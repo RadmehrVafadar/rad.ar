@@ -13,6 +13,7 @@ FROM node:22-alpine AS runtime
 WORKDIR /app/apps/mcp
 RUN apk add --no-cache curl
 COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=builder /app/apps/mcp/node_modules ./node_modules
 COPY --from=builder /app/apps/mcp/dist ./dist
 COPY --from=builder /app/apps/mcp/package.json ./package.json
 ENV NODE_ENV=production MCP_TRANSPORT=http PORT=3002

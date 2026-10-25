@@ -46,4 +46,7 @@ it('builds the MCP image with the root lockfile and shared workspace sources', (
   expect(dockerfile).toContain('COPY packages ./packages');
   expect(dockerfile).toContain('RUN npm ci');
   expect(dockerfile).toContain('RUN npx nest build mcp');
+  expect(dockerfile).toContain(
+    'COPY --from=builder /app/apps/mcp/node_modules ./node_modules',
+  );
 });

@@ -17,3 +17,8 @@ The browser component suite passed 26 tests and the operator E2E flow passed.
 All five production entrypoints built, lint and documentation checks passed, and the built API and MCP transports passed smoke checks.
 Container builds and live database or upstream-source verification require an environment with those services; Docker was unavailable locally.
 The completed cleanup specification was folded into the project structure and identifier migration documents.
+
+## 2026-10-25
+
+Recorded case-only documentation renames in Git so lowercase links resolve in Linux CI.
+The MCP runtime image now includes its workspace-local dependencies to preserve Express 4 resolution alongside the API's Express 5.
