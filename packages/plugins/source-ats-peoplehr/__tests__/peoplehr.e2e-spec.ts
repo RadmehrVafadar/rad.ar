@@ -14,8 +14,8 @@
  * as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PeopleHrModule, PeopleHrService } from '@ever-jobs/source-ats-peoplehr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PeopleHrModule, PeopleHrService } from '@rad-ar/source-ats-peoplehr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public PeopleHR-powered board (EFI Group's careers sub-domain — confirmed live 2026-06-04).
 const KNOWN_TENANT = 'efigroup';

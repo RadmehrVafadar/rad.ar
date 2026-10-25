@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-ethenalabs",
+  "name": "@rad-ar/source-company-ethenalabs",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

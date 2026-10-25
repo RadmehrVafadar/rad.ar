@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 // WIP: CareerBuilder uses Cloudflare protection — likely needs residential proxies for reliable scraping.
 import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
@@ -10,14 +10,14 @@ import {
   JobPostDto,
   LocationDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   randomSleep,
   extractSalary,
   extractEmails,
-} from '@ever-jobs/common';
-import { BrowserPool } from '@ever-jobs/common';
+} from '@rad-ar/common';
+import { BrowserPool } from '@rad-ar/common';
 import {
   CB_SEARCH_URL,
   CB_HEADERS,

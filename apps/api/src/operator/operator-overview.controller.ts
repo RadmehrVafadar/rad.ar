@@ -4,7 +4,7 @@ import { AdminAuth } from "../auth/admin-auth.decorator";
 import {
   OperatorOverview,
   OperatorOverviewService,
-} from "./operator-overview.service";
+} from "@rad-ar/operator-overview/operator-overview.service";
 
 @ApiTags("Operator")
 @ApiSecurity("api-key")

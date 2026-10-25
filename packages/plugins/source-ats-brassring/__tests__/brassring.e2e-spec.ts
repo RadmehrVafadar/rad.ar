@@ -14,8 +14,8 @@
  * returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BrassRingModule, BrassRingService } from '@ever-jobs/source-ats-brassring';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BrassRingModule, BrassRingService } from '@rad-ar/source-ats-brassring';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public BrassRing-powered Talent Gateway (AAFES — confirmed 2026-06-03).
 const KNOWN_PARTNER_ID = '25212';

@@ -15,8 +15,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TrackerRmsModule, TrackerRmsService } from '@ever-jobs/source-ats-trackerrms';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TrackerRmsModule, TrackerRmsService } from '@rad-ar/source-ats-trackerrms';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public TrackerRMS-powered tenant (Precision Resources — US staffing firm, observed live 2026-06-03).
 const KNOWN_TENANT = 'Tracker_PrecisionResources';

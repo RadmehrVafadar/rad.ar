@@ -12,8 +12,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HirefulModule, HirefulService } from '@ever-jobs/source-ats-hireful';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HirefulModule, HirefulService } from '@rad-ar/source-ats-hireful';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Hireful-powered candidate portal (The Big Issue — confirmed 2026-06-03).
 const KNOWN_TENANT = 'thebigissue';

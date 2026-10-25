@@ -11,8 +11,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApplicantStackModule, ApplicantStackService } from '@ever-jobs/source-ats-applicantstack';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ApplicantStackModule, ApplicantStackService } from '@rad-ar/source-ats-applicantstack';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public ApplicantStack-powered careers sub-domain (At Work Group — verified live 2026-06-03).
 const KNOWN_TENANT = 'atwork443';

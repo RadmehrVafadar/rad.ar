@@ -5,8 +5,8 @@
  * Requires a valid companySlug (feed hash) to fetch jobs.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobylonModule, JobylonService } from '@ever-jobs/source-ats-jobylon';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobylonModule, JobylonService } from '@rad-ar/source-ats-jobylon';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobylonService (E2E)', () => {
   let service: JobylonService;

@@ -4,8 +4,8 @@
  * Uses the public Landing.jobs API (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { LandingJobsModule, LandingJobsService } from '@ever-jobs/source-landingjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { LandingJobsModule, LandingJobsService } from '@rad-ar/source-landingjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('LandingJobsService (E2E)', () => {
   let service: LandingJobsService;

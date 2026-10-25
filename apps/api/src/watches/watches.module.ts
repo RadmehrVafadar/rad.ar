@@ -1,14 +1,14 @@
-import { Module } from "@nestjs/common";
-import { WatcherModule } from "@ever-jobs/watcher";
-import { NotificationSecretLocalModule } from "@ever-jobs/notification-secret-local";
-import { JobsModule } from "../jobs/jobs.module";
-import { JobsService } from "../jobs/jobs.service";
+import { Module } from '@nestjs/common';
+import { ConfiguredWatchModule as WatcherModule } from '../watch-composition';
+import { NotificationSecretLocalModule } from '@rad-ar/notification-secret-local';
+import { JobsModule } from '../jobs/jobs.module';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
 import {
   NotificationsController,
   ObservedJobsController,
   WatchesController,
-} from "./watches.controller";
-import { WatchApplyService } from "./watch-apply.service";
+} from './watches.controller';
+import { WatchApplyService } from '@rad-ar/watch-engine/management/watch-apply.service';
 
 @Module({
   imports: [

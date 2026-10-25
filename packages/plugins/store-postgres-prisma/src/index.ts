@@ -1,5 +1,5 @@
 /**
- * Barrel for `@ever-jobs/store-postgres-prisma` (Spec 004 / Phase 4 /
+ * Barrel for `@rad-ar/store-postgres-prisma` (Spec 004 / Phase 4 /
  * T09–T10). Re-exports the public surface so consumers don't need to
  * reach into per-file paths.
  */

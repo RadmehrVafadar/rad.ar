@@ -14,8 +14,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BeameryModule, BeameryService } from '@ever-jobs/source-ats-beamery';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BeameryModule, BeameryService } from '@rad-ar/source-ats-beamery';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Beamery-powered career site (Beamery's own board — host confirmed live 2026-06-04).
 const KNOWN_TENANT = 'careers';

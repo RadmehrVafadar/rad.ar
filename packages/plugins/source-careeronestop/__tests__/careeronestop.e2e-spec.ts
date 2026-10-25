@@ -5,8 +5,8 @@
  * Without it, the service returns empty results gracefully.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CareerOneStopModule, CareerOneStopService } from '@ever-jobs/source-careeronestop';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CareerOneStopModule, CareerOneStopService } from '@rad-ar/source-careeronestop';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CareerOneStopService (E2E)', () => {
   let service: CareerOneStopService;

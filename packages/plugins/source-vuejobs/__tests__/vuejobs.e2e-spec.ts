@@ -1,5 +1,5 @@
 import { VueJobsService } from '../src/vuejobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('VueJobsService (e2e)', () => {
   let service: VueJobsService;

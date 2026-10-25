@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PythonJobsModule, PythonJobsService } from '@ever-jobs/source-pythonjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PythonJobsModule, PythonJobsService } from '@rad-ar/source-pythonjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PythonJobsService (E2E)', () => {
   let service: PythonJobsService;

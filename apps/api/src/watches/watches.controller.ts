@@ -19,22 +19,9 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@nestjs/swagger";
-import {
-  CompanyCoverageReport,
-  CompanyCoverageService,
-  defaultInternshipWatch,
-  DiscordNotificationProvider,
-  JobWatch,
-  Page,
-  RunWatchOptions,
-  WATCH_REPOSITORY,
-  WatchExecutionService,
-  WatchPresetApplyResult,
-  WatchPresetService,
-  WatchRepository,
-  WatchValidationService,
-  validateWatchTargetKeys,
-} from "@ever-jobs/watcher";
+import { CompanyCoverageReport, CompanyCoverageService, defaultInternshipWatch, RunWatchOptions, WatchExecutionService, WatchPresetApplyResult, WatchPresetService, WatchValidationService, validateWatchTargetKeys } from '@rad-ar/watch-engine';
+import { DiscordNotificationProvider } from '@rad-ar/notification-discord';
+import { JobWatch, Page, WATCH_REPOSITORY, WatchRepository } from '@rad-ar/models';
 import { AdminAuth } from "../auth/admin-auth.decorator";
 import {
   CompanyCoverageReportDto,
@@ -48,8 +35,8 @@ import {
   UpdateWatchDto,
   WatchMatchQueryDto,
   WatchRunQueryDto,
-} from "./watch.dto";
-import { WatchApplyResult, WatchApplyService } from "./watch-apply.service";
+} from "@rad-ar/models/dtos/watch.dto";
+import { WatchApplyResult, WatchApplyService } from "@rad-ar/watch-engine/management/watch-apply.service";
 import {
   createDiscordTestMessage,
   publicNotificationDelivery,
@@ -59,8 +46,8 @@ import {
   toObservedJobQuery,
   toWatchMatchQuery,
   toWatchRunQuery,
-} from "./watch-management.helpers";
-import { collectWatchMetrics } from "./watch-metrics";
+} from "@rad-ar/watch-engine/management/watch-management.helpers";
+import { collectWatchMetrics } from '@rad-ar/watch-engine/management/watch-metrics';
 
 type PublicWatchPresetApplyResult = Omit<WatchPresetApplyResult, "watch"> & {
   watch?: Record<string, unknown>;

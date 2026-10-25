@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-mobiapps",
+  "name": "@rad-ar/source-company-mobiapps",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

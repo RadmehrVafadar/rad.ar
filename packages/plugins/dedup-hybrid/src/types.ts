@@ -1,4 +1,4 @@
-import { JobPostDto } from '@ever-jobs/models';
+import { JobPostDto } from '@rad-ar/models';
 
 /**
  * One raw input enriched with its precomputed canonical key + id and original

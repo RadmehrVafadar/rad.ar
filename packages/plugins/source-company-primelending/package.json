@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-primelending",
+  "name": "@rad-ar/source-company-primelending",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

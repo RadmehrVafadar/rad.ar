@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-revinate",
+  "name": "@rad-ar/source-company-revinate",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

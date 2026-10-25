@@ -1,5 +1,5 @@
 import { LegitimacyDetectorService } from '../src/legitimacy-detector.service';
-import type { LegitimacyInput } from '@ever-jobs/models';
+import type { LegitimacyInput } from '@rad-ar/models';
 
 const base: LegitimacyInput = {
   hasCompensation: false,

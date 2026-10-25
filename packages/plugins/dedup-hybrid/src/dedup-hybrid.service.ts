@@ -10,8 +10,8 @@ import {
   Site,
   SourceObservation,
   provenance,
-} from '@ever-jobs/models';
-import { canonicalJobId, canonicalKey, normalizeCompany, normalizeLocation, normalizeTitle } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { canonicalJobId, canonicalKey, normalizeCompany, normalizeLocation, normalizeTitle } from '@rad-ar/common';
 
 import { HashStrategy } from './strategies/hash-strategy';
 import { MinHashStrategy } from './strategies/minhash-strategy';

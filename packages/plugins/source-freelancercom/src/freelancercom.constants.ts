@@ -3,5 +3,5 @@ export const FREELANCERCOM_DEFAULT_RESULTS = 25;
 export const FREELANCERCOM_MAX_RESULTS = 50;
 export const FREELANCERCOM_HEADERS: Record<string, string> = {
   Accept: 'application/json',
-  'User-Agent': 'EverJobs/1.0',
+  'User-Agent': 'Radar/1.0',
 };

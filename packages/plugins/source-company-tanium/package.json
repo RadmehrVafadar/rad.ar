@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-tanium",
+  "name": "@rad-ar/source-company-tanium",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

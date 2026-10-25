@@ -9,8 +9,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BeisenModule, BeisenService } from '@ever-jobs/source-ats-beisen';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BeisenModule, BeisenService } from '@rad-ar/source-ats-beisen';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Beisen-powered career site (bare tenant subdomain on `*.zhiye.com`).
 const KNOWN_SLUG = 'mengniu';

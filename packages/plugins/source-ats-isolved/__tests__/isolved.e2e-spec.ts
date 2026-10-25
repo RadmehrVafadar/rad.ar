@@ -12,8 +12,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { IsolvedModule, IsolvedService } from '@ever-jobs/source-ats-isolved';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { IsolvedModule, IsolvedService } from '@rad-ar/source-ats-isolved';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public isolved-Hire-powered career board (America Votes — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'americavotes';

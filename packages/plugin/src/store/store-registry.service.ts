@@ -3,7 +3,7 @@ import {
   IJobStore,
   IStoreMetadata,
   ERR_STORE_NOT_FOUND,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Kebab-case validator for store ids (Spec 004 / FR-4).
@@ -66,7 +66,7 @@ export const ERR_STORE_DUPLICATE_ID = 'ERR_STORE_DUPLICATE_ID';
  * The downstream `StoreModule.forActive(storeId)` (Spec 004 / T04)
  * consults `get(id)` at bootstrap to bind the matching backend to
  * `JOB_STORE_TOKEN`; bootstrap MUST fail fast with
- * {@link ERR_STORE_NOT_FOUND} when `EVER_JOBS_STORE` references an
+ * {@link ERR_STORE_NOT_FOUND} when `RADAR_STORE` references an
  * unknown id (Spec 004 §7.3).
  *
  * @example

@@ -9,7 +9,7 @@ import {
   Site,
   SourceHealth,
   SourceHealthError,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Per-site state held by {@link CircuitBreakerService}. One record is created

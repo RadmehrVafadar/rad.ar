@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-stabilityai",
+  "name": "@rad-ar/source-company-stabilityai",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

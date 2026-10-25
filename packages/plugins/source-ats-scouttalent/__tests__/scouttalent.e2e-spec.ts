@@ -12,8 +12,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ScoutTalentModule, ScoutTalentService } from '@ever-jobs/source-ats-scouttalent';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScoutTalentModule, ScoutTalentService } from '@rad-ar/source-ats-scouttalent';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Scout Talent-powered candidate board (Ku-ring-gai Council — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'krg';

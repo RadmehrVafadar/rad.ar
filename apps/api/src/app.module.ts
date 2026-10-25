@@ -4,9 +4,9 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { StoreModule } from '@ever-jobs/plugin';
-import { AppConfigModule } from './config/config.module';
-import { AppCacheModule } from './cache/cache.module';
+import { StoreModule } from '@rad-ar/plugin';
+import { AppConfigModule } from '@rad-ar/common/runtime/config/config.module';
+import { AppCacheModule } from '@rad-ar/common/runtime/cache/cache.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { MetricsInterceptor } from './metrics/metrics.interceptor';
 
@@ -21,7 +21,7 @@ import { NotificationDestinationsModule } from './notification-destinations/noti
 import { OperatorModule } from './operator/operator.module';
 
 /**
- * Spec 004 / T12 — `EVER_JOBS_STORE` env-var honoured at bootstrap.
+ * Spec 004 / T12 — `RADAR_STORE` env-var honoured at bootstrap.
  *
  * `resolveStoreBootstrap()` runs at module-evaluation time (synchronously)
  * and either returns the `{ id, backendClass }` for the active backend
@@ -49,7 +49,7 @@ const ACTIVE_STORE = resolveStoreBootstrap();
       useFactory: (config: ConfigService) => ({
         throttlers: [
           {
-            ttl: (config.get<number>('rateLimit.timeframeSec', 3600)) * 1000,
+            ttl: config.get<number>('rateLimit.timeframeSec', 3600) * 1000,
             limit: config.get<number>('rateLimit.maxRequests', 100),
           },
         ],
@@ -75,14 +75,16 @@ const ACTIVE_STORE = resolveStoreBootstrap();
         path: config.get<string>('graphql.path', 'graphql'),
         introspection: true,
         // Disable GraphQL module entirely if env var is set
-        ...(config.get<boolean>('graphql.enabled', true) ? {} : { autoSchemaFile: false }),
+        ...(config.get<boolean>('graphql.enabled', true)
+          ? {}
+          : { autoSchemaFile: false }),
       }),
     }),
 
     // Global cache (Redis or in-memory)
     AppCacheModule,
 
-    // Spec 004 / T12 — `EVER_JOBS_STORE` env-var resolved into the
+    // Spec 004 / T12 — `RADAR_STORE` env-var resolved into the
     // active `IJobStore` + `IJobObservationStore` bindings before
     // `JobsModule` imports. Importing `StoreModule.forActive(...)` here
     // (above `JobsModule`) keeps the global-module ordering clean: the

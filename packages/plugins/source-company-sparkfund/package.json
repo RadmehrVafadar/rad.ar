@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-sparkfund",
+  "name": "@rad-ar/source-company-sparkfund",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

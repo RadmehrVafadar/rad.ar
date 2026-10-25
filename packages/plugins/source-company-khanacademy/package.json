@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-khanacademy",
+  "name": "@rad-ar/source-company-khanacademy",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

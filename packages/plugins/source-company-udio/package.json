@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-udio",
+  "name": "@rad-ar/source-company-udio",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

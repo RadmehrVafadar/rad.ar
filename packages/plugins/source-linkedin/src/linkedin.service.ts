@@ -1,4 +1,4 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import {
@@ -10,7 +10,7 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   HttpClient,
   LinkedInException,
@@ -20,7 +20,7 @@ import {
   parseLocationList,
   plainConverter,
   randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 
 import { LINKEDIN_HEADERS } from './linkedin.constants';
 import {

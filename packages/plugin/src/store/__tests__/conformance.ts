@@ -7,7 +7,7 @@ import {
   JOB_STORE_QUERY_MAX_LIMIT,
   Site,
   SourceObservation,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Shape of the value yielded by the per-test factory passed to

@@ -5,8 +5,8 @@
  * To run authenticated tests, set RECRUITEE_API_TOKEN env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruiteeModule, RecruiteeService } from '@ever-jobs/source-ats-recruitee';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruiteeModule, RecruiteeService } from '@rad-ar/source-ats-recruitee';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RecruiteeService (E2E)', () => {
   let service: RecruiteeService;

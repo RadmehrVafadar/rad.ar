@@ -5,8 +5,8 @@
  * Tests are automatically skipped when no token is available.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DeelModule, DeelService } from '@ever-jobs/source-ats-deel';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DeelModule, DeelService } from '@rad-ar/source-ats-deel';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const describeIfKey = process.env.DEEL_API_TOKEN ? describe : describe.skip;
 

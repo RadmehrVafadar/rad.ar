@@ -1,5 +1,5 @@
 import { ReliefWebService } from '../src/reliefweb.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ReliefWebService (e2e)', () => {
   let service: ReliefWebService;

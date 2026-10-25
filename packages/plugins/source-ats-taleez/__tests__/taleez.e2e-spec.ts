@@ -14,8 +14,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TaleezModule, TaleezService } from '@ever-jobs/source-ats-taleez';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TaleezModule, TaleezService } from '@rad-ar/source-ats-taleez';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Taleez-powered tenant (TEHTRIS — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'tehtris';

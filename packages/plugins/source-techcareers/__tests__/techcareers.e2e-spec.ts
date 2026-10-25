@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { TechcareersModule, TechcareersService } from '../src';
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 describe('TechcareersService (e2e)', () => {
   let service: TechcareersService;

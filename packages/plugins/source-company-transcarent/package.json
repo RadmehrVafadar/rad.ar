@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-transcarent",
+  "name": "@rad-ar/source-company-transcarent",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

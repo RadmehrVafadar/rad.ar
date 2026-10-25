@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-wintermutetrading",
+  "name": "@rad-ar/source-company-wintermutetrading",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

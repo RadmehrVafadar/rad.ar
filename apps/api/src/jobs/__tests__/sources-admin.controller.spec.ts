@@ -23,7 +23,7 @@ import {
   ICircuitBreakerService,
   Site,
   SourceHealth,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { SourcesHealthController } from '../health.controller';
 
 function makeBreakerStub(): {

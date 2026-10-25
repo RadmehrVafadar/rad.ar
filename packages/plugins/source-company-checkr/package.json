@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-checkr",
+  "name": "@rad-ar/source-company-checkr",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

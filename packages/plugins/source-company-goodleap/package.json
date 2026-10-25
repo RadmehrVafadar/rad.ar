@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-goodleap",
+  "name": "@rad-ar/source-company-goodleap",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

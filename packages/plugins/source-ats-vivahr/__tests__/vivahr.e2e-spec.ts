@@ -9,8 +9,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { VivaHRModule, VivaHRService } from '@ever-jobs/source-ats-vivahr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { VivaHRModule, VivaHRService } from '@rad-ar/source-ats-vivahr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('VivaHRService (E2E)', () => {
   let service: VivaHRService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-intuitivesurgical",
+  "name": "@rad-ar/source-company-intuitivesurgical",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -9,18 +9,18 @@ target-health alerts, rollback, and failure recovery.
 
 The detailed component reference is in the
 [watcher application guide](../../apps/watcher/README.md). The base functional
-contract is [Spec 016](../../.specify/specs/016-realtime-job-watcher/spec.md);
-[Spec 6000](../../.specify/specs/6000-prestige-internship-coverage-expansion/spec.md)
+contract is Spec 016 (retired specification);
+Spec 6000 (retired specification)
 defines the target-aware coverage expansion and takes precedence only for its
-listed amendments. [Spec 6002](../../.specify/specs/6002-local-operator-gui/spec.md)
+listed amendments. Spec 6002 (retired specification)
 defines the additive GUI, safe-apply, named-destination, and notification-routing
 contracts.
-[Spec 6003](../../.specify/specs/6003-canadian-tech-internships/spec.md)
+Spec 6003 (retired specification)
 defines the original Toronto/GTA-only profile.
-[Spec 6004](../../.specify/specs/6004-canadian-employer-internship-coverage/spec.md)
+Spec 6004 (retired specification)
 adds the separate 41-employer technology-adjacent profile, official ATS board
 searches, and role-family eligibility.
-[Spec 6006](../../.specify/specs/6006-concurrent-watch-scheduling/spec.md)
+Spec 6006 (retired specification)
 defines concurrent scheduled-watch admission, oldest-due FIFO ordering,
 process-wide source limits, immediate capacity backfill, and shutdown behavior.
 
@@ -198,7 +198,7 @@ Copy-Item .env.example .env
 At minimum, verify these entries in `.env`:
 
 ```dotenv
-DATABASE_URL=postgresql://ever_jobs:ever_jobs@localhost:5432/ever_jobs
+DATABASE_URL=postgresql://radar:radar@localhost:5432/radar
 WATCHER_ENABLED=true
 WATCHER_HEALTH_PORT=3002
 WATCHER_DEFAULT_TIMEZONE=America/Toronto
@@ -327,8 +327,8 @@ While both runs are active, health must report
 distinct `scheduler.activeWatchIds`. Metrics must report:
 
 ```text
-ever_jobs_watcher_scheduler_capacity 2
-ever_jobs_watcher_scheduler_active_runs 2
+radar_watcher_scheduler_capacity 2
+radar_watcher_scheduler_active_runs 2
 ```
 
 If the source work finishes too quickly to sample, inspect both watches' run
@@ -459,7 +459,7 @@ The CLI and authenticated API expose the same company-level projection:
 
 ```bash
 npm run cli -- watch coverage --id <watch-id> --json
-curl -H "x-api-key: $EVER_JOBS_API_KEY" \
+curl -H "x-api-key: $RADAR_API_KEY" \
   http://localhost:3001/api/watches/<watch-id>/coverage
 ```
 
@@ -579,27 +579,27 @@ curl http://localhost:3002/metrics
 
 Important series include:
 
-- `ever_jobs_watcher_runs_total`
-- `ever_jobs_watcher_source_requests_total`
-- `ever_jobs_watcher_jobs_fetched_total`
-- `ever_jobs_watcher_new_jobs_total`
-- `ever_jobs_watcher_matches_total`
-- `ever_jobs_watcher_notifications_total`
-- `ever_jobs_watcher_duplicates_suppressed_total`
-- `ever_jobs_watcher_run_duration_seconds`
-- `ever_jobs_watcher_source_duration_seconds`
-- `ever_jobs_watcher_detection_latency_seconds`
-- `ever_jobs_watcher_notification_latency_seconds`
-- `ever_jobs_watcher_scheduler_last_poll_timestamp_seconds`
-- `ever_jobs_watcher_scheduler_capacity`
-- `ever_jobs_watcher_scheduler_active_runs`
-- `ever_jobs_watcher_target_runs_total{watch,target,tier,outcome}`
-- `ever_jobs_watcher_target_consecutive_hard_failures{watch,target,tier}`
-- `ever_jobs_watcher_target_degraded{watch,target,tier}`
-- `ever_jobs_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_tier1_coverage_degraded{watch}`
-- `ever_jobs_watcher_company_coverage{watch_id,status}` with bounded `status`
+- `radar_watcher_runs_total`
+- `radar_watcher_source_requests_total`
+- `radar_watcher_jobs_fetched_total`
+- `radar_watcher_new_jobs_total`
+- `radar_watcher_matches_total`
+- `radar_watcher_notifications_total`
+- `radar_watcher_duplicates_suppressed_total`
+- `radar_watcher_run_duration_seconds`
+- `radar_watcher_source_duration_seconds`
+- `radar_watcher_detection_latency_seconds`
+- `radar_watcher_notification_latency_seconds`
+- `radar_watcher_scheduler_last_poll_timestamp_seconds`
+- `radar_watcher_scheduler_capacity`
+- `radar_watcher_scheduler_active_runs`
+- `radar_watcher_target_runs_total{watch,target,tier,outcome}`
+- `radar_watcher_target_consecutive_hard_failures{watch,target,tier}`
+- `radar_watcher_target_degraded{watch,target,tier}`
+- `radar_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_tier1_coverage_degraded{watch}`
+- `radar_watcher_company_coverage{watch_id,status}` with bounded `status`
   values `configured`, `active`, `disabled`, `uncovered`, `initialized`, and
   `degraded`
 
@@ -621,7 +621,7 @@ baseline rather than paging on every naturally empty board. One target failure
 does not erase successful siblings or make the whole worker unavailable, but a
 degraded Tier 1 signal is an explicit coverage incident.
 
-The API's `ever_jobs_sources_total` gauge is set from the plugin registry's
+The API's `radar_sources_total` gauge is set from the plugin registry's
 actual discovered size during application initialization. Do not compare it to
 the old hard-coded value of 160; alert on unexpected changes relative to the
 deployment's enabled plugin configuration.
@@ -635,12 +635,12 @@ Use this path when the worker itself should run in Compose rather than through t
 Build and start the watcher container from the repository root:
 
 ```bash
-docker compose up -d --build ever-jobs-watcher
-docker compose ps --all postgres watcher-migrate ever-jobs-watcher
-docker compose logs -f ever-jobs-watcher
+docker compose up -d --build radar-watcher
+docker compose ps --all postgres watcher-migrate radar-watcher
+docker compose logs -f radar-watcher
 ```
 
-Compose starts healthy PostgreSQL, runs `watcher-migrate` as a one-shot `prisma migrate deploy`, and starts `ever-jobs-watcher` only after migration succeeds. The worker publishes `${WATCHER_HEALTH_PORT:-3002}:3002` and checks `/health`. With `WATCHER_SEED_DEFAULT=true`, bootstrap creates the missing default watch in disabled baseline mode and leaves existing watches untouched.
+Compose starts healthy PostgreSQL, runs `watcher-migrate` as a one-shot `prisma migrate deploy`, and starts `radar-watcher` only after migration succeeds. The worker publishes `${WATCHER_HEALTH_PORT:-3002}:3002` and checks `/health`. With `WATCHER_SEED_DEFAULT=true`, bootstrap creates the missing default watch in disabled baseline mode and leaves existing watches untouched.
 
 Install host dependencies and generate the client before using the host CLI:
 
@@ -786,8 +786,8 @@ Check scheduler poll freshness, previous run duration, source timeouts/retries, 
 - [ ] The watch was resumed only after baseline and provider testing.
 - [ ] Two additional no-notification observation runs appear in history for the
       target-enabled set, including both Tier 1 cycles.
-- [ ] `ever_jobs_watcher_tier1_coverage_degraded{watch}` is zero and no enabled Tier 1 target is degraded.
-- [ ] `ever_jobs_watcher_company_coverage{watch_id,status}` reflects the coverage report counts.
+- [ ] `radar_watcher_tier1_coverage_degraded{watch}` is zero and no enabled Tier 1 target is degraded.
+- [ ] `radar_watcher_company_coverage{watch_id,status}` reflects the coverage report counts.
 - [ ] Delivery and match queries work.
 - [ ] The webhook URL exists only in local environment/secret storage.
 
@@ -833,7 +833,7 @@ explicitly. The default remains paused and baseline-required.
 
 ### Authenticate the browser session
 
-Open Settings and enter the existing `EVER_JOBS_API_KEY` value. The GUI keeps it
+Open Settings and enter the existing `RADAR_API_KEY` value. The GUI keeps it
 only in browser `sessionStorage`. It is cleared when the tab session ends. It is
 never copied into a watch, route, PostgreSQL row, `.env.local`, local storage,
 IndexedDB, cookie, query string, screenshot, or download.

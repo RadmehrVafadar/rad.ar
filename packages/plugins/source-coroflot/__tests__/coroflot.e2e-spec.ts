@@ -1,5 +1,5 @@
 import { CoroflotService } from '../src/coroflot.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CoroflotService (e2e)', () => {
   let service: CoroflotService;

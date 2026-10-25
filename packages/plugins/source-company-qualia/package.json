@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-qualia",
+  "name": "@rad-ar/source-company-qualia",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

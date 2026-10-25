@@ -4,8 +4,8 @@
  * Requires TALROO_PUBLISHER_ID and TALROO_PUBLISHER_PASS to be set in the environment.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalrooModule, TalrooService } from '@ever-jobs/source-talroo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalrooModule, TalrooService } from '@rad-ar/source-talroo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('TalrooService (E2E)', () => {
   let service: TalrooService;

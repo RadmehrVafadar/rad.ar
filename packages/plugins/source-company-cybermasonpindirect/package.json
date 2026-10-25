@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cybermasonpindirect",
+  "name": "@rad-ar/source-company-cybermasonpindirect",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

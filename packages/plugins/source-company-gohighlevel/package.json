@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-gohighlevel",
+  "name": "@rad-ar/source-company-gohighlevel",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

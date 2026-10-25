@@ -13,8 +13,8 @@
  *     served at `https://v2c2.onlyfy.jobs/`.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PrescreenModule, PrescreenService } from '@ever-jobs/source-ats-prescreen';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PrescreenModule, PrescreenService } from '@rad-ar/source-ats-prescreen';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PrescreenService (E2E)', () => {
   let service: PrescreenService;

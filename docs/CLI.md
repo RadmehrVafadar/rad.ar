@@ -19,31 +19,31 @@ yarn build cli
 Search one or more job boards for matching positions.
 
 ```bash
-ever-jobs search [options]
+radar search [options]
 ```
 
 #### Basic Examples
 
 ```bash
 # Search LinkedIn for "React developer"
-ever-jobs search -s linkedin -q "React developer"
+radar search -s linkedin -q "React developer"
 
 # Multi-site search with location filter
-ever-jobs search -s linkedin -s indeed -q "DevOps" -l "New York"
+radar search -s linkedin -s indeed -q "DevOps" -l "New York"
 
 # Remote-only, last 24 hours, top 20 results
-ever-jobs search -s linkedin -q "Python" -r --hours-old 24 -n 20
+radar search -s linkedin -q "Python" -r --hours-old 24 -n 20
 
 # Output as CSV file
-ever-jobs search -s indeed -q "Data Scientist" -f csv -o results.csv
+radar search -s indeed -q "Data Scientist" -f csv -o results.csv
 
 # Table view for quick scanning
-ever-jobs search -s glassdoor -q "Product Manager" -f table
+radar search -s glassdoor -q "Product Manager" -f table
 
 # ATS board scraping (company-specific)
-ever-jobs search -s ashby --company-slug stripe -n 50
-ever-jobs search -s greenhouse --company-slug github -n 50
-ever-jobs search -s workday --company-slug "tesla:5:Tesla" -n 30
+radar search -s ashby --company-slug stripe -n 50
+radar search -s greenhouse --company-slug github -n 50
+radar search -s workday --company-slug "tesla:5:Tesla" -n 30
 ```
 
 #### LLM / Programmatic Usage (stdin)
@@ -51,10 +51,10 @@ ever-jobs search -s workday --company-slug "tesla:5:Tesla" -n 30
 The CLI accepts JSON input via stdin for integration with LLMs and scripts:
 
 ```bash
-echo '{"siteType":["linkedin","indeed"],"searchTerm":"ML Engineer","isRemote":true}' | ever-jobs search --stdin
+echo '{"siteType":["linkedin","indeed"],"searchTerm":"ML Engineer","isRemote":true}' | radar search --stdin
 
 # Pipe from a file
-cat search-params.json | ever-jobs search --stdin -f csv -o output.csv
+cat search-params.json | radar search --stdin -f csv -o output.csv
 ```
 
 #### BD Intelligence Mode
@@ -62,7 +62,7 @@ cat search-params.json | ever-jobs search --stdin -f csv -o output.csv
 Analyze hiring patterns across companies instead of listing individual jobs:
 
 ```bash
-ever-jobs search -s linkedin -q "Engineering" --bd
+radar search -s linkedin -q "Engineering" --bd
 ```
 
 #### Analysis Mode
@@ -70,7 +70,7 @@ ever-jobs search -s linkedin -q "Engineering" --bd
 Append salary, remote %, and company analytics after results:
 
 ```bash
-ever-jobs search -s linkedin -s indeed -q "Backend" --analyze
+radar search -s linkedin -s indeed -q "Backend" --analyze
 ```
 
 #### Full Options Reference
@@ -116,20 +116,20 @@ ever-jobs search -s linkedin -s indeed -q "Backend" --analyze
 Search all 65+ boards individually and compare results side-by-side.
 
 ```bash
-ever-jobs compare [options]
+radar compare [options]
 ```
 
 #### Examples
 
 ```bash
 # Compare "React developer" across all sites
-ever-jobs compare -q "React developer"
+radar compare -q "React developer"
 
 # Compare with location filter, save to file
-ever-jobs compare -q "DevOps" -l "San Francisco" -o comparison.json
+radar compare -q "DevOps" -l "San Francisco" -o comparison.json
 
 # Remote jobs only, last 48 hours
-ever-jobs compare -q "ML Engineer" -r --hours-old 48
+radar compare -q "ML Engineer" -r --hours-old 48
 ```
 
 #### Output
@@ -441,7 +441,7 @@ history.
 
 The complete operational workflow is in the
 [local watcher runbook](runbooks/watcher-local.md), and the authoritative
-contract is [Spec 6002](../.specify/specs/6002-local-operator-gui/spec.md).
+contract is Spec 6002 (retired specification).
 
 ---
 
@@ -530,6 +530,6 @@ Direct company career page scrapers (Amazon, Apple, Microsoft, Nvidia, etc.).
 
 | Variable                       | Description                                            |
 | ------------------------------ | ------------------------------------------------------ |
-| `EVER_JOBS_API_URL`            | API base URL (default: `http://localhost:3001`)        |
+| `RADAR_API_URL`            | API base URL (default: `http://localhost:3001`)        |
 | `HTTP_PROXY` / `HTTPS_PROXY`   | Global proxy configuration                             |
 | `NODE_TLS_REJECT_UNAUTHORIZED` | Set to `0` to skip TLS verification (development only) |

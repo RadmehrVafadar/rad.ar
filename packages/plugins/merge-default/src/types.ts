@@ -1,4 +1,4 @@
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 /**
  * Coarse-grained category used to rank candidate field values.
@@ -8,7 +8,7 @@ import { Site } from '@ever-jobs/models';
  * source plugins already use (`remote`, `government`, `regional`,
  * `freelance`).
  *
- * The literal union mirrors `PluginCategory` from `@ever-jobs/plugin` —
+ * The literal union mirrors `PluginCategory` from `@rad-ar/plugin` —
  * we duplicate it here only so the resolver can stay free of a runtime
  * dependency on the plugin package.
  */

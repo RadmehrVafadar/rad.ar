@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GreenJobsBoardModule, GreenJobsBoardService } from '@ever-jobs/source-greenjobsboard';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GreenJobsBoardModule, GreenJobsBoardService } from '@rad-ar/source-greenjobsboard';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GreenJobsBoardService (E2E)', () => {
   let service: GreenJobsBoardService;

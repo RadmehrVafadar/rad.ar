@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 /**
  * BuiltIn.com Job Search — tech-focused job board.
@@ -19,12 +19,12 @@ import {
   CompensationInterval,
   JobType,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   randomSleep,
   stripHtmlTags,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   BUILTIN_BASE_URL,
   BUILTIN_HEADERS,

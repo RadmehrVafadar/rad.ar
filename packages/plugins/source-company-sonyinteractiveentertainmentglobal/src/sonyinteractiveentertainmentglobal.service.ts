@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * PlayStation (Sony Interactive Entertainment) — PlayStation (Sony Interactive Entertainment) is an employer in the Gaming / interactive entertainment sector, headquartered in San Mateo, California, USA..
@@ -14,7 +14,7 @@ import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/
  * California, USA. This source plugin ingests live open roles
  * published on PlayStation (Sony Interactive Entertainment)'s official
  * Greenhouse-hosted careers board via the public Greenhouse Job Board
- * API. Retrieved postings are normalized into the Ever Jobs job schema
+ * API. Retrieved postings are normalized into the rad.ar job schema
  * so they can flow through the standard sourcing pipeline
  * (deduplication, liveness checking, and salary normalization). The
  * plugin performs read-only, unauthenticated discovery and stores no

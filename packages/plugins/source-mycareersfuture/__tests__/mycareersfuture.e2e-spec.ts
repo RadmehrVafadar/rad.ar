@@ -5,8 +5,8 @@
  * (mycareersfuture.gov.sg). Uses a public JSON API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { MycareersfutureModule, MycareersfutureService } from '@ever-jobs/source-mycareersfuture';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { MycareersfutureModule, MycareersfutureService } from '@rad-ar/source-mycareersfuture';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('MycareersfutureService (E2E)', () => {
   let service: MycareersfutureService;

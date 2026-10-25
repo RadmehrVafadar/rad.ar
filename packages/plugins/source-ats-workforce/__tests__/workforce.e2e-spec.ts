@@ -18,8 +18,8 @@
  * returned. 30000 ms timeouts on network tests.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkforceModule, WorkforceService } from '@ever-jobs/source-ats-workforce';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WorkforceModule, WorkforceService } from '@rad-ar/source-ats-workforce';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Workforce.com-hosted careers board (Workforce.com dogfoods its own ATS — its careers
 // page links to `/ats/apply/job/{uuid}` apply pages on the Workforce host).

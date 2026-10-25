@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { EcojobsModule, EcojobsService } from '../src';
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 describe('EcojobsService (e2e)', () => {
   let service: EcojobsService;

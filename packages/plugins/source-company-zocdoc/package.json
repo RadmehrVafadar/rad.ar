@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-zocdoc",
+  "name": "@rad-ar/source-company-zocdoc",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

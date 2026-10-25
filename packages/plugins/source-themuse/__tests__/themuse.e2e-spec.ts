@@ -4,8 +4,8 @@
  * Uses the public TheMuse API (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TheMuseModule, TheMuseService } from '@ever-jobs/source-themuse';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TheMuseModule, TheMuseService } from '@rad-ar/source-themuse';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('TheMuseService (E2E)', () => {
   let service: TheMuseService;

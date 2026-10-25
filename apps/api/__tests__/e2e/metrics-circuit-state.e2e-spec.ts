@@ -18,7 +18,7 @@ import {
   CIRCUIT_BREAKER_TOKEN,
   ICircuitBreakerService,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { createTestApp } from '../helpers/create-app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -46,7 +46,7 @@ describe('GET /metrics — source_circuit_state (E2E) — Spec 005 / T06', () =>
     // Metadata is always emitted because the Gauge is registered;
     // sample lines may or may not be present depending on whether any
     // site has been observed yet.
-    expect(res.text).toContain('# TYPE ever_jobs_source_circuit_state gauge');
+    expect(res.text).toContain('# TYPE radar_source_circuit_state gauge');
     expect(res.text).toContain(
       'Per-source circuit-breaker state (closed=0, half-open=1, open=2)',
     );
@@ -59,7 +59,7 @@ describe('GET /metrics — source_circuit_state (E2E) — Spec 005 / T06', () =>
 
     // The acceptance line: `source_circuit_state{site="linkedin"} 2`.
     expect(res.text).toMatch(
-      /ever_jobs_source_circuit_state\{site="linkedin"\} 2\b/,
+      /radar_source_circuit_state\{site="linkedin"\} 2\b/,
     );
   });
 
@@ -70,7 +70,7 @@ describe('GET /metrics — source_circuit_state (E2E) — Spec 005 / T06', () =>
       .get('/metrics')
       .expect(200);
     expect(opened.text).toMatch(
-      /ever_jobs_source_circuit_state\{site="indeed"\} 2\b/,
+      /radar_source_circuit_state\{site="indeed"\} 2\b/,
     );
 
     breaker.forceReset(Site.INDEED);
@@ -79,7 +79,7 @@ describe('GET /metrics — source_circuit_state (E2E) — Spec 005 / T06', () =>
       .get('/metrics')
       .expect(200);
     expect(closed.text).toMatch(
-      /ever_jobs_source_circuit_state\{site="indeed"\} 0\b/,
+      /radar_source_circuit_state\{site="indeed"\} 0\b/,
     );
   });
 
@@ -93,7 +93,7 @@ describe('GET /metrics — source_circuit_state (E2E) — Spec 005 / T06', () =>
       .split('\n')
       .filter(
         (l: string) =>
-          l.startsWith('ever_jobs_source_circuit_state') && l.includes('{'),
+          l.startsWith('radar_source_circuit_state') && l.includes('{'),
       );
 
     // At least the two we forced; could be more if upstream tests

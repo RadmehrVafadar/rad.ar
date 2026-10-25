@@ -11,8 +11,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AvionteModule, AvionteService } from '@ever-jobs/source-ats-avionte';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AvionteModule, AvionteService } from '@rad-ar/source-ats-avionte';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public AviontéBOLD-powered tenant build (Meador Staffing Services — confirmed
 // live on the `mdr.aviontego.com` portal host, 2026-06-03).

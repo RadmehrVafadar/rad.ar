@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JoinRiseModule, JoinRiseService } from '@ever-jobs/source-joinrise';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JoinRiseModule, JoinRiseService } from '@rad-ar/source-joinrise';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JoinRiseService (E2E)', () => {
   let service: JoinRiseService;

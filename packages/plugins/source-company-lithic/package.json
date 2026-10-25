@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-lithic",
+  "name": "@rad-ar/source-company-lithic",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

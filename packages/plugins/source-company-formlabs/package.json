@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-formlabs",
+  "name": "@rad-ar/source-company-formlabs",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -5,7 +5,7 @@ import {
   RawJobSchema,
   Site,
   SourceObservationSchema,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 describe('CanonicalJobSchema (Spec 003 / T03)', () => {
   const fixture: CanonicalJob = {

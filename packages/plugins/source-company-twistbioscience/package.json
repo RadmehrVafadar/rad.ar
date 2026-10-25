@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-twistbioscience",
+  "name": "@rad-ar/source-company-twistbioscience",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

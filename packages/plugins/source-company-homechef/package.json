@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-homechef",
+  "name": "@rad-ar/source-company-homechef",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

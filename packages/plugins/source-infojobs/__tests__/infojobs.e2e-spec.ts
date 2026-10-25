@@ -4,8 +4,8 @@
  * Requires INFOJOBS_CLIENT_ID and INFOJOBS_CLIENT_SECRET to be set in the environment.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { InfoJobsModule, InfoJobsService } from '@ever-jobs/source-infojobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { InfoJobsModule, InfoJobsService } from '@rad-ar/source-infojobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('InfoJobsService (E2E)', () => {
   let service: InfoJobsService;

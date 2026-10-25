@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-saronictechnologies",
+  "name": "@rad-ar/source-company-saronictechnologies",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

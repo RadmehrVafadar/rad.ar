@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
 import * as cheerio from 'cheerio';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   DescriptionFormat,
   IScraper,
@@ -9,13 +9,13 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   BrowserPool,
   createHttpClient,
   htmlToPlainText,
   randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   ICIMS_DELAY_MAX,
   ICIMS_DELAY_MIN,

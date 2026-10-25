@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-carbonrobotics",
+  "name": "@rad-ar/source-company-carbonrobotics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

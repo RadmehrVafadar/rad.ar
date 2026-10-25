@@ -1,4 +1,4 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
@@ -10,13 +10,13 @@ import {
   LocationDto,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   PEOPLEHR_ROOT_DOMAIN,
   PEOPLEHR_DEFAULT_RESULTS,

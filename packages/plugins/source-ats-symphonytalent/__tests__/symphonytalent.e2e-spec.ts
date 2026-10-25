@@ -13,8 +13,8 @@
  * zero results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SymphonyTalentModule, SymphonyTalentService } from '@ever-jobs/source-ats-symphonytalent';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SymphonyTalentModule, SymphonyTalentService } from '@rad-ar/source-ats-symphonytalent';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Symphony-Talent-powered career site (Symphony Talent's own board — confirmed live
 // 2026-06-03 via the m-cloud.io jobs API, Organization=2015).

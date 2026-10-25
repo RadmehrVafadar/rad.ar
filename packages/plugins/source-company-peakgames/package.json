@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-peakgames",
+  "name": "@rad-ar/source-company-peakgames",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

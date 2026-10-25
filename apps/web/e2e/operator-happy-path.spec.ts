@@ -24,7 +24,7 @@ test("an authenticated operator reviews and atomically applies a watch edit", as
       },
     });
   });
-  await page.route("**/api/**", async (route) => {
+  await page.route((url) => url.pathname.startsWith("/api/"), async (route) => {
     const request = route.request();
     const url = new URL(request.url());
 

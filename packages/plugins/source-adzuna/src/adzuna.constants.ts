@@ -1,4 +1,4 @@
-import { Country } from '@ever-jobs/models';
+import { Country } from '@rad-ar/models';
 
 export const ADZUNA_API_BASE_URL = 'https://api.adzuna.com/v1/api/jobs';
 

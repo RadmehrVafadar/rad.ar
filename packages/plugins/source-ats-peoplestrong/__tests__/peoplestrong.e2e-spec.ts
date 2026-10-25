@@ -14,8 +14,8 @@
  * pattern verified live 2026-06-03; open-roles JSON payload documented-but-unverified.)
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PeopleStrongModule, PeopleStrongService } from '@ever-jobs/source-ats-peoplestrong';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PeopleStrongModule, PeopleStrongService } from '@rad-ar/source-ats-peoplestrong';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public PeopleStrong-powered candidate portal (EXL — host confirmed live 2026-06-03).
 const KNOWN_TENANT = 'exlcareers';

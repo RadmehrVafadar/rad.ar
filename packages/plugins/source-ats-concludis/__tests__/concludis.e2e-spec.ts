@@ -14,8 +14,8 @@
  *     Listing 302s from the portal root; detail pages embed JSON-LD JobPosting.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConcludisModule, ConcludisService } from '@ever-jobs/source-ats-concludis';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ConcludisModule, ConcludisService } from '@rad-ar/source-ats-concludis';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ConcludisService (E2E)', () => {
   let service: ConcludisService;

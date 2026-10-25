@@ -13,8 +13,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EddyModule, EddyService } from '@ever-jobs/source-ats-eddy';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EddyModule, EddyService } from '@rad-ar/source-ats-eddy';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Eddy-powered careers organization UUID (confirmed live 2026-06-03 — the public
 // list + detail endpoints answered HTTP 200 anonymously for this org). Boards are dynamic,

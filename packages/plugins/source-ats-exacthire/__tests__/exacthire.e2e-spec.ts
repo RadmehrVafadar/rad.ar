@@ -12,8 +12,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ExactHireModule, ExactHireService } from '@ever-jobs/source-ats-exacthire';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ExactHireModule, ExactHireService } from '@rad-ar/source-ats-exacthire';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public ExactHire-powered careers sub-domain (AFL-CIO — confirmed 2026-06-03).
 const KNOWN_TENANT = 'aflcio';

@@ -13,8 +13,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaycomModule, PaycomService } from '@ever-jobs/source-ats-paycom';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PaycomModule, PaycomService } from '@rad-ar/source-ats-paycom';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Paycom-powered careers board (Club Champion — confirmed 2026-06-03).
 const KNOWN_CLIENTKEY = '03A0C40668106F27C234F910C58A5717';

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GolangJobsModule, GolangJobsService } from '@ever-jobs/source-golangjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GolangJobsModule, GolangJobsService } from '@rad-ar/source-golangjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GolangJobsService (E2E)', () => {
   let service: GolangJobsService;

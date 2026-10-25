@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-gridscale",
+  "name": "@rad-ar/source-company-gridscale",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-sonyinteractiveentertainmentglobal",
+  "name": "@rad-ar/source-company-sonyinteractiveentertainmentglobal",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

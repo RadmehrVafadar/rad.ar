@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-try-picnic",
+  "name": "@rad-ar/source-company-try-picnic",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

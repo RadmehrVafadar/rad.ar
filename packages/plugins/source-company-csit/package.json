@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-csit",
+  "name": "@rad-ar/source-company-csit",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

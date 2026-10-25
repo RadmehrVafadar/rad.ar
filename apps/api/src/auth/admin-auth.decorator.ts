@@ -9,7 +9,7 @@ import { SetMetadata } from '@nestjs/common';
  * importing the decorator (decorators don't compose with `getAllAndOverride`
  * the same way string keys do).
  */
-export const ADMIN_AUTH_METADATA_KEY = 'ever-jobs:admin-auth';
+export const ADMIN_AUTH_METADATA_KEY = 'radar:admin-auth';
 
 /**
  * Marks a route handler (or controller class) as admin-tier — Spec 005 /

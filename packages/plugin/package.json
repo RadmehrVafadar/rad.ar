@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/plugin",
+  "name": "@rad-ar/plugin",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

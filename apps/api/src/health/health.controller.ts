@@ -7,7 +7,7 @@ import {
 } from "@nestjs/common";
 import { ApiExcludeEndpoint, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { ConfigService } from "@nestjs/config";
-import { WATCH_REPOSITORY, WatchRepository } from "@ever-jobs/watcher";
+import { WATCH_REPOSITORY, WatchRepository } from '@rad-ar/models';
 
 @ApiTags("Health")
 @Controller()

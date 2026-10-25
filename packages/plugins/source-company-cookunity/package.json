@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cookunity",
+  "name": "@rad-ar/source-company-cookunity",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

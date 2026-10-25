@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -11,11 +11,11 @@ import {
   CompensationInterval,
   DescriptionFormat,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { JOINRISE_API_URL, JOINRISE_HEADERS, JOINRISE_DEFAULT_RESULTS, JOINRISE_MAX_RESULTS } from './joinrise.constants';
 import { JoinRiseResponse, JoinRiseJob } from './joinrise.types';
 

@@ -14,7 +14,7 @@ import { TeslaService } from './tesla.service';
  * returning an empty `JobResponseDto`.
  *
  * **This package is HTTP-only.** Playwright support lives in the
- * OPTIONAL companion package `@ever-jobs/source-tesla-playwright`
+ * OPTIONAL companion package `@rad-ar/source-tesla-playwright`
  * (per Spec 013 / Q-028 / FR-13). Do NOT add `playwright` to this
  * service.
  */

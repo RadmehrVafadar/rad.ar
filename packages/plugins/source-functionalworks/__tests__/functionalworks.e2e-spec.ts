@@ -5,8 +5,8 @@
  * Uses a public GraphQL API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FunctionalworksModule, FunctionalworksService } from '@ever-jobs/source-functionalworks';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FunctionalworksModule, FunctionalworksService } from '@rad-ar/source-functionalworks';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FunctionalworksService (E2E)', () => {
   let service: FunctionalworksService;

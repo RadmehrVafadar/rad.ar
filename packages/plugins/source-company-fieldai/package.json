@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-fieldai",
+  "name": "@rad-ar/source-company-fieldai",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

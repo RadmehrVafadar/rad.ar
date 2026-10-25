@@ -12,8 +12,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobDivaModule, JobDivaService } from '@ever-jobs/source-ats-jobdiva';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobDivaModule, JobDivaService } from '@rad-ar/source-ats-jobdiva';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public JobDiva candidate-portal key (verified live 2026-06-03 against
 // https://www1.jobdiva.com/portal/?a=… — "Current Openings").

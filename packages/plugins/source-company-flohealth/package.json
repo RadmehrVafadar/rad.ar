@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-flohealth",
+  "name": "@rad-ar/source-company-flohealth",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

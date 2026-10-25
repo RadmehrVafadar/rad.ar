@@ -5,8 +5,8 @@
  * No authentication required -- the API is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { NoDeskModule, NoDeskService } from '@ever-jobs/source-nodesk';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { NoDeskModule, NoDeskService } from '@rad-ar/source-nodesk';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('NoDeskService (E2E)', () => {
   let service: NoDeskService;

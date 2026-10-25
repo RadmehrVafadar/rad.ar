@@ -13,8 +13,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GupyModule, GupyService } from '@ever-jobs/source-ats-gupy';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GupyModule, GupyService } from '@rad-ar/source-ats-gupy';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Gupy-powered career site (Sicredi — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'sicredi';

@@ -13,8 +13,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { UmantisModule, UmantisService } from '@ever-jobs/source-ats-umantis';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { UmantisModule, UmantisService } from '@rad-ar/source-ats-umantis';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Umantis-powered board (ASMPT, on recruitingapp-5476.de.umantis.com —
 // confirmed live 2026-06-03). The `.de` suffix selects the German host variant.

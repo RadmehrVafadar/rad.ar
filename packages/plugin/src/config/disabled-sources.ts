@@ -1,4 +1,4 @@
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 /**
  * Name of the environment variable that controls which source plugins are
@@ -6,9 +6,9 @@ import { Site } from '@ever-jobs/models';
  * (case-insensitive, whitespace tolerant).
  *
  * @example
- *   EVER_JOBS_DISABLED_SOURCES=linkedin, indeed ,glassdoor
+ *   RADAR_DISABLED_SOURCES=linkedin, indeed ,glassdoor
  */
-export const DISABLED_SOURCES_ENV_VAR = 'EVER_JOBS_DISABLED_SOURCES';
+export const DISABLED_SOURCES_ENV_VAR = 'RADAR_DISABLED_SOURCES';
 
 /**
  * Parse the disabled-sources env-var into a normalised, frozen `Set<Site>`.

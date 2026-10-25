@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { LEGITIMACY_CHECKER_TOKEN } from '@ever-jobs/models';
+import { LEGITIMACY_CHECKER_TOKEN } from '@rad-ar/models';
 
 import { LegitimacyDetectorService } from './legitimacy-detector.service';
 

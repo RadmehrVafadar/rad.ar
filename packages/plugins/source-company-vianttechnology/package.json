@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-vianttechnology",
+  "name": "@rad-ar/source-company-vianttechnology",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

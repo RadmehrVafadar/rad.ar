@@ -16,12 +16,12 @@ curl http://localhost:3001/health
 ## Standalone Docker
 
 ```bash
-docker build -t ever-jobs-api .
+docker build -t radar-api .
 docker run -d \
-  --name ever-jobs-api \
+  --name radar-api \
   -p 3001:3001 \
   --env-file .env \
-  ever-jobs-api
+  radar-api
 ```
 
 ## Development (Docker)
@@ -45,25 +45,25 @@ npm run start:dev
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ever-jobs-api
+  name: radar-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ever-jobs-api
+      app: radar-api
   template:
     metadata:
       labels:
-        app: ever-jobs-api
+        app: radar-api
     spec:
       containers:
         - name: api
-          image: ever-jobs-api:latest
+          image: radar-api:latest
           ports:
             - containerPort: 3001
           envFrom:
             - configMapRef:
-                name: ever-jobs-config
+                name: radar-config
           livenessProbe:
             httpGet:
               path: /health
@@ -80,10 +80,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ever-jobs-api
+  name: radar-api
 spec:
   selector:
-    app: ever-jobs-api
+    app: radar-api
   ports:
     - port: 80
       targetPort: 3001

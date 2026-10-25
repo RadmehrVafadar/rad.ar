@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-amtechsoftware",
+  "name": "@rad-ar/source-company-amtechsoftware",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

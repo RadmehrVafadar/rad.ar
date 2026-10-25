@@ -12,8 +12,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PyjamaHrModule, PyjamaHrService } from '@ever-jobs/source-ats-pyjamahr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PyjamaHrModule, PyjamaHrService } from '@rad-ar/source-ats-pyjamahr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public PyjamaHR-powered candidate portal (Jobscubicle — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'jobscubicle';

@@ -31,7 +31,7 @@ const PAGE_EMPTY_HTML = fs.readFileSync(
 );
 
 // Patch `createHttpClient` BEFORE requiring the service. The service
-// captures `createHttpClient` via the `@ever-jobs/common` barrel, but
+// captures `createHttpClient` via the `@rad-ar/common` barrel, but
 // the barrel re-exports through `__exportStar`-generated getters that
 // are NOT configurable — so we can't redefine the property on the
 // barrel itself. Instead we mutate the deepest module's own writable
@@ -62,7 +62,7 @@ const { Logger } = require('@nestjs/common');
 Logger.overrideLogger(false);
 
 const { AvatureService } = require('../src');
-const { Site } = require('@ever-jobs/models');
+const { Site } = require('@rad-ar/models');
 
 const ITERATIONS = 20;
 const WARMUPS = 3;

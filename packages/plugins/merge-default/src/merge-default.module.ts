@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MERGE_RESOLVER_TOKEN } from '@ever-jobs/models';
+import { MERGE_RESOLVER_TOKEN } from '@rad-ar/models';
 import { MergeDefaultService } from './merge-default.service';
 
 /**

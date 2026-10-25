@@ -5,8 +5,8 @@
  * No authentication required -- the API is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HeadhunterModule, HeadhunterService } from '@ever-jobs/source-headhunter';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HeadhunterModule, HeadhunterService } from '@rad-ar/source-headhunter';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HeadhunterService (E2E)', () => {
   let service: HeadhunterService;

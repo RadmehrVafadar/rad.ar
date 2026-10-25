@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   IScraper,
   JobPostDto,
@@ -7,8 +7,8 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { createHttpClient } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient } from '@rad-ar/common';
 import {
   ORACLE_DEFAULT_EXPAND,
   ORACLE_DEFAULT_FACETS,

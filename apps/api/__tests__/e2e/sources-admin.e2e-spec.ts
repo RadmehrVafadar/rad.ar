@@ -25,7 +25,7 @@ import {
   ICircuitBreakerService,
   Site,
   SourceHealth,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { createTestApp } from '../helpers/create-app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DEDUP_ENGINE_TOKEN } from '@ever-jobs/models';
+import { DEDUP_ENGINE_TOKEN } from '@rad-ar/models';
 import { DedupHybridService } from './dedup-hybrid.service';
 
 /**

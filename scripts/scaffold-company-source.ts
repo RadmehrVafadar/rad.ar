@@ -13,10 +13,7 @@
  *     src/<slug>.service.ts
  *     __tests__/<slug>.service.spec.ts
  *     __tests__/fixtures/<slug>-jobs.json
- *   .specify/specs/<specNo>-source-company-<slug>/
- *     spec.md
- *     plan.md
- *     tasks.md
+ *   docs/specs/source-company-<slug>.md
  *
  * It only ever CREATES new package + spec files — it never mutates the four
  * shared wiring files (`site.enum.ts`, `packages/plugins/index.ts`,
@@ -122,13 +119,13 @@ function docComment(d: CompanyDescriptor): string {
 }
 
 function serviceFile(d: CompanyDescriptor): string {
-  return `import { SourcePlugin } from '@ever-jobs/plugin';
+  return `import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 ${docComment(d)}
 const API_URL = 'https://api.greenhouse.io/v1/boards/${d.slug}/jobs';
@@ -242,7 +239,7 @@ function packageJson(d: CompanyDescriptor): string {
   return (
     JSON.stringify(
       {
-        name: `@ever-jobs/source-company-${d.slug}`,
+        name: `@rad-ar/source-company-${d.slug}`,
         version: '0.0.1',
         private: true,
         main: 'src/index.ts',
@@ -297,195 +294,16 @@ function buildFixture(d: CompanyDescriptor): string {
   return JSON.stringify({ jobs }, null, 2) + '\n';
 }
 
-function specMd(d: CompanyDescriptor): string {
-  const created = '2026-06-03';
-  return `# Spec: ${d.specNo} — Source Company Plugin: ${d.displayName}
-
-| Field          | Value                                  |
-| -------------- | -------------------------------------- |
-| Spec ID        | ${d.specNo}                            |
-| Slug           | source-company-${d.slug}               |
-| Status         | accepted                               |
-| Owner          | claude (run #398)                      |
-| Created        | ${created}                             |
-| Last updated   | ${created}                             |
-| Supersedes     | (none)                                 |
-| Related specs  | 001, 003, 005                          |
-
-## 1. Problem Statement
-
-${wrap(d.description, 68).join('\n')}
-
-${d.displayName} publishes its careers board through Greenhouse at
-the bare slug \`${d.slug}\`. The run-398 batch sweep confirmed
-${d.jobCount} live role(s) via a direct probe of
-\`https://api.greenhouse.io/v1/boards/${d.slug}/jobs?content=true\`.
-Sector: ${d.sector}. HQ: ${d.hq}.
-
-## 2. Goals
-
-- Ship a \`source-company-${d.slug}\` plugin returning live
-  \`JobPostDto\` rows from the Greenhouse board.
-- Mirror the canonical variant-2 + D-08 company-direct template
-  (wire \`company_name\` pass-through; defensive title/department
-  trim; entity-decode-then-tag-strip descriptions).
-- Bundle a unit-test suite (≥ 9 cases) with a mocked HTTP fixture.
-- Publish the plugin's \`Module\` in \`ALL_SOURCE_MODULES\`.
-
-## 3. Non-Goals
-
-- Authenticated Greenhouse Harvest API support.
-- Backfilling historical ${d.displayName} postings.
-- Cross-board enrichment or salary inference.
-
-## 4. User / Caller Stories
-
-> As an **aggregator caller**, I want **\`Site.${d.enumKey}\`** in the
-> source registry, so that **a single \`siteType: [Site.${d.enumKey}]\`
-> request returns ${d.displayName}'s open roles**.
-
-## 5. Functional Requirements
-
-| ID    | Requirement                                                                 | Priority |
-| ----- | --------------------------------------------------------------------------- | -------- |
-| FR-1  | Add \`Site.${d.enumKey} = '${d.slug}'\` to the \`Site\` enum.               | must     |
-| FR-2  | New plugin package \`@ever-jobs/source-company-${d.slug}\`.                  | must     |
-| FR-3  | \`${d.serviceName}.scrape(input)\` returns a \`JobResponseDto\`; never throws. | must   |
-| FR-4  | The plugin is registered in \`ALL_SOURCE_MODULES\`.                          | must     |
-| FR-5  | \`tsconfig.base.json\` path-alias + matching \`jest.config.js\` mapper.      | must     |
-| FR-6  | Each \`JobPostDto\` \`id\` prefixed \`${d.slug}-\`, \`site === Site.${d.enumKey}\`. | must |
-| FR-7  | \`input.resultsWanted\` honoured.                                           | must     |
-| FR-8  | \`input.searchTerm\` honoured (title + department substring).               | should   |
-| FR-9  | Network errors caught — returns \`{ jobs: [] }\`.                            | must     |
-| FR-10 | ≥ 9 unit tests with mocked HTTP.                                            | must     |
-| FR-11 | D-08 decode-then-strip pipeline.                                            | must     |
-| FR-12 | Wire \`absolute_url\` flows through to \`jobUrl\` (variant 2).               | must     |
-| FR-13 | D-10 defensive \`.trim()\` on wire titles.                                   | must     |
-| FR-14 | D-11 defensive \`.trim()\` on wire department names.                         | must     |
-
-## 6. Non-Functional Requirements
-
-NFR-1..NFR-4 — same as cohort baseline (no new runtime deps;
-\`Promise\`-based async; \`Logger\` not \`console\`; resilient to
-malformed payloads).
-
-## 7. Contracts
-
-### 7.1 API / Interface
-
-\`\`\`ts
-@SourcePlugin({ site: Site.${d.enumKey}, name: '${sq(d.displayName)}', category: 'company' })
-@Injectable()
-export class ${d.serviceName} implements IScraper {
-  scrape(input: ScraperInputDto): Promise<JobResponseDto>;
-}
-\`\`\`
-
-### 7.2 Errors
-
-All transport errors swallowed; caller sees \`{ jobs: [] }\`.
-
-## 8. Test Plan
-
-- ≥ 9 cases. Happy-path asserts variant-2 URL pass-through
-  (\`job-boards.greenhouse.io/${d.slug}/jobs/<id>\`), wire
-  \`company_name\` pass-through (\`'${sq(d.displayName)}'\`),
-  D-10 title-trim lock, D-11 department-trim lock, and the
-  D-08 decode-then-strip regression guard.
-- Plus standard cohort cases (resultsWanted cap, searchTerm
-  match + non-match, HTTP 500 error handling, empty payload).
-
-## 9. Open Questions
-
-(none open — see § 10 Decisions.)
-
-## 10. Decisions
-
-- **D-04 (run #398):** Wire-shape variant 2 (canonical hosted-board
-  host \`job-boards.greenhouse.io/${d.slug}/jobs/<id>\`).
-- **D-08 (run #398):** Decode-then-strip description pipeline.
-- **D-09 (run #398):** Wire \`company_name\` pass-through
-  (\`'${sq(d.displayName)}'\`).
-- **D-10 (run #398):** Defensive \`.trim()\` on wire titles.
-- **D-11 (run #398):** Defensive \`.trim()\` on wire department names.
-
-## 11. References
-
-- \`packages/plugins/source-company-acurussolutions/src/acurussolutions.service.ts\`
-  — canonical variant-2 + D-08 company-direct template.
-- \`packages/plugins/source-ats-greenhouse/src/greenhouse.service.ts\`
-- \`packages/common/src/utils/html-utils.ts\`
-- \`docs/SOURCE_ADOPTION_BACKLOG.md\`
-- \`docs/PLUGIN_ARCHITECTURE.md\`
-`;
-}
-
-function planMd(d: CompanyDescriptor): string {
-  const created = '2026-06-03';
-  return `# Plan: ${d.specNo} — Source Company Plugin: ${d.displayName}
-
-| Field        | Value      |
-| ------------ | ---------- |
-| Spec         | spec.md    |
-| Created      | ${created} |
-| Last updated | ${created} |
-
-## 1. Approach
-
-${d.displayName}'s careers board is hosted on Greenhouse at the slug
-\`${d.slug}\`. This plugin mirrors the canonical variant-2 + D-08
-company-direct template: fetch
-\`https://api.greenhouse.io/v1/boards/${d.slug}/jobs?content=true\`,
-map each listing to a \`JobPostDto\`, pass the wire \`company_name\`
-through, defensively \`.trim()\` titles and department names, and run
-descriptions through the entity-decode-then-tag-strip pipeline. All
-transport errors are swallowed so the aggregator sees an empty result
-rather than an exception.
-
-## 2. Phases
-
-### Phase 1 — Scaffold + register + test
-
-- Goal: a registered, tested \`source-company-${d.slug}\` plugin.
-- Deliverables: package files, \`Site.${d.enumKey}\` enum value, the
-  four wiring registrations, and a ≥ 9-case unit suite against a
-  3-listing fixture.
-- Exit criteria: \`jest\` green for the new suite; docs + CI green.
-
-## 3. Packages Touched
-
-- \`packages/plugins/source-company-${d.slug}\` (new)
-- \`packages/models/src/enums/site.enum.ts\` (enum value)
-- \`packages/plugins/index.ts\` (barrel registration)
-- \`tsconfig.base.json\` + \`jest.config.js\` (path alias + mapper)
-`;
-}
-
-function tasksMd(d: CompanyDescriptor): string {
-  return `# Tasks: ${d.specNo} — Source Company Plugin: ${d.displayName}
-
-> Status legend: \`[ ]\` pending • \`[~]\` in-progress • \`[x]\` done • \`[-]\` dropped
-
-## Phase 1 — Scaffold + register + test
-
-- [x] T01 — Add \`Site.${d.enumKey} = '${d.slug}'\` enum value under Phase ${d.phaseNo}
-- [x] T02 — Scaffold the \`@ever-jobs/source-company-${d.slug}\` package
-- [x] T03 — Register plugin in the four wiring files
-- [x] T04 — Unit tests with mocked HTTP fixture (≥ 9 cases)
-- [x] T05 — Cross-regression sweep + docs update + commit + push + CI green
-`;
-}
-
 function testFile(d: CompanyDescriptor): string {
   return `import 'reflect-metadata';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Test } from '@nestjs/testing';
-import { JobResponseDto, ScraperInputDto, Site } from '@ever-jobs/models';
+import { JobResponseDto, ScraperInputDto, Site } from '@rad-ar/models';
 
 const mockGet = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -695,12 +513,7 @@ function writeFileSafe(abs: string, content: string): void {
 
 export function scaffoldOne(repoRoot: string, d: CompanyDescriptor): string[] {
   const pkgDir = path.join(repoRoot, 'packages', 'plugins', `source-company-${d.slug}`);
-  const specDir = path.join(
-    repoRoot,
-    '.specify',
-    'specs',
-    `${d.specNo}-source-company-${d.slug}`,
-  );
+  const specPath = path.join(repoRoot, 'docs', 'specs', `source-company-${d.slug}.md`);
   const files: Array<[string, string]> = [
     [path.join(pkgDir, 'package.json'), packageJson(d)],
     [path.join(pkgDir, 'tsconfig.json'), tsconfigJson()],
@@ -709,10 +522,11 @@ export function scaffoldOne(repoRoot: string, d: CompanyDescriptor): string[] {
     [path.join(pkgDir, 'src', `${d.slug}.service.ts`), serviceFile(d)],
     [path.join(pkgDir, '__tests__', `${d.slug}.service.spec.ts`), testFile(d)],
     [path.join(pkgDir, '__tests__', 'fixtures', `${d.slug}-jobs.json`), buildFixture(d)],
-    [path.join(specDir, 'spec.md'), specMd(d)],
-    [path.join(specDir, 'plan.md'), planMd(d)],
-    [path.join(specDir, 'tasks.md'), tasksMd(d)],
+    [specPath, `# Source company ${d.displayName}\n\n**Status:** ready\n\n## Goal\n\nExpose ${d.displayName} through the source plugin contract.\n\n## Scope\n\n- In: the company source adapter and its mocked regression suite.\n- Out: new API behavior and unrelated sources.\n\n## Design\n\nUse the existing source registry and shared HTTP client or ATS contract.\n\n## Tasks\n\n- [ ] Register the plugin and run its tests.\n\n## Done when\n\n- [ ] Registration, type checks, and mocked source tests pass.\n`],
   ];
+  // Persist the design before emitting implementation files.
+  const specification = files.pop()!;
+  files.unshift(specification);
   for (const [abs, content] of files) writeFileSafe(abs, content);
   return files.map(([abs]) => abs);
 }

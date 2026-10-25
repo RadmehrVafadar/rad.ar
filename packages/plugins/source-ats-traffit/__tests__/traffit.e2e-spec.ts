@@ -8,8 +8,8 @@
  * as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TraffitModule, TraffitService } from '@ever-jobs/source-ats-traffit';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TraffitModule, TraffitService } from '@rad-ar/source-ats-traffit';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Traffit-powered tenant verified live 2026-06-03 (12 published adverts).
 const KNOWN_TENANT = 'people';

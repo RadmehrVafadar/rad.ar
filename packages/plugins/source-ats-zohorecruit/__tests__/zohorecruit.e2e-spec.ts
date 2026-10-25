@@ -8,8 +8,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZohoRecruitModule, ZohoRecruitService } from '@ever-jobs/source-ats-zohorecruit';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ZohoRecruitModule, ZohoRecruitService } from '@rad-ar/source-ats-zohorecruit';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ZohoRecruitService (E2E)', () => {
   let service: ZohoRecruitService;

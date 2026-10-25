@@ -14,8 +14,8 @@
  *     (CR14, an Estonian cyber-range team — 2 open roles in Tallinn)
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TeamdashModule, TeamdashService } from '@ever-jobs/source-ats-teamdash';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TeamdashModule, TeamdashService } from '@rad-ar/source-ats-teamdash';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const KNOWN_TENANT_CAREER_URL =
   'https://cr14.teamdash.com/p/job/20eH77Ul/career-page';

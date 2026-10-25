@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-qphox",
+  "name": "@rad-ar/source-company-qphox",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

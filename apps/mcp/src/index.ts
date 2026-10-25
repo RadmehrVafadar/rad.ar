@@ -17,8 +17,8 @@
  *   - compare_sources: Compare available source types
  *
  * Usage:
- *   npx @ever-jobs/mcp                      # stdio mode
- *   EVER_JOBS_API_URL=http://localhost:3001  # custom API endpoint
+ *   npx @rad-ar/mcp                      # stdio mode
+ *   RADAR_API_URL=http://localhost:3001  # custom API endpoint
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -33,7 +33,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { searchJobs, getJobDetails, listSources, searchRemoteJobs, getSalaryInsights, compareSources, JobSearchParams } from './tools';
 
-const SERVER_NAME = 'ever-jobs';
+const SERVER_NAME = 'radar';
 const SERVER_VERSION = '0.1.0';
 
 /** Create and configure the MCP server */
@@ -277,13 +277,13 @@ function createServer(): Server {
   server.setRequestHandler(ListResourcesRequestSchema, async () => ({
     resources: [
       {
-        uri: 'everjobs://sources',
+        uri: 'radar://sources',
         name: 'Available Job Sources',
         description: 'List of all 163+ job sources available for searching',
         mimeType: 'application/json',
       },
       {
-        uri: 'everjobs://guide',
+        uri: 'radar://guide',
         name: 'Search Guide',
         description: 'Tips and best practices for effective job searching',
         mimeType: 'text/plain',
@@ -295,7 +295,7 @@ function createServer(): Server {
     const { uri } = request.params;
 
     switch (uri) {
-      case 'everjobs://sources':
+      case 'radar://sources':
         return {
           contents: [
             {
@@ -306,7 +306,7 @@ function createServer(): Server {
           ],
         };
 
-      case 'everjobs://guide':
+      case 'radar://guide':
         return {
           contents: [
             {

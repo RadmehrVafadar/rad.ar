@@ -5,8 +5,8 @@
  * No authentication required -- the RSS feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { IcrunchdataModule, IcrunchdataService } from '@ever-jobs/source-icrunchdata';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { IcrunchdataModule, IcrunchdataService } from '@rad-ar/source-icrunchdata';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('IcrunchdataService (E2E)', () => {
   let service: IcrunchdataService;

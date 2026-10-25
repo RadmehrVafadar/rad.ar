@@ -25,16 +25,16 @@ import {
   type ILivenessChecker,
   type ILegitimacyChecker,
   type LegitimacyInput,
-} from '@ever-jobs/models';
-import { JobsService } from './jobs.service';
-import { JobsAggregator } from './jobs.aggregator';
-import { AnalyticsService } from '@ever-jobs/analytics';
-import { CacheService } from '../cache/cache.service';
-import { CompareJobsDto } from './job-comparison.dto';
+} from '@rad-ar/models';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
+import { JobsAggregator } from '@rad-ar/job-search/jobs.aggregator';
+import { AnalyticsService } from '@rad-ar/analytics';
+import { CacheService } from '@rad-ar/common/runtime/cache/cache.service';
+import { CompareJobsDto } from '@rad-ar/models/dtos/job-comparison.dto';
 import {
   JobComparisonResult,
   JobComparisonService,
-} from './job-comparison.service';
+} from '@rad-ar/job-search/job-comparison.service';
 
 @ApiTags('Jobs')
 @Controller('api/jobs')

@@ -1,6 +1,6 @@
 # Google Careers source
 
-`@ever-jobs/source-company-google` reads the official server-rendered Google
+`@rad-ar/source-company-google` reads the official server-rendered Google
 Careers results and detail pages under
 `https://www.google.com/about/careers/applications/jobs/results/`.
 

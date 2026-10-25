@@ -3,5 +3,5 @@ export const UNDPJOBS_DEFAULT_RESULTS = 25;
 
 export const UNDPJOBS_HEADERS: Record<string, string> = {
   'Accept': 'application/xml, text/xml, application/rss+xml',
-  'User-Agent': 'ever-jobs/0.1.0 (job-aggregator)',
+  'User-Agent': 'radar/0.1.0 (job-aggregator)',
 };

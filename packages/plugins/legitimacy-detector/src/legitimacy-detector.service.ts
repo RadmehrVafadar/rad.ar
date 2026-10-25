@@ -3,7 +3,7 @@ import type {
   ILegitimacyChecker,
   LegitimacyInput,
   LegitimacyVerdict,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Deterministic, explainable posting-legitimacy scorer (Spec 740).

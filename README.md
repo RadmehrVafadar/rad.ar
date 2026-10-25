@@ -16,8 +16,8 @@ and deliver notifications.
 The registry determines the source count and availability at application startup. A source being
 present in the catalog does not by itself mean it is enabled for unattended monitoring.
 
-The `@ever-jobs/*` npm scope, `EVER_JOBS_*` environment variables, `ever_jobs_*`
-metrics, and existing CLI/MCP identifiers are retained for backward compatibility.
+The platform uses `@rad-ar/*` packages, `RADAR_*` application environment variables, and `radar_*` metrics.
+Existing deployments must follow the [identifier migration guide](docs/identifier-migration.md) before upgrading.
 
 ## Start the operator GUI
 
@@ -77,8 +77,8 @@ rad.ar keeps orchestration separate from source and feature implementations:
 
 Source plugins implement the common scraper contract and are loaded by the registry. Core
 applications depend on contracts rather than on individual source implementations. See the
-[architecture overview](docs/ARCHITECTURE_OVERVIEW.md) and
-[plugin architecture](docs/PLUGIN_ARCHITECTURE.md) for the full design.
+[architecture overview](docs/architecture-overview.md) and
+[plugin architecture](docs/plugin-architecture.md) for the full design.
 
 ## Quick start
 
@@ -126,11 +126,11 @@ structured JSON through `search --stdin`.
 With the API running:
 
 ```bash
-npm --workspace @ever-jobs/mcp run build
-npm --workspace @ever-jobs/mcp start
+npm --workspace @rad-ar/mcp run build
+npm --workspace @rad-ar/mcp start
 ```
 
-Set `EVER_JOBS_API_URL` when the API is not at `http://localhost:3001`. See the
+Set `RADAR_API_URL` when the API is not at `http://localhost:3001`. See the
 [MCP guide](apps/mcp/README.md) for client configuration and available tools.
 
 ### Persistent watcher
@@ -214,7 +214,7 @@ aligned preset example is
 Watch-level interval and geography fields are inherited by source targets unless
 the target explicitly overrides them; the compact migrated 47-target example is
 [`examples/canadian-tech-adjacent-internships.watch.json`](examples/canadian-tech-adjacent-internships.watch.json).
-See [Spec 6004's human-readable guide](docs/specs/6004-canadian-employer-internship-coverage.md)
+See Spec 6004's human-readable guide (retired specification)
 for the expanded template, ATS mapping, and baseline workflow.
 
 ## Common development commands
@@ -227,7 +227,7 @@ for the expanded template, ATS mapping, and baseline workflow.
 | `npm run cli -- search --help` | Show CLI search options |
 | `npm run build` | Build all Nx projects |
 | `npm run lint` | Lint all projects |
-| `npm run lint:docs` | Validate documentation and Spec Kit metadata |
+| `npm run lint:docs` | Validate documentation links and planning conventions |
 | `npm test` | Run the Jest test suite |
 | `npm run test:api` | Run API tests |
 | `npm run test:cli` | Run CLI tests |
@@ -255,16 +255,16 @@ authenticated browser state. All outbound source requests must use the shared HT
 | --- | --- |
 | [Documentation index](docs/index.md) | Complete map of specs, plans, references, and runbooks |
 | [API and source manifest](tool_manifest.json) | Machine-readable capabilities, endpoints, source groups, and watcher contracts |
-| [CLI reference](docs/CLI.md) | Search, comparison, and watcher commands |
-| [API changelog](docs/API_CHANGELOG.md) | Public API compatibility history |
+| [CLI reference](docs/cli.md) | Search, comparison, and watcher commands |
+| [API changelog](docs/api-changelog.md) | Public API compatibility history |
 | [Watcher guide](apps/watcher/README.md) | Runtime model, cadence, coverage, metrics, and operations |
 | [Local watcher runbook](docs/runbooks/watcher-local.md) | Safe setup, baseline, observation, and troubleshooting sequence |
-| [Deployment guide](docs/DEPLOYMENT.md) | Docker and deployment guidance |
-| [Security guidelines](docs/SECURITY_GUIDELINES.md) | Credential handling and security expectations |
+| [Deployment guide](docs/deployment.md) | Docker and deployment guidance |
+| [Security guidelines](docs/security-guidelines.md) | Credential handling and security expectations |
 | [Contributing guide](CONTRIBUTING.md) | Development workflow and contribution requirements |
 
-The authoritative rules for coding agents are in [`AGENTS.md`](AGENTS.md). Feature work follows
-the Spec Kit artifacts under [`.specify/specs`](.specify/specs).
+The authoritative rules for coding agents are in [`AGENTS.md`](AGENTS.md).
+Designed work uses descriptive specifications under [`docs/specs/`](docs/specs/roadmap.md).
 
 ## Responsible use
 

@@ -16,8 +16,8 @@
  * jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CarerixModule, CarerixService } from '@ever-jobs/source-ats-carerix';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CarerixModule, CarerixService } from '@rad-ar/source-ats-carerix';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Candidate Carerix application slug (the tenant sub-domain label on carerix.com).
 // Surface researched 2026-06-03; feeds may be password-gated per tenant, so zero

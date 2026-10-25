@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ElixirJobsModule, ElixirJobsService } from '@ever-jobs/source-elixirjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ElixirJobsModule, ElixirJobsService } from '@rad-ar/source-elixirjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ElixirJobsService (E2E)', () => {
   let service: ElixirJobsService;

@@ -6,15 +6,10 @@ import {
   ServiceUnavailableException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import {
-  buildCompanyCoverageReport,
-  JobWatch,
-  WATCH_REPOSITORY,
-  WatcherMetricsService,
-  WatcherSchedulerService,
-  WatchRepository,
-} from "@ever-jobs/watcher";
-import { MetricsService } from "../../api/src/metrics/metrics.service";
+import { buildCompanyCoverageReport, WatcherSchedulerService } from '@rad-ar/watch-engine';
+import { JobWatch, WATCH_REPOSITORY, WatchRepository } from '@rad-ar/models';
+import { WatcherMetricsService } from '@rad-ar/common/runtime/watcher/watcher-metrics.service';
+import { MetricsService } from "@rad-ar/common/runtime/metrics/metrics.service";
 
 @Controller()
 export class WatcherHealthController {

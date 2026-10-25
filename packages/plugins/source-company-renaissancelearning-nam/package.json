@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-renaissancelearning-nam",
+  "name": "@rad-ar/source-company-renaissancelearning-nam",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

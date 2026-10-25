@@ -5,8 +5,8 @@
  * No authentication required -- the RSS feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DjinniModule, DjinniService } from '@ever-jobs/source-djinni';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DjinniModule, DjinniService } from '@rad-ar/source-djinni';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DjinniService (E2E)', () => {
   let service: DjinniService;

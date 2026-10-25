@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobsAcUkModule, JobsAcUkService } from '@ever-jobs/source-jobsacuk';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobsAcUkModule, JobsAcUkService } from '@rad-ar/source-jobsacuk';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobsAcUkService (E2E)', () => {
   let service: JobsAcUkService;

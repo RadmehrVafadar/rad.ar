@@ -2,8 +2,8 @@
  * E2E test for the Bayt scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BaytModule, BaytService } from '@ever-jobs/source-bayt';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { BaytModule, BaytService } from '@rad-ar/source-bayt';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 describe('BaytService (E2E)', () => {
   let service: BaytService;

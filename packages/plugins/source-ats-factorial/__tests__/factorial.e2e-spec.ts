@@ -11,8 +11,8 @@
  *   https://jobs-tendencys.factorialhr.com  — 22 open positions
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FactorialModule, FactorialService } from '@ever-jobs/source-ats-factorial';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FactorialModule, FactorialService } from '@rad-ar/source-ats-factorial';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FactorialService (E2E)', () => {
   let service: FactorialService;

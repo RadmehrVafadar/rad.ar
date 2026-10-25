@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-turnertownsend",
+  "name": "@rad-ar/source-company-turnertownsend",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

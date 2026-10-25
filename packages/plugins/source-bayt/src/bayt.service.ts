@@ -1,12 +1,12 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto,
   LocationDto, Country, Site, countryFromString,
-} from '@ever-jobs/models';
-import { createHttpClient, randomSleep } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, randomSleep } from '@rad-ar/common';
 
 @SourcePlugin({
   site: Site.BAYT,

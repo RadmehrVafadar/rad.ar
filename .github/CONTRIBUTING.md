@@ -1,4 +1,4 @@
-# Contributing to Ever Jobs
+# Contributing to rad.ar
 
 Thank you for your interest in contributing! Here's how to get started.
 
@@ -23,9 +23,9 @@ Thank you for your interest in contributing! Here's how to get started.
 ## Adding a New Job Source
 
 1. Create a new package in `packages/source-<name>/`
-2. Implement the `IScraper` interface from `@ever-jobs/models`
+2. Implement the `IScraper` interface from `@rad-ar/models`
 3. Register the module in `apps/api/src/jobs/jobs.module.ts`
-4. Add the site to the `Site` enum in `@ever-jobs/models`
+4. Add the site to the `Site` enum in `@rad-ar/models`
 5. Add the source mapping in `JobsService` constructor
 
 ## Pull Request Guidelines

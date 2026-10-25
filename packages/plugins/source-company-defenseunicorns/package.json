@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-defenseunicorns",
+  "name": "@rad-ar/source-company-defenseunicorns",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

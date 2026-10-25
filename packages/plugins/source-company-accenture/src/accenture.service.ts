@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { Injectable, Logger } from '@nestjs/common';
-import { createHttpClient, extractEmails, htmlToPlainText, markdownConverter } from '@ever-jobs/common';
+import { createHttpClient, extractEmails, htmlToPlainText, markdownConverter } from '@rad-ar/common';
 import {
   DescriptionFormat,
   IScraper,
@@ -10,8 +10,8 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { SourcePlugin } from '@ever-jobs/plugin';
+} from '@rad-ar/models';
+import { SourcePlugin } from '@rad-ar/plugin';
 import { AccentureSourceError } from './accenture-source.error';
 
 const SEARCH_URL = 'https://www.accenture.com/api/accenture/elastic/findjobs';

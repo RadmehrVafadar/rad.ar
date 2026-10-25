@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-nimblerobotics",
+  "name": "@rad-ar/source-company-nimblerobotics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

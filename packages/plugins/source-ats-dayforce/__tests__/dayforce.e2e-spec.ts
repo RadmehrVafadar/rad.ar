@@ -7,8 +7,8 @@
  * the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DayforceModule, DayforceService } from '@ever-jobs/source-ats-dayforce';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DayforceModule, DayforceService } from '@rad-ar/source-ats-dayforce';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DayforceService (E2E)', () => {
   let service: DayforceService;

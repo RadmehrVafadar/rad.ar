@@ -9,8 +9,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CareerPlugModule, CareerPlugService } from '@ever-jobs/source-ats-careerplug';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CareerPlugModule, CareerPlugService } from '@rad-ar/source-ats-careerplug';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public CareerPlug tenant sub-domain (CareerPlug's own careers site),
 // verified live 2026-06-03 at https://cplugjobs.careerplug.com/jobs.

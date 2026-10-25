@@ -9,7 +9,7 @@ import { InMemoryJobStore } from './store-memory.service';
  * The module deliberately does NOT bind the service under
  * `JOB_STORE_TOKEN` itself — that binding is `StoreModule.forActive`'s
  * responsibility, because the active backend is selected at bootstrap
- * by `EVER_JOBS_STORE` and may not be the in-memory one. Importing
+ * by `RADAR_STORE` and may not be the in-memory one. Importing
  * this module without also importing `StoreModule.forActive(...)`
  * gives you the class as an injectable provider but does NOT make it
  * the active store.
@@ -25,7 +25,7 @@ import { InMemoryJobStore } from './store-memory.service';
  * ```typescript
  * @Module({
  *   imports: [
- *     StoreModule.forActive(process.env.EVER_JOBS_STORE ?? 'memory', {
+ *     StoreModule.forActive(process.env.RADAR_STORE ?? 'memory', {
  *       backends: [InMemoryJobStore],
  *     }),
  *   ],

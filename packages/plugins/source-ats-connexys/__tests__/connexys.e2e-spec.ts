@@ -15,8 +15,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConnexysModule, ConnexysService } from '@ever-jobs/source-ats-connexys';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ConnexysModule, ConnexysService } from '@rad-ar/source-ats-connexys';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Connexys-powered career site (a Connexys site name observed in the public feed
 // addressing scheme). Live results may be empty if the tenant has migrated platforms.

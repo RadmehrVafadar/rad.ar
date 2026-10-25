@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-heraldapi",
+  "name": "@rad-ar/source-company-heraldapi",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

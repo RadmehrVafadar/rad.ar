@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 import { Test } from '@nestjs/testing';
-import { DescriptionFormat, ScraperInputDto, Site } from '@ever-jobs/models';
+import { DescriptionFormat, ScraperInputDto, Site } from '@rad-ar/models';
 
 const mockPost = jest.fn();
 const mockGet = jest.fn();
 const mockRandomSleep = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     randomSleep: mockRandomSleep,

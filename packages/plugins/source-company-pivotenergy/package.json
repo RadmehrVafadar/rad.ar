@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-pivotenergy",
+  "name": "@rad-ar/source-company-pivotenergy",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

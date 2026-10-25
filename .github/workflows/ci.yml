@@ -2,11 +2,25 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [prod]
   pull_request:
-    branches: [main, develop]
+    branches: [prod]
 
 jobs:
+  lint:
+    name: Lint and architecture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:architecture
+      - run: npm run test --workspace @rad-ar/web
+
   docs-lint:
     name: Docs Lint
     runs-on: ubuntu-latest
@@ -31,6 +45,7 @@ jobs:
         run: npx jest --testPathPatterns 'scripts/__tests__/docs-lint' --verbose
 
   build:
+    needs: [lint, docs-lint]
     name: Build & Type-Check
     runs-on: ubuntu-latest
 
@@ -161,7 +176,7 @@ jobs:
       # strict (250 ms / 2 500 ms); CI ceilings still catch the 24x-over
       # class of regression these gates exist for.
       - name: Run feature plugin tests
-        run: npx jest --testPathPatterns 'packages/plugins/(dedup-hybrid|merge-default|store-memory|liveness-http)/' --verbose
+        run: npx jest --testPathPatterns 'packages/plugins/(dedup-hybrid|merge-default|store-memory|liveness-http|job-search|watch-engine|store-watch-memory|store-watch-prisma|notification-discord|notification-webhook|notification-telegram|operator-overview)/' --verbose
         env:
           DEDUP_PERF_NFR1_MS: '1000'
           DEDUP_PERF_NFR2_MS: '8000'
@@ -176,16 +191,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t ever-jobs-api:ci .
+        run: docker build -t radar-api:ci .
 
       - name: Verify Docker health
         run: |
-          docker run -d --name ever-jobs-test -p 3001:3001 ever-jobs-api:ci
+          docker run -d --name radar-test -p 3001:3001 radar-api:ci
           sleep 10
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/health || true)
-          docker logs ever-jobs-test
-          docker stop ever-jobs-test
-          docker rm ever-jobs-test
+          docker logs radar-test
+          docker stop radar-test
+          docker rm radar-test
           if [ "$STATUS" = "200" ]; then
             echo "Health check passed (HTTP $STATUS)"
           else

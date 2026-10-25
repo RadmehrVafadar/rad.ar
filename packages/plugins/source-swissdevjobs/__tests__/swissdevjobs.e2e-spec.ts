@@ -5,8 +5,8 @@
  * No authentication required -- the RSS feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SwissdevjobsModule, SwissdevjobsService } from '@ever-jobs/source-swissdevjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SwissdevjobsModule, SwissdevjobsService } from '@rad-ar/source-swissdevjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('SwissdevjobsService (E2E)', () => {
   let service: SwissdevjobsService;

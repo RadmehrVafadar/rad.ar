@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-lightmatter",
+  "name": "@rad-ar/source-company-lightmatter",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

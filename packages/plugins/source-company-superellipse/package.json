@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-superellipse",
+  "name": "@rad-ar/source-company-superellipse",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

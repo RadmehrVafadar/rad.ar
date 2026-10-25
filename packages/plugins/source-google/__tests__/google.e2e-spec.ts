@@ -2,8 +2,8 @@
  * E2E test for the Google scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GoogleModule, GoogleService } from '@ever-jobs/source-google';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { GoogleModule, GoogleService } from '@rad-ar/source-google';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 const describeNetwork = process.env.RUN_NETWORK_E2E === 'true' ? describe : describe.skip;
 

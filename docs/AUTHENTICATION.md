@@ -121,13 +121,13 @@ echo '{
       "grantType": "client_credentials"
     }
   }
-}' | npx ever-jobs search --stdin
+}' | npx radar search --stdin
 ```
 
 **Option 2: CLI flag**:
 
 ```bash
-npx ever-jobs search -q "python" -s upwork \
+npx radar search -q "python" -s upwork \
   --upwork-auth-json '{"clientId":"x","clientSecret":"y","grantType":"client_credentials"}'
 ```
 
@@ -196,4 +196,4 @@ To add per-request auth for a new source:
 - Auth data **is included in cache keys** by design (different credentials may return different results)
 - Never commit `.env` files with real credentials to version control
 - Rotate credentials periodically and revoke compromised ones
-- See [Security Guidelines](./SECURITY_GUIDELINES.md) for additional best practices
+- See [Security Guidelines](./security-guidelines.md) for additional best practices

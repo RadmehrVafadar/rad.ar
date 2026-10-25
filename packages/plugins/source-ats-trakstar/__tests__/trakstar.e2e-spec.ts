@@ -6,8 +6,8 @@
  * Set TRAKSTAR_API_KEY env var to enable the live tests.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TrakstarModule, TrakstarService } from '@ever-jobs/source-ats-trakstar';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TrakstarModule, TrakstarService } from '@rad-ar/source-ats-trakstar';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const describeIfKey = process.env.TRAKSTAR_API_KEY ? describe : describe.skip;
 

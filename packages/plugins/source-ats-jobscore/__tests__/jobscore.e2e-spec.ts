@@ -4,8 +4,8 @@
  * Tests public feed scraping (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobScoreModule, JobScoreService } from '@ever-jobs/source-ats-jobscore';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobScoreModule, JobScoreService } from '@rad-ar/source-ats-jobscore';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobScoreService (E2E)', () => {
   let service: JobScoreService;

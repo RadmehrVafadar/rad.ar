@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { JobPostDto, Site } from '@ever-jobs/models';
+import { JobPostDto, Site } from '@rad-ar/models';
 import { JobsResolver } from '../jobs.resolver';
 import { SearchJobsInput } from '../gql-types';
 

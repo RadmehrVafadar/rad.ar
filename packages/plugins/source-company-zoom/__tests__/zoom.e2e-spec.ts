@@ -4,8 +4,8 @@
  * Uses the Eightfold PCSX API (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZoomModule, ZoomService } from '@ever-jobs/source-company-zoom';
-import { ScraperInputDto, Site } from '@ever-jobs/models';
+import { ZoomModule, ZoomService } from '@rad-ar/source-company-zoom';
+import { ScraperInputDto, Site } from '@rad-ar/models';
 
 describe('ZoomService (E2E)', () => {
   let service: ZoomService;

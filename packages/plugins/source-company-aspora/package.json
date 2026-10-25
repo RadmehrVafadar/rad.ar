@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aspora",
+  "name": "@rad-ar/source-company-aspora",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

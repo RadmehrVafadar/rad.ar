@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-axiom",
+  "name": "@rad-ar/source-company-axiom",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

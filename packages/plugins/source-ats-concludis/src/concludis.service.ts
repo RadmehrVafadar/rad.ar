@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper,
@@ -9,14 +9,14 @@ import {
   LocationDto,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
   randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   CONCLUDIS_HOST_TEMPLATE,
   CONCLUDIS_LIST_PATH_TEMPLATE,

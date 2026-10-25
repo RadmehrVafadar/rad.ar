@@ -2,8 +2,8 @@
  * E2E test for the Naukri scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { NaukriModule, NaukriService } from '@ever-jobs/source-naukri';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { NaukriModule, NaukriService } from '@rad-ar/source-naukri';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('NaukriService (E2E)', () => {
   let service: NaukriService;

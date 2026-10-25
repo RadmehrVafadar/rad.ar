@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-openevidence",
+  "name": "@rad-ar/source-company-openevidence",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-vast",
+  "name": "@rad-ar/source-company-vast",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

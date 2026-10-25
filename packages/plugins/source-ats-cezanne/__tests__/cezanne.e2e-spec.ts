@@ -13,8 +13,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CezanneModule, CezanneService } from '@ever-jobs/source-ats-cezanne';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CezanneModule, CezanneService } from '@rad-ar/source-ats-cezanne';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Cezanne OnDemand careers board (Bluecrest — confirmed live host pattern 2026-06-03).
 const KNOWN_TENANT = 'bluecresthealth';

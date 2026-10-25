@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -13,11 +13,11 @@ import {
   JobType,
   getJobTypeFromString,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   JOOBLE_API_BASE_URL,
   JOOBLE_HEADERS,

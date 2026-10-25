@@ -12,8 +12,8 @@
  * Verified live on 2026-06-03: `36047dd7/jamba` hosts open Jamba franchise positions.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkstreamModule, WorkstreamService } from '@ever-jobs/source-ats-workstream';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WorkstreamModule, WorkstreamService } from '@rad-ar/source-ats-workstream';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('WorkstreamService (E2E)', () => {
   let service: WorkstreamService;

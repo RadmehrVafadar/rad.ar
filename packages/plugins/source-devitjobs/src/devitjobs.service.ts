@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -11,13 +11,13 @@ import {
   CompensationInterval,
   DescriptionFormat,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { DEVITJOBS_FEED_URL, DEVITJOBS_DEFAULT_RESULTS, DEVITJOBS_MAX_RESULTS, DEVITJOBS_HEADERS } from './devitjobs.constants';
 import { DevITJobsXmlItem } from './devitjobs.types';
 

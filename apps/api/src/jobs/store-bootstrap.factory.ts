@@ -1,14 +1,14 @@
 import { Type } from '@nestjs/common';
-import { ERR_STORE_NOT_FOUND, IJobStore } from '@ever-jobs/models';
-import { StoreRegistryError } from '@ever-jobs/plugin';
-import { InMemoryJobStore } from '@ever-jobs/store-memory';
-import { SqliteDrizzleJobStore } from '@ever-jobs/store-sqlite-drizzle';
-import { PostgresPrismaJobStore } from '@ever-jobs/store-postgres-prisma';
+import { ERR_STORE_NOT_FOUND, IJobStore } from '@rad-ar/models';
+import { StoreRegistryError } from '@rad-ar/plugin';
+import { InMemoryJobStore } from '@rad-ar/store-memory';
+import { SqliteDrizzleJobStore } from '@rad-ar/store-sqlite-drizzle';
+import { PostgresPrismaJobStore } from '@rad-ar/store-postgres-prisma';
 
 /**
- * Spec 004 / T12 — `EVER_JOBS_STORE` env-var bootstrap factory.
+ * Spec 004 / T12 — `RADAR_STORE` env-var bootstrap factory.
  *
- * Reads `EVER_JOBS_STORE` synchronously and resolves the single
+ * Reads `RADAR_STORE` synchronously and resolves the single
  * `@StorePlugin()`-decorated backend class to pass to
  * `StoreModule.forActive(...)`. Choice of "lazy resolve by id" over
  * "eager declare every backend" is locked in by Q-019 (Option C):
@@ -27,12 +27,12 @@ import { PostgresPrismaJobStore } from '@ever-jobs/store-postgres-prisma';
  *      this factory is where that contract is honoured.
  *
  * Postgres opt-in is by *config*, not by *code*. The stock build
- * recognises `EVER_JOBS_STORE=postgres` and selects
+ * recognises `RADAR_STORE=postgres` and selects
  * `PostgresPrismaJobStore`, but the service constructor fails fast
  * if `STORE_POSTGRES_PRISMA_CONFIG` is unbound (Spec 004 / T10
  * decision 2). The operator wires that config in their own root
  * module / `.env` at the same time they set
- * `EVER_JOBS_STORE=postgres`.
+ * `RADAR_STORE=postgres`.
  *
  * @see {@link KNOWN_STORE_IDS} — the literal set of recognised ids.
  * @see {@link DEFAULT_STORE_ID} — fallback when env-var is absent.
@@ -44,10 +44,10 @@ import { PostgresPrismaJobStore } from '@ever-jobs/store-postgres-prisma';
  * Exported for testability — tests pass a synthetic `env` map and
  * key off the same constant the production code reads.
  */
-export const EVER_JOBS_STORE_ENV_VAR = 'EVER_JOBS_STORE';
+export const RADAR_STORE_ENV_VAR = 'RADAR_STORE';
 
 /**
- * Fallback store id when `EVER_JOBS_STORE` is unset or an empty
+ * Fallback store id when `RADAR_STORE` is unset or an empty
  * string. Picks `memory` because (a) zero-config / zero-deps,
  * (b) every existing test that doesn't care about persistence keeps
  * working, (c) Spec 004 §10's "in-memory store always available
@@ -59,7 +59,7 @@ export const DEFAULT_STORE_ID = 'memory';
  * Literal set of store ids the stock build recognises. Each maps to
  * exactly one `@StorePlugin()`-decorated class via {@link STORE_BACKEND_BY_ID}.
  * Operator-facing error messages enumerate these ids so a typo like
- * `EVER_JOBS_STORE=postres` returns "did you mean memory / sqlite /
+ * `RADAR_STORE=postres` returns "did you mean memory / sqlite /
  * postgres?" rather than the registry's generic listing.
  *
  * Exported as a `readonly` tuple so a future admin endpoint
@@ -114,7 +114,7 @@ export interface ResolvedStoreBootstrap {
 }
 
 /**
- * Resolve the active store backend from `EVER_JOBS_STORE`.
+ * Resolve the active store backend from `RADAR_STORE`.
  *
  * Behaviour:
  *
@@ -142,15 +142,15 @@ export interface ResolvedStoreBootstrap {
 export function resolveStoreBootstrap(
   env: NodeJS.ProcessEnv = process.env,
 ): ResolvedStoreBootstrap {
-  const raw = env[EVER_JOBS_STORE_ENV_VAR];
+  const raw = env[RADAR_STORE_ENV_VAR];
   const trimmed = typeof raw === 'string' ? raw.trim() : '';
   const id = trimmed.length === 0 ? DEFAULT_STORE_ID : trimmed;
 
   if (!isKnownStoreId(id)) {
     throw new StoreRegistryError(
-      `${EVER_JOBS_STORE_ENV_VAR}=${JSON.stringify(raw)} does not match any built-in store id. ` +
+      `${RADAR_STORE_ENV_VAR}=${JSON.stringify(raw)} does not match any built-in store id. ` +
         `Known ids: [${KNOWN_STORE_IDS.join(', ')}]. ` +
-        `Set ${EVER_JOBS_STORE_ENV_VAR} to one of those, or unset it to use the default ('${DEFAULT_STORE_ID}').`,
+        `Set ${RADAR_STORE_ENV_VAR} to one of those, or unset it to use the default ('${DEFAULT_STORE_ID}').`,
       ERR_STORE_NOT_FOUND,
     );
   }

@@ -1,11 +1,11 @@
-name: Build and Publish Ever Jobs Image
+name: Build and Publish rad.ar Image
 
-# Builds the Ever Jobs container (API; MCP shares the image) and pushes it to GHCR
-# (ghcr.io/ever-jobs/ever-jobs) using the built-in GITHUB_TOKEN. The k8s-gauzy cluster
-# pulls this image for the INTERNAL (ClusterIP-only) Ever Jobs deployment.
+# Builds the rad.ar container (API; MCP shares the image) and pushes it to GHCR
+# (ghcr.io/radmehrvafadar/radar) using the built-in GITHUB_TOKEN. The k8s-gauzy cluster
+# pulls this image for the INTERNAL (ClusterIP-only) rad.ar deployment.
 on:
   push:
-    branches: [main, develop]
+    branches: [prod]
     paths:
       - "apps/**"
       - "packages/**"
@@ -49,9 +49,9 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/ever-jobs/ever-jobs:latest
-            ghcr.io/ever-jobs/ever-jobs:${{ github.sha }}
-          cache-from: type=registry,ref=ghcr.io/ever-jobs/ever-jobs:latest
+            ghcr.io/radmehrvafadar/radar:latest
+            ghcr.io/radmehrvafadar/radar:${{ github.sha }}
+          cache-from: type=registry,ref=ghcr.io/radmehrvafadar/radar:latest
           cache-to: type=inline
 
   build-mcp:
@@ -75,7 +75,7 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/ever-jobs/ever-jobs-mcp:latest
-            ghcr.io/ever-jobs/ever-jobs-mcp:${{ github.sha }}
-          cache-from: type=registry,ref=ghcr.io/ever-jobs/ever-jobs-mcp:latest
+            ghcr.io/radmehrvafadar/radar-mcp:latest
+            ghcr.io/radmehrvafadar/radar-mcp:${{ github.sha }}
+          cache-from: type=registry,ref=ghcr.io/radmehrvafadar/radar-mcp:latest
           cache-to: type=inline

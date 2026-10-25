@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-spykegames",
+  "name": "@rad-ar/source-company-spykegames",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

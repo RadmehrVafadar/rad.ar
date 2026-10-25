@@ -2,7 +2,7 @@
  * Integration test — Spec 006 / T09.
  *
  * Wires the **real** `AppModule` (full Nest bootstrap) with the only
- * external surface — `@ever-jobs/common`'s `createHttpClient` — replaced
+ * external surface — `@rad-ar/common`'s `createHttpClient` — replaced
  * by a fixture-driven router. The router decides per-URL which fixture
  * to return, so the three new ATS plugins (`avature` / `gem` / `join_com`)
  * exercise their real `scrape()` code paths against deterministic data
@@ -158,8 +158,8 @@ function avatureRoutedGet(url: string): unknown {
   return count === 1 ? PLUGIN_FIXTURES.avaturePage1 : PLUGIN_FIXTURES.avatureEmpty;
 }
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -181,21 +181,15 @@ jest.mock('@ever-jobs/common', () => {
 });
 
 // ── Now import the app — AFTER the mock is installed ──────────────────────
-// eslint-disable-next-line import/first
 import { INestApplication } from '@nestjs/common';
-// eslint-disable-next-line import/first
 import {
   JobPostDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-// eslint-disable-next-line import/first
-import { PluginRegistry } from '@ever-jobs/plugin';
-// eslint-disable-next-line import/first
-import { JobsAggregator } from '../../src/jobs/jobs.aggregator';
-// eslint-disable-next-line import/first
-import { JobsService } from '../../src/jobs/jobs.service';
-// eslint-disable-next-line import/first
+} from '@rad-ar/models';
+import { PluginRegistry } from '@rad-ar/plugin';
+import { JobsAggregator } from '@rad-ar/job-search/jobs.aggregator';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
 import { createTestApp } from '../helpers/create-app';
 
 describe('Integration — Spec 006 / T09 (source-ats batch 1: avature × gem × join_com)', () => {

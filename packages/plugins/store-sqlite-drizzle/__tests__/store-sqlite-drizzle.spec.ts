@@ -6,7 +6,7 @@ import {
   IStoreMetadata,
   STORE_PLUGIN_METADATA_KEY,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { runStoreConformance } from '../../../plugin/src/store/__tests__/conformance';
 import {
   STORE_SQLITE_DRIZZLE_DESCRIPTION,

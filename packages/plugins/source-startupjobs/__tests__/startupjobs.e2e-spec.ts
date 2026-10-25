@@ -4,8 +4,8 @@
  * Hits the live Startup.jobs API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { StartupJobsModule, StartupJobsService } from '@ever-jobs/source-startupjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { StartupJobsModule, StartupJobsService } from '@rad-ar/source-startupjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('StartupJobsService (E2E)', () => {
   let service: StartupJobsService;

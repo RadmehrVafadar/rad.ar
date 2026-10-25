@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-gustileder",
+  "name": "@rad-ar/source-company-gustileder",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

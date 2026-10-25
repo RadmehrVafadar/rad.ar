@@ -1,6 +1,6 @@
 import { HashStrategy } from '../src/strategies/hash-strategy';
 import { PreparedJob } from '../src/types';
-import { JobPostDto } from '@ever-jobs/models';
+import { JobPostDto } from '@rad-ar/models';
 
 function prepared(index: number, canonicalJobId: string): PreparedJob {
   return {

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-universityofthewestofengland",
+  "name": "@rad-ar/source-company-universityofthewestofengland",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

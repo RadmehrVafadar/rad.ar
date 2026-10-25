@@ -358,7 +358,7 @@ The defaults are shown in [.env.example](../../.env.example).
 
 | Variable                           | Purpose                                                        | Typical local value                                         |
 | ---------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------- |
-| `DATABASE_URL`                     | Prisma/PostgreSQL connection string                            | `postgresql://ever_jobs:ever_jobs@localhost:5432/ever_jobs` |
+| `DATABASE_URL`                     | Prisma/PostgreSQL connection string                            | `postgresql://radar:radar@localhost:5432/radar` |
 | `WATCHER_ENABLED`                  | Starts scheduler polling when `true`                           | `true`                                                      |
 | `WATCHER_HEALTH_PORT`              | Worker health/metrics port                                     | `3002`                                                      |
 | `WATCHER_DEFAULT_TIMEZONE`         | Default watch and digest timezone                              | `America/Toronto`                                           |
@@ -447,12 +447,12 @@ The authenticated API supplies the equivalent watch CRUD, initialization, run, p
 
 ## Docker
 
-The Compose watcher uses the `watcher-runtime` Docker target, publishes port 3002, and has its own `/health` check. Its dependency graph starts PostgreSQL, runs the one-shot `watcher-migrate` service, and starts `ever-jobs-watcher` only after migration succeeds. With `WATCHER_SEED_DEFAULT=true`, worker bootstrap creates the missing default as a disabled baseline watch; it never resets an existing watch.
+The Compose watcher uses the `watcher-runtime` Docker target, publishes port 3002, and has its own `/health` check. Its dependency graph starts PostgreSQL, runs the one-shot `watcher-migrate` service, and starts `radar-watcher` only after migration succeeds. With `WATCHER_SEED_DEFAULT=true`, worker bootstrap creates the missing default as a disabled baseline watch; it never resets an existing watch.
 
 ```bash
-docker compose up -d --build ever-jobs-watcher
-docker compose ps --all postgres watcher-migrate ever-jobs-watcher
-docker compose logs -f ever-jobs-watcher
+docker compose up -d --build radar-watcher
+docker compose ps --all postgres watcher-migrate radar-watcher
+docker compose logs -f radar-watcher
 ```
 
 For host-side CLI management, install dependencies and generate the Prisma client with `npm ci` and `npm run db:generate`. Host commands use `DATABASE_URL` with `localhost`; Compose uses `COMPOSE_DATABASE_URL` with the `postgres` service hostname. `npm run db:seed` remains available when an explicit host-side seed is preferred, but it is not required for a fresh Compose worker while safe bootstrap seeding is enabled.
@@ -466,11 +466,11 @@ requests and duration, hard failures versus valid empty runs, fetched and newly
 detected jobs, matches, notification outcomes, canonical duplicate suppression,
 execution duration, detection/notification latency, scheduler poll time,
 configured scheduler capacity, active runs, and aggregate Tier 1 degradation. Key series use the
-`ever_jobs_watcher_` prefix.
+`radar_watcher_` prefix.
 
 Scheduler capacity is exposed by
-`ever_jobs_watcher_scheduler_capacity`; current occupancy remains
-`ever_jobs_watcher_scheduler_active_runs`. Worker health reports the same values
+`radar_watcher_scheduler_capacity`; current occupancy remains
+`radar_watcher_scheduler_active_runs`. Worker health reports the same values
 as `scheduler.maxConcurrentWatches` and `scheduler.activeWatchCount`, with
 `scheduler.activeWatchIds` retained for operational diagnosis.
 
@@ -490,16 +490,16 @@ success/non-empty timestamps. Run-level `coverageDegraded` summarizes Tier 1.
 
 Target coverage series are:
 
-- `ever_jobs_watcher_target_runs_total{watch,target,tier,outcome}`
-- `ever_jobs_watcher_target_consecutive_hard_failures{watch,target,tier}`
-- `ever_jobs_watcher_target_degraded{watch,target,tier}`
-- `ever_jobs_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_tier1_coverage_degraded{watch}`
-- `ever_jobs_watcher_company_coverage{watch_id,status}` where `status` is one of
+- `radar_watcher_target_runs_total{watch,target,tier,outcome}`
+- `radar_watcher_target_consecutive_hard_failures{watch,target,tier}`
+- `radar_watcher_target_degraded{watch,target,tier}`
+- `radar_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_tier1_coverage_degraded{watch}`
+- `radar_watcher_company_coverage{watch_id,status}` where `status` is one of
   `configured`, `active`, `disabled`, `uncovered`, `initialized`, or `degraded`
 
-The separate API metrics registry initializes `ever_jobs_sources_total` from
+The separate API metrics registry initializes `radar_sources_total` from
 the discovered plugin registry at application startup. It is no longer a
 hard-coded catalog total, so enabling or disabling discovered plugins changes
 the gauge without a source-count code edit.

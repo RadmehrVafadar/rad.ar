@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-servicenow",
+  "name": "@rad-ar/source-company-servicenow",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

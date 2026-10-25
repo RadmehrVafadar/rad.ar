@@ -14,8 +14,8 @@
  * results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZimyoModule, ZimyoService } from '@ever-jobs/source-ats-zimyo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ZimyoModule, ZimyoService } from '@rad-ar/source-ats-zimyo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Zimyo-powered org (Zimyo's own board — confirmed live 2026-06-03; the widget
 // API answered HTTP 200 and a real role `jobId=11268` resolved under this org).

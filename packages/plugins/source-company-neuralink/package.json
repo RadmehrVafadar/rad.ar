@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-neuralink",
+  "name": "@rad-ar/source-company-neuralink",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

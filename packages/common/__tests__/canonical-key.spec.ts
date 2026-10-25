@@ -1,4 +1,4 @@
-import { canonicalJobId, canonicalKey } from '@ever-jobs/common';
+import { canonicalJobId, canonicalKey } from '@rad-ar/common';
 
 describe('canonicalKey (Spec 003 / T05)', () => {
   it('joins normalised triple with pipes', () => {

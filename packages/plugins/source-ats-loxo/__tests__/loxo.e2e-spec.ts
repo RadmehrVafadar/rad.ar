@@ -5,8 +5,8 @@
  * To run authenticated tests, set LOXO_API_TOKEN env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { LoxoModule, LoxoService } from '@ever-jobs/source-ats-loxo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { LoxoModule, LoxoService } from '@rad-ar/source-ats-loxo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('LoxoService (E2E)', () => {
   let service: LoxoService;

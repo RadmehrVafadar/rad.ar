@@ -3,7 +3,7 @@
   "schemaVersion": "1.0",
   "generatedBy": "ecc-tools",
   "generatedAt": "2026-06-26T12:54:40.620Z",
-  "repo": "https://github.com/ever-jobs/ever-jobs",
+  "repo": "https://github.com/RadmehrVafadar/rad.ar",
   "referenceSetReadiness": {
     "score": 14,
     "present": 1,
@@ -136,59 +136,59 @@
     "workflow-pack"
   ],
   "managedFiles": [
-    ".claude/skills/ever-jobs/SKILL.md",
-    ".agents/skills/ever-jobs/SKILL.md",
-    ".agents/skills/ever-jobs/agents/openai.yaml",
+    ".claude/skills/radar/SKILL.md",
+    ".agents/skills/radar/SKILL.md",
+    ".agents/skills/radar/agents/openai.yaml",
     ".claude/identity.json",
     ".codex/config.toml",
     ".codex/AGENTS.md",
     ".codex/agents/explorer.toml",
     ".codex/agents/reviewer.toml",
     ".codex/agents/docs-researcher.toml",
-    ".claude/homunculus/instincts/inherited/ever-jobs-instincts.yaml"
+    ".claude/homunculus/instincts/inherited/radar-instincts.yaml"
   ],
   "packageFiles": {
     "runtime-core": [
-      ".claude/skills/ever-jobs/SKILL.md",
-      ".agents/skills/ever-jobs/SKILL.md",
-      ".agents/skills/ever-jobs/agents/openai.yaml",
+      ".claude/skills/radar/SKILL.md",
+      ".agents/skills/radar/SKILL.md",
+      ".agents/skills/radar/agents/openai.yaml",
       ".claude/identity.json",
       ".codex/config.toml",
       ".codex/AGENTS.md",
       ".codex/agents/explorer.toml",
       ".codex/agents/reviewer.toml",
       ".codex/agents/docs-researcher.toml",
-      ".claude/homunculus/instincts/inherited/ever-jobs-instincts.yaml"
+      ".claude/homunculus/instincts/inherited/radar-instincts.yaml"
     ]
   },
   "moduleFiles": {
     "runtime-core": [
-      ".claude/skills/ever-jobs/SKILL.md",
-      ".agents/skills/ever-jobs/SKILL.md",
-      ".agents/skills/ever-jobs/agents/openai.yaml",
+      ".claude/skills/radar/SKILL.md",
+      ".agents/skills/radar/SKILL.md",
+      ".agents/skills/radar/agents/openai.yaml",
       ".claude/identity.json",
       ".codex/config.toml",
       ".codex/AGENTS.md",
       ".codex/agents/explorer.toml",
       ".codex/agents/reviewer.toml",
       ".codex/agents/docs-researcher.toml",
-      ".claude/homunculus/instincts/inherited/ever-jobs-instincts.yaml"
+      ".claude/homunculus/instincts/inherited/radar-instincts.yaml"
     ]
   },
   "files": [
     {
       "moduleId": "runtime-core",
-      "path": ".claude/skills/ever-jobs/SKILL.md",
+      "path": ".claude/skills/radar/SKILL.md",
       "description": "Repository-specific Claude Code skill generated from git history."
     },
     {
       "moduleId": "runtime-core",
-      "path": ".agents/skills/ever-jobs/SKILL.md",
+      "path": ".agents/skills/radar/SKILL.md",
       "description": "Codex-facing copy of the generated repository skill."
     },
     {
       "moduleId": "runtime-core",
-      "path": ".agents/skills/ever-jobs/agents/openai.yaml",
+      "path": ".agents/skills/radar/agents/openai.yaml",
       "description": "Codex skill metadata so the repo skill appears cleanly in the skill interface."
     },
     {
@@ -223,21 +223,21 @@
     },
     {
       "moduleId": "runtime-core",
-      "path": ".claude/homunculus/instincts/inherited/ever-jobs-instincts.yaml",
+      "path": ".claude/homunculus/instincts/inherited/radar-instincts.yaml",
       "description": "Continuous-learning instincts derived from repository patterns."
     }
   ],
   "workflows": [],
   "adapters": {
     "claudeCode": {
-      "skillPath": ".claude/skills/ever-jobs/SKILL.md",
+      "skillPath": ".claude/skills/radar/SKILL.md",
       "identityPath": ".claude/identity.json",
       "commandPaths": []
     },
     "codex": {
       "configPath": ".codex/config.toml",
       "agentsGuidePath": ".codex/AGENTS.md",
-      "skillPath": ".agents/skills/ever-jobs/SKILL.md"
+      "skillPath": ".agents/skills/radar/SKILL.md"
     }
   }
 }

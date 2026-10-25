@@ -14,8 +14,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SagePeopleModule, SagePeopleService } from '@ever-jobs/source-ats-sagepeople';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SagePeopleModule, SagePeopleService } from '@rad-ar/source-ats-sagepeople';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sage People-powered applicant portal (Acteon Group — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'acteonpeopleportal';

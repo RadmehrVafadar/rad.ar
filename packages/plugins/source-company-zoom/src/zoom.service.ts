@@ -1,10 +1,10 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient } from '@rad-ar/common';
 import {
   ZOOM_SEARCH_ENDPOINT, ZOOM_HEADERS,
   ZOOM_PAGE_SIZE, ZOOM_REQUEST_DELAY_MS, ZOOM_BASE_URL,

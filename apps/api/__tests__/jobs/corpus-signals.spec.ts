@@ -1,6 +1,6 @@
 import { JobsController } from '../../src/jobs/jobs.controller';
-import { LegitimacyDetectorService } from '@ever-jobs/legitimacy-detector';
-import type { JobPostDto, ScraperInputDto } from '@ever-jobs/models';
+import { LegitimacyDetectorService } from '@rad-ar/legitimacy-detector';
+import type { JobPostDto, ScraperInputDto } from '@rad-ar/models';
 
 /**
  * Spec 740 — controller enrichment: liveness + legitimacy are opt-in (query flags) and absent on

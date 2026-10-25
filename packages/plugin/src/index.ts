@@ -68,3 +68,5 @@ export {
   ERR_STORE_ACTIVE_ID_REQUIRED,
   ERR_STORE_BACKEND_NOT_DECORATED,
 } from "./store/store.module";
+
+export * from './interfaces/feature-tokens';

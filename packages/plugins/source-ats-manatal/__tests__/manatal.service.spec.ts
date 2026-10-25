@@ -6,12 +6,12 @@ import {
   DescriptionFormat,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 const mockGet = jest.fn();
 const mockSetHeaders = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({

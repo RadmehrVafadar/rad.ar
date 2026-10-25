@@ -4,8 +4,8 @@
  * Uses the public Hacker News Firebase API (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HackerNewsModule, HackerNewsService } from '@ever-jobs/source-hackernews';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HackerNewsModule, HackerNewsService } from '@rad-ar/source-hackernews';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HackerNewsService (E2E)', () => {
   let service: HackerNewsService;

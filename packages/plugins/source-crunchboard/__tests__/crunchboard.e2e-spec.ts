@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CrunchboardModule, CrunchboardService } from '@ever-jobs/source-crunchboard';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CrunchboardModule, CrunchboardService } from '@rad-ar/source-crunchboard';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CrunchboardService (E2E)', () => {
   let service: CrunchboardService;

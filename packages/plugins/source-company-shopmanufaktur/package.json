@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-shopmanufaktur",
+  "name": "@rad-ar/source-company-shopmanufaktur",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

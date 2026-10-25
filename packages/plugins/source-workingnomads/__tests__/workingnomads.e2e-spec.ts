@@ -4,8 +4,8 @@
  * Uses the public WorkingNomads API (no auth required).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkingNomadsModule, WorkingNomadsService } from '@ever-jobs/source-workingnomads';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WorkingNomadsModule, WorkingNomadsService } from '@rad-ar/source-workingnomads';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('WorkingNomadsService (E2E)', () => {
   let service: WorkingNomadsService;

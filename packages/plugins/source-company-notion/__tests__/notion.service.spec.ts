@@ -6,12 +6,12 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   type IPluginMetadata,
   PluginRegistry,
   SOURCE_PLUGIN_METADATA,
-} from '@ever-jobs/plugin';
+} from '@rad-ar/plugin';
 
 import { NotionModule, NotionService } from '../src';
 

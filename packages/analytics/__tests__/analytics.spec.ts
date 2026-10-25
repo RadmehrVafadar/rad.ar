@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { AnalyticsService } from '@ever-jobs/analytics';
-import { JobPostDto, LocationDto, CompensationDto, CompensationInterval, JobType } from '@ever-jobs/models';
+import { AnalyticsService } from '@rad-ar/analytics';
+import { JobPostDto, LocationDto, CompensationDto, CompensationInterval, JobType } from '@rad-ar/models';
 
 function makeJob(overrides: Partial<{
   title: string;

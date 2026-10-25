@@ -15,8 +15,8 @@
  * results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { OtysModule, OtysService } from '@ever-jobs/source-ats-otys';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { OtysModule, OtysService } from '@rad-ar/source-ats-otys';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public OTYS-powered recruitment site (Middendorp Recruitment — confirmed live 2026-06-03).
 const KNOWN_TENANT_URL = 'https://www.middendorprecruitment.nl/vacatures.html';

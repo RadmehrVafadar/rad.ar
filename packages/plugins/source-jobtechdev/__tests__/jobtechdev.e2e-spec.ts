@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobTechDevModule, JobTechDevService } from '@ever-jobs/source-jobtechdev';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobTechDevModule, JobTechDevService } from '@rad-ar/source-jobtechdev';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobTechDevService (E2E)', () => {
   let service: JobTechDevService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-akidolabs",
+  "name": "@rad-ar/source-company-akidolabs",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aristanetworks",
+  "name": "@rad-ar/source-company-aristanetworks",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

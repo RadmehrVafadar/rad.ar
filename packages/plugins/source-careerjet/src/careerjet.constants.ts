@@ -1,4 +1,4 @@
-import { Country } from '@ever-jobs/models';
+import { Country } from '@rad-ar/models';
 
 export const CAREERJET_API_URL = 'https://public.api.careerjet.net/search';
 
@@ -39,6 +39,6 @@ export const COUNTRY_TO_LOCALE: Partial<Record<Country, string>> = {
 };
 
 export const DEFAULT_LOCALE = 'en_US';
-export const DEFAULT_USER_AGENT = 'EverJobs/1.0 (+https://github.com/ever-co/ever-jobs)';
+export const DEFAULT_USER_AGENT = 'Radar/1.0 (+https://github.com/ever-co/radar)';
 export const MAX_PAGE = 10;
 export const DEFAULT_PAGE_SIZE = 50;

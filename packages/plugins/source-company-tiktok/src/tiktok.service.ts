@@ -1,11 +1,11 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site,
   LocationDto,
-} from '@ever-jobs/models';
-import { BrowserPool } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { BrowserPool } from '@rad-ar/common';
 
 const SEARCH_URL = 'https://lifeattiktok.com/search';
 const DELAY_MS = 1500;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-yugabyte",
+  "name": "@rad-ar/source-company-yugabyte",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

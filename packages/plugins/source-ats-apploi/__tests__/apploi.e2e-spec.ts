@@ -16,8 +16,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApploiModule, ApploiService } from '@ever-jobs/source-ats-apploi';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ApploiModule, ApploiService } from '@rad-ar/source-ats-apploi';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Apploi-powered board (Apploi's own employer profile — confirmed live 2026-06-04).
 const KNOWN_TENANT = 'apploi.com';

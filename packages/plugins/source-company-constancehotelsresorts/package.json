@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-constancehotelsresorts",
+  "name": "@rad-ar/source-company-constancehotelsresorts",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

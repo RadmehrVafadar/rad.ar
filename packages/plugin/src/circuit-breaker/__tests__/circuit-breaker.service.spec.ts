@@ -1,4 +1,4 @@
-import { Site, ERR_SOURCE_CIRCUIT_OPEN, DEFAULT_CIRCUIT_POLICY } from '@ever-jobs/models';
+import { Site, ERR_SOURCE_CIRCUIT_OPEN, DEFAULT_CIRCUIT_POLICY } from '@rad-ar/models';
 import { CircuitBreakerService } from '../circuit-breaker.service';
 
 /**

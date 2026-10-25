@@ -1,4 +1,4 @@
-export const UI_PLUGIN_TOKEN = Symbol.for("@ever-jobs/plugin/IUiPlugin");
+export const UI_PLUGIN_TOKEN = Symbol.for("@rad-ar/plugin/IUiPlugin");
 
 export interface UiNavigationItem {
   id: string;

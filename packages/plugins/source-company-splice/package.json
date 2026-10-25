@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-splice",
+  "name": "@rad-ar/source-company-splice",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

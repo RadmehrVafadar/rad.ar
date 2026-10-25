@@ -3,7 +3,7 @@ import {
   FieldWithProvenance,
   IMergeResolver,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { MergeCategory, MergeDefaultOptions } from './types';
 import { SITE_CATEGORY_DEFAULTS } from './site-category-defaults';
 

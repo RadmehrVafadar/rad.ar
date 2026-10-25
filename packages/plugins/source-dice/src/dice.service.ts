@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 /**
  * Dice Job Search — uses the Dice REST API as primary, HTML scraping as fallback.
@@ -18,13 +18,13 @@ import {
   CompensationInterval,
   JobType,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   randomSleep,
   extractSalary,
-} from '@ever-jobs/common';
-import { BrowserPool } from '@ever-jobs/common';
+} from '@rad-ar/common';
+import { BrowserPool } from '@rad-ar/common';
 import {
   DICE_API_URL,
   DICE_SEARCH_URL,

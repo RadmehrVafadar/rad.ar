@@ -32,14 +32,14 @@ Your service must implement the `IScraper` interface:
 
 ```typescript
 import { Injectable, Logger } from "@nestjs/common";
-import { HttpClient, extractSalary, convertToAnnual } from "@ever-jobs/common";
+import { HttpClient, extractSalary, convertToAnnual } from "@rad-ar/common";
 import {
   JobPostDto,
   JobResponseDto,
   ScraperInputDto,
   JobType,
   CompensationInterval,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 
 @Injectable()
 export class YourService implements IScraper {
@@ -70,7 +70,7 @@ Update these files:
 | File                                     | Change                                    |
 | ---------------------------------------- | ----------------------------------------- |
 | `packages/models/src/enums/site.enum.ts` | Add `YOUR_SOURCE = 'your_source'`         |
-| `tsconfig.base.json`                     | Add path alias `@ever-jobs/source-<name>` |
+| `tsconfig.base.json`                     | Add path alias `@rad-ar/source-<name>` |
 | `apps/api/src/jobs/jobs.module.ts`       | Import `YourModule`                       |
 | `apps/api/src/jobs/jobs.service.ts`      | Add constructor DI + scraperMap entry     |
 | `apps/cli/src/cli.module.ts`             | Import `YourModule`                       |
@@ -90,7 +90,7 @@ Update these files:
 - **API first**: Prefer REST/JSON APIs over HTML scraping.
 - **Dual-mode extraction**: If the site has embedded JSON (e.g. `__NEXT_DATA__`), use that as primary with HTML fallback.
 - **Rate limiting**: Use the HttpClient's built-in rate-delay support.
-- **Salary parsing**: Use `extractSalary()` from `@ever-jobs/common` for description-based salary extraction.
+- **Salary parsing**: Use `extractSalary()` from `@rad-ar/common` for description-based salary extraction.
 - **Use enums**: Use `CompensationInterval.YEARLY` instead of string `'yearly'`.
 - **Error handling**: Catch and log errors gracefully. Never let one source crash the whole search.
 
@@ -124,4 +124,4 @@ npx jest --testPathPatterns e2e-spec
 - **TypeScript strict mode**: Enabled in `tsconfig.base.json`
 - **Formatting**: Use Prettier defaults
 - **Naming**: camelCase for files, PascalCase for classes, kebab-case for package directories
-- **Imports**: Use `@ever-jobs/*` path aliases, not relative paths between packages
+- **Imports**: Use `@rad-ar/*` path aliases, not relative paths between packages

@@ -9,7 +9,7 @@
  *
  * **HTTP-only by design.** No `playwright` reference anywhere in this
  * file — Akamai bypass is a feature of the OPTIONAL companion plugin
- * `@ever-jobs/source-tesla-playwright` (Spec 013 / FR-13).
+ * `@rad-ar/source-tesla-playwright` (Spec 013 / FR-13).
  */
 
 /** Public Tesla origin used for both API + careers-portal URLs. */

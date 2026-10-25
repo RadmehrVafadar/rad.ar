@@ -3,12 +3,12 @@
 version: "3.8"
 
 services:
-  ever-jobs-api:
+  radar-api:
     build:
       context: .
       dockerfile: Dockerfile
       target: builder   # Use the builder stage (has devDependencies)
-    container_name: ever-jobs-api-dev
+    container_name: radar-api-dev
     ports:
       - "${PORT:-3001}:3001"
     env_file:
@@ -33,7 +33,7 @@ services:
     command: ["npx", "ts-node-dev", "--respawn", "--transpile-only", "apps/api/src/main.ts"]
     restart: unless-stopped
 
-  ever-jobs-web:
+  radar-web:
     build:
       context: .
       dockerfile: Dockerfile
@@ -41,9 +41,9 @@ services:
     environment:
       NODE_ENV: development
       VITE_API_BASE_URL: /api
-      VITE_PROXY_TARGET: http://ever-jobs-api:3001
+      VITE_PROXY_TARGET: http://radar-api:3001
     volumes:
       - .:/app
       - /app/node_modules
     working_dir: /app
-    command: ["npm", "--workspace", "@ever-jobs/web", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000", "--strictPort"]
+    command: ["npm", "--workspace", "@rad-ar/web", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000", "--strictPort"]

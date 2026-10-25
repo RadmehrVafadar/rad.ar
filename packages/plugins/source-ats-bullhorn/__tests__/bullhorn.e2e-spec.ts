@@ -5,8 +5,8 @@
  * Without the env var, only the "no companySlug" test runs unconditionally.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BullhornModule, BullhornService } from '@ever-jobs/source-ats-bullhorn';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BullhornModule, BullhornService } from '@rad-ar/source-ats-bullhorn';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('BullhornService (E2E)', () => {
   let service: BullhornService;

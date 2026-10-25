@@ -12,8 +12,8 @@
  *   - `companyUrl: 'https://jobs.islington.gov.uk'` — Islington Council (UK)
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EployModule, EployService } from '@ever-jobs/source-ats-eploy';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EployModule, EployService } from '@rad-ar/source-ats-eploy';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('EployService (E2E)', () => {
   let service: EployService;

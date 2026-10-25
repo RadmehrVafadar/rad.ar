@@ -37,7 +37,7 @@ export interface SfODataResponse {
 
 /** Metadata retained while walking a branded SuccessFactors listing page. */
 export interface SfVanityPageResult {
-  jobs: import('@ever-jobs/models').JobPostDto[];
+  jobs: import('@rad-ar/models').JobPostDto[];
   advertisedResultCount: number | null;
   /** Zero-based startrow value advertised by the page's next result range. */
   nextStartRow: number | null;

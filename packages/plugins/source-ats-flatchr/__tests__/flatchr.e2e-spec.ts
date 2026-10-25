@@ -13,8 +13,8 @@
  *   - `companySlug: 'groupeaudeo'` — Groupe Audeo (2 published vacancies)
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FlatchrModule, FlatchrService } from '@ever-jobs/source-ats-flatchr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FlatchrModule, FlatchrService } from '@rad-ar/source-ats-flatchr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FlatchrService (E2E)', () => {
   let service: FlatchrService;

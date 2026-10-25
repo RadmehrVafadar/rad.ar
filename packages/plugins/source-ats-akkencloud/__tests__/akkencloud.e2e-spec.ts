@@ -19,8 +19,8 @@
  * the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AkkenCloudModule, AkkenCloudService } from '@ever-jobs/source-ats-akkencloud';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AkkenCloudModule, AkkenCloudService } from '@rad-ar/source-ats-akkencloud';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Canonical AkkenCloud-hosted board (shared host jobs.akkencloud.com → slug `jobs`).
 const KNOWN_TENANT = 'jobs';

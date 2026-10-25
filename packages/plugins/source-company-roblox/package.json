@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-roblox",
+  "name": "@rad-ar/source-company-roblox",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

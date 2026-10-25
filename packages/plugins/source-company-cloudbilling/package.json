@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cloudbilling",
+  "name": "@rad-ar/source-company-cloudbilling",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

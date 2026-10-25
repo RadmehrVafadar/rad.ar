@@ -5,8 +5,8 @@
  * No authentication required -- the RSS feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CryptocurrencyJobsModule, CryptocurrencyJobsService } from '@ever-jobs/source-cryptocurrencyjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CryptocurrencyJobsModule, CryptocurrencyJobsService } from '@rad-ar/source-cryptocurrencyjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CryptocurrencyJobsService (E2E)', () => {
   let service: CryptocurrencyJobsService;

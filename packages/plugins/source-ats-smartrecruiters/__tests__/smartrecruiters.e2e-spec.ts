@@ -5,8 +5,8 @@
  * To run authenticated tests, set SMARTRECRUITERS_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SmartRecruitersModule, SmartRecruitersService } from '@ever-jobs/source-ats-smartrecruiters';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SmartRecruitersModule, SmartRecruitersService } from '@rad-ar/source-ats-smartrecruiters';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('SmartRecruitersService (E2E)', () => {
   let service: SmartRecruitersService;

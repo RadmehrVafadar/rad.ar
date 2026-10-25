@@ -2,7 +2,7 @@ import { Inject, Injectable, Optional } from "@nestjs/common";
 import {
   INotificationSecretStore,
   NotificationSecretStatus,
-} from "@ever-jobs/plugin";
+} from "@rad-ar/plugin";
 import { parse as parseDotEnv } from "dotenv";
 import { randomUUID } from "node:crypto";
 import { promises as fs } from "node:fs";
@@ -18,7 +18,7 @@ import {
 const DEFAULT_DESTINATION_REF = "default";
 const DEFAULT_ENVIRONMENT_VARIABLE = "DISCORD_WEBHOOK_URL";
 const CUSTOM_ENVIRONMENT_PREFIX = "DISCORD_WEBHOOK_";
-const LOCAL_ENV_FILE_VARIABLE = "EVER_JOBS_LOCAL_ENV_FILE";
+const LOCAL_ENV_FILE_VARIABLE = "RADAR_LOCAL_ENV_FILE";
 const DESTINATION_REF_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_DESTINATION_REF_LENGTH = 64;
 const DISCORD_HOSTS = new Set([

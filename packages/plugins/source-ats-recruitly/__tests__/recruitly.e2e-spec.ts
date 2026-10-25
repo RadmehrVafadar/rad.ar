@@ -14,8 +14,8 @@
  * as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruitlyModule, RecruitlyService } from '@ever-jobs/source-ats-recruitly';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruitlyModule, RecruitlyService } from '@rad-ar/source-ats-recruitly';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Recruitly board API key (demo board, confirmed live 2026-06-03).
 const KNOWN_API_KEY = 'WEAV1001764028E594BF49688A653966A1729A21';

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aninebing",
+  "name": "@rad-ar/source-company-aninebing",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

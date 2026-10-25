@@ -8,8 +8,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PolymerModule, PolymerService } from '@ever-jobs/source-ats-polymer';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PolymerModule, PolymerService } from '@rad-ar/source-ats-polymer';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PolymerService (E2E)', () => {
   let service: PolymerService;

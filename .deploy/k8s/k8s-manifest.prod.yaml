@@ -1,19 +1,19 @@
-# Ever Jobs — INTERNAL deployment on do-sfo2-k8s-gauzy. ClusterIP only, NO Ingress:
+# rad.ar — INTERNAL deployment on do-sfo2-k8s-gauzy. ClusterIP only, NO Ingress:
 # the API is reachable only inside the cluster (Hust's pods call it at
-# http://ever-jobs-api.default.svc.cluster.local:3001). Not exposed to the public internet.
+# http://radar-api.default.svc.cluster.local:3001). Not exposed to the public internet.
 #
-# Image ghcr.io/ever-jobs/ever-jobs:latest (built by docker-build-publish.yml).
+# Image ghcr.io/radmehrvafadar/radar:latest (built by docker-build-publish.yml).
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: ever-jobs-api
+  name: radar-api
   labels:
-    app: ever-jobs-api
+    app: radar-api
 spec:
   type: ClusterIP
   selector:
-    app: ever-jobs-api
+    app: radar-api
   ports:
     - name: http
       protocol: TCP
@@ -23,12 +23,12 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ever-jobs-api
+  name: radar-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ever-jobs-api
+      app: radar-api
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -37,11 +37,11 @@ spec:
   template:
     metadata:
       labels:
-        app: ever-jobs-api
+        app: radar-api
     spec:
       containers:
-        - name: ever-jobs-api
-          image: ghcr.io/ever-jobs/ever-jobs:latest
+        - name: radar-api
+          image: ghcr.io/radmehrvafadar/radar:latest
           imagePullPolicy: Always
           command: ["node", "dist/apps/api/main.js"]
           ports:
@@ -89,20 +89,20 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 5
             failureThreshold: 3
-      # GHCR package ghcr.io/ever-jobs/ever-jobs is public — no imagePullSecret needed.
+      # Configure image pull credentials when required by the published image visibility.
 ---
-# Ever Jobs MCP server — INTERNAL only (ClusterIP, no Ingress). Streamable-HTTP transport;
-# reachable inside the cluster at http://ever-jobs-mcp.default.svc.cluster.local:3002/mcp.
+# rad.ar MCP server — INTERNAL only (ClusterIP, no Ingress). Streamable-HTTP transport;
+# reachable inside the cluster at http://radar-mcp.default.svc.cluster.local:3002/mcp.
 kind: Service
 apiVersion: v1
 metadata:
-  name: ever-jobs-mcp
+  name: radar-mcp
   labels:
-    app: ever-jobs-mcp
+    app: radar-mcp
 spec:
   type: ClusterIP
   selector:
-    app: ever-jobs-mcp
+    app: radar-mcp
   ports:
     - name: http
       protocol: TCP
@@ -112,12 +112,12 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ever-jobs-mcp
+  name: radar-mcp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ever-jobs-mcp
+      app: radar-mcp
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -126,11 +126,11 @@ spec:
   template:
     metadata:
       labels:
-        app: ever-jobs-mcp
+        app: radar-mcp
     spec:
       containers:
-        - name: ever-jobs-mcp
-          image: ghcr.io/ever-jobs/ever-jobs-mcp:latest
+        - name: radar-mcp
+          image: ghcr.io/radmehrvafadar/radar-mcp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3002
@@ -142,9 +142,9 @@ spec:
               value: "http"
             - name: PORT
               value: "3002"
-            # The MCP proxies to the internal Ever Jobs API over the cluster network.
-            - name: EVER_JOBS_API_URL
-              value: "http://ever-jobs-api.default.svc.cluster.local:3001"
+            # The MCP proxies to the internal rad.ar API over the cluster network.
+            - name: RADAR_API_URL
+              value: "http://radar-api.default.svc.cluster.local:3001"
           resources:
             requests:
               cpu: "50m"

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-vts",
+  "name": "@rad-ar/source-company-vts",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

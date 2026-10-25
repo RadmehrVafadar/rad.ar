@@ -32,10 +32,10 @@ import 'reflect-metadata';
 import {
   ERR_SOURCE_CIRCUIT_OPEN,
   Site,
-} from '@ever-jobs/models';
-import { CircuitBreakerService } from '@ever-jobs/plugin';
-import { InMemoryJobStore } from '@ever-jobs/store-memory';
-import { HealthSnapshotCron } from '../../src/jobs/health-snapshot.cron';
+} from '@rad-ar/models';
+import { CircuitBreakerService } from '@rad-ar/plugin';
+import { InMemoryJobStore } from '@rad-ar/store-memory';
+import { HealthSnapshotCron } from '@rad-ar/job-search/health-snapshot.cron';
 
 describe('Integration — HealthSnapshotCron × CircuitBreakerService × InMemoryJobStore (Spec 005 / T09)', () => {
   it('persists one SourceHealth row per breaker site on each tick', async () => {

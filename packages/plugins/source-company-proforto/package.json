@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-proforto",
+  "name": "@rad-ar/source-company-proforto",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

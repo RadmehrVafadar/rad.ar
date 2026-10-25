@@ -5,8 +5,8 @@
  * No authentication required -- the RSS feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { LaraJobsModule, LaraJobsService } from '@ever-jobs/source-larajobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { LaraJobsModule, LaraJobsService } from '@rad-ar/source-larajobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('LaraJobsService (E2E)', () => {
   let service: LaraJobsService;

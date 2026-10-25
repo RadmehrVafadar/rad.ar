@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-chainguard",
+  "name": "@rad-ar/source-company-chainguard",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

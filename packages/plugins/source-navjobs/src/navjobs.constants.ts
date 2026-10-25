@@ -3,5 +3,5 @@ export const NAVJOBS_PUBLIC_TOKEN_URL = 'https://pam-stilling-feed.nav.no/api/pu
 export const NAVJOBS_DEFAULT_RESULTS = 25;
 export const NAVJOBS_HEADERS: Record<string, string> = {
   Accept: 'application/json',
-  'User-Agent': 'EverJobs/1.0',
+  'User-Agent': 'Radar/1.0',
 };

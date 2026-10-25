@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RealWorkFromAnywhereModule, RealWorkFromAnywhereService } from '@ever-jobs/source-realworkfromanywhere';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RealWorkFromAnywhereModule, RealWorkFromAnywhereService } from '@rad-ar/source-realworkfromanywhere';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RealWorkFromAnywhereService (E2E)', () => {
   let service: RealWorkFromAnywhereService;

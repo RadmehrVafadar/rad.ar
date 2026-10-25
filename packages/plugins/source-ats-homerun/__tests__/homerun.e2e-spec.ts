@@ -5,8 +5,8 @@
  * To run tests, set HOMERUN_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HomerunModule, HomerunService } from '@ever-jobs/source-ats-homerun';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HomerunModule, HomerunService } from '@rad-ar/source-ats-homerun';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HomerunService (E2E)', () => {
   let service: HomerunService;

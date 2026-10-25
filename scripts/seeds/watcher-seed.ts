@@ -3,7 +3,7 @@ import {
   prestigeInternshipsV2Watch,
   PrismaWatchRepository,
   WatcherPrismaService,
-} from "@ever-jobs/watcher";
+} from "@rad-ar/watcher";
 
 async function seed(): Promise<void> {
   if (!process.env.DATABASE_URL) {

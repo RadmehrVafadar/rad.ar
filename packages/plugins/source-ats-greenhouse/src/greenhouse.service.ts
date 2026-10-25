@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -10,7 +10,7 @@ import {
   CompensationInterval,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
@@ -18,7 +18,7 @@ import {
   extractEmails,
   parseLocationList,
   resolveCompensation,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { GREENHOUSE_API_URL, GREENHOUSE_HARVEST_API_URL, GREENHOUSE_HEADERS } from './greenhouse.constants';
 import {
   GreenhouseJob,

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-valeofoods",
+  "name": "@rad-ar/source-company-valeofoods",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -3,7 +3,7 @@
 Production installation:
 
 ```text
-/Users/vafadar/repo/ever-jobs
+/Users/vafadar/repo/radar
 ```
 
 Production watch ID:
@@ -15,14 +15,14 @@ Production watch ID:
 LaunchAgent label:
 
 ```text
-com.everjobs.watcher
+com.radar.watcher
 ```
 
 ## Start every terminal session
 
 ```bash
 source ~/.zshrc
-cd /Users/vafadar/repo/ever-jobs
+cd /Users/vafadar/repo/radar
 ```
 
 Use the compiled CLI for production administration. It starts much faster than
@@ -90,9 +90,9 @@ Read the two non-secret LaunchAgent values without printing its full environment
 
 ```bash
 /usr/libexec/PlistBuddy -c "Print :EnvironmentVariables:WATCHER_MAX_CONCURRENT_WATCHES" \
-  /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
+  /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
 /usr/libexec/PlistBuddy -c "Print :EnvironmentVariables:WATCHER_MAX_CONCURRENT_SOURCES" \
-  /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
+  /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
 ```
 
 ## Verify two watches safely
@@ -116,7 +116,7 @@ node dist/apps/cli/main.js watch resume "$WATCH_A_ID" --json
 node dist/apps/cli/main.js watch resume "$WATCH_B_ID" --json
 curl -sS http://localhost:3002/health
 curl -sS http://localhost:3002/metrics | grep -E \
-  '^ever_jobs_watcher_scheduler_(capacity|active_runs) '
+  '^radar_watcher_scheduler_(capacity|active_runs) '
 ```
 
 With capacity two, health should briefly report two distinct `activeWatchIds`,
@@ -141,10 +141,10 @@ Run each command separately and stop if one fails:
 
 ```bash
 source ~/.zshrc
-cd /Users/vafadar/repo/ever-jobs
+cd /Users/vafadar/repo/radar
 git branch --show-current
 git status --short --branch
-launchctl bootout gui/$(id -u)/com.everjobs.watcher
+launchctl bootout gui/$(id -u)/com.radar.watcher
 git pull --ff-only origin codex-branch
 npm ci
 npm run db:generate
@@ -153,8 +153,8 @@ npx nx reset
 npx nx run watcher:build --skip-nx-cache
 npx nx run api:build --skip-nx-cache
 npx nx run cli:build --skip-nx-cache
-plutil -lint /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
-launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
+plutil -lint /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
+launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
 curl -sS http://localhost:3002/health
 ```
 
@@ -185,14 +185,14 @@ standard production-update sequence.
 
 ```bash
 git log -1 --oneline
-sed -n '203,285p' packages/watcher/src/services/canadian-tech-internships.preset.ts
+sed -n '203,285p' packages/plugins/watch-engine/src/services/canadian-tech-internships.preset.ts
 ```
 
 Do not verify `maxRequestsPerRun: 1` with a loose `grep`: it also matches `12`.
 Use an end-of-line expression:
 
 ```bash
-grep -Eq "maxRequestsPerRun: 1,$" packages/watcher/src/services/canadian-tech-internships.preset.ts \
+grep -Eq "maxRequestsPerRun: 1,$" packages/plugins/watch-engine/src/services/canadian-tech-internships.preset.ts \
   && echo "SOURCE NEW" || echo "SOURCE NOT EXPECTED"
 ```
 
@@ -281,15 +281,15 @@ API-key warnings for unselected plugins are informational. Use `sourcesFailed`,
 Latest normal and error logs:
 
 ```bash
-tail -n 100 /Users/vafadar/Library/Logs/ever-jobs-watcher.log
-tail -n 100 /Users/vafadar/Library/Logs/ever-jobs-watcher-error.log
+tail -n 100 /Users/vafadar/Library/Logs/radar-watcher.log
+tail -n 100 /Users/vafadar/Library/Logs/radar-watcher-error.log
 ```
 
 Follow logs; press `Ctrl+C` to stop following:
 
 ```bash
-tail -f /Users/vafadar/Library/Logs/ever-jobs-watcher.log
-tail -f /Users/vafadar/Library/Logs/ever-jobs-watcher-error.log
+tail -f /Users/vafadar/Library/Logs/radar-watcher.log
+tail -f /Users/vafadar/Library/Logs/radar-watcher-error.log
 ```
 
 The first lines printed by `tail -f` are historical. Use their timestamps and a
@@ -298,7 +298,7 @@ fresh health request before concluding that the watcher stopped.
 Check sizes:
 
 ```bash
-du -h /Users/vafadar/Library/Logs/ever-jobs-watcher*.log
+du -h /Users/vafadar/Library/Logs/radar-watcher*.log
 ```
 
 ## LaunchAgent operations
@@ -306,13 +306,13 @@ du -h /Users/vafadar/Library/Logs/ever-jobs-watcher*.log
 Inspect:
 
 ```bash
-launchctl print gui/$(id -u)/com.everjobs.watcher
+launchctl print gui/$(id -u)/com.radar.watcher
 ```
 
 Restart the registered service:
 
 ```bash
-launchctl kickstart -k gui/$(id -u)/com.everjobs.watcher
+launchctl kickstart -k gui/$(id -u)/com.radar.watcher
 curl -sS http://localhost:3002/health
 ```
 
@@ -322,9 +322,9 @@ After editing the plist, validate and reload it; `kickstart` does not reread a
 changed plist:
 
 ```bash
-plutil -lint /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
-launchctl bootout gui/$(id -u)/com.everjobs.watcher
-launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
+plutil -lint /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
+launchctl bootout gui/$(id -u)/com.radar.watcher
+launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
 ```
 
 ## PostgreSQL and backup
@@ -333,7 +333,7 @@ launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.everjob
 pg_isready
 brew services list
 brew services restart postgresql@16
-psql -d ever_jobs
+psql -d radar
 ```
 
 Exit `psql` with `\q`.
@@ -341,9 +341,9 @@ Exit `psql` with `\q`.
 Create and inspect a timestamped backup:
 
 ```bash
-mkdir -p /Users/vafadar/ever-jobs-backups
-pg_dump -d ever_jobs -Fc -f "/Users/vafadar/ever-jobs-backups/ever-jobs-$(date +%Y%m%d-%H%M%S).dump"
-ls -lh /Users/vafadar/ever-jobs-backups
+mkdir -p /Users/vafadar/radar-backups
+pg_dump -d radar -Fc -f "/Users/vafadar/radar-backups/radar-$(date +%Y%m%d-%H%M%S).dump"
+ls -lh /Users/vafadar/radar-backups
 ```
 
 ## Machine checks
@@ -361,10 +361,10 @@ automatic restart should be enabled (`autorestart 1`). Display sleep is fine.
 
 ```bash
 which node
-nano /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
-plutil -lint /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
-launchctl bootout gui/$(id -u)/com.everjobs.watcher
-launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
+nano /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
+plutil -lint /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
+launchctl bootout gui/$(id -u)/com.radar.watcher
+launchctl bootstrap gui/$(id -u) /Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
 curl -sS http://localhost:3002/health
 ```
 
@@ -373,11 +373,11 @@ Update every Node path in the plist before reloading it.
 ## Important files
 
 ```text
-/Users/vafadar/repo/ever-jobs/.env
-/Users/vafadar/Library/LaunchAgents/com.everjobs.watcher.plist
-/Users/vafadar/Library/Logs/ever-jobs-watcher.log
-/Users/vafadar/Library/Logs/ever-jobs-watcher-error.log
-/Users/vafadar/ever-jobs-backups/
+/Users/vafadar/repo/radar/.env
+/Users/vafadar/Library/LaunchAgents/com.radar.watcher.plist
+/Users/vafadar/Library/Logs/radar-watcher.log
+/Users/vafadar/Library/Logs/radar-watcher-error.log
+/Users/vafadar/radar-backups/
 ```
 
 Never print, paste, commit, or share `.env`; it contains database credentials and

@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(),
@@ -10,8 +10,8 @@ jest.mock('@ever-jobs/common', () => {
   };
 });
 
-import { createHttpClient } from '@ever-jobs/common';
-import { DescriptionFormat, ScraperInputDto, Site } from '@ever-jobs/models';
+import { createHttpClient } from '@rad-ar/common';
+import { DescriptionFormat, ScraperInputDto, Site } from '@rad-ar/models';
 import { LinkedInService } from '../src/linkedin.service';
 
 const fixture = (name: string): string =>

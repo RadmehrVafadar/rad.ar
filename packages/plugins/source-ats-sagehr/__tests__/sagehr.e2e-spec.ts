@@ -8,8 +8,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SageHrModule, SageHrService } from '@ever-jobs/source-ats-sagehr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SageHrModule, SageHrService } from '@rad-ar/source-ats-sagehr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sage HR career site id (Newstel Worldwide HQ), verified live 2026-06-03
 // at https://talent.sage.hr/cf0157f8-8d5e-4d2a-a9f7-0a80b348b097/vacancies.

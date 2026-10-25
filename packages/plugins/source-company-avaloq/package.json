@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-avaloq",
+  "name": "@rad-ar/source-company-avaloq",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

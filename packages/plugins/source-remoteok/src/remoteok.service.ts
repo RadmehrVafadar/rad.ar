@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -11,8 +11,8 @@ import {
   Site,
   DescriptionFormat,
   CompensationInterval,
-} from '@ever-jobs/models';
-import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@rad-ar/common';
 import { REMOTEOK_API_URL, REMOTEOK_HEADERS } from './remoteok.constants';
 import { RemoteOkJob } from './remoteok.types';
 

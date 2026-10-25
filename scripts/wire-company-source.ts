@@ -90,12 +90,12 @@ function main(): void {
   const tsconfigPath = path.join(repoRoot, 'tsconfig.base.json');
   let tsSrc = read(tsconfigPath);
   for (const d of batch) {
-    const alias = `"@ever-jobs/source-company-${d.slug}":`;
+    const alias = `"@rad-ar/source-company-${d.slug}":`;
     if (tsSrc.includes(alias)) continue;
     const line =
-      `      "@ever-jobs/source-company-${d.slug}": ["packages/plugins/source-company-${d.slug}/src/index.ts"],\n`;
+      `      "@rad-ar/source-company-${d.slug}": ["packages/plugins/source-company-${d.slug}/src/index.ts"],\n`;
     // Anchor: the first existing source-company path alias line.
-    const anchorMatch = tsSrc.match(/ {6}"@ever-jobs\/source-company-[^\n]+\n/);
+    const anchorMatch = tsSrc.match(/ {6}"@rad-ar\/source-company-[^\n]+\n/);
     if (!anchorMatch) throw new Error('tsconfig source-company anchor not found');
     const aIdx = tsSrc.indexOf(anchorMatch[0]);
     tsSrc = tsSrc.slice(0, aIdx) + line + tsSrc.slice(aIdx);
@@ -106,11 +106,11 @@ function main(): void {
   const jestPath = path.join(repoRoot, 'jest.config.js');
   let jestSrc = read(jestPath);
   for (const d of batch) {
-    const key = `'^@ever-jobs/source-company-${d.slug}$':`;
+    const key = `'^@rad-ar/source-company-${d.slug}$':`;
     if (jestSrc.includes(key)) continue;
     const line =
-      `    '^@ever-jobs/source-company-${d.slug}$': '<rootDir>/packages/plugins/source-company-${d.slug}/src/index.ts',\n`;
-    const anchorMatch = jestSrc.match(/ {4}'\^@ever-jobs\/source-company-[^\n]+\n/);
+      `    '^@rad-ar/source-company-${d.slug}$': '<rootDir>/packages/plugins/source-company-${d.slug}/src/index.ts',\n`;
+    const anchorMatch = jestSrc.match(/ {4}'\^@rad-ar\/source-company-[^\n]+\n/);
     if (!anchorMatch) throw new Error('jest source-company anchor not found');
     const aIdx = jestSrc.indexOf(anchorMatch[0]);
     jestSrc = jestSrc.slice(0, aIdx) + line + jestSrc.slice(aIdx);

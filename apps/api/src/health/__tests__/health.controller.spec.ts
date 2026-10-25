@@ -1,5 +1,5 @@
 import { ConfigService } from "@nestjs/config";
-import { WatchRepository } from "@ever-jobs/watcher";
+import { WatchRepository } from '@rad-ar/models';
 import { HealthController } from "../health.controller";
 
 describe("HealthController watcher coverage", () => {

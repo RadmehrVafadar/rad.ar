@@ -5,8 +5,8 @@
  * To run authenticated tests, set WORKABLE_API_TOKEN and WORKABLE_SUBDOMAIN env vars.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkableModule, WorkableService } from '@ever-jobs/source-ats-workable';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WorkableModule, WorkableService } from '@rad-ar/source-ats-workable';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('WorkableService (E2E)', () => {
   let service: WorkableService;

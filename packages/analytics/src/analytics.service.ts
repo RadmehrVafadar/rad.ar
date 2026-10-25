@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   JobPostDto, JobSummaryDto, CompanyInsightDto,
   SiteComparisonDto, JobAnalysisDto,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Analytics service providing reusable job analysis functions.

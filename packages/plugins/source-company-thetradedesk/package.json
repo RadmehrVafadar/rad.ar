@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-thetradedesk",
+  "name": "@rad-ar/source-company-thetradedesk",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

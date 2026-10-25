@@ -5,8 +5,8 @@
  * Tests always run against known Phenom-powered company career sites.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PhenomModule, PhenomService } from '@ever-jobs/source-ats-phenom';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PhenomModule, PhenomService } from '@rad-ar/source-ats-phenom';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PhenomService (E2E)', () => {
   let service: PhenomService;

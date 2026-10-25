@@ -15,8 +15,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AltamiraModule, AltamiraService } from '@ever-jobs/source-ats-altamira';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AltamiraModule, AltamiraService } from '@rad-ar/source-ats-altamira';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Altamira-powered career site (Etinars — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'etinars';

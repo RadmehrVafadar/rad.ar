@@ -8,8 +8,8 @@
  * the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { OccupopModule, OccupopService } from '@ever-jobs/source-ats-occupop';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { OccupopModule, OccupopService } from '@rad-ar/source-ats-occupop';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('OccupopService (E2E)', () => {
   let service: OccupopService;

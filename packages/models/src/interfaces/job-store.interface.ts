@@ -7,7 +7,7 @@ import { JobStorePage, JobStoreQuery } from './job-store-query.interface';
  *
  * Implementations are registered as NestJS providers under
  * {@link JOB_STORE_TOKEN}. Bootstrap binds the provider whose
- * {@link IStoreMetadata.id} matches `EVER_JOBS_STORE` (FR-3); no other code
+ * {@link IStoreMetadata.id} matches `RADAR_STORE` (FR-3); no other code
  * consults the env var.
  *
  * Every method returns a `Promise`; callers MUST be ready for the underlying
@@ -132,13 +132,13 @@ export interface IJobObservationStore {
  * Static metadata advertised by a store plugin via the `@StorePlugin()`
  * decorator (Spec 004 / FR-4 / T02).
  *
- * `id` is what `EVER_JOBS_STORE` matches against; pick a short kebab-case
+ * `id` is what `RADAR_STORE` matches against; pick a short kebab-case
  * string (`postgres`, `sqlite`, `memory`, `mongo`, …). `description` is
  * surfaced by `GET /api/storage` and the CLI's `stores list` subcommand
  * for operator triage.
  */
 export interface IStoreMetadata {
-  /** Match key for `EVER_JOBS_STORE`. Lower-case kebab-case. */
+  /** Match key for `RADAR_STORE`. Lower-case kebab-case. */
   readonly id: string;
   /** Human-readable one-liner shown in admin/CLI output. */
   readonly description?: string;
@@ -162,11 +162,11 @@ export const JOB_OBSERVATION_STORE_TOKEN = 'JOB_OBSERVATION_STORE';
  * (Spec 004 / T02). Kept here next to the contract so plugin authors
  * don't import from a deeper internal path.
  */
-export const STORE_PLUGIN_METADATA_KEY = 'ever-jobs:store-plugin';
+export const STORE_PLUGIN_METADATA_KEY = 'radar:store-plugin';
 
 /**
  * Error code raised when bootstrap encounters an unknown
- * `EVER_JOBS_STORE` value (Spec 004 / §7.3 / T12). Surfaces via the
+ * `RADAR_STORE` value (Spec 004 / §7.3 / T12). Surfaces via the
  * thrown `Error.code` — bootstrap MUST fail fast and refuse to start.
  */
 export const ERR_STORE_NOT_FOUND = 'ERR_STORE_NOT_FOUND';

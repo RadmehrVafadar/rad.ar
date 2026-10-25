@@ -5,8 +5,8 @@
  * or blocked depending on your network/IP. Run sparingly.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { IndeedModule, IndeedService } from '@ever-jobs/source-indeed';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { IndeedModule, IndeedService } from '@rad-ar/source-indeed';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 describe('IndeedService (E2E)', () => {
   let service: IndeedService;

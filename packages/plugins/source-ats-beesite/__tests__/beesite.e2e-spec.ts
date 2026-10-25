@@ -14,8 +14,8 @@
  * only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BeeSiteModule, BeeSiteService } from '@ever-jobs/source-ats-beesite';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BeeSiteModule, BeeSiteService } from '@rad-ar/source-ats-beesite';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public BeeSite-powered career portal (milch & zucker demo — confirmed platform 2026-06-03).
 const KNOWN_SLUG = 'frontend-demo';

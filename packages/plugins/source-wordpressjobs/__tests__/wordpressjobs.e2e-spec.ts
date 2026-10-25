@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WordPressJobsModule, WordPressJobsService } from '@ever-jobs/source-wordpressjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WordPressJobsModule, WordPressJobsService } from '@rad-ar/source-wordpressjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('WordPressJobsService (E2E)', () => {
   let service: WordPressJobsService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aloyoga",
+  "name": "@rad-ar/source-company-aloyoga",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

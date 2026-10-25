@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-ats-sympa",
+  "name": "@rad-ar/source-ats-sympa",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

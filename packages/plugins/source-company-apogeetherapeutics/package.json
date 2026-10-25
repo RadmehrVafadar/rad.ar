@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-apogeetherapeutics",
+  "name": "@rad-ar/source-company-apogeetherapeutics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

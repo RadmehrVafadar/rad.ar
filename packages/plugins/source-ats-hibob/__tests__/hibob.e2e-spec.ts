@@ -14,8 +14,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HiBobModule, HiBobService } from '@ever-jobs/source-ats-hibob';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HiBobModule, HiBobService } from '@rad-ar/source-ats-hibob';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public HiBob-powered candidate careers page (dcbyte — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'dcbyte';

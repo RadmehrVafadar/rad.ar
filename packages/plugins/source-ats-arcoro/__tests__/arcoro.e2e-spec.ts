@@ -12,8 +12,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ArcoroModule, ArcoroService } from '@ever-jobs/source-ats-arcoro';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ArcoroModule, ArcoroService } from '@rad-ar/source-ats-arcoro';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Arcoro/BirdDogHR-powered careers sub-domain (verified live 2026-06-03).
 const KNOWN_TENANT = 'engineeringjobs';

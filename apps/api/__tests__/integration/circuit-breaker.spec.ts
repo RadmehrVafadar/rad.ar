@@ -34,14 +34,14 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   CircuitBreakerInterceptor,
   CircuitBreakerService,
   PluginRegistry,
-} from '@ever-jobs/plugin';
-import { JobsAggregator } from '../../src/jobs/jobs.aggregator';
-import { JobsService } from '../../src/jobs/jobs.service';
+} from '@rad-ar/plugin';
+import { JobsAggregator } from '@rad-ar/job-search/jobs.aggregator';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
 
 // ---------------------------------------------------------------------------
 // Helpers

@@ -13,8 +13,8 @@
  * as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { VidCruiterModule, VidCruiterService } from '@ever-jobs/source-ats-vidcruiter';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { VidCruiterModule, VidCruiterService } from '@rad-ar/source-ats-vidcruiter';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public VidCruiter-powered board (VidCruiter's own employer board — confirmed live 2026-06-04 at
 // https://vidcruiter.hiringplatform.com/list/careers/).

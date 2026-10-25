@@ -9,8 +9,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GoHireModule, GoHireService } from '@ever-jobs/source-ats-gohire';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GoHireModule, GoHireService } from '@rad-ar/source-ats-gohire';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GoHireService (E2E)', () => {
   let service: GoHireService;

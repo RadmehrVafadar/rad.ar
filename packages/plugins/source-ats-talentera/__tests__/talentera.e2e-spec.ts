@@ -16,8 +16,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalenteraModule, TalenteraService } from '@ever-jobs/source-ats-talentera';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalenteraModule, TalenteraService } from '@rad-ar/source-ats-talentera';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Talentera-powered tenant career portal (confirmed live 2026-06-04).
 const KNOWN_TENANT = 'careerroyaljet';

@@ -12,8 +12,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DoverModule, DoverService } from '@ever-jobs/source-ats-dover';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DoverModule, DoverService } from '@rad-ar/source-ats-dover';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Dover-powered candidate board (Dover's own board — confirmed 2026-06-03).
 const KNOWN_TENANT = 'dover';

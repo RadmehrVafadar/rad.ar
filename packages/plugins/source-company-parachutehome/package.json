@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-parachutehome",
+  "name": "@rad-ar/source-company-parachutehome",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

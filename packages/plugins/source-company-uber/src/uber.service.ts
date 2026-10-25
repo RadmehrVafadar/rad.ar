@@ -5,13 +5,13 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 import {
   createHttpClient,
   parseLocationList,
   stripHtmlTags,
-} from "@ever-jobs/common";
-import { SourcePlugin } from "@ever-jobs/plugin";
+} from "@rad-ar/common";
+import { SourcePlugin } from "@rad-ar/plugin";
 
 import { UberSourceError, uberErrorMessage } from "./uber-source.error";
 

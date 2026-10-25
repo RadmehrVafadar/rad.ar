@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-lightspeedcommerce",
+  "name": "@rad-ar/source-company-lightspeedcommerce",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

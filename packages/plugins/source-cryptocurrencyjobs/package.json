@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-cryptocurrencyjobs",
+  "name": "@rad-ar/source-cryptocurrencyjobs",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

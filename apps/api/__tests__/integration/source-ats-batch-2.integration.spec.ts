@@ -2,7 +2,7 @@
  * Integration test — Spec 013 / T11.
  *
  * Wires the **real** `AppModule` (full Nest bootstrap) with the only
- * external surface — `@ever-jobs/common`'s `createHttpClient` —
+ * external surface — `@rad-ar/common`'s `createHttpClient` —
  * replaced by a fixture-driven router. The router decides per-URL
  * which fixture to return, so the three new batch-2 plugins
  * (`oracle` / `mercor` / `tesla`) exercise their real `scrape()`
@@ -10,7 +10,7 @@
  *
  * Mirrors the structure of Spec 006 / T09's
  * `source-ats-batch-1.integration.spec.ts` — same fixture-router +
- * `jest.mock('@ever-jobs/common', …)` shape, same four-place-
+ * `jest.mock('@rad-ar/common', …)` shape, same four-place-
  * registration assertions, same `JobsAggregator` dedup pin.
  *
  * Acceptance from `tasks.md` T11:
@@ -160,8 +160,8 @@ function routePost(url: string): unknown {
   return null;
 }
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -179,21 +179,15 @@ jest.mock('@ever-jobs/common', () => {
 });
 
 // ── Now import the app — AFTER the mock is installed ──────────────────
-// eslint-disable-next-line import/first
 import { INestApplication } from '@nestjs/common';
-// eslint-disable-next-line import/first
 import {
   JobPostDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-// eslint-disable-next-line import/first
-import { PluginRegistry } from '@ever-jobs/plugin';
-// eslint-disable-next-line import/first
-import { JobsAggregator } from '../../src/jobs/jobs.aggregator';
-// eslint-disable-next-line import/first
-import { JobsService } from '../../src/jobs/jobs.service';
-// eslint-disable-next-line import/first
+} from '@rad-ar/models';
+import { PluginRegistry } from '@rad-ar/plugin';
+import { JobsAggregator } from '@rad-ar/job-search/jobs.aggregator';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
 import { createTestApp } from '../helpers/create-app';
 
 describe('Integration — Spec 013 / T11 (source-ats batch 2: oracle × mercor × tesla)', () => {

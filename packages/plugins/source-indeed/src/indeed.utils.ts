@@ -1,4 +1,4 @@
-import { JobType, CompensationInterval, getCompensationInterval, getJobTypeFromString } from '@ever-jobs/models';
+import { JobType, CompensationInterval, getCompensationInterval, getJobTypeFromString } from '@rad-ar/models';
 
 /**
  * Get job types from Indeed attribute list.

@@ -1,6 +1,6 @@
 # LinkedIn Public Guest Source
 
-`@ever-jobs/source-linkedin` searches LinkedIn's unauthenticated public guest
+`@rad-ar/source-linkedin` searches LinkedIn's unauthenticated public guest
 surface as `Site.LINKEDIN`. It is a query source (`watchMode: "query"`) and
 provides best-effort redundancy; it does not recreate personalized account
 alerts.

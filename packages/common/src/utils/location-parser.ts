@@ -1,4 +1,4 @@
-import { LocationDto } from "@ever-jobs/models";
+import { LocationDto } from "@rad-ar/models";
 
 export type NorthAmericanCountryCode = "CA" | "US";
 export type LocationParseConfidence = "high" | "medium" | "low" | "unknown";

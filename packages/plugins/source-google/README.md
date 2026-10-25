@@ -1,6 +1,6 @@
 # Google Jobs Source
 
-`@ever-jobs/source-google` searches the public Google Jobs surface as
+`@rad-ar/source-google` searches the public Google Jobs surface as
 `Site.GOOGLE`. It is a query source (`watchMode: "query"`), not a complete
 company board. The watcher therefore supplies a bounded rotating search-term ×
 location request matrix.

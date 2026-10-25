@@ -14,8 +14,8 @@
  * the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SubscribeHrModule, SubscribeHrService } from '@ever-jobs/source-ats-subscribehr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SubscribeHrModule, SubscribeHrService } from '@rad-ar/source-ats-subscribehr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Subscribe-HR-powered careers board (confirmed live 2026-06-04).
 const KNOWN_TENANT = 'subscribehr16';

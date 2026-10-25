@@ -7,8 +7,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CornerstoneModule, CornerstoneService } from '@ever-jobs/source-ats-cornerstone';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CornerstoneModule, CornerstoneService } from '@rad-ar/source-ats-cornerstone';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CornerstoneService (E2E)', () => {
   let service: CornerstoneService;

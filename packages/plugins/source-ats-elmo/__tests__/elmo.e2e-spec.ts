@@ -13,8 +13,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ElmoModule, ElmoService } from '@ever-jobs/source-ats-elmo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ElmoModule, ElmoService } from '@rad-ar/source-ats-elmo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public ELMO-powered career site (ANZCA — surface researched 2026-06-03).
 const KNOWN_TENANT = 'anzca';

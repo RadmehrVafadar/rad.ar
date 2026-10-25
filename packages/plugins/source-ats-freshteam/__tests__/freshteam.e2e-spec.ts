@@ -5,8 +5,8 @@
  * To run these tests, set FRESHTEAM_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FreshteamModule, FreshteamService } from '@ever-jobs/source-ats-freshteam';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FreshteamModule, FreshteamService } from '@rad-ar/source-ats-freshteam';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const runTests = process.env.FRESHTEAM_API_KEY ? describe : describe.skip;
 

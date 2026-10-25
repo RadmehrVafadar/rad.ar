@@ -21,11 +21,11 @@ Add to your Claude Desktop config (`~/.claude/claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
-    "ever-jobs": {
+    "radar": {
       "command": "node",
       "args": ["<path-to>/rad.ar/apps/mcp/dist/index.js"],
       "env": {
-        "EVER_JOBS_API_URL": "http://localhost:3001"
+        "RADAR_API_URL": "http://localhost:3001"
       }
     }
   }
@@ -98,14 +98,14 @@ _No parameters required._
 
 | URI                  | Description                        |
 | -------------------- | ---------------------------------- |
-| `everjobs://sources` | Complete list of available sources |
-| `everjobs://guide`   | Search tips and usage guide        |
+| `radar://sources` | Complete list of available sources |
+| `radar://guide`   | Search tips and usage guide        |
 
 ## Environment Variables
 
 | Variable            | Default                 | Description            |
 | ------------------- | ----------------------- | ---------------------- |
-| `EVER_JOBS_API_URL` | `http://localhost:3001` | rad.ar API endpoint |
+| `RADAR_API_URL` | `http://localhost:3001` | rad.ar API endpoint |
 
 ## Source Coverage
 

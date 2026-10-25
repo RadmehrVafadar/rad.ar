@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-sunstudio",
+  "name": "@rad-ar/source-company-sunstudio",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

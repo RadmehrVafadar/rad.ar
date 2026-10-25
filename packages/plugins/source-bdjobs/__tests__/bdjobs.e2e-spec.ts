@@ -2,8 +2,8 @@
  * E2E test for the BDJobs scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BDJobsModule, BDJobsService } from '@ever-jobs/source-bdjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BDJobsModule, BDJobsService } from '@rad-ar/source-bdjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('BDJobsService (E2E)', () => {
   let service: BDJobsService;

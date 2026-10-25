@@ -9,8 +9,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruitCrmModule, RecruitCrmService } from '@ever-jobs/source-ats-recruitcrm';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruitCrmModule, RecruitCrmService } from '@rad-ar/source-ats-recruitcrm';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RecruitCrmService (E2E)', () => {
   let service: RecruitCrmService;

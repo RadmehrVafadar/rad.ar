@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { LIVENESS_CHECKER_TOKEN } from '@ever-jobs/models';
+import { LIVENESS_CHECKER_TOKEN } from '@rad-ar/models';
 
 import { LivenessHttpService } from './liveness-http.service';
 

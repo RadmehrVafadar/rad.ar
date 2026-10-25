@@ -13,8 +13,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobtrainModule, JobtrainService } from '@ever-jobs/source-ats-jobtrain';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobtrainModule, JobtrainService } from '@rad-ar/source-ats-jobtrain';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Jobtrain-powered career site (CrossReach — verified live 2026-06-03).
 const KNOWN_TENANT = 'crossreach';

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GuardianjobsModule, GuardianjobsService } from '@ever-jobs/source-guardianjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GuardianjobsModule, GuardianjobsService } from '@rad-ar/source-guardianjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GuardianjobsService (E2E)', () => {
   let service: GuardianjobsService;

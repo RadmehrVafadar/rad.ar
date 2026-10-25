@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-apolloio",
+  "name": "@rad-ar/source-company-apolloio",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

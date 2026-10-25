@@ -5,8 +5,8 @@
  * Without it, the service returns empty results gracefully.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ArbeitsagenturModule, ArbeitsagenturService } from '@ever-jobs/source-arbeitsagentur';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ArbeitsagenturModule, ArbeitsagenturService } from '@rad-ar/source-arbeitsagentur';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ArbeitsagenturService (E2E)', () => {
   let service: ArbeitsagenturService;

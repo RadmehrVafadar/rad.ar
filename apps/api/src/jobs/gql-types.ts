@@ -1,5 +1,5 @@
 import { ObjectType, Field, InputType, Int, Float, ID, registerEnumType } from '@nestjs/graphql';
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 // ── Register the Site enum for GraphQL ───────────────────
 registerEnumType(Site, {

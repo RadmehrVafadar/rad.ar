@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-anybotics",
+  "name": "@rad-ar/source-company-anybotics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

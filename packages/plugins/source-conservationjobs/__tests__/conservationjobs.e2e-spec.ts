@@ -1,5 +1,5 @@
 import { ConservationJobsService } from '../src/conservationjobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ConservationJobsService (e2e)', () => {
   let service: ConservationJobsService;

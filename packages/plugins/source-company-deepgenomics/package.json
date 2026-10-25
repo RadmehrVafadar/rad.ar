@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-deepgenomics",
+  "name": "@rad-ar/source-company-deepgenomics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

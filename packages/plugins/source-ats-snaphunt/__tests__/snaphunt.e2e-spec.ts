@@ -13,8 +13,8 @@
  * returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SnaphuntModule, SnaphuntService } from '@ever-jobs/source-ats-snaphunt';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SnaphuntModule, SnaphuntService } from '@rad-ar/source-ats-snaphunt';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Snaphunt-powered candidate career-site (Snappr — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'snappr';

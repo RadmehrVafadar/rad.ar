@@ -3,11 +3,11 @@ import { Reflector } from '@nestjs/core';
 import {
   IStoreMetadata,
   STORE_PLUGIN_METADATA_KEY as KEY_FROM_MODELS,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   StorePlugin,
   STORE_PLUGIN_METADATA_KEY as KEY_FROM_PLUGIN,
-} from '@ever-jobs/plugin';
+} from '@rad-ar/plugin';
 
 /**
  * Spec 004 / T02 — `@StorePlugin()` decorator unit tests.
@@ -21,13 +21,13 @@ import {
 describe('@StorePlugin() decorator (Spec 004 / T02)', () => {
   const reflector = new Reflector();
 
-  it('re-exports STORE_PLUGIN_METADATA_KEY identical to @ever-jobs/models', () => {
-    // Single source of truth — the key string lives in @ever-jobs/models
+  it('re-exports STORE_PLUGIN_METADATA_KEY identical to @rad-ar/models', () => {
+    // Single source of truth — the key string lives in @rad-ar/models
     // because both `IJobStore` (in models) and `StorePlugin` (in
     // plugin) reference it. If these ever drift, every backend's
     // registration silently breaks.
     expect(KEY_FROM_PLUGIN).toBe(KEY_FROM_MODELS);
-    expect(KEY_FROM_PLUGIN).toBe('ever-jobs:store-plugin');
+    expect(KEY_FROM_PLUGIN).toBe('radar:store-plugin');
   });
 
   it('attaches metadata under STORE_PLUGIN_METADATA_KEY (id + description)', () => {

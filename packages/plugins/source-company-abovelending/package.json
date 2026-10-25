@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-abovelending",
+  "name": "@rad-ar/source-company-abovelending",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

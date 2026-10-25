@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cima",
+  "name": "@rad-ar/source-company-cima",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

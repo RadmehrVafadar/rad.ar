@@ -16,8 +16,8 @@
  * jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SesameHrModule, SesameHrService } from '@ever-jobs/source-ats-sesamehr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SesameHrModule, SesameHrService } from '@rad-ar/source-ats-sesamehr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sesame-powered career site (Sesame HR's own board — confirmed live 2026-06-03,
 // 36 roles across 2 pages). NOTE: the company segment is case-sensitive on the API.

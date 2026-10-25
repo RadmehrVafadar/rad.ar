@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 // WIP: This source may need selector updates after live testing.
 // SimplyHired is owned by Indeed and may have anti-bot measures.
@@ -11,13 +11,13 @@ import {
   JobPostDto,
   LocationDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   randomSleep,
   extractSalary,
-} from '@ever-jobs/common';
-import { BrowserPool } from '@ever-jobs/common';
+} from '@rad-ar/common';
+import { BrowserPool } from '@rad-ar/common';
 import {
   SIMPLYHIRED_SEARCH_URL,
   SIMPLYHIRED_HEADERS,

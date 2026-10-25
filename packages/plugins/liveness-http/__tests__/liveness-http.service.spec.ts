@@ -4,11 +4,11 @@ import {
   ILivenessChecker,
   LIVENESS_CHECKER_TOKEN,
   LivenessVerdict,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 const mockGet = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -18,7 +18,7 @@ jest.mock('@ever-jobs/common', () => {
   };
 });
 
-import { createHttpClient } from '@ever-jobs/common';
+import { createHttpClient } from '@rad-ar/common';
 import { LivenessHttpModule, LivenessHttpService } from '../src';
 import {
   DEFAULT_TIMEOUT_MS,

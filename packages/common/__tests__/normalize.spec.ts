@@ -1,4 +1,4 @@
-import { normalizeCompany, normalizeLocation, normalizeTitle } from '@ever-jobs/common';
+import { normalizeCompany, normalizeLocation, normalizeTitle } from '@rad-ar/common';
 
 describe('normalizeCompany (Spec 003 / T04)', () => {
   it.each<[string, string]>([

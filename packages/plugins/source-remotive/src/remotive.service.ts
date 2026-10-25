@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -12,8 +12,8 @@ import {
   DescriptionFormat,
   CompensationInterval,
   JobType,
-} from '@ever-jobs/models';
-import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@rad-ar/common';
 import { REMOTIVE_API_URL, REMOTIVE_HEADERS } from './remotive.constants';
 import { RemotiveApiResponse, RemotiveJob } from './remotive.types';
 

@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import {
@@ -11,7 +11,7 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   GoogleJobsException,
   createHttpClient,
@@ -20,7 +20,7 @@ import {
   parseLocationList,
   plainConverter,
   randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 
 const GOOGLE_HEADERS: Record<string, string> = {
   accept: 'text/html,application/xhtml+xml,application/xml;q=0.9',

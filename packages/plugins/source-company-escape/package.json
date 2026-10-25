@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-escape",
+  "name": "@rad-ar/source-company-escape",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

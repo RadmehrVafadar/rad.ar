@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   IScraper,
   JobPostDto,
@@ -8,13 +8,13 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   extractEmails,
   htmlToPlainText,
   randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   SF_DELAY_MAX,
   SF_DELAY_MIN,
