@@ -22,3 +22,8 @@ The completed cleanup specification was folded into the project structure and id
 
 Recorded case-only documentation renames in Git so lowercase links resolve in Linux CI.
 The MCP runtime image now includes its workspace-local dependencies to preserve Express 4 resolution alongside the API's Express 5.
+CI source fixtures now run in 12 bounded shards with isolated transpilation, and live source checks run manually for a selected package.
+Every job has a timeout of at most 15 minutes, and superseded runs are cancelled.
+A complete local shard executed 129 suites in 291 seconds, with 128 suites passing.
+The remaining Lever country-inference assertion also fails under the original Jest configuration and is unrelated to the CI changes.
+Source checks retain their existing non-blocking status.

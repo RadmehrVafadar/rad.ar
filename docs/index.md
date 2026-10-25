@@ -6,6 +6,7 @@
 - [authentication](authentication.md)
 - [cli](cli.md)
 - [company-slug-directory](company-slug-directory.md)
+- [continuous-integration](continuous-integration.md)
 - [deployment](deployment.md)
 - [documentation](documentation.md)
 - [faq](faq.md)

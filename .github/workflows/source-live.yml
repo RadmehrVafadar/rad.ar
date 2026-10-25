@@ -1,0 +1,40 @@
+name: Live source check
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Source package directory, for example source-indeed
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.source }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate selected source
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: |
+          [[ "$SOURCE" =~ ^source-[a-z0-9]+(-[a-z0-9]+)*$ ]] || exit 1
+          test -d "packages/plugins/$SOURCE/__tests__"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - run: npm ci
+      - name: Test selected source
+        timeout-minutes: 5
+        env:
+          SOURCE: ${{ inputs.source }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+        run: npx jest --testPathPatterns "packages/plugins/$SOURCE/" --ci --testTimeout=30000

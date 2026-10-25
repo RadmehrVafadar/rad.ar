@@ -55,3 +55,4 @@ docs/archive/         Historical logs and reference material.
 - Before changing a subsystem, locate its reference in [the docs index](docs/index.md).
 - Before consulting historical records, read [the archive guide](docs/archive/README.md).
 - Before changing deployment identifiers, read [Identifier migration](docs/identifier-migration.md).
+- Before changing workflows or test sharding, read [Continuous integration](docs/continuous-integration.md).
