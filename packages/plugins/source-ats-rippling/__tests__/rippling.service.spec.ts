@@ -403,8 +403,9 @@ describe("RipplingService pagination", () => {
     expect(result.jobs[0]).not.toHaveProperty("applyUrl");
     expect(result.jobs[1]).toMatchObject({
       employmentType: "Seasonal specialist",
-      location: { city: "Remote - United States" },
+      location: { city: "Remote", country: "United States" },
       isRemote: true,
+      workFromHomeType: "Remote",
     });
     expect(result.jobs[1]).not.toHaveProperty("jobType");
   });

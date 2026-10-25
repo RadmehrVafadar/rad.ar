@@ -27,3 +27,6 @@ Every job has a timeout of at most 15 minutes, and superseded runs are cancelled
 A complete local shard executed 129 suites in 291 seconds, with 128 suites passing.
 The remaining Lever country-inference assertion also fails under the original Jest configuration and is unrelated to the CI changes.
 Source checks retain their existing non-blocking status.
+The subsequent full CI run identified stale Lever and Rippling assertions that predated shared location normalization.
+Their expectations now preserve the inferred US country and normalized remote city, with added coverage for an unresolved country without geographic evidence.
+Both source suites pass all 40 tests without runtime changes.

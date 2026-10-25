@@ -177,7 +177,7 @@ describe('LeverService field mappings (spec 752)', () => {
     expect(job.location?.country).toBe('Netherlands');
   });
 
-  it('should ignore an unresolvable country code', async () => {
+  it('should retain the country inferred from a US state when the country code is invalid', async () => {
     const job = await scrapeOne({
       id: 'bad-country',
       text: 'Operator',
@@ -186,6 +186,17 @@ describe('LeverService field mappings (spec 752)', () => {
     });
     expect(job.location?.city).toBe('Nashua');
     expect(job.location?.state).toBe('NH');
+    expect(job.location?.country).toBe('United States');
+  });
+
+  it('should leave the country unset when neither the code nor location resolves it', async () => {
+    const job = await scrapeOne({
+      id: 'unknown-country',
+      text: 'Operator',
+      categories: { location: 'Unlisted City' },
+      country: 'QZ',
+    });
+    expect(job.location?.city).toBe('Unlisted City');
     expect(job.location?.country).toBeFalsy();
   });
 });
