@@ -5,8 +5,8 @@
  * No authentication required -- the API is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { Web3CareerModule, Web3CareerService } from '@ever-jobs/source-web3career';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { Web3CareerModule, Web3CareerService } from '@rad-ar/source-web3career';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('Web3CareerService (E2E)', () => {
   let service: Web3CareerService;

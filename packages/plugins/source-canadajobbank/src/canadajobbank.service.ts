@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from "@ever-jobs/plugin";
+﻿import { SourcePlugin } from "@rad-ar/plugin";
 
 import { Injectable, Logger } from "@nestjs/common";
 import {
@@ -11,8 +11,8 @@ import {
   CompensationInterval,
   DescriptionFormat,
   Site,
-} from "@ever-jobs/models";
-import { createHttpClient, extractEmails } from "@ever-jobs/common";
+} from "@rad-ar/models";
+import { createHttpClient, extractEmails } from "@rad-ar/common";
 import {
   CANADAJOBBANK_API_URL,
   CANADAJOBBANK_RESOURCE_ID,

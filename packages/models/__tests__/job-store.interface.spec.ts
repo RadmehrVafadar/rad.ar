@@ -15,7 +15,7 @@ import {
   Site,
   SourceObservation,
   STORE_PLUGIN_METADATA_KEY,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Spec 004 / T01 — interface-shape and constant-value lock-in tests.
@@ -38,8 +38,8 @@ describe('Spec 004 / T01 — store interfaces & constants', () => {
       expect(JOB_OBSERVATION_STORE_TOKEN).toBe('JOB_OBSERVATION_STORE');
     });
 
-    it('exports the @StorePlugin() metadata key under the ever-jobs namespace', () => {
-      expect(STORE_PLUGIN_METADATA_KEY).toBe('ever-jobs:store-plugin');
+    it('exports the @StorePlugin() metadata key under the radar namespace', () => {
+      expect(STORE_PLUGIN_METADATA_KEY).toBe('radar:store-plugin');
     });
   });
 

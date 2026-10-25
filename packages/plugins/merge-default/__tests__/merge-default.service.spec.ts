@@ -1,4 +1,4 @@
-import { FieldWithProvenance, Site, provenance } from '@ever-jobs/models';
+import { FieldWithProvenance, Site, provenance } from '@rad-ar/models';
 import {
   DEFAULT_CATEGORY_PRIORITY,
   MergeDefaultService,

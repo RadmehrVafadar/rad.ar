@@ -1,9 +1,9 @@
-import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';
+import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';
 
 import { Injectable, Logger, Optional } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Office Depot — Office products and business supplies retailer operating stores and e-commerce under Office Depot and OfficeMax.

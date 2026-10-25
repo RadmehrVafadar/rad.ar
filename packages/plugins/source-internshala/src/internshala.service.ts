@@ -1,14 +1,14 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto,
   LocationDto, DescriptionFormat, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient, markdownConverter, plainConverter, randomSleep, extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 
 /** Internshala base URLs and selectors */
 const INTERNSHALA_BASE = 'https://internshala.com';

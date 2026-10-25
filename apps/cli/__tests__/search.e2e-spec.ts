@@ -116,7 +116,7 @@ describe('CLI search command (E2E)', () => {
   it('should write output to file with -o flag', () => {
     const tmpFile = path.join(
       os.tmpdir(),
-      `ever-jobs-test-${Date.now()}.json`,
+      `radar-test-${Date.now()}.json`,
     );
 
     try {

@@ -31,8 +31,8 @@
  *     against (avoids cold-start flakes per Notes-for-the-next-run
  *     decision 2).
  */
-import { extractSalary } from '@ever-jobs/common';
-import { Country } from '@ever-jobs/models';
+import { extractSalary } from '@rad-ar/common';
+import { Country } from '@rad-ar/models';
 import * as fs from 'fs';
 import * as path from 'path';
 

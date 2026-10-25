@@ -13,8 +13,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TempWorksModule, TempWorksService } from '@ever-jobs/source-ats-tempworks';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TempWorksModule, TempWorksService } from '@rad-ar/source-ats-tempworks';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public TempWorks-powered candidate board (Just In Time Staffing — confirmed 2026-06-03).
 const KNOWN_TENANT = 'JustInTimeStaffing';

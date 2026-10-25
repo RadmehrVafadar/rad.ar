@@ -1,14 +1,7 @@
-import { Global, Module } from "@nestjs/common";
-import { MetricsService } from "./metrics.service";
-import { MetricsController } from "./metrics.controller";
-
-@Global()
-@Module({
-  providers: [MetricsService],
-  exports: [MetricsService],
-})
-export class MetricsProvidersModule {}
-
+import { Global, Module } from '@nestjs/common';
+import { MetricsProvidersModule } from '@rad-ar/common/runtime/metrics/metrics.module';
+import { MetricsController } from './metrics.controller';
+export { MetricsProvidersModule } from '@rad-ar/common/runtime/metrics/metrics.module';
 @Global()
 @Module({
   imports: [MetricsProvidersModule],

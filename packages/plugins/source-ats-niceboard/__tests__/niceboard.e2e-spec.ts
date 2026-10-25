@@ -8,8 +8,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { NiceboardModule, NiceboardService } from '@ever-jobs/source-ats-niceboard';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { NiceboardModule, NiceboardService } from '@rad-ar/source-ats-niceboard';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('NiceboardService (E2E)', () => {
   let service: NiceboardService;

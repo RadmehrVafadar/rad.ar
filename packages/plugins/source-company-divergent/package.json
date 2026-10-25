@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-divergent",
+  "name": "@rad-ar/source-company-divergent",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,9 +1,9 @@
-import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';
+import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';
 
 import { Injectable, Logger, Optional } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Method Financial — An API platform for connecting to consumer liability accounts and executing payments.

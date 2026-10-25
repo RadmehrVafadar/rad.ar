@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-eataly",
+  "name": "@rad-ar/source-company-eataly",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

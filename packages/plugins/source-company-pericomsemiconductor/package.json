@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-pericomsemiconductor",
+  "name": "@rad-ar/source-company-pericomsemiconductor",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

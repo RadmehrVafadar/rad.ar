@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-tailscale",
+  "name": "@rad-ar/source-company-tailscale",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

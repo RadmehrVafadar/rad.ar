@@ -5,8 +5,8 @@
  * To run authenticated tests, set TEAMTAILOR_API_TOKEN env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TeamtailorModule, TeamtailorService } from '@ever-jobs/source-ats-teamtailor';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TeamtailorModule, TeamtailorService } from '@rad-ar/source-ats-teamtailor';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('TeamtailorService (E2E)', () => {
   let service: TeamtailorService;

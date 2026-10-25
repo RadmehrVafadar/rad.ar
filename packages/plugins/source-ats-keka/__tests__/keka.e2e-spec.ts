@@ -12,8 +12,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { KekaModule, KekaService } from '@ever-jobs/source-ats-keka';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { KekaModule, KekaService } from '@rad-ar/source-ats-keka';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Keka-powered candidate career site (Algoworks — confirmed 2026-06-03).
 const KNOWN_TENANT = 'algoworks';

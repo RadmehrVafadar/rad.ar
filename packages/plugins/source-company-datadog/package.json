@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-datadog",
+  "name": "@rad-ar/source-company-datadog",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

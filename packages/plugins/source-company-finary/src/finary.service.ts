@@ -1,9 +1,9 @@
-import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';
+import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';
 
 import { Injectable, Logger, Optional } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Finary — A personal finance and wealth management app for tracking investments and net worth.

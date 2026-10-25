@@ -1,15 +1,15 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto,
   LocationDto, CompensationDto, CompensationInterval,
   DescriptionFormat, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient, markdownConverter, plainConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   CAREERJET_API_URL, CAREERJET_HEADERS, COUNTRY_TO_LOCALE,
   DEFAULT_LOCALE, DEFAULT_USER_AGENT, MAX_PAGE, DEFAULT_PAGE_SIZE,

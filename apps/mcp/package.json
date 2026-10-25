@@ -1,23 +1,24 @@
 {
-  "name": "@ever-jobs/mcp",
+  "name": "@rad-ar/mcp",
   "version": "0.1.0",
   "private": true,
   "description": "MCP (Model Context Protocol) server for rad.ar — allows AI assistants like ChatGPT, Claude, and Copilot to search and browse jobs",
   "main": "dist/index.js",
   "bin": {
-    "ever-jobs-mcp": "dist/index.js"
+    "radar-mcp": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "cd ../.. && nest build mcp",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.0",
     "zod": "^3.23.0",
     "axios": "^1.7.0",
     "express": "^4.21.2",
-    "tslib": "^2.8.1"
+    "tslib": "^2.8.1",
+    "@rad-ar/common": "0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",

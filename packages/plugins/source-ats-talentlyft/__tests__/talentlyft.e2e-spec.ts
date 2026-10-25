@@ -5,8 +5,8 @@
  * To run tests, set TALENTLYFT_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalentLyftModule, TalentLyftService } from '@ever-jobs/source-ats-talentlyft';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalentLyftModule, TalentLyftService } from '@rad-ar/source-ats-talentlyft';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('TalentLyftService (E2E)', () => {
   let service: TalentLyftService;

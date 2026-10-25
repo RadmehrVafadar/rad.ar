@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-egisgroup",
+  "name": "@rad-ar/source-company-egisgroup",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

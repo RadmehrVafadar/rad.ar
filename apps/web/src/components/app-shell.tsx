@@ -14,10 +14,10 @@ import {
 } from "lucide-react";
 import { ReactNode, useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { OPERATOR_UI_MANIFEST } from "@ever-jobs/ui-operator/manifest";
-import { api } from "../api/client";
-import { useAuth } from "../context/auth-context";
-import { StatusBadge } from "./ui";
+import { OPERATOR_UI_MANIFEST } from "@rad-ar/ui-operator/manifest";
+import { api } from "@rad-ar/ui-operator/browser/api/client";
+import { useAuth } from "@rad-ar/ui-operator/browser/context/auth-context";
+import { StatusBadge } from "@rad-ar/ui-operator/browser/components/ui";
 
 const NAV_ICONS: Record<string, ReactNode> = {
   overview: <LayoutDashboard size={18} />,

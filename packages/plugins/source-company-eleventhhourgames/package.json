@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-eleventhhourgames",
+  "name": "@rad-ar/source-company-eleventhhourgames",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

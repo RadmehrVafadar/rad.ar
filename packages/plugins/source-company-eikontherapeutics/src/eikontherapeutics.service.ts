@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * Eikon Therapeutics — Biopharmaceutical company developing precision medicines for cancer and other diseases using live-cell, single-molecule imaging drug discovery..

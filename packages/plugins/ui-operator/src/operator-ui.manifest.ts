@@ -1,4 +1,4 @@
-import { type UiPluginManifest } from "@ever-jobs/plugin/ui-plugin";
+import { type UiPluginManifest } from "@rad-ar/plugin/ui-plugin";
 
 const DISABLED_VALUES = new Set(["0", "false", "off"]);
 

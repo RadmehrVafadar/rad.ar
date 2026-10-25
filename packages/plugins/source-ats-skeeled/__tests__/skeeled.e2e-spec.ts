@@ -12,8 +12,8 @@
  *   - board `63ff6b1561114076fed6be2d` — CBL s.a (Luxembourg).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SkeeledModule, SkeeledService } from '@ever-jobs/source-ats-skeeled';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SkeeledModule, SkeeledService } from '@rad-ar/source-ats-skeeled';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const KNOWN_BOARD_ID = '63ff6b1561114076fed6be2d';
 

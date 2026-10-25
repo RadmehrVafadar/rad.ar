@@ -1,15 +1,15 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto,
   LocationDto, Country, DescriptionFormat, Site, countryFromString,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient, markdownConverter, removeAttributes,
   extractEmails, randomSleep,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { BDJOBS_HEADERS, BDJOBS_SEARCH_PARAMS, BDJOBS_JOB_SELECTORS } from './bdjobs.constants';
 
 @SourcePlugin({

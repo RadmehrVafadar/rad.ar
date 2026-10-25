@@ -2,17 +2,17 @@ import 'reflect-metadata';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Test } from '@nestjs/testing';
-import { JobResponseDto, ScraperInputDto, Site } from '@ever-jobs/models';
+import { JobResponseDto, ScraperInputDto, Site } from '@rad-ar/models';
 
 /**
- * Mock the `@ever-jobs/common.createHttpClient` factory so the service
+ * Mock the `@rad-ar/common.createHttpClient` factory so the service
  * hits a controlled test pipeline instead of the live Tesla host. Same
  * pattern as Oracle T04 / Mercor T05.
  */
 const mockGet = jest.fn();
 const mockSetHeaders = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({

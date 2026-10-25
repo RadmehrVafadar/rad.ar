@@ -14,8 +14,8 @@
  * treating zero results as acceptable; the shape assertions only run when jobs are returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruitezeModule, RecruitezeService } from '@ever-jobs/source-ats-recruiteze';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruitezeModule, RecruitezeService } from '@rad-ar/source-ats-recruiteze';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Recruiteze-powered career board (SpearMC Consulting — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'spearmc';

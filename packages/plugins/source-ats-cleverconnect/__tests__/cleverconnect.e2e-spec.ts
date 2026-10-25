@@ -15,8 +15,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CleverConnectModule, CleverConnectService } from '@ever-jobs/source-ats-cleverconnect';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CleverConnectModule, CleverConnectService } from '@rad-ar/source-ats-cleverconnect';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public CleverConnect-powered career site (the CleverConnect demo — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'demo';

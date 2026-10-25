@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-sailorhealth",
+  "name": "@rad-ar/source-company-sailorhealth",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -6,9 +6,9 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from "@ever-jobs/models";
-import { createHttpClient, parseLocationList } from "@ever-jobs/common";
-import { SourcePlugin } from "@ever-jobs/plugin";
+} from "@rad-ar/models";
+import { createHttpClient, parseLocationList } from "@rad-ar/common";
+import { SourcePlugin } from "@rad-ar/plugin";
 
 import {
   GoogleCareersSourceError,

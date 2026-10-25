@@ -1,5 +1,5 @@
 import { BerlinStartupJobsService } from '../src/berlinstartupjobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('BerlinStartupJobsService (e2e)', () => {
   let service: BerlinStartupJobsService;

@@ -1,9 +1,9 @@
-import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';
+import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';
 
 import { Injectable, Logger, Optional } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * RIOT — Security awareness platform delivering short chat-based training, phishing simulations, and employee-facing security tools.

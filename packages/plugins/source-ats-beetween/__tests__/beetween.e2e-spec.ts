@@ -11,8 +11,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BeetweenModule, BeetweenService } from '@ever-jobs/source-ats-beetween';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BeetweenModule, BeetweenService } from '@rad-ar/source-ats-beetween';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Beetween-powered career site (Beetween's own recruitment site).
 const KNOWN_TENANT = 'beetween';

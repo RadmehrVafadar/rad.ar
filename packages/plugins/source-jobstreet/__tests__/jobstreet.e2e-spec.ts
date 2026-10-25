@@ -4,8 +4,8 @@
  * Jobstreet is a major Southeast Asian job board -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobstreetModule, JobstreetService } from '@ever-jobs/source-jobstreet';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobstreetModule, JobstreetService } from '@rad-ar/source-jobstreet';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobstreetService (E2E)', () => {
   let service: JobstreetService;

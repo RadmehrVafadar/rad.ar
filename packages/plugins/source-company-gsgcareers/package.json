@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-gsgcareers",
+  "name": "@rad-ar/source-company-gsgcareers",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

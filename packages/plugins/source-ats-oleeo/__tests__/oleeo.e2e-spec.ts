@@ -12,8 +12,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { OleeoModule, OleeoService } from '@ever-jobs/source-ats-oleeo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { OleeoModule, OleeoService } from '@rad-ar/source-ats-oleeo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Oleeo-powered candidate portal (UK FCDO — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'fcdo';

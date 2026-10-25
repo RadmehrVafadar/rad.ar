@@ -1,4 +1,4 @@
-import { ERR_SOURCE_CIRCUIT_OPEN, Site } from '@ever-jobs/models';
+import { ERR_SOURCE_CIRCUIT_OPEN, Site } from '@rad-ar/models';
 import { CircuitBreakerInterceptor } from '../circuit-breaker.interceptor';
 import { CircuitBreakerService } from '../circuit-breaker.service';
 

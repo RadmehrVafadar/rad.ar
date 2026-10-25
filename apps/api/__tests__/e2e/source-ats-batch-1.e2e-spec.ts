@@ -3,7 +3,7 @@
  *
  * Hits the real HTTP surface (`POST /api/jobs/search`) of a fully
  * bootstrapped `AppModule`, with the only external dependency —
- * `@ever-jobs/common`'s `createHttpClient` — replaced by a fixture
+ * `@rad-ar/common`'s `createHttpClient` — replaced by a fixture
  * router. Verifies that the three new ATS plugins
  * (`avature` / `gem` / `join_com`) round-trip through the controller +
  * cache + dedup pipeline and return non-empty `JobPostDto[]`.
@@ -26,7 +26,7 @@
  *      we honour the *intent* (per-plugin HTTP round-trip) by
  *      hitting the real endpoint shape instead.
  *   2. **Mock `createHttpClient`, not `nock`.** The unit suites for
- *      the three plugins already use the same `jest.mock(@ever-jobs/common)`
+ *      the three plugins already use the same `jest.mock(@rad-ar/common)`
  *      pattern; using it here keeps the integration shape consistent
  *      across unit / integration / E2E tiers. `nock` would shadow
  *      the same code path (axios → undici stack) at the network
@@ -131,8 +131,8 @@ function routePost(url: string): unknown {
   return null;
 }
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -151,11 +151,8 @@ jest.mock('@ever-jobs/common', () => {
 });
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────
-// eslint-disable-next-line import/first
 import { INestApplication } from '@nestjs/common';
-// eslint-disable-next-line import/first
-import { Site } from '@ever-jobs/models';
-// eslint-disable-next-line import/first
+import { Site } from '@rad-ar/models';
 import { createTestApp } from '../helpers/create-app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

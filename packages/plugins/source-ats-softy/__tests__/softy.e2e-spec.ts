@@ -11,8 +11,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SoftyModule, SoftyService } from '@ever-jobs/source-ats-softy';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SoftyModule, SoftyService } from '@rad-ar/source-ats-softy';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Softy-powered careers board (Groupe CLS — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'groupecls';

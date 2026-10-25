@@ -8,13 +8,13 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { PluginRegistry } from '@ever-jobs/plugin';
-import { SmartRecruitersService } from '@ever-jobs/source-ats-smartrecruiters';
+} from '@rad-ar/models';
+import { PluginRegistry } from '@rad-ar/plugin';
+import { SmartRecruitersService } from '@rad-ar/source-ats-smartrecruiters';
 
 const mockGet = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({

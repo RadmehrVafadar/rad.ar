@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -8,13 +8,13 @@ import {
   JobPostDto,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { EUROJOBS_RSS_URL, EUROJOBS_HEADERS } from './eurojobs.constants';
 import { EurojobsRssItem } from './eurojobs.types';
 

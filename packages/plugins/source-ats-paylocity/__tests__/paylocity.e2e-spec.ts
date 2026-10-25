@@ -9,8 +9,8 @@
  * The companySlug is the company GUID from the public careers-page board link.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaylocityModule, PaylocityService } from '@ever-jobs/source-ats-paylocity';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PaylocityModule, PaylocityService } from '@rad-ar/source-ats-paylocity';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Real GUID: SendCutSend Inc (7 live openings as of capture).
 const SENDCUTSEND_GUID = '3ecffcba-6b5a-4a7e-b71b-bbb54a4527ab';

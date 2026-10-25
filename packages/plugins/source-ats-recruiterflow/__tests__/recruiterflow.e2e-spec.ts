@@ -4,8 +4,8 @@
  * Tests ATS scraping (requires companySlug as API key).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruiterflowModule, RecruiterflowService } from '@ever-jobs/source-ats-recruiterflow';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruiterflowModule, RecruiterflowService } from '@rad-ar/source-ats-recruiterflow';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RecruiterflowService (E2E)', () => {
   let service: RecruiterflowService;

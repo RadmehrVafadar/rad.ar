@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-caribou",
+  "name": "@rad-ar/source-company-caribou",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

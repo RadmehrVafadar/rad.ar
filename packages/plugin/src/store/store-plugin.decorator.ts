@@ -2,7 +2,7 @@ import { SetMetadata } from '@nestjs/common';
 import {
   IStoreMetadata,
   STORE_PLUGIN_METADATA_KEY,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Class decorator that marks a NestJS provider as a persistent-store
@@ -13,7 +13,7 @@ import {
  * {@link STORE_PLUGIN_METADATA_KEY}. The downstream `StoreRegistry`
  * (Spec 004 / T03) reads the metadata via the NestJS `Reflector`,
  * indexes plugins by `id`, and at bootstrap binds the one matching
- * `EVER_JOBS_STORE` to {@link JOB_STORE_TOKEN} via
+ * `RADAR_STORE` to {@link JOB_STORE_TOKEN} via
  * `StoreModule.forActive(storeId)` (Spec 004 / T04).
  *
  * Validation of `id` (kebab-case, non-empty, no duplicates) lives in
@@ -37,6 +37,6 @@ export const StorePlugin = (metadata: IStoreMetadata): ClassDecorator => {
 /**
  * Re-export of the metadata key so plugin authors and the
  * forthcoming `StoreRegistry` (T03) can resolve it from
- * `@ever-jobs/plugin` without reaching back into `@ever-jobs/models`.
+ * `@rad-ar/plugin` without reaching back into `@rad-ar/models`.
  */
-export { STORE_PLUGIN_METADATA_KEY } from '@ever-jobs/models';
+export { STORE_PLUGIN_METADATA_KEY } from '@rad-ar/models';

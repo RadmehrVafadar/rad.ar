@@ -1,9 +1,9 @@
-import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';
+import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';
 
 import { Injectable, Logger, Optional } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Ockto — Naarden-based fintech whose platform lets consumers securely collect and share verified personal/financial data for processes like mortgage applications.

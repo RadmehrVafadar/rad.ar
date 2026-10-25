@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-kittitasvalleyhealthcare",
+  "name": "@rad-ar/source-company-kittitasvalleyhealthcare",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

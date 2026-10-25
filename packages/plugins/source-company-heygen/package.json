@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-heygen",
+  "name": "@rad-ar/source-company-heygen",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-collate",
+  "name": "@rad-ar/source-company-collate",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

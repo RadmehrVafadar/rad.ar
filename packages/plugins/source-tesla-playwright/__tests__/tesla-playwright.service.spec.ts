@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Test } from '@nestjs/testing';
-import { JobResponseDto, ScraperInputDto, Site } from '@ever-jobs/models';
+import { JobResponseDto, ScraperInputDto, Site } from '@rad-ar/models';
 import {
   TESLA_PLAYWRIGHT_BASE_URL,
   TESLA_PLAYWRIGHT_BOARD_PATH,

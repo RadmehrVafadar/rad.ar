@@ -15,8 +15,8 @@
  * jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HireserveModule, HireserveService } from '@ever-jobs/source-ats-hireserve';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HireserveModule, HireserveService } from '@rad-ar/source-ats-hireserve';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Hireserve-powered portal (University of Hireserve demo — confirmed live 2026-06-03).
 const KNOWN_HOST = 'university.hireserve-projects.com';

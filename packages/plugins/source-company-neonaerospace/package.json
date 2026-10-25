@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-neonaerospace",
+  "name": "@rad-ar/source-company-neonaerospace",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

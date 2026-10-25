@@ -8,7 +8,7 @@ import {
   IStoreMetadata,
   STORE_PLUGIN_METADATA_KEY,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { runStoreConformance } from '../../../plugin/src/store/__tests__/conformance';
 import {
   PostgresPrismaJobStore,
@@ -186,9 +186,9 @@ describeIfPg('PostgresPrismaJobStore — Testcontainers-backed (RUN_PG_TESTS=1)'
     // would dominate runtime; we instead truncate-in-beforeEach (below)
     // for fresh state across tests.
     pgContainer = await new tc.PostgreSqlContainer('postgres:16-alpine')
-      .withDatabase('ever_jobs_test')
-      .withUsername('ever_jobs')
-      .withPassword('ever_jobs')
+      .withDatabase('radar_test')
+      .withUsername('radar')
+      .withPassword('radar')
       .start();
 
     const databaseUrl = pgContainer.getConnectionUri();

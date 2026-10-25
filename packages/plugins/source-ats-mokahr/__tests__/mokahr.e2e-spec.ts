@@ -13,8 +13,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { MokaHrModule, MokaHrService } from '@ever-jobs/source-ats-mokahr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { MokaHrModule, MokaHrService } from '@rad-ar/source-ats-mokahr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public MokaHR-powered career site (Tesla China — tenant slug + orgId confirmed live
 // 2026-06-03 at app.mokahr.com/social-recruitment/tesla/46129).

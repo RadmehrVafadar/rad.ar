@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-hanwharenewables",
+  "name": "@rad-ar/source-company-hanwharenewables",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

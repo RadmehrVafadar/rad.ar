@@ -11,8 +11,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalentAdoreModule, TalentAdoreService } from '@ever-jobs/source-ats-talentadore';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalentAdoreModule, TalentAdoreService } from '@rad-ar/source-ats-talentadore';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public TalentAdore-powered careers sub-domain (Amer Sports).
 const KNOWN_TENANT = 'amersports';

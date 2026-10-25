@@ -1,5 +1,5 @@
 export const NOTIFICATION_SECRET_STORE = Symbol.for(
-  "@ever-jobs/plugin/NotificationSecretStore",
+  "@rad-ar/plugin/NotificationSecretStore",
 );
 
 export type NotificationSecretSource = "environment" | "local";

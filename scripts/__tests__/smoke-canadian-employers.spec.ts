@@ -1,4 +1,4 @@
-import { JobPostDto, JobResponseDto, LocationDto } from '@ever-jobs/models';
+import { JobPostDto, JobResponseDto, LocationDto } from '@rad-ar/models';
 
 import {
   CANADIAN_EMPLOYER_SMOKE_TARGETS,

@@ -5,7 +5,7 @@ import {
   PRESTIGE_INTERNSHIPS_V2_ID,
   WatchPresetService,
   WatchRepository,
-} from "@ever-jobs/watcher";
+} from "@rad-ar/watcher";
 import { WatchCommand } from "../src/commands/watch.command";
 
 describe("WatchCommand", () => {

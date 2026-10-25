@@ -1,11 +1,11 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
 import * as fs from 'fs';
-import { JobsService } from '../../../api/src/jobs/jobs.service';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
 import {
   ScraperInputDto, JobPostDto, Site, Country,
   DescriptionFormat, JobType,
-} from '@ever-jobs/models';
-import { AnalyticsService } from '@ever-jobs/analytics';
+} from '@rad-ar/models';
+import { AnalyticsService } from '@rad-ar/analytics';
 
 interface SearchOptions {
   site?: string[];

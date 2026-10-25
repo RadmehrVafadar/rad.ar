@@ -4,8 +4,8 @@ import {
   LivenessBatchOptions,
   LivenessCheckOptions,
   LivenessVerdict,
-} from '@ever-jobs/models';
-import { createHttpClient, HttpClient } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, HttpClient } from '@rad-ar/common';
 
 import {
   HeuristicOutcome,

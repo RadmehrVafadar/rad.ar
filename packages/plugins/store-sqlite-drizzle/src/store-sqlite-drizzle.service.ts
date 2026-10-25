@@ -10,8 +10,8 @@ import {
   JobStoreQuery,
   Site,
   SourceObservation,
-} from '@ever-jobs/models';
-import { StorePlugin } from '@ever-jobs/plugin';
+} from '@rad-ar/models';
+import { StorePlugin } from '@rad-ar/plugin';
 import Database from 'better-sqlite3';
 import { and, asc, desc, eq, gte, inArray, like, lt, or, sql } from 'drizzle-orm';
 import {
@@ -22,7 +22,7 @@ import { canonicalJob, INITIAL_SCHEMA_SQL, sourceObservation } from '../drizzle/
 
 /**
  * Canonical id under which this backend registers with `StoreRegistry`.
- * Operators select it via `EVER_JOBS_STORE=sqlite`.
+ * Operators select it via `RADAR_STORE=sqlite`.
  */
 export const STORE_SQLITE_DRIZZLE_ID = 'sqlite';
 
@@ -136,7 +136,7 @@ function resolveLimit(limit: number | undefined): number {
  * Configuration for the SQLite backend. Defaults to an ephemeral
  * `:memory:` database — this is what the conformance test factory uses
  * so each test gets a brand-new schema. Production deployments pass a
- * file path (e.g. `/var/lib/ever-jobs/jobs.db`).
+ * file path (e.g. `/var/lib/radar/jobs.db`).
  */
 export interface StoreSqliteDrizzleConfig {
   /**
@@ -150,7 +150,7 @@ export interface StoreSqliteDrizzleConfig {
 /**
  * NestJS DI token for {@link StoreSqliteDrizzleConfig}. Bind it via a
  * provider in the consuming app's root module so the SQLite path is
- * resolved from `EVER_JOBS_SQLITE_PATH` at bootstrap. The token is
+ * resolved from `RADAR_SQLITE_PATH` at bootstrap. The token is
  * `@Optional()` on the constructor — when absent, the backend defaults
  * to `:memory:`, which is the right behaviour for tests but NOT for
  * production (operators MUST set the path explicitly to get

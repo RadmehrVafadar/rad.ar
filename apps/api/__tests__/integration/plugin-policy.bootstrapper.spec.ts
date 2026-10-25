@@ -26,12 +26,12 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   CircuitBreakerService,
   PluginRegistry,
-} from '@ever-jobs/plugin';
-import { PluginPolicyBootstrapper } from '../../src/jobs/plugin-policy.bootstrapper';
+} from '@rad-ar/plugin';
+import { PluginPolicyBootstrapper } from '@rad-ar/job-search/plugin-policy.bootstrapper';
 
 const TIGHT_POLICY: CircuitPolicy = {
   failureThreshold: 2,

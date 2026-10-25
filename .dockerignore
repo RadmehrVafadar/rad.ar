@@ -1,5 +1,12 @@
 node_modules
+**/node_modules
 dist
+**/dist
+tmp
+.pnpm-store
+.agents
+.claude
+.codex
 .git
 .gitignore
 .nx

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-mavenclinic",
+  "name": "@rad-ar/source-company-mavenclinic",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

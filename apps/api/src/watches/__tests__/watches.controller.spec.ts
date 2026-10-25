@@ -1,11 +1,7 @@
 import "reflect-metadata";
 import { NotFoundException } from "@nestjs/common";
-import {
-  JobWatch,
-  ObservedJob,
-  WatchValidationService,
-  WatchRepository,
-} from "@ever-jobs/watcher";
+import { JobWatch, ObservedJob, WatchRepository } from '@rad-ar/models';
+import { WatchValidationService } from '@rad-ar/watch-engine';
 import { ADMIN_AUTH_METADATA_KEY } from "../../auth/admin-auth.decorator";
 import {
   NotificationsController,

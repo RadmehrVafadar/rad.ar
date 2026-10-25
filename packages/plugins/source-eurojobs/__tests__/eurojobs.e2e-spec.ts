@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EurojobsModule, EurojobsService } from '@ever-jobs/source-eurojobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EurojobsModule, EurojobsService } from '@rad-ar/source-eurojobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('EurojobsService (E2E)', () => {
   let service: EurojobsService;

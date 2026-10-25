@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 // WIP: Taleo API response format may vary per company deployment.
 import { Injectable, Logger } from '@nestjs/common';
@@ -9,12 +9,12 @@ import {
   JobPostDto,
   LocationDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   randomSleep,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   TALEO_HEADERS,
   TALEO_PAGE_SIZE,

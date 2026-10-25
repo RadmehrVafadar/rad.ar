@@ -12,8 +12,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaychexModule, PaychexService } from '@ever-jobs/source-ats-paychex';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PaychexModule, PaychexService } from '@rad-ar/source-ats-paychex';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Placeholder Paychex Flex Hiring candidate-site tenant. The per-tenant careers
 // site is a client-rendered app (surface researched 2026-06-03, verified=false),

@@ -17,8 +17,8 @@
  * makes the suite tolerant of the live anti-bot gate and of upstream host changes.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HrOneModule, HrOneService } from '@ever-jobs/source-ats-hrone';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HrOneModule, HrOneService } from '@rad-ar/source-ats-hrone';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public HROne-powered career portal (HROne's own demo/career portal — host confirmed live
 // 2026-06-03; the role feed is gated by a signed request token, so zero results is tolerated).

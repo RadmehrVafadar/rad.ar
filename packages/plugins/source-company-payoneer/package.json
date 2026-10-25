@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-payoneer",
+  "name": "@rad-ar/source-company-payoneer",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

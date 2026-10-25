@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   IScraper,
   JobPostDto,
@@ -7,8 +7,8 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { createHttpClient } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient } from '@rad-ar/common';
 import {
   TESLA_AKAMAI_STATUS_CODES,
   TESLA_BASE_URL,
@@ -59,7 +59,7 @@ import {
  *     detail-page poison the whole catalogue.
  *
  * **HTTP-only by design.** Playwright support lives in the OPTIONAL
- * companion package `@ever-jobs/source-tesla-playwright`. No
+ * companion package `@rad-ar/source-tesla-playwright`. No
  * `playwright` import in this file, period.
  */
 @SourcePlugin({

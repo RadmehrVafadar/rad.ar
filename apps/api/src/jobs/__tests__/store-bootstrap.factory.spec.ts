@@ -1,18 +1,18 @@
 import 'reflect-metadata';
-import { ERR_STORE_NOT_FOUND } from '@ever-jobs/models';
-import { StoreRegistryError } from '@ever-jobs/plugin';
-import { InMemoryJobStore } from '@ever-jobs/store-memory';
-import { SqliteDrizzleJobStore } from '@ever-jobs/store-sqlite-drizzle';
-import { PostgresPrismaJobStore } from '@ever-jobs/store-postgres-prisma';
+import { ERR_STORE_NOT_FOUND } from '@rad-ar/models';
+import { StoreRegistryError } from '@rad-ar/plugin';
+import { InMemoryJobStore } from '@rad-ar/store-memory';
+import { SqliteDrizzleJobStore } from '@rad-ar/store-sqlite-drizzle';
+import { PostgresPrismaJobStore } from '@rad-ar/store-postgres-prisma';
 import {
   DEFAULT_STORE_ID,
-  EVER_JOBS_STORE_ENV_VAR,
+  RADAR_STORE_ENV_VAR,
   KNOWN_STORE_IDS,
   resolveStoreBootstrap,
 } from '../store-bootstrap.factory';
 
 /**
- * Spec 004 / T12 — `EVER_JOBS_STORE` env-var bootstrap factory tests.
+ * Spec 004 / T12 — `RADAR_STORE` env-var bootstrap factory tests.
  *
  * The factory is the load-bearing piece between operator config and
  * `StoreModule.forActive`. These tests pin:
@@ -40,7 +40,7 @@ import {
 describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
   describe('constants', () => {
     it('exposes the env-var name verbatim for ops dashboards', () => {
-      expect(EVER_JOBS_STORE_ENV_VAR).toBe('EVER_JOBS_STORE');
+      expect(RADAR_STORE_ENV_VAR).toBe('RADAR_STORE');
     });
 
     it('defaults to memory when the env-var is unset', () => {
@@ -60,8 +60,8 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       ['memory', InMemoryJobStore],
       ['sqlite', SqliteDrizzleJobStore],
       ['postgres', PostgresPrismaJobStore],
-    ])('resolves EVER_JOBS_STORE=%s to its backend class', (id, cls) => {
-      const result = resolveStoreBootstrap({ EVER_JOBS_STORE: id });
+    ])('resolves RADAR_STORE=%s to its backend class', (id, cls) => {
+      const result = resolveStoreBootstrap({ RADAR_STORE: id });
       expect(result.id).toBe(id);
       expect(result.backendClass).toBe(cls);
     });
@@ -70,7 +70,7 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       // Operators copy-paste env values into Helm charts; trailing
       // whitespace is a common typo that Spec 004 §7.3's "fail fast"
       // rule should NOT punish.
-      const result = resolveStoreBootstrap({ EVER_JOBS_STORE: '  sqlite  ' });
+      const result = resolveStoreBootstrap({ RADAR_STORE: '  sqlite  ' });
       expect(result.id).toBe('sqlite');
       expect(result.backendClass).toBe(SqliteDrizzleJobStore);
     });
@@ -79,8 +79,8 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
   describe('default fallback — env-var unset / empty / whitespace', () => {
     it.each([
       ['undefined', {}],
-      ['empty string', { EVER_JOBS_STORE: '' }],
-      ['whitespace only', { EVER_JOBS_STORE: '   ' }],
+      ['empty string', { RADAR_STORE: '' }],
+      ['whitespace only', { RADAR_STORE: '   ' }],
     ])('falls back to memory when env-var is %s', (_label, env) => {
       const result = resolveStoreBootstrap(env);
       expect(result.id).toBe(DEFAULT_STORE_ID);
@@ -92,7 +92,7 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
     it('throws StoreRegistryError with the documented code', () => {
       let caught: unknown;
       try {
-        resolveStoreBootstrap({ EVER_JOBS_STORE: 'mongo' });
+        resolveStoreBootstrap({ RADAR_STORE: 'mongo' });
       } catch (err) {
         caught = err;
       }
@@ -106,7 +106,7 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       // listing API.
       let caught: unknown;
       try {
-        resolveStoreBootstrap({ EVER_JOBS_STORE: 'postres' });
+        resolveStoreBootstrap({ RADAR_STORE: 'postres' });
       } catch (err) {
         caught = err;
       }
@@ -118,7 +118,7 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       // grep for the offending input.
       expect(msg).toContain('postres');
       // The fallback hint is included so operators know how to recover.
-      expect(msg).toContain(EVER_JOBS_STORE_ENV_VAR);
+      expect(msg).toContain(RADAR_STORE_ENV_VAR);
       expect(msg).toContain(DEFAULT_STORE_ID);
     });
 
@@ -136,35 +136,35 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       // but actually got the in-memory one). Reject everything that
       // isn't an exact match.
       expect(() =>
-        resolveStoreBootstrap({ EVER_JOBS_STORE: badId }),
+        resolveStoreBootstrap({ RADAR_STORE: badId }),
       ).toThrow(StoreRegistryError);
     });
   });
 
   describe('purity — synthetic env does not mutate process.env', () => {
     it('reads from the supplied env map, not process.env', () => {
-      const before = process.env[EVER_JOBS_STORE_ENV_VAR];
-      const result = resolveStoreBootstrap({ EVER_JOBS_STORE: 'sqlite' });
-      const after = process.env[EVER_JOBS_STORE_ENV_VAR];
+      const before = process.env[RADAR_STORE_ENV_VAR];
+      const result = resolveStoreBootstrap({ RADAR_STORE: 'sqlite' });
+      const after = process.env[RADAR_STORE_ENV_VAR];
       expect(result.id).toBe('sqlite');
       expect(after).toBe(before);
     });
 
     it('uses process.env as default when no env argument is given', () => {
-      const original = process.env[EVER_JOBS_STORE_ENV_VAR];
+      const original = process.env[RADAR_STORE_ENV_VAR];
       try {
         // Force a known value into process.env for the duration of
         // this test — restored in `finally` below so other tests
         // remain isolated.
-        process.env[EVER_JOBS_STORE_ENV_VAR] = 'memory';
+        process.env[RADAR_STORE_ENV_VAR] = 'memory';
         const result = resolveStoreBootstrap();
         expect(result.id).toBe('memory');
         expect(result.backendClass).toBe(InMemoryJobStore);
       } finally {
         if (original === undefined) {
-          delete process.env[EVER_JOBS_STORE_ENV_VAR];
+          delete process.env[RADAR_STORE_ENV_VAR];
         } else {
-          process.env[EVER_JOBS_STORE_ENV_VAR] = original;
+          process.env[RADAR_STORE_ENV_VAR] = original;
         }
       }
     });
@@ -176,7 +176,7 @@ describe('resolveStoreBootstrap (Spec 004 / T12)', () => {
       // — that lookup only succeeds if `cls` is the exact decorated
       // class. Returning a wrapper / proxy would silently break boot
       // with `ERR_STORE_BACKEND_NOT_DECORATED`.
-      const result = resolveStoreBootstrap({ EVER_JOBS_STORE: 'memory' });
+      const result = resolveStoreBootstrap({ RADAR_STORE: 'memory' });
       expect(Object.getPrototypeOf(InMemoryJobStore.prototype).constructor).toBe(
         Object.getPrototypeOf(result.backendClass.prototype).constructor,
       );

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CanadaJobBankModule, CanadaJobBankService } from '@ever-jobs/source-canadajobbank';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CanadaJobBankModule, CanadaJobBankService } from '@rad-ar/source-canadajobbank';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CanadaJobBankService (E2E)', () => {
   let service: CanadaJobBankService;

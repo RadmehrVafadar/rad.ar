@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/dedup-hybrid",
+  "name": "@rad-ar/dedup-hybrid",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

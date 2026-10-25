@@ -14,8 +14,8 @@
  * verified live on 2026-06-03 to have at least one open role.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppliedModule, AppliedService } from '@ever-jobs/source-ats-applied';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AppliedModule, AppliedService } from '@rad-ar/source-ats-applied';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('AppliedService (E2E)', () => {
   let service: AppliedService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-chargepoint",
+  "name": "@rad-ar/source-company-chargepoint",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

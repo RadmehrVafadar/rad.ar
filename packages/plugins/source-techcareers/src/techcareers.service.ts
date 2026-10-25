@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -9,13 +9,13 @@ import {
   Site,
   DescriptionFormat,
   LocationDto,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { TECHCAREERS_SEARCH_URL, TECHCAREERS_HEADERS } from './techcareers.constants';
 import { TechcareersJob } from './techcareers.types';
 

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AcademiccareersModule, AcademiccareersService } from '@ever-jobs/source-academiccareers';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AcademiccareersModule, AcademiccareersService } from '@rad-ar/source-academiccareers';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('AcademiccareersService (E2E)', () => {
   let service: AcademiccareersService;

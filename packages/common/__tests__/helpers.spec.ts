@@ -1,5 +1,5 @@
-import { extractSalary, convertToAnnual, parseSalaryCurrency, parseSalaryNumber } from '@ever-jobs/common';
-import { Country } from '@ever-jobs/models';
+import { extractSalary, convertToAnnual, parseSalaryCurrency, parseSalaryNumber } from '@rad-ar/common';
+import { Country } from '@rad-ar/models';
 // Spec 012 / T02 — `pickLocale` is module-private (Notes-for-the-next-run
 // decision 1). The `__INTERNAL_TEST_ONLY__` shim is exported solely so
 // this test file can pin the documented acceptance cases without

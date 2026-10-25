@@ -1,10 +1,8 @@
 import { ConfigService } from "@nestjs/config";
-import {
-  WatcherMetricsService,
-  WatcherSchedulerService,
-  WatchRepository,
-} from "@ever-jobs/watcher";
-import { MetricsService } from "../../../api/src/metrics/metrics.service";
+import { WatcherMetricsService } from '@rad-ar/common/runtime/watcher/watcher-metrics.service';
+import { WatcherSchedulerService } from '@rad-ar/watch-engine';
+import { WatchRepository } from '@rad-ar/models';
+import { MetricsService } from "@rad-ar/common/runtime/metrics/metrics.service";
 import { WatcherHealthController } from "../watcher-health.controller";
 
 describe("WatcherHealthController", () => {

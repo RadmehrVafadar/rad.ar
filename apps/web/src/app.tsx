@@ -3,16 +3,16 @@ import { type ReactNode } from "react";
 import {
   isOperatorUiEnabled,
   OPERATOR_UI_MANIFEST,
-} from "@ever-jobs/ui-operator/manifest";
+} from "@rad-ar/ui-operator/manifest";
 import { AppShell } from "./components/app-shell";
-import { ComparePage } from "./pages/compare-page";
-import { MatchesPage } from "./pages/matches-page";
-import { NotificationsPage } from "./pages/notifications-page";
-import { OverviewPage } from "./pages/overview-page";
-import { SearchPage } from "./pages/search-page";
-import { SettingsPage } from "./pages/settings-page";
-import { WatchEditorPage } from "./pages/watch-editor-page";
-import { WatchesPage } from "./pages/watches-page";
+import { ComparePage } from "@rad-ar/ui-operator/browser/pages/compare-page";
+import { MatchesPage } from "@rad-ar/ui-operator/browser/pages/matches-page";
+import { NotificationsPage } from "@rad-ar/ui-operator/browser/pages/notifications-page";
+import { OverviewPage } from "@rad-ar/ui-operator/browser/pages/overview-page";
+import { SearchPage } from "@rad-ar/ui-operator/browser/pages/search-page";
+import { SettingsPage } from "@rad-ar/ui-operator/browser/pages/settings-page";
+import { WatchEditorPage } from "@rad-ar/ui-operator/browser/pages/watch-editor-page";
+import { WatchesPage } from "@rad-ar/ui-operator/browser/pages/watches-page";
 
 export function App() {
   if (!isOperatorUiEnabled(import.meta.env.VITE_UI_OPERATOR)) {

@@ -13,8 +13,8 @@
  * results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WelcomeToTheJungleModule, WelcomeToTheJungleService } from '@ever-jobs/source-ats-wttj';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WelcomeToTheJungleModule, WelcomeToTheJungleService } from '@rad-ar/source-ats-wttj';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public WTTJ company (Groupe Partnaire — confirmed live 2026-06-03, 48 open roles).
 const KNOWN_COMPANY = 'groupe-partnaire';

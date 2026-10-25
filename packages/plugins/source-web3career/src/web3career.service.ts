@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -11,8 +11,8 @@ import {
   CompensationInterval,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
-import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@rad-ar/common';
 import { WEB3CAREER_API_URL, WEB3CAREER_HEADERS } from './web3career.constants';
 import { Web3CareerJob, Web3CareerResponse } from './web3career.types';
 

@@ -13,8 +13,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ReachMeeModule, ReachMeeService } from '@ever-jobs/source-ats-reachmee';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ReachMeeModule, ReachMeeService } from '@rad-ar/source-ats-reachmee';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public ReachMee-powered installation (Örebro University — verified live 2026-06-03).
 const KNOWN_TENANT = 'oru@I003:12#site106';

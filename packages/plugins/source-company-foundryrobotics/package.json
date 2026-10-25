@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-foundryrobotics",
+  "name": "@rad-ar/source-company-foundryrobotics",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

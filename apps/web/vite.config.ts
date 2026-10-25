@@ -16,7 +16,8 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        "@ever-jobs/ui-operator/manifest": fileURLToPath(
+        "@rad-ar/ui-operator/browser": fileURLToPath(new URL("../../packages/plugins/ui-operator/src/browser", import.meta.url)),
+        "@rad-ar/ui-operator/manifest": fileURLToPath(
           new URL(
             "../../packages/plugins/ui-operator/src/operator-ui.manifest.ts",
             import.meta.url,
@@ -44,6 +45,7 @@ export default defineConfig(({ mode }) => {
       environment: "jsdom",
       setupFiles: ["./src/test/setup.ts"],
       css: true,
+      include: ["../../packages/plugins/ui-operator/src/browser/**/*.test.{ts,tsx}"],
       exclude: ["e2e/**", "node_modules/**", "dist/**"],
     },
   };

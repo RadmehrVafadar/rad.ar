@@ -14,8 +14,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { InRecruitingModule, InRecruitingService } from '@ever-jobs/source-ats-inrecruiting';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { InRecruitingModule, InRecruitingService } from '@rad-ar/source-ats-inrecruiting';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public In-recruiting-powered career site (RINASCENTE — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'rinascente';

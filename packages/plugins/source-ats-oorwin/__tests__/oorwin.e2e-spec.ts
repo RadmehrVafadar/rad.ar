@@ -9,8 +9,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { OorwinModule, OorwinService } from '@ever-jobs/source-ats-oorwin';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { OorwinModule, OorwinService } from '@rad-ar/source-ats-oorwin';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('OorwinService (E2E)', () => {
   let service: OorwinService;

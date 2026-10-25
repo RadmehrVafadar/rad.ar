@@ -1,0 +1,12 @@
+{
+  "name": "@rad-ar/notification-telegram",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@rad-ar/models": "0.1.0",
+    "@nestjs/common": "^11.1.27"
+  }
+}

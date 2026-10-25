@@ -4,8 +4,8 @@
  * Hits the live 4DayWeek.io API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FourDayWeekModule, FourDayWeekService } from '@ever-jobs/source-4dayweek';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FourDayWeekModule, FourDayWeekService } from '@rad-ar/source-4dayweek';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FourDayWeekService (E2E)', () => {
   let service: FourDayWeekService;

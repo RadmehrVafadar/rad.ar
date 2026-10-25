@@ -10,8 +10,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalentsoftModule, TalentsoftService } from '@ever-jobs/source-ats-talentsoft';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalentsoftModule, TalentsoftService } from '@rad-ar/source-ats-talentsoft';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Talentsoft-powered careers sub-domain (Elis — verified live 2026-06-03).
 const KNOWN_TENANT = 'elis';

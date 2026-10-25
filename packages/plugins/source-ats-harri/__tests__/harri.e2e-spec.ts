@@ -11,8 +11,8 @@
  * only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HarriModule, HarriService } from '@ever-jobs/source-ats-harri';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HarriModule, HarriService } from '@rad-ar/source-ats-harri';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HarriService (E2E)', () => {
   let service: HarriService;

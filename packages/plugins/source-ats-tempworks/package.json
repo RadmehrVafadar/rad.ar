@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-ats-tempworks",
+  "name": "@rad-ar/source-ats-tempworks",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

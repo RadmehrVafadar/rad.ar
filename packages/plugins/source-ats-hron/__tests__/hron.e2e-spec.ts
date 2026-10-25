@@ -9,8 +9,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HrOnModule, HrOnService } from '@ever-jobs/source-ats-hron';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HrOnModule, HrOnService } from '@rad-ar/source-ats-hron';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // A known, public HR-ON Recruit career page (HR-ON ApS' own careers site).
 const KNOWN_CAREER_URL = 'https://hr-on.com/careers/';

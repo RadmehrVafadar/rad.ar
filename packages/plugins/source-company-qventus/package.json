@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-qventus",
+  "name": "@rad-ar/source-company-qventus",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

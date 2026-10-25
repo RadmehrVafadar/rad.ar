@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-solidpower",
+  "name": "@rad-ar/source-company-solidpower",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

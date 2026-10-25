@@ -10,8 +10,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DvinciModule, DvinciService } from '@ever-jobs/source-ats-dvinci';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DvinciModule, DvinciService } from '@rad-ar/source-ats-dvinci';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public d.vinci tenant verified live 2026-06-03 (60 active publications).
 const KNOWN_TENANT_SLUG = 'inverto';

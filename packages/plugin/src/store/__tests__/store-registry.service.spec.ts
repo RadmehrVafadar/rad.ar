@@ -7,7 +7,7 @@ import {
   JobStorePage,
   JobStoreQuery,
   ERR_STORE_NOT_FOUND,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   ERR_STORE_DUPLICATE_ID,
   ERR_STORE_INVALID_ID,

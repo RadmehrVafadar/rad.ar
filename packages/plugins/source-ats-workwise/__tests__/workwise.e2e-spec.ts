@@ -17,8 +17,8 @@
  * `https://www.workwise.io/job/{id}-{slug}` is the canonical detail / apply URL.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkwiseModule, WorkwiseService } from '@ever-jobs/source-ats-workwise';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WorkwiseModule, WorkwiseService } from '@rad-ar/source-ats-workwise';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Workwise-powered tenant career board (aifinyo AG — company id 47188, confirmed
 // live 2026-06-03 via its anonymous per-role detail pages on www.workwise.io).

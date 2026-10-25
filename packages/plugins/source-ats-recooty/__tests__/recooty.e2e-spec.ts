@@ -9,8 +9,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecootyModule, RecootyService } from '@ever-jobs/source-ats-recooty';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecootyModule, RecootyService } from '@rad-ar/source-ats-recooty';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public sample widget id shipped in Recooty's own Job Widget integration.
 const KNOWN_WIDGET_ID = 'd16fb36f0911f878998c136191af705e';

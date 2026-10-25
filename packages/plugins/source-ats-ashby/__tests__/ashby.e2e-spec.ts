@@ -5,8 +5,8 @@
  * To run authenticated tests, set ASHBY_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AshbyModule, AshbyService } from '@ever-jobs/source-ats-ashby';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AshbyModule, AshbyService } from '@rad-ar/source-ats-ashby';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('AshbyService (E2E)', () => {
   let service: AshbyService;

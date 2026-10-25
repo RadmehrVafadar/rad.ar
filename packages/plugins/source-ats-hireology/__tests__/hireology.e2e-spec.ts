@@ -9,8 +9,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HireologyModule, HireologyService } from '@ever-jobs/source-ats-hireology';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HireologyModule, HireologyService } from '@rad-ar/source-ats-hireology';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HireologyService (E2E)', () => {
   let service: HireologyService;

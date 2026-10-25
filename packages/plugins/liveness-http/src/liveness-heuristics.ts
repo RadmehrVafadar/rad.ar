@@ -1,5 +1,5 @@
-import { LivenessCode, LivenessResult } from '@ever-jobs/models';
-import { htmlToPlainText } from '@ever-jobs/common';
+import { LivenessCode, LivenessResult } from '@rad-ar/models';
+import { htmlToPlainText } from '@rad-ar/common';
 
 import { DEFAULT_MIN_CONTENT_LENGTH } from './liveness-http.constants';
 

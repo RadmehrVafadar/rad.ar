@@ -17,8 +17,8 @@
  *     anonymous career-portal API key below.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CeipalModule, CeipalService } from '@ever-jobs/source-ats-ceipal';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CeipalModule, CeipalService } from '@rad-ar/source-ats-ceipal';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public career-portal API key for the known live tenant (carried in the URL
 // path by the tenant's own portal config — not a secret credential).

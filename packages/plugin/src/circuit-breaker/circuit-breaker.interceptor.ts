@@ -3,7 +3,7 @@ import {
   CIRCUIT_BREAKER_TOKEN,
   ICircuitBreakerService,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { CircuitBreakerService } from './circuit-breaker.service';
 
 /**

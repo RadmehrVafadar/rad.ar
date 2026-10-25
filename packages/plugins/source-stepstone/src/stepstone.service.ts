@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 // WIP: This source may need selector updates after live testing.
 // StepStone is a React SPA with aggressive anti-bot measures.
@@ -15,14 +15,14 @@ import {
   CompensationInterval,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   htmlToPlainText,
   markdownConverter,
   extractEmails,
   randomSleep,
-} from '@ever-jobs/common';
-import { BrowserPool } from '@ever-jobs/common';
+} from '@rad-ar/common';
+import { BrowserPool } from '@rad-ar/common';
 import {
   STEPSTONE_DEFAULT_DOMAIN,
   STEPSTONE_DELAY_MIN,

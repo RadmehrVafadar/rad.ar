@@ -6,7 +6,7 @@ import { PostgresPrismaJobStore } from './store-postgres-prisma.service';
  * `StoreModule.forActive('postgres', { backends: [PostgresPrismaJobStore] })`
  * (Spec 004 / Phase 4 / T10).
  *
- * Mirrors {@link import('@ever-jobs/store-sqlite-drizzle').StoreSqliteDrizzleModule}:
+ * Mirrors {@link import('@rad-ar/store-sqlite-drizzle').StoreSqliteDrizzleModule}:
  * the module does NOT bind the service under `JOB_STORE_TOKEN` itself —
  * that binding is `StoreModule.forActive`'s responsibility. Importing
  * this module without `StoreModule.forActive(...)` gives you the class
@@ -21,13 +21,13 @@ import { PostgresPrismaJobStore } from './store-postgres-prisma.service';
  * import {
  *   PostgresPrismaJobStore,
  *   STORE_POSTGRES_PRISMA_CONFIG,
- * } from '@ever-jobs/store-postgres-prisma';
+ * } from '@rad-ar/store-postgres-prisma';
  *
  * const prisma = new PrismaClient({ datasourceUrl: process.env.DATABASE_URL });
  *
  * @Module({
  *   imports: [
- *     StoreModule.forActive(process.env.EVER_JOBS_STORE ?? 'postgres', {
+ *     StoreModule.forActive(process.env.RADAR_STORE ?? 'postgres', {
  *       backends: [PostgresPrismaJobStore],
  *     }),
  *   ],

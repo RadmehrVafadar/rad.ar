@@ -5,8 +5,8 @@
  * Uses a public RSS feed -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClojurejobsModule, ClojurejobsService } from '@ever-jobs/source-clojurejobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ClojurejobsModule, ClojurejobsService } from '@rad-ar/source-clojurejobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ClojurejobsService (E2E)', () => {
   let service: ClojurejobsService;

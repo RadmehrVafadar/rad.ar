@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -12,13 +12,13 @@ import {
   CompensationInterval,
   LocationDto,
   Country,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { SWISSDEVJOBS_RSS_URL, SWISSDEVJOBS_HEADERS } from './swissdevjobs.constants';
 import { SwissdevjobsRssItem } from './swissdevjobs.types';
 

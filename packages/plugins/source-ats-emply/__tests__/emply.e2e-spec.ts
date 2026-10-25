@@ -14,8 +14,8 @@
  * only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EmplyModule, EmplyService } from '@ever-jobs/source-ats-emply';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EmplyModule, EmplyService } from '@rad-ar/source-ats-emply';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Emply-powered career site (Aarhus University — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'au';

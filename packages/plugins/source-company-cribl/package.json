@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cribl",
+  "name": "@rad-ar/source-company-cribl",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -13,8 +13,8 @@
  *     agency board with ~38 open roles across 2 pages.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PCRecruiterModule, PCRecruiterService } from '@ever-jobs/source-ats-pcrecruiter';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PCRecruiterModule, PCRecruiterService } from '@rad-ar/source-ats-pcrecruiter';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const KNOWN_TENANT_UID = 'alliance staffing.alliancestaffing';
 

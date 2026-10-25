@@ -13,8 +13,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobtoolzModule, JobtoolzService } from '@ever-jobs/source-ats-jobtoolz';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobtoolzModule, JobtoolzService } from '@rad-ar/source-ats-jobtoolz';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Jobtoolz-powered jobsite (Tordale — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'tordale';

@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -10,13 +10,13 @@ import {
   Site,
   DescriptionFormat,
   Country,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { JOBSCH_API_URL, JOBSCH_DEFAULT_RESULTS, JOBSCH_HEADERS } from './jobsch.constants';
 import { JobsChDocument, JobsChApiResponse } from './jobsch.types';
 

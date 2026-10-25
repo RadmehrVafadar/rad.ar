@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -12,12 +12,12 @@ import {
   Site,
   UpworkAuthDto,
   UpworkGrantType,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   markdownConverter,
   plainConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   JOB_SEARCH_QUERY,
   DEFAULT_NUM_RESULTS,

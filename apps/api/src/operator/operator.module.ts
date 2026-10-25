@@ -1,22 +1,15 @@
-import { Module } from "@nestjs/common";
-import { NotificationSecretLocalModule } from "@ever-jobs/notification-secret-local";
-import { WatchesModule } from "../watches/watches.module";
-import { OperatorOverviewController } from "./operator-overview.controller";
-import {
-  createWorkerHealthClient,
-  OperatorOverviewService,
-  WORKER_HEALTH_CLIENT,
-} from "./operator-overview.service";
-
+import { Module } from '@nestjs/common';
+import { NotificationSecretLocalModule } from '@rad-ar/notification-secret-local';
+import { OperatorOverviewModule } from '@rad-ar/operator-overview';
+import { WatchesModule } from '../watches/watches.module';
+import { OperatorOverviewController } from './operator-overview.controller';
 @Module({
-  imports: [WatchesModule, NotificationSecretLocalModule],
-  controllers: [OperatorOverviewController],
-  providers: [
-    OperatorOverviewService,
-    {
-      provide: WORKER_HEALTH_CLIENT,
-      useFactory: createWorkerHealthClient,
-    },
+  imports: [
+    OperatorOverviewModule.register([
+      WatchesModule,
+      NotificationSecretLocalModule,
+    ]),
   ],
+  controllers: [OperatorOverviewController],
 })
 export class OperatorModule {}

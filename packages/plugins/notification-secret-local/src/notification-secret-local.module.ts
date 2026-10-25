@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { NOTIFICATION_SECRET_STORE } from "@ever-jobs/plugin";
+import { NOTIFICATION_SECRET_STORE } from "@rad-ar/plugin";
 import { LocalNotificationSecretStore } from "./local-notification-secret.store";
 
 @Module({

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FreelancerComModule, FreelancerComService } from '@ever-jobs/source-freelancercom';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FreelancerComModule, FreelancerComService } from '@rad-ar/source-freelancercom';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FreelancerComService (E2E)', () => {
   let service: FreelancerComService;

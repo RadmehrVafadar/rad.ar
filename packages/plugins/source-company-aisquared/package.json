@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aisquared",
+  "name": "@rad-ar/source-company-aisquared",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

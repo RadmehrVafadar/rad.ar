@@ -19,7 +19,7 @@ import {
   JobPostDto,
   JobResponseDto,
   ScraperInputDto,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 export type CanadianEmployerAdapter =
   | 'workday'
@@ -419,32 +419,32 @@ function createScraper(adapter: CanadianEmployerAdapter): IScraper {
   // operator-only script load only the five adapters it actually needs.
   switch (adapter) {
     case 'workday': {
-      const { WorkdayService } = require('@ever-jobs/source-ats-workday') as {
+      const { WorkdayService } = require('@rad-ar/source-ats-workday') as {
         WorkdayService: new () => IScraper;
       };
       return new WorkdayService();
     }
     case 'icims': {
-      const { IcimsService } = require('@ever-jobs/source-ats-icims') as {
+      const { IcimsService } = require('@rad-ar/source-ats-icims') as {
         IcimsService: new () => IScraper;
       };
       return new IcimsService();
     }
     case 'successfactors': {
       const { SuccessFactorsService } = require(
-        '@ever-jobs/source-ats-successfactors'
+        '@rad-ar/source-ats-successfactors'
       ) as { SuccessFactorsService: new () => IScraper };
       return new SuccessFactorsService();
     }
     case 'yello': {
-      const { YelloService } = require('@ever-jobs/source-ats-yello') as {
+      const { YelloService } = require('@rad-ar/source-ats-yello') as {
         YelloService: new () => IScraper;
       };
       return new YelloService();
     }
     case 'accenture': {
       const { AccentureService } = require(
-        '@ever-jobs/source-company-accenture'
+        '@rad-ar/source-company-accenture'
       ) as { AccentureService: new () => IScraper };
       return new AccentureService();
     }

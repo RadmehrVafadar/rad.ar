@@ -16,12 +16,12 @@ import {
   Site,
   SourceHealth,
   SourceObservation,
-} from '@ever-jobs/models';
-import { StorePlugin } from '@ever-jobs/plugin';
+} from '@rad-ar/models';
+import { StorePlugin } from '@rad-ar/plugin';
 
 /**
  * Canonical id under which this backend registers with `StoreRegistry`.
- * Operators select it via `EVER_JOBS_STORE=memory`. Exported so consumers
+ * Operators select it via `RADAR_STORE=memory`. Exported so consumers
  * (`apps/api`'s root module, integration tests) can import the constant
  * instead of hard-coding the string literal.
  */
@@ -499,4 +499,3 @@ function resolveSnapshotLimit(limit: number | undefined): number {
   }
   return Math.min(Math.floor(limit), HEALTH_SNAPSHOT_QUERY_MAX_LIMIT);
 }
-

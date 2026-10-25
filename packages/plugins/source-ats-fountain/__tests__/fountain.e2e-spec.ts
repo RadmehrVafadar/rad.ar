@@ -5,8 +5,8 @@
  * Tests are conditionally run: set FOUNTAIN_API_KEY env var to enable.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FountainModule, FountainService } from '@ever-jobs/source-ats-fountain';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FountainModule, FountainService } from '@rad-ar/source-ats-fountain';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const describeIfKey = process.env.FOUNTAIN_API_KEY ? describe : describe.skip;
 

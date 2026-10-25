@@ -20,6 +20,9 @@ COPY packages/models/package.json ./packages/models/package.json
 COPY packages/plugin/package.json ./packages/plugin/package.json
 COPY packages/watcher/package.json ./packages/watcher/package.json
 
+# Include all nested plugin workspaces before dependency installation.
+COPY packages/plugins ./packages/plugins
+
 # Install ALL dependencies (needed for build)
 RUN npm ci
 
@@ -125,7 +128,7 @@ COPY --from=builder /app/dist/apps/web ./dist/apps/web
 
 ENV NODE_ENV=production
 ENV WEB_PORT=3000
-ENV VITE_PROXY_TARGET=http://ever-jobs-api:3001
+ENV VITE_PROXY_TARGET=http://radar-api:3001
 
 EXPOSE 3000
 

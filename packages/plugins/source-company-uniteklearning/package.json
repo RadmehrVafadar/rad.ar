@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-uniteklearning",
+  "name": "@rad-ar/source-company-uniteklearning",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

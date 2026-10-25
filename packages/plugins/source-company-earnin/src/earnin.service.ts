@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * EarnIn — EarnIn is a fintech app that lets workers access wages they have already earned before their scheduled payday..

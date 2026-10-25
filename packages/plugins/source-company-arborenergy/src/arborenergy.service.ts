@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * Arbor Energy — Arbor Energy builds baseload power systems that generate carbon-negative electricity by combusting biomass-derived fuel in high-pressure oxy-combustion turbomachinery and permanently sequestering the captured CO2..

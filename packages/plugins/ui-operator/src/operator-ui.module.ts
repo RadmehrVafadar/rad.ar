@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { UI_PLUGIN_TOKEN } from "@ever-jobs/plugin";
+import { UI_PLUGIN_TOKEN } from "@rad-ar/plugin";
 import { OperatorUiPlugin } from "./operator-ui.plugin";
 
 @Module({

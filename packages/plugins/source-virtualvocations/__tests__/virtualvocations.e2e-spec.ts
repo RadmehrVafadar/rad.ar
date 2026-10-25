@@ -5,8 +5,8 @@
  * No authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { VirtualVocationsModule, VirtualVocationsService } from '@ever-jobs/source-virtualvocations';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { VirtualVocationsModule, VirtualVocationsService } from '@rad-ar/source-virtualvocations';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('VirtualVocationsService (E2E)', () => {
   let service: VirtualVocationsService;

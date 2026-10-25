@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   CompensationDto,
   CompensationInterval,
@@ -9,8 +9,8 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { createHttpClient } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient } from '@rad-ar/common';
 import {
   MERCOR_API_BASE_URL,
   MERCOR_DEFAULT_RESULTS_WANTED,

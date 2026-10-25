@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-blossomhealth",
+  "name": "@rad-ar/source-company-blossomhealth",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

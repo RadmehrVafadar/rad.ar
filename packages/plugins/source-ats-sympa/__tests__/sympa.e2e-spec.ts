@@ -13,8 +13,8 @@
  * returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SympaModule, SympaService } from '@ever-jobs/source-ats-sympa';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SympaModule, SympaService } from '@rad-ar/source-ats-sympa';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sympa-powered careers board confirmed live 2026-06-04 (active tenant with open roles).
 const KNOWN_TENANT = 'bunq';

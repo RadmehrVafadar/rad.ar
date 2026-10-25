@@ -15,8 +15,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { KenjoModule, KenjoService } from '@ever-jobs/source-ats-kenjo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { KenjoModule, KenjoService } from '@rad-ar/source-ats-kenjo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Kenjo-powered career site (Kenjo GmbH's own board — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'careers';

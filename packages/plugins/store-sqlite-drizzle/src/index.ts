@@ -1,5 +1,5 @@
 /**
- * Barrel for `@ever-jobs/store-sqlite-drizzle` (Spec 004 / Phase 3 /
+ * Barrel for `@rad-ar/store-sqlite-drizzle` (Spec 004 / Phase 3 /
  * T07–T08). Re-exports the public surface so consumers don't need to
  * reach into per-file paths.
  */

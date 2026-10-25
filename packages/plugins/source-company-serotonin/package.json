@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-serotonin",
+  "name": "@rad-ar/source-company-serotonin",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

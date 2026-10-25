@@ -8,8 +8,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClearCompanyModule, ClearCompanyService } from '@ever-jobs/source-ats-clearcompany';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ClearCompanyModule, ClearCompanyService } from '@rad-ar/source-ats-clearcompany';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ClearCompanyService (E2E)', () => {
   let service: ClearCompanyService;

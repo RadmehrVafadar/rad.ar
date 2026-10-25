@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-evidentid",
+  "name": "@rad-ar/source-company-evidentid",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

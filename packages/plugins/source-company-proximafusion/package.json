@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-proximafusion",
+  "name": "@rad-ar/source-company-proximafusion",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -19,8 +19,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TurboHireModule, TurboHireService } from '@ever-jobs/source-ats-turbohire';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TurboHireModule, TurboHireService } from '@rad-ar/source-ats-turbohire';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public TurboHire-powered candidate portal (Tata Motors — tenant sub-domain
 // `tatamotors.turbohire.co`, observed live 2026-06-03).

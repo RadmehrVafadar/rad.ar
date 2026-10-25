@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-stytch",
+  "name": "@rad-ar/source-company-stytch",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

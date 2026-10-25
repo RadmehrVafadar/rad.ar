@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * Air North — Yukon-based regional airline serving Whitehorse, Old Crow, and southern Canada..

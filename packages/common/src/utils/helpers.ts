@@ -5,7 +5,7 @@ import {
   JobType,
   getCompensationInterval,
   getJobTypeFromString,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Locale dispatch for the Spec 012 salary parser.

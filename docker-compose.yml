@@ -1,10 +1,10 @@
 services:
-  ever-jobs-api:
+  radar-api:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ever-jobs-api:latest
-    container_name: ever-jobs-api
+    image: radar-api:latest
+    container_name: radar-api
     ports:
       - "${PORT:-3001}:3001"
     env_file:
@@ -14,9 +14,9 @@ services:
       NODE_ENV: production
       API_HOST: 0.0.0.0
       PORT: 3001
-      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://ever_jobs:ever_jobs@postgres:5432/ever_jobs}
-      EVER_JOBS_LOCAL_ENV_FILE: /app/.local-secrets/.env.local
-      WATCHER_HEALTH_URL: http://ever-jobs-watcher:3002/health
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://${POSTGRES_USER:-radar}:${POSTGRES_PASSWORD:-radar}@postgres:5432/${POSTGRES_DB:-radar}}
+      RADAR_LOCAL_ENV_FILE: /app/.local-secrets/.env.local
+      WATCHER_HEALTH_URL: http://radar-watcher:3002/health
 
       # API Security
       ENABLE_API_KEY_AUTH: ${ENABLE_API_KEY_AUTH:-false}
@@ -54,7 +54,7 @@ services:
         condition: service_completed_successfully
     volumes:
       - ./logs:/app/logs
-      - ever-jobs-local-config:/app/.local-secrets
+      - radar-local-config:/app/.local-secrets
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
@@ -66,15 +66,15 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: ever_jobs
-      POSTGRES_USER: ever_jobs
-      POSTGRES_PASSWORD: ever_jobs
+      POSTGRES_DB: ${POSTGRES_DB:-radar}
+      POSTGRES_USER: ${POSTGRES_USER:-radar}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-radar}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - ever-jobs-postgres:/var/lib/postgresql/data
+      - radar-postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ever_jobs -d ever_jobs"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -94,23 +94,23 @@ services:
       context: .
       dockerfile: Dockerfile
       target: watcher-runtime
-    image: ever-jobs-watcher:latest
+    image: radar-watcher:latest
     command: ["npx", "prisma", "migrate", "deploy"]
     env_file:
       - .env
     environment:
-      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://ever_jobs:ever_jobs@postgres:5432/ever_jobs}
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://${POSTGRES_USER:-radar}:${POSTGRES_PASSWORD:-radar}@postgres:5432/${POSTGRES_DB:-radar}}
     depends_on:
       postgres:
         condition: service_healthy
     restart: "no"
 
-  ever-jobs-watcher:
+  radar-watcher:
     build:
       context: .
       dockerfile: Dockerfile
       target: watcher-runtime
-    image: ever-jobs-watcher:latest
+    image: radar-watcher:latest
     ports:
       - "${WATCHER_HEALTH_PORT:-3002}:3002"
     env_file:
@@ -121,13 +121,13 @@ services:
       WATCHER_SEED_DEFAULT: ${WATCHER_SEED_DEFAULT:-true}
       WATCHER_HEALTH_HOST: 0.0.0.0
       WATCHER_HEALTH_PORT: 3002
-      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://ever_jobs:ever_jobs@postgres:5432/ever_jobs}
-      EVER_JOBS_LOCAL_ENV_FILE: /app/.local-secrets/.env.local
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql://${POSTGRES_USER:-radar}:${POSTGRES_PASSWORD:-radar}@postgres:5432/${POSTGRES_DB:-radar}}
+      RADAR_LOCAL_ENV_FILE: /app/.local-secrets/.env.local
     depends_on:
       watcher-migrate:
         condition: service_completed_successfully
     volumes:
-      - ever-jobs-local-config:/app/.local-secrets
+      - radar-local-config:/app/.local-secrets
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
@@ -136,7 +136,7 @@ services:
       start_period: 15s
       retries: 3
 
-  ever-jobs-web:
+  radar-web:
     profiles: ["gui"]
     build:
       context: .
@@ -144,16 +144,16 @@ services:
       target: web-runtime
       args:
         VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
-        VITE_UI_OPERATOR: ${EVER_JOBS_UI_OPERATOR:-true}
-    image: ever-jobs-web:latest
-    container_name: ever-jobs-web
+        VITE_UI_OPERATOR: ${RADAR_UI_OPERATOR:-true}
+    image: radar-web:latest
+    container_name: radar-web
     ports:
       - "${WEB_PORT:-3000}:3000"
     environment:
       WEB_PORT: 3000
-      VITE_PROXY_TARGET: http://ever-jobs-api:3001
+      VITE_PROXY_TARGET: http://radar-api:3001
     depends_on:
-      ever-jobs-api:
+      radar-api:
         condition: service_healthy
     restart: unless-stopped
     healthcheck:
@@ -164,5 +164,7 @@ services:
       retries: 3
 
 volumes:
-  ever-jobs-postgres:
-  ever-jobs-local-config:
+  radar-postgres:
+    name: ${POSTGRES_VOLUME_NAME:-radar-postgres}
+  radar-local-config:
+    name: ${LOCAL_CONFIG_VOLUME_NAME:-radar-local-config}

@@ -1,4 +1,4 @@
--- @ever-jobs/store-postgres-prisma — initial migration (Spec 004 / Phase 4 / T09).
+-- @rad-ar/store-postgres-prisma — initial migration (Spec 004 / Phase 4 / T09).
 --
 -- Hand-authored (not `prisma migrate dev`-generated) so the
 -- pg_trgm extension setup and the GIN trigram indexes that back FR-7's

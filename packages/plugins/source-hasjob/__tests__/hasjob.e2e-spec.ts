@@ -5,8 +5,8 @@
  * No authentication required -- the Atom feed is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HasJobModule, HasJobService } from '@ever-jobs/source-hasjob';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HasJobModule, HasJobService } from '@rad-ar/source-hasjob';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HasJobService (E2E)', () => {
   let service: HasJobService;

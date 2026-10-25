@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -9,13 +9,13 @@ import {
   LocationDto,
   DescriptionFormat,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { BERLINSTARTUPJOBS_RSS_URL, BERLINSTARTUPJOBS_DEFAULT_RESULTS, BERLINSTARTUPJOBS_HEADERS } from './berlinstartupjobs.constants';
 import { BerlinStartupJobsRssItem } from './berlinstartupjobs.types';
 

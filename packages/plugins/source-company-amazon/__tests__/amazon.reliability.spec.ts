@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import { ScraperInputDto, Site } from "@ever-jobs/models";
+import { ScraperInputDto, Site } from "@rad-ar/models";
 
 const mockPost = jest.fn();
-jest.mock("@ever-jobs/common", () => ({
-  ...jest.requireActual("@ever-jobs/common"),
+jest.mock("@rad-ar/common", () => ({
+  ...jest.requireActual("@rad-ar/common"),
   createHttpClient: jest.fn(() => ({
     post: mockPost,
     setHeaders: jest.fn(),

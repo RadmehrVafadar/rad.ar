@@ -5,8 +5,8 @@
  * To run authenticated tests, set PERSONIO_CLIENT_ID and PERSONIO_CLIENT_SECRET env vars.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PersonioModule, PersonioService } from '@ever-jobs/source-ats-personio';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PersonioModule, PersonioService } from '@rad-ar/source-ats-personio';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PersonioService (E2E)', () => {
   let service: PersonioService;

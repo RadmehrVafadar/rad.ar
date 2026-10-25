@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-ats-yello",
+  "name": "@rad-ar/source-ats-yello",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",

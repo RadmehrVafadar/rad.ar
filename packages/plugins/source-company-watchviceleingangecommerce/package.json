@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-watchviceleingangecommerce",
+  "name": "@rad-ar/source-company-watchviceleingangecommerce",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

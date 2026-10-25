@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-northwesternmedicine",
+  "name": "@rad-ar/source-company-northwesternmedicine",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

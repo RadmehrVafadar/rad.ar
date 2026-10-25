@@ -3,4 +3,4 @@ export {
   type UiNavigationItem,
   type UiPluginManifest,
   UI_PLUGIN_TOKEN,
-} from "@ever-jobs/plugin/ui-plugin";
+} from "@rad-ar/plugin/ui-plugin";

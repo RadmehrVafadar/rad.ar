@@ -1,11 +1,11 @@
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
-import { Site } from "@ever-jobs/models";
+import { Site } from "@rad-ar/models";
 import {
   ApplyWatchDto,
   CreateWatchDto,
   InitializeWatchDto,
-} from "../watch.dto";
+} from "@rad-ar/models/dtos/watch.dto";
 
 describe("watch DTO nested source scope", () => {
   it("accepts a bounded target scope and nullable baseline timestamp", async () => {

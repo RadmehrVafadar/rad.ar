@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-smiledigitalhealth",
+  "name": "@rad-ar/source-company-smiledigitalhealth",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

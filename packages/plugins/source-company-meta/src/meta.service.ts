@@ -1,10 +1,10 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, stripHtmlTags } from '@rad-ar/common';
 
 const API_URL = 'https://www.metacareers.com/graphql';
 const CAREERS_BASE = 'https://www.metacareers.com/jobs/';

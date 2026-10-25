@@ -5,8 +5,8 @@
  * Uses a public JSON API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { NoFluffJobsModule, NoFluffJobsService } from '@ever-jobs/source-nofluffjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { NoFluffJobsModule, NoFluffJobsService } from '@rad-ar/source-nofluffjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('NoFluffJobsService (E2E)', () => {
   let service: NoFluffJobsService;

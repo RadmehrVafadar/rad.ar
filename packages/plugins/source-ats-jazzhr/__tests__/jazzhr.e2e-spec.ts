@@ -5,8 +5,8 @@
  * To run authenticated tests, set JAZZHR_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JazzHRModule, JazzHRService } from '@ever-jobs/source-ats-jazzhr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JazzHRModule, JazzHRService } from '@rad-ar/source-ats-jazzhr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JazzHRService (E2E)', () => {
   let service: JazzHRService;

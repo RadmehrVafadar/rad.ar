@@ -2,8 +2,8 @@
  * E2E test for the LinkedIn scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { LinkedInModule, LinkedInService } from '@ever-jobs/source-linkedin';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { LinkedInModule, LinkedInService } from '@rad-ar/source-linkedin';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 const describeNetwork = process.env.RUN_NETWORK_E2E === 'true' ? describe : describe.skip;
 

@@ -15,8 +15,8 @@
  * the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EmploymentHeroModule, EmploymentHeroService } from '@ever-jobs/source-ats-employmenthero';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EmploymentHeroModule, EmploymentHeroService } from '@rad-ar/source-ats-employmenthero';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Employment Hero-powered board (Employment Hero's own organisation — confirmed live
 // 2026-06-04).

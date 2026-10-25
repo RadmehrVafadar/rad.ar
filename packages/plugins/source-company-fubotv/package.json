@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-fubotv",
+  "name": "@rad-ar/source-company-fubotv",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

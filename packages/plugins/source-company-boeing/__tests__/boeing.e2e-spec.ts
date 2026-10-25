@@ -4,8 +4,8 @@
  * Hits the live Boeing jobs API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BoeingModule, BoeingService } from '@ever-jobs/source-company-boeing';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BoeingModule, BoeingService } from '@rad-ar/source-company-boeing';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('BoeingService (E2E)', () => {
   let service: BoeingService;

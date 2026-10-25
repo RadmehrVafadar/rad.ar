@@ -8,13 +8,13 @@ import {
   ScraperInputDto,
   Site,
   CompensationInterval,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 const mockGet = jest.fn();
 const mockSetHeaders = jest.fn();
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -24,7 +24,7 @@ jest.mock('@ever-jobs/common', () => {
   };
 });
 
-import { LeverModule, LeverService } from '@ever-jobs/source-ats-lever';
+import { LeverModule, LeverService } from '@rad-ar/source-ats-lever';
 
 async function scrapeOne(job: Record<string, unknown>) {
   mockGet.mockResolvedValueOnce({ data: [job] });
@@ -177,7 +177,7 @@ describe('LeverService field mappings (spec 752)', () => {
     expect(job.location?.country).toBe('Netherlands');
   });
 
-  it('should ignore an unresolvable country code', async () => {
+  it('should retain the country inferred from a US state when the country code is invalid', async () => {
     const job = await scrapeOne({
       id: 'bad-country',
       text: 'Operator',
@@ -186,6 +186,17 @@ describe('LeverService field mappings (spec 752)', () => {
     });
     expect(job.location?.city).toBe('Nashua');
     expect(job.location?.state).toBe('NH');
+    expect(job.location?.country).toBe('United States');
+  });
+
+  it('should leave the country unset when neither the code nor location resolves it', async () => {
+    const job = await scrapeOne({
+      id: 'unknown-country',
+      text: 'Operator',
+      categories: { location: 'Unlisted City' },
+      country: 'QZ',
+    });
+    expect(job.location?.city).toBe('Unlisted City');
     expect(job.location?.country).toBeFalsy();
   });
 });

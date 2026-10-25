@@ -11,8 +11,8 @@
  *   - `companySlug: 'simpler'` → https://simpler.jobsoid.com
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobsoidModule, JobsoidService } from '@ever-jobs/source-ats-jobsoid';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobsoidModule, JobsoidService } from '@rad-ar/source-ats-jobsoid';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobsoidService (E2E)', () => {
   let service: JobsoidService;

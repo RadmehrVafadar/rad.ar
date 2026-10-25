@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { Logger } from '@nestjs/common';
-import { JobPostDto, Site } from '@ever-jobs/models';
-import { JobsService } from './jobs.service';
-import { JobsAggregator } from './jobs.aggregator';
-import { CacheService } from '../cache/cache.service';
+import { JobPostDto, Site } from '@rad-ar/models';
+import { JobsService } from '@rad-ar/job-search/jobs.service';
+import { JobsAggregator } from '@rad-ar/job-search/jobs.aggregator';
+import { CacheService } from '@rad-ar/common/runtime/cache/cache.service';
 import {
   SearchJobsInput,
   SearchJobsResult,

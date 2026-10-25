@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FranceTravailModule, FranceTravailService } from '@ever-jobs/source-francetravail';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FranceTravailModule, FranceTravailService } from '@rad-ar/source-francetravail';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FranceTravailService (E2E)', () => {
   let service: FranceTravailService;

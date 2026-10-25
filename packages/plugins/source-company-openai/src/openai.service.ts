@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from "@ever-jobs/plugin";
+﻿import { SourcePlugin } from "@rad-ar/plugin";
 
 import { Injectable, Logger } from "@nestjs/common";
 import {
@@ -8,8 +8,8 @@ import {
   JobPostDto,
   Site,
   LocationDto,
-} from "@ever-jobs/models";
-import { createHttpClient, stripHtmlTags } from "@ever-jobs/common";
+} from "@rad-ar/models";
+import { createHttpClient, stripHtmlTags } from "@rad-ar/common";
 
 /** OpenAI uses Ashby for their careers page */
 const API_URL = "https://api.ashbyhq.com/posting-api/job-board/openai";

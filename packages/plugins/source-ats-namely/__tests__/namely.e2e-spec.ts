@@ -12,8 +12,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { NamelyModule, NamelyService } from '@ever-jobs/source-ats-namely';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { NamelyModule, NamelyService } from '@rad-ar/source-ats-namely';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // A Namely-powered candidate career-site tenant slug (sub-domain of namely.com).
 const KNOWN_TENANT = 'demo';

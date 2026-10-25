@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { DiscoveryService, Reflector } from '@nestjs/core';
-import { IScraper, Site } from '@ever-jobs/models';
+import { IScraper, Site } from '@rad-ar/models';
 import { SOURCE_PLUGIN_METADATA } from '../decorators/source-plugin.decorator';
 import { IPluginMetadata } from '../interfaces/plugin-metadata.interface';
 import { PluginRegistry } from '../registry/plugin-registry.service';
@@ -10,7 +10,7 @@ import { readDisabledSources } from '../config/disabled-sources';
  * Automatically discovers all NestJS providers decorated with @SourcePlugin()
  * and registers them into the PluginRegistry.
  *
- * Sites listed in EVER_JOBS_DISABLED_SOURCES are skipped at registration time
+ * Sites listed in RADAR_DISABLED_SOURCES are skipped at registration time
  * (see Spec 001 §FR-6).
  *
  * Runs at bootstrap (OnModuleInit) after all modules are loaded, ensuring every
@@ -62,7 +62,7 @@ export class PluginDiscoveryService implements OnModuleInit {
         seenDisabledHits.add(metadata.site);
         skipped++;
         this.logger.log(
-          `Skipping disabled plugin: ${metadata.name} (${metadata.site}) — listed in EVER_JOBS_DISABLED_SOURCES`,
+          `Skipping disabled plugin: ${metadata.name} (${metadata.site}) — listed in RADAR_DISABLED_SOURCES`,
         );
         continue;
       }
@@ -75,7 +75,7 @@ export class PluginDiscoveryService implements OnModuleInit {
     for (const id of disabled) {
       if (!seenDisabledHits.has(id)) {
         this.logger.warn(
-          `EVER_JOBS_DISABLED_SOURCES references unknown site '${id}' — typo? (no plugin matched)`,
+          `RADAR_DISABLED_SOURCES references unknown site '${id}' — typo? (no plugin matched)`,
         );
       }
     }

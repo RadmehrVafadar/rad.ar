@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-daybreakgames",
+  "name": "@rad-ar/source-company-daybreakgames",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

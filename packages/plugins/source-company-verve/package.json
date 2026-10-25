@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-verve",
+  "name": "@rad-ar/source-company-verve",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

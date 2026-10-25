@@ -1,4 +1,4 @@
-import { JobPostDto, LocationDto, Site } from '@ever-jobs/models';
+import { JobPostDto, LocationDto, Site } from '@rad-ar/models';
 import { DedupHybridService } from '../src/dedup-hybrid.service';
 
 function job(partial: Partial<JobPostDto>): JobPostDto {

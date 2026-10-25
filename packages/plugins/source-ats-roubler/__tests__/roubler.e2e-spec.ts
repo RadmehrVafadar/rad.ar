@@ -17,8 +17,8 @@
  * actually returned, so the suite passes whether or not the public feed responds anonymously.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RoublerModule, RoublerService } from '@ever-jobs/source-ats-roubler';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RoublerModule, RoublerService } from '@rad-ar/source-ats-roubler';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Best-effort Roubler-powered tenant careers id (researched 2026-06-04; surface verified=FALSE,
 // so zero results are tolerated throughout).

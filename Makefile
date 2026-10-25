@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────
-# Ever Jobs API — Makefile
+# rad.ar API — Makefile
 # ──────────────────────────────────────────
 .PHONY: install dev build test lint clean docker-build docker-up docker-dev docker-down logs restart rebuild clean-start help
 
@@ -24,7 +24,7 @@ clean:           ## Remove dist and node_modules
 
 # ── Docker ────────────────────────────────
 docker-build:    ## Build Docker image
-	docker build -t ever-jobs-api .
+	docker build -t radar-api .
 
 docker-up:       ## Start production containers
 	docker compose up -d
@@ -36,7 +36,7 @@ docker-down:     ## Stop containers
 	docker compose down
 
 logs:            ## Tail container logs
-	docker compose logs -f ever-jobs-api
+	docker compose logs -f radar-api
 
 restart:         ## Restart containers
 	docker compose restart

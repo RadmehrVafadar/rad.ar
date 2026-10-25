@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-ulbrichstainlesssteelsspecialmetals",
+  "name": "@rad-ar/source-company-ulbrichstainlesssteelsspecialmetals",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -2,8 +2,8 @@
  * E2E test for the Glassdoor scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GlassdoorModule, GlassdoorService } from '@ever-jobs/source-glassdoor';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { GlassdoorModule, GlassdoorService } from '@rad-ar/source-glassdoor';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 describe('GlassdoorService (E2E)', () => {
   let service: GlassdoorService;

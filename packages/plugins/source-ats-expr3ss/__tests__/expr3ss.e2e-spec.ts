@@ -14,8 +14,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { Expr3ssModule, Expr3ssService } from '@ever-jobs/source-ats-expr3ss';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { Expr3ssModule, Expr3ssService } from '@rad-ar/source-ats-expr3ss';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Expr3ss-powered board (a real tenant sub-domain — confirmed live 2026-06-04).
 const KNOWN_TENANT = 'cos';

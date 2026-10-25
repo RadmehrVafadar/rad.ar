@@ -16,8 +16,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BreatheHrModule, BreatheHrService } from '@ever-jobs/source-ats-breathehr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BreatheHrModule, BreatheHrService } from '@rad-ar/source-ats-breathehr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // A public Breathe-hosted vacancy share token (confirmed live, anonymous, 2026-06-04). The
 // adapter resolves a bare `{slug}-{id}` token directly to its `/v/{slug}-{id}` detail page.

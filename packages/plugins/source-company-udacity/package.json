@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-udacity",
+  "name": "@rad-ar/source-company-udacity",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

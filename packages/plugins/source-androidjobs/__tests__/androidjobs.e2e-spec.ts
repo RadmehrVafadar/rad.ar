@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AndroidjobsModule, AndroidjobsService } from '@ever-jobs/source-androidjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AndroidjobsModule, AndroidjobsService } from '@rad-ar/source-androidjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('AndroidjobsService (E2E)', () => {
   let service: AndroidjobsService;

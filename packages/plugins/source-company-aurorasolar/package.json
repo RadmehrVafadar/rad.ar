@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aurorasolar",
+  "name": "@rad-ar/source-company-aurorasolar",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

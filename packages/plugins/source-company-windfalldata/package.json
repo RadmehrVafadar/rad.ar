@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-windfalldata",
+  "name": "@rad-ar/source-company-windfalldata",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

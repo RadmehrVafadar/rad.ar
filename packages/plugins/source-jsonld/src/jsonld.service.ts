@@ -1,4 +1,4 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -12,7 +12,7 @@ import {
   JobType,
   DescriptionFormat,
   getJobTypeFromString,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
@@ -23,7 +23,7 @@ import {
   resolveCompensation,
   JobPostingLd,
   JobPostingLdLocation,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { JSONLD_HEADERS } from './jsonld.constants';
 
 /**

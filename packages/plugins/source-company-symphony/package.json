@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-symphony",
+  "name": "@rad-ar/source-company-symphony",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

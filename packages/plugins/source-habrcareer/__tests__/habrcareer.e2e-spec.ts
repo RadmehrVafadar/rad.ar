@@ -5,8 +5,8 @@
  * Uses a public JSON API -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HabrcareerModule, HabrcareerService } from '@ever-jobs/source-habrcareer';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HabrcareerModule, HabrcareerService } from '@rad-ar/source-habrcareer';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('HabrcareerService (E2E)', () => {
   let service: HabrcareerService;

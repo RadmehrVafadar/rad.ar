@@ -11,8 +11,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { DarwinboxModule, DarwinboxService } from '@ever-jobs/source-ats-darwinbox';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DarwinboxModule, DarwinboxService } from '@rad-ar/source-ats-darwinbox';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Darwinbox-powered careers sub-domain (Darwinbox's own portal).
 const KNOWN_TENANT = 'dbox';

@@ -6,7 +6,7 @@
  * `campaign` query parameter is mandatory and fixed to `api`).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 import { SolidJobsModule } from '../src/solidjobs.module';
 import { SolidJobsService } from '../src/solidjobs.service';
 

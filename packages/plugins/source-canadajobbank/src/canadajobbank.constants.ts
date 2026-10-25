@@ -4,5 +4,5 @@ export const CANADAJOBBANK_DEFAULT_RESULTS = 25;
 export const CANADAJOBBANK_MAX_RESULTS = 100;
 export const CANADAJOBBANK_HEADERS: Record<string, string> = {
   Accept: 'application/json',
-  'User-Agent': 'EverJobs/1.0',
+  'User-Agent': 'Radar/1.0',
 };

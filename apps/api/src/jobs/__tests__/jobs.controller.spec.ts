@@ -3,7 +3,7 @@ import {
   ScraperInputDto,
   JobPostDto,
   JobAnalysisDto,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { JobsController } from '../jobs.controller';
 
 // ---------------------------------------------------------------------------

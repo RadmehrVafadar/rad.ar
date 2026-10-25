@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-epirus",
+  "name": "@rad-ar/source-company-epirus",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

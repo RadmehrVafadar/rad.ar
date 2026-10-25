@@ -5,8 +5,8 @@
  * Uses a public JSON RSS endpoint -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PowertoflyModule, PowertoflyService } from '@ever-jobs/source-powertofly';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PowertoflyModule, PowertoflyService } from '@rad-ar/source-powertofly';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PowertoflyService (E2E)', () => {
   let service: PowertoflyService;

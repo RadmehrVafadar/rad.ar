@@ -4,8 +4,8 @@
  * EchoJobs is a curated tech job board -- no authentication required.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EchoJobsModule, EchoJobsService } from '@ever-jobs/source-echojobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EchoJobsModule, EchoJobsService } from '@rad-ar/source-echojobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('EchoJobsService (E2E)', () => {
   let service: EchoJobsService;

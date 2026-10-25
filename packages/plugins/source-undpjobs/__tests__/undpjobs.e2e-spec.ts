@@ -1,5 +1,5 @@
 import { UndpJobsService } from '../src/undpjobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('UndpJobsService (e2e)', () => {
   let service: UndpJobsService;

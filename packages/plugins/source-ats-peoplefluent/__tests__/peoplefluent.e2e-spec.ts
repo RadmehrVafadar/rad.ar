@@ -13,8 +13,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PeopleFluentModule, PeopleFluentService } from '@ever-jobs/source-ats-peoplefluent';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PeopleFluentModule, PeopleFluentService } from '@rad-ar/source-ats-peoplefluent';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public PeopleFluent-powered RMS career site (MIT — observed live 2026-06-03).
 const KNOWN_TENANT = 'mit';

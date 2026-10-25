@@ -1,5 +1,5 @@
 import { PyJobsService } from '../src/pyjobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('PyJobsService (e2e)', () => {
   let service: PyJobsService;

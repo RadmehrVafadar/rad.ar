@@ -11,8 +11,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { VarbiModule, VarbiService } from '@ever-jobs/source-ats-varbi';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { VarbiModule, VarbiService } from '@rad-ar/source-ats-varbi';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Varbi-powered career sub-domain (KTH Royal Institute of Technology).
 const KNOWN_TENANT = 'kth';

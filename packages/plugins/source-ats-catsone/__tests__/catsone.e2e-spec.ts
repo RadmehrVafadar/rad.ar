@@ -11,8 +11,8 @@
  * `https://authoritypartnersinc.catsone.com/careers/86212-General`.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CatsoneModule, CatsoneService } from '@ever-jobs/source-ats-catsone';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CatsoneModule, CatsoneService } from '@rad-ar/source-ats-catsone';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CatsoneService (E2E)', () => {
   let service: CatsoneService;

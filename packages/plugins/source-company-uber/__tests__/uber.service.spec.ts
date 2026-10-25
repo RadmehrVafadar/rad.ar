@@ -1,16 +1,16 @@
 import "reflect-metadata";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { ScraperInputDto, Site } from "@ever-jobs/models";
+import { ScraperInputDto, Site } from "@rad-ar/models";
 import {
   SOURCE_PLUGIN_METADATA,
   type IPluginMetadata,
-} from "@ever-jobs/plugin";
+} from "@rad-ar/plugin";
 
 const mockPost = jest.fn();
 const mockSetHeaders = jest.fn();
-jest.mock("@ever-jobs/common", () => {
-  const actual = jest.requireActual("@ever-jobs/common");
+jest.mock("@rad-ar/common", () => {
+  const actual = jest.requireActual("@rad-ar/common");
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({

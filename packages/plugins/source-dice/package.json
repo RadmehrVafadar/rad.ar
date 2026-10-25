@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-dice",
+  "name": "@rad-ar/source-dice",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

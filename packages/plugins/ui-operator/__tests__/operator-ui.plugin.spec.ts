@@ -20,8 +20,8 @@ describe("OperatorUiPlugin", () => {
     const plugin = new OperatorUiPlugin();
 
     expect(plugin.isEnabled({})).toBe(true);
-    expect(plugin.isEnabled({ EVER_JOBS_UI_OPERATOR: "off" })).toBe(false);
-    expect(plugin.isEnabled({ EVER_JOBS_UI_OPERATOR: "true" })).toBe(true);
+    expect(plugin.isEnabled({ RADAR_UI_OPERATOR: "off" })).toBe(false);
+    expect(plugin.isEnabled({ RADAR_UI_OPERATOR: "true" })).toBe(true);
   });
 
   it("uses the same browser-safe feature switch for Vite configuration", () => {

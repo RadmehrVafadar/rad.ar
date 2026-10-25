@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-carvana",
+  "name": "@rad-ar/source-company-carvana",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

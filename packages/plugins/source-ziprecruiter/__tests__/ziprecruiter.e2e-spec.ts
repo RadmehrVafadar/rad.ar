@@ -2,8 +2,8 @@
  * E2E test for the ZipRecruiter scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZipRecruiterModule, ZipRecruiterService } from '@ever-jobs/source-ziprecruiter';
-import { ScraperInputDto, Site, Country, DescriptionFormat } from '@ever-jobs/models';
+import { ZipRecruiterModule, ZipRecruiterService } from '@rad-ar/source-ziprecruiter';
+import { ScraperInputDto, Site, Country, DescriptionFormat } from '@rad-ar/models';
 
 describe('ZipRecruiterService (E2E)', () => {
   let service: ZipRecruiterService;

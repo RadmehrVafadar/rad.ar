@@ -5,8 +5,8 @@
  * Without it, the service returns empty results gracefully.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ExaModule, ExaService } from '@ever-jobs/source-exa';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ExaModule, ExaService } from '@rad-ar/source-exa';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ExaService (E2E)', () => {
   let service: ExaService;

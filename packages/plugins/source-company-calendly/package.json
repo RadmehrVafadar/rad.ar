@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-calendly",
+  "name": "@rad-ar/source-company-calendly",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

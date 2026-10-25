@@ -19,8 +19,8 @@
  * to tolerate zero results.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ZwayamModule, ZwayamService } from '@ever-jobs/source-ats-zwayam';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ZwayamModule, ZwayamService } from '@rad-ar/source-ats-zwayam';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Zwayam-powered career site (Beacon India — confirmed live 2026-06-03 via the
 // `careers.beacon-india.com/beacon-india/` career page + `public.zwayam.com` preview).

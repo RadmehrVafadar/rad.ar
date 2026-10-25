@@ -5,8 +5,8 @@
  * To run authenticated tests, set GREENHOUSE_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GreenhouseModule, GreenhouseService } from '@ever-jobs/source-ats-greenhouse';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GreenhouseModule, GreenhouseService } from '@rad-ar/source-ats-greenhouse';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GreenhouseService (E2E)', () => {
   let service: GreenhouseService;

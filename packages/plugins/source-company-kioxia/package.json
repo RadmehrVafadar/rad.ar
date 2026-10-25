@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-kioxia",
+  "name": "@rad-ar/source-company-kioxia",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,7 +1,7 @@
 import { Controller, Get, Logger, Res } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { MetricsService } from './metrics.service';
+import { MetricsService } from '@rad-ar/common/runtime/metrics/metrics.service';
 
 @ApiTags('Health')
 @Controller('metrics')
@@ -29,7 +29,7 @@ export class MetricsController {
     summary: 'Get Prometheus metrics',
     description:
       'Returns application metrics in Prometheus text format. ' +
-      'The exposition includes `ever_jobs_source_circuit_state{site}` ' +
+      'The exposition includes `radar_source_circuit_state{site}` ' +
       'when the circuit-breaker bridge is bound (Spec 005 / T06).',
   })
   @ApiResponse({ status: 200, description: 'Prometheus metrics' })

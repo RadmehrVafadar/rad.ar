@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-fingerprint",
+  "name": "@rad-ar/source-company-fingerprint",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

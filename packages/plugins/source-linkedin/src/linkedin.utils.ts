@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { JobType, getJobTypeFromString } from '@ever-jobs/models';
+import { JobType, getJobTypeFromString } from '@rad-ar/models';
 import { JOB_TYPE_CODES } from './linkedin.constants';
 
 /**

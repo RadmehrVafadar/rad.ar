@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DuunitoriModule, DuunitoriService } from '@ever-jobs/source-duunitori';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DuunitoriModule, DuunitoriService } from '@rad-ar/source-duunitori';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DuunitoriService (E2E)', () => {
   let service: DuunitoriService;

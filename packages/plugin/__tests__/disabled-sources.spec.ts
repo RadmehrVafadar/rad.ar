@@ -1,9 +1,9 @@
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 import {
   DISABLED_SOURCES_ENV_VAR,
   parseDisabledSources,
   readDisabledSources,
-} from '@ever-jobs/plugin';
+} from '@rad-ar/plugin';
 
 describe('parseDisabledSources', () => {
   it('returns an empty set for undefined', () => {
@@ -91,6 +91,6 @@ describe('readDisabledSources', () => {
 
 describe('DISABLED_SOURCES_ENV_VAR constant', () => {
   it('is the documented name', () => {
-    expect(DISABLED_SOURCES_ENV_VAR).toBe('EVER_JOBS_DISABLED_SOURCES');
+    expect(DISABLED_SOURCES_ENV_VAR).toBe('RADAR_DISABLED_SOURCES');
   });
 });

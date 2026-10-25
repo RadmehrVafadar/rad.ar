@@ -4,8 +4,8 @@
  * Requires FINDWORK_API_KEY to be set in the environment.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindWorkModule, FindWorkService } from '@ever-jobs/source-findwork';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { FindWorkModule, FindWorkService } from '@rad-ar/source-findwork';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('FindWorkService (E2E)', () => {
   let service: FindWorkService;

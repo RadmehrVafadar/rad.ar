@@ -5,8 +5,8 @@
  * No authentication required -- the search API is public.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobsChModule, JobsChService } from '@ever-jobs/source-jobsch';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobsChModule, JobsChService } from '@rad-ar/source-jobsch';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobsChService (E2E)', () => {
   let service: JobsChService;

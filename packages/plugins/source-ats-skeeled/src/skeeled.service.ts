@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper,
@@ -9,13 +9,13 @@ import {
   LocationDto,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   SKEELED_HOST,
   SKEELED_BOARD_PATH_TEMPLATE,

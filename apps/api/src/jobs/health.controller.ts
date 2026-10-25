@@ -26,8 +26,8 @@ import {
   ICircuitBreakerService,
   Site,
   SourceHealth,
-} from '@ever-jobs/models';
-import { PluginRegistry } from '@ever-jobs/plugin';
+} from '@rad-ar/models';
+import { PluginRegistry } from '@rad-ar/plugin';
 import { AdminAuth } from '../auth/admin-auth.decorator';
 
 /**

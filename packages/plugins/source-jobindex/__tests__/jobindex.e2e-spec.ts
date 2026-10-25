@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobindexModule, JobindexService } from '@ever-jobs/source-jobindex';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobindexModule, JobindexService } from '@rad-ar/source-jobindex';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobindexService (E2E)', () => {
   let service: JobindexService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-vercel",
+  "name": "@rad-ar/source-company-vercel",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

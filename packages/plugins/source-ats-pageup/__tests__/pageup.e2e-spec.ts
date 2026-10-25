@@ -13,8 +13,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PageUpModule, PageUpService } from '@ever-jobs/source-ats-pageup';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PageUpModule, PageUpService } from '@rad-ar/source-ats-pageup';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public PageUp-powered candidate site (Calor — confirmed live 2026-06-03).
 const KNOWN_TENANT = '595';

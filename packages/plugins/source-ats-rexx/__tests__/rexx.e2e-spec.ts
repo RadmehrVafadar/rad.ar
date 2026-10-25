@@ -13,8 +13,8 @@
  *   - `companySlug: 'nobix'`   → `https://nobix-portal.rexx-systems.com`
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RexxModule, RexxService } from '@ever-jobs/source-ats-rexx';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RexxModule, RexxService } from '@rad-ar/source-ats-rexx';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RexxService (E2E)', () => {
   let service: RexxService;

@@ -13,8 +13,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HrPartnerModule, HrPartnerService } from '@ever-jobs/source-ats-hrpartner';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HrPartnerModule, HrPartnerService } from '@rad-ar/source-ats-hrpartner';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public HR Partner-powered job board (Employment Options Inc Trading As Youth Options —
 // confirmed live 2026-06-03).

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-applytoaktos",
+  "name": "@rad-ar/source-company-applytoaktos",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

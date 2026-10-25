@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-instabase",
+  "name": "@rad-ar/source-company-instabase",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

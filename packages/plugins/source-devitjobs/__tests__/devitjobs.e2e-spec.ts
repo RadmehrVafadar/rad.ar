@@ -1,5 +1,5 @@
 import { DevITJobsService } from '../src/devitjobs.service';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DevITJobsService (e2e)', () => {
   let service: DevITJobsService;

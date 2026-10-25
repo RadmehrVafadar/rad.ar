@@ -1,10 +1,10 @@
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IScraper, ScraperInputDto, JobResponseDto, JobPostDto, Site, LocationDto,
-} from '@ever-jobs/models';
-import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@rad-ar/common';
 
 /**
  * Wildlife Studios — Wildlife Studios is an employer in the Mobile gaming / interactive entertainment sector, headquartered in São Paulo, São Paulo, Brazil..
@@ -14,7 +14,7 @@ import { createHttpClient, decodeHtmlEntities, stripHtmlTags } from '@ever-jobs/
  * Brazil. This source plugin ingests live open roles published on
  * Wildlife Studios's official Greenhouse-hosted careers board via the
  * public Greenhouse Job Board API. Retrieved postings are normalized
- * into the Ever Jobs job schema so they can flow through the standard
+ * into the rad.ar job schema so they can flow through the standard
  * sourcing pipeline (deduplication, liveness checking, and salary
  * normalization). The plugin performs read-only, unauthenticated
  * discovery and stores no candidate or employer credentials.

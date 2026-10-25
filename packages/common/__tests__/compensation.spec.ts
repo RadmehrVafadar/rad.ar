@@ -4,8 +4,8 @@ import {
   resolveCompensation,
   salaryToCompensation,
   type ExtractSalaryResult,
-} from '@ever-jobs/common';
-import { CompensationDto, CompensationInterval } from '@ever-jobs/models';
+} from '@rad-ar/common';
+import { CompensationDto, CompensationInterval } from '@rad-ar/models';
 
 describe('compensationFromSalary (Spec 5018)', () => {
   it('maps a bounded yearly range to a CompensationDto', () => {

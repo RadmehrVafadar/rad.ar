@@ -2,7 +2,7 @@ import {
   CompensationDto,
   CompensationInterval,
   getCompensationInterval,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 
 /**
  * Shared schema.org `JobPosting` JSON-LD extraction (Spec 5022).

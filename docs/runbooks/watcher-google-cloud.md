@@ -8,7 +8,7 @@ instance, and one maximum instance.
 
 Complete and validate the [local watcher runbook](watcher-local.md) first. The worker must baseline successfully and deliver a Discord test locally before cloud deployment is treated as ready.
 
-[Spec 6006](../../.specify/specs/6006-concurrent-watch-scheduling/spec.md)
+Spec 6006 (retired specification)
 defines bounded concurrent scheduled-watch admission. Its capacity is local to
 each worker process; Cloud SQL leases continue to provide same-watch exclusion
 across Cloud Run replicas.
@@ -84,7 +84,7 @@ Provision these resources in the chosen project and region:
 - A dedicated database user for rad.ar.
 - A dedicated Cloud Run runtime service account.
 - Secret Manager secrets for `DATABASE_URL` and `DISCORD_WEBHOOK_URL`.
-- A private Cloud Run service named, for example, `ever-jobs-watcher`.
+- A private Cloud Run service named, for example, `radar-watcher`.
 - Logging and monitoring access for operators.
 
 Prefer the Canadian region that meets the deployment's latency, data-residency, and product-availability needs. Keep Cloud Run, Artifact Registry, and Cloud SQL in the same region where practical.
@@ -119,8 +119,8 @@ Store the complete Discord URL as a separate `DISCORD_WEBHOOK_URL` secret. The d
 Configure secret access by environment variable at deployment time:
 
 ```text
-DATABASE_URL=ever-jobs-database-url:latest
-DISCORD_WEBHOOK_URL=ever-jobs-discord-webhook:latest
+DATABASE_URL=radar-database-url:latest
+DISCORD_WEBHOOK_URL=radar-discord-webhook:latest
 ```
 
 Pinning an immutable secret version provides more deterministic rollouts. Using `latest` simplifies rotation but requires a new Cloud Run revision or instance restart before all processes necessarily observe the new value.
@@ -174,13 +174,13 @@ The `watcher-runtime` image starts `node dist/apps/watcher/main.js`. It binds to
 The following command is a template. Replace placeholders and verify flags against the installed Google Cloud CLI:
 
 ```bash
-gcloud run deploy ever-jobs-watcher \
+gcloud run deploy radar-watcher \
   --image REGION-docker.pkg.dev/PROJECT_ID/REPOSITORY/watcher:TAG \
   --region REGION \
   --service-account WATCHER_SERVICE_ACCOUNT \
   --port 8080 \
   --set-env-vars WATCHER_ENABLED=true,WATCHER_SEED_DEFAULT=false,WATCHER_HEALTH_PORT=8080,WATCHER_DEFAULT_TIMEZONE=America/Toronto,WATCHER_DEFAULT_INTERVAL_MINUTES=3,WATCHER_SCHEDULER_POLL_MS=15000,WATCHER_MAX_CONCURRENT_WATCHES=2,WATCHER_MAX_CONCURRENT_SOURCES=5,WATCHER_SOURCE_TIMEOUT_MS=12000,WATCHER_SCHEDULER_LOCK_TTL_MS=180000,DIGEST_ENABLED=true,DIGEST_DEFAULT_HOUR=8,DIGEST_DEFAULT_MINUTE=0 \
-  --set-secrets DATABASE_URL=ever-jobs-database-url:latest,DISCORD_WEBHOOK_URL=ever-jobs-discord-webhook:latest \
+  --set-secrets DATABASE_URL=radar-database-url:latest,DISCORD_WEBHOOK_URL=radar-discord-webhook:latest \
   --add-cloudsql-instances PROJECT_ID:REGION:INSTANCE_ID \
   --min-instances 1 \
   --max-instances 1 \
@@ -225,7 +225,7 @@ Worker health exposes the aggregate as
 `coverage.{status,tier1Degraded,degradedTargets,watches}`. The separately
 deployed API uses `watcherCoverage.{status,tier1Degraded,watches}`.
 
-Inspect startup logs for configuration-validation failures without printing secret values. Verify `ever_jobs_watcher_scheduler_last_poll_timestamp_seconds` advances on `/metrics` through an authenticated monitoring path.
+Inspect startup logs for configuration-validation failures without printing secret values. Verify `radar_watcher_scheduler_last_poll_timestamp_seconds` advances on `/metrics` through an authenticated monitoring path.
 
 The Cloud Run service itself does not expose watcher-management endpoints. Use one of these trusted administration paths:
 
@@ -294,8 +294,8 @@ IDs and these values:
 ```text
 scheduler.maxConcurrentWatches = 2
 scheduler.activeWatchCount = 2
-ever_jobs_watcher_scheduler_capacity 2
-ever_jobs_watcher_scheduler_active_runs 2
+radar_watcher_scheduler_capacity 2
+radar_watcher_scheduler_active_runs 2
 ```
 
 If both runs settle between samples, use each watch's durable run history to
@@ -326,17 +326,17 @@ The worker's `/metrics` endpoint emits Prometheus text. Use an authenticated col
 
 Scheduler-capacity series are:
 
-- `ever_jobs_watcher_scheduler_capacity`
-- `ever_jobs_watcher_scheduler_active_runs`
+- `radar_watcher_scheduler_capacity`
+- `radar_watcher_scheduler_active_runs`
 
 Coverage-specific series are:
 
-- `ever_jobs_watcher_target_runs_total{watch,target,tier,outcome}`
-- `ever_jobs_watcher_target_consecutive_hard_failures{watch,target,tier}`
-- `ever_jobs_watcher_target_degraded{watch,target,tier}`
-- `ever_jobs_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
-- `ever_jobs_watcher_tier1_coverage_degraded{watch}`
+- `radar_watcher_target_runs_total{watch,target,tier,outcome}`
+- `radar_watcher_target_consecutive_hard_failures{watch,target,tier}`
+- `radar_watcher_target_degraded{watch,target,tier}`
+- `radar_watcher_target_last_success_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_target_last_non_empty_timestamp_seconds{watch,target,tier}`
+- `radar_watcher_tier1_coverage_degraded{watch}`
 
 Run and delivery records in PostgreSQL remain the durable operational audit trail. In-process metric counters restart with a new instance.
 
@@ -345,7 +345,7 @@ Suggested alerts include:
 - `/health` unavailable or unhealthy for a sustained interval;
 - scheduler poll timestamp older than two expected poll periods;
 - no successful Tier 1 run for more than two configured Tier 1 intervals plus normal run duration;
-- `ever_jobs_watcher_tier1_coverage_degraded{watch} == 1` for a sustained
+- `radar_watcher_tier1_coverage_degraded{watch} == 1` for a sustained
   collection interval;
 - a Tier 1 target reaching three consecutive hard failures or remaining without
   success for more than two expected target intervals plus normal duration;

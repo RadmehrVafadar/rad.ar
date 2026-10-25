@@ -10,12 +10,12 @@ import {
   JobStoreQuery,
   Site,
   SourceObservation,
-} from '@ever-jobs/models';
-import { StorePlugin } from '@ever-jobs/plugin';
+} from '@rad-ar/models';
+import { StorePlugin } from '@rad-ar/plugin';
 
 /**
  * Canonical id under which this backend registers with `StoreRegistry`.
- * Operators select it via `EVER_JOBS_STORE=postgres`.
+ * Operators select it via `RADAR_STORE=postgres`.
  */
 export const STORE_POSTGRES_PRISMA_ID = 'postgres';
 
@@ -32,7 +32,7 @@ export const STORE_POSTGRES_PRISMA_DESCRIPTION =
  * Encoded as base64-of-JSON over `{ v, mergedAt, canonicalJobId }`. The
  * envelope is wire-compatible with the SQLite backend's cursor (T08) so
  * the future `GET /api/jobs?cursor=…` endpoint does NOT fork on backend
- * type — operators can swap `EVER_JOBS_STORE=sqlite` ↔ `=postgres` and
+ * type — operators can swap `RADAR_STORE=sqlite` ↔ `=postgres` and
  * outstanding cursors still parse. The `v: 1` discriminator is forward-
  * compatibility insurance: a future v2 envelope (e.g. SAFE-pointer for a
  * sharded backend) ships `v: 2` and rejects v1 cursors with
@@ -254,7 +254,7 @@ export interface PrismaJobsClient {
  *   datasourceUrl: process.env.DATABASE_URL,
  * });
  *
- * StoreModule.forActive(process.env.EVER_JOBS_STORE ?? 'postgres', {
+ * StoreModule.forActive(process.env.RADAR_STORE ?? 'postgres', {
  *   backends: [PostgresPrismaJobStore],
  *   providers: [
  *     {

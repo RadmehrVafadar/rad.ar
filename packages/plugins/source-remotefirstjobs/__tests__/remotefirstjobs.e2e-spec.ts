@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemotefirstjobsModule, RemotefirstjobsService } from '@ever-jobs/source-remotefirstjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RemotefirstjobsModule, RemotefirstjobsService } from '@rad-ar/source-remotefirstjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RemotefirstjobsService (E2E)', () => {
   let service: RemotefirstjobsService;

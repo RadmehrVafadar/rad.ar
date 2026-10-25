@@ -89,7 +89,7 @@ const { Logger } = require('@nestjs/common');
 Logger.overrideLogger(false);
 
 const { TeslaService } = require('../src');
-const { Site } = require('@ever-jobs/models');
+const { Site } = require('@rad-ar/models');
 
 const ITERATIONS = 20;
 const WARMUPS = 3;

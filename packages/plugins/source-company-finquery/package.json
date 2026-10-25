@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-finquery",
+  "name": "@rad-ar/source-company-finquery",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

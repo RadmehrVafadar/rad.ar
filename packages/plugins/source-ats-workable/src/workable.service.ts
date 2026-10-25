@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -10,13 +10,13 @@ import {
   Site,
   DescriptionFormat,
   getJobTypeFromString,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   resolveCompensation,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import {
   WORKABLE_API_URL,
   WORKABLE_DETAIL_CONCURRENCY,

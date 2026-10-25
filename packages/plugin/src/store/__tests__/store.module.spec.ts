@@ -17,7 +17,7 @@ import {
   Site,
   SourceHealth,
   SourceObservation,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   ERR_STORE_DUPLICATE_ID,
   StoreRegistry,
@@ -309,7 +309,7 @@ describe('StoreModule.forActive (Spec 004 / T04)', () => {
     it('propagates the registry error when storeId matches no backend', async () => {
       // The factory bubbles the registry error up to NestJS's bootstrap
       // path. Failing during `.compile()` means an operator with a typo
-      // in `EVER_JOBS_STORE` learns about it before the first request.
+      // in `RADAR_STORE` learns about it before the first request.
       let caught: unknown;
       try {
         testModule = await Test.createTestingModule({
@@ -336,7 +336,7 @@ describe('StoreModule.forActive (Spec 004 / T04)', () => {
     ])('rejects %s before NestJS construction', (_label, badId) => {
       // The check runs synchronously in `forActive()` itself, so we
       // don't even get to `Test.createTestingModule`. This catches a
-      // common operator typo where `EVER_JOBS_STORE` is set but blank.
+      // common operator typo where `RADAR_STORE` is set but blank.
       let caught: unknown;
       try {
         StoreModule.forActive(badId, { backends: [MemoryStubStore] });
@@ -522,7 +522,7 @@ describe('StoreModule.forActive (Spec 004 / T04)', () => {
       // Operator calls `forActive('memory')` but forgets to declare
       // any backends. The registry stays empty, so `get('memory')`
       // raises ERR_STORE_NOT_FOUND with a friendly "Registered ids: []"
-      // message. This is the exact failure mode T12 (`EVER_JOBS_STORE`
+      // message. This is the exact failure mode T12 (`RADAR_STORE`
       // honoured at bootstrap) will rely on.
       let caught: unknown;
       try {

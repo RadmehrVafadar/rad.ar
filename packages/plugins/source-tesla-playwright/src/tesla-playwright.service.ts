@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SourcePlugin } from '@ever-jobs/plugin';
+import { SourcePlugin } from '@rad-ar/plugin';
 import {
   IScraper,
   JobPostDto,
@@ -7,7 +7,7 @@ import {
   LocationDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   TESLA_PLAYWRIGHT_BASE_URL,
   TESLA_PLAYWRIGHT_BOARD_PATH,

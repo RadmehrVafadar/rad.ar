@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-appletreeprep",
+  "name": "@rad-ar/source-company-appletreeprep",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

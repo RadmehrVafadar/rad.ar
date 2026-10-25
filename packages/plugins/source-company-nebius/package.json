@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-nebius",
+  "name": "@rad-ar/source-company-nebius",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

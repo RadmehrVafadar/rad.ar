@@ -17,8 +17,8 @@
  * every test asserts a well-formed (possibly empty) response.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HReasilyModule, HReasilyService } from '@ever-jobs/source-ats-hreasily';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HReasilyModule, HReasilyService } from '@rad-ar/source-ats-hreasily';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public HReasily-powered career-page slug (best-effort tenant token — the platform's own
 // brand slug on the careers host; tolerated empty if the live surface differs).

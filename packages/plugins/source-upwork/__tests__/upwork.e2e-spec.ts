@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UpworkModule, UpworkService } from '@ever-jobs/source-upwork';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { UpworkModule, UpworkService } from '@rad-ar/source-upwork';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('UpworkService (e2e)', () => {
   let service: UpworkService;

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-talkiatry",
+  "name": "@rad-ar/source-company-talkiatry",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

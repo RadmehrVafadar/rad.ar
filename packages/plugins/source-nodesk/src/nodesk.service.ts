@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -9,8 +9,8 @@ import {
   LocationDto,
   Site,
   DescriptionFormat,
-} from '@ever-jobs/models';
-import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, htmlToPlainText, markdownConverter, extractEmails } from '@rad-ar/common';
 import { NODESK_API_URL, NODESK_HEADERS } from './nodesk.constants';
 import { NoDeskJob } from './nodesk.types';
 

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GetOnBoardModule, GetOnBoardService } from '@ever-jobs/source-getonboard';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GetOnBoardModule, GetOnBoardService } from '@rad-ar/source-getonboard';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('GetOnBoardService (E2E)', () => {
   let service: GetOnBoardService;

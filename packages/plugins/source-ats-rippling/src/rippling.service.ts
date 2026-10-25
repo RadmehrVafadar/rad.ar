@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from "@ever-jobs/plugin";
+﻿import { SourcePlugin } from "@rad-ar/plugin";
 
 import { Injectable, Logger } from "@nestjs/common";
 import {
@@ -12,7 +12,7 @@ import {
   DescriptionFormat,
   getJobTypeFromString,
   getCompensationInterval,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 import {
   createHttpClient,
   extractEmails,
@@ -21,7 +21,7 @@ import {
   parseLocationList,
   salaryToCompensation,
   aggregateCompensation,
-} from "@ever-jobs/common";
+} from "@rad-ar/common";
 import {
   RIPPLING_BASE_URL,
   RIPPLING_DETAIL_CONCURRENCY,

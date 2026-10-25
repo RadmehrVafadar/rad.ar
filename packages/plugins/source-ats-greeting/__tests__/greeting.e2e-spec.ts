@@ -13,8 +13,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GreetingModule, GreetingService } from '@ever-jobs/source-ats-greeting';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GreetingModule, GreetingService } from '@rad-ar/source-ats-greeting';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Greeting-powered career site (ABLE Labs / 에이블랩스 — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'ablelabs';

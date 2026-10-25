@@ -13,10 +13,7 @@
  *     src/<slug>.service.ts
  *     __tests__/<slug>.service.spec.ts
  *     __tests__/fixtures/<slug>-jobs.json
- *   .specify/specs/<specNo>-source-company-<slug>/
- *     spec.md
- *     plan.md
- *     tasks.md
+ *   docs/specs/source-company-<slug>.md
  *
  * The generated service does NOT re-implement Lever parsing. It resolves the
  * registered Lever ATS plugin from the core `PluginRegistry` at runtime and
@@ -113,7 +110,7 @@ function packageJson(d: LeverCompanyDescriptor): string {
   return (
     JSON.stringify(
       {
-        name: `@ever-jobs/source-company-${d.slug}`,
+        name: `@rad-ar/source-company-${d.slug}`,
         version: '0.0.1',
         private: true,
         main: 'src/index.ts',
@@ -175,11 +172,11 @@ function serviceFile(d: LeverCompanyDescriptor): string {
     ` * registry" rule.\n` +
     ` */`;
   return (
-    `import { SourcePlugin, PluginRegistry } from '@ever-jobs/plugin';\n\n` +
+    `import { SourcePlugin, PluginRegistry } from '@rad-ar/plugin';\n\n` +
     `import { Injectable, Logger, Optional } from '@nestjs/common';\n` +
     `import {\n` +
     `  IScraper, ScraperInputDto, JobResponseDto, Site,\n` +
-    `} from '@ever-jobs/models';\n\n` +
+    `} from '@rad-ar/models';\n\n` +
     `${doc}\n` +
     `const COMPANY_SLUG = '${sq(d.companySlug)}';\n` +
     `const COMPANY_NAME = '${sq(d.displayName)}';\n\n` +
@@ -266,13 +263,13 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from '@ever-jobs/models';
-import { PluginRegistry } from '@ever-jobs/plugin';
-import { LeverService } from '@ever-jobs/source-ats-lever';
+} from '@rad-ar/models';
+import { PluginRegistry } from '@rad-ar/plugin';
+import { LeverService } from '@rad-ar/source-ats-lever';
 
 const mockGet = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -459,116 +456,6 @@ describe('${d.serviceName} — Lever delegation', () => {
 `;
 }
 
-function specMd(d: LeverCompanyDescriptor): string {
-  return `# Spec: ${d.specNo} — Source Company Plugin: ${d.displayName}
-
-| Field | Value |
-| --- | --- |
-| Spec ID | ${d.specNo} |
-| Slug | source-company-${d.slug} |
-| Status | accepted |
-| Owner | claude (run #442) |
-| Created | 2026-07-03 |
-| Last updated | 2026-07-03 |
-| Supersedes | (none) |
-| Related specs | 1194, 975 |
-
-## Summary
-
-New **Lever-backed company-direct** source plugin \`source-company-${d.slug}\` for
-**${d.displayName}** (${d.oneLiner}). Sector: ${d.sector}. HQ: ${d.hq}.
-
-The company's live postings are served by **Lever** on job board
-\`${d.companySlug}\` (\`https://jobs.lever.co/${d.companySlug}\`), which exposed
-**${d.jobCount} live role(s)** at probe time (public Lever Postings API,
-\`MIN_JOBS = 3\` gate). Discovered and gated through the deterministic Lever
-company-source pipeline (\`probe-lever → assemble → scaffold-lever → wire\`) —
-see \`.specify/specs/1194-lever-company-source-pipeline/\`.
-
-## Constitution cross-check
-
-- **TypeScript-only** — plugin is TS; no JS/Python. ✔
-- **Modular / plugin** — a self-contained \`source-company-${d.slug}\` package,
-  installable/removable via the barrel + \`Site\` enum; no core changes. ✔
-- **No peer imports** — delegates to the Lever ATS plugin via \`PluginRegistry\`
-  at runtime (never imports it directly). ✔
-- **Performance** — zero extra network cost over the Lever plugin it delegates
-  to (single public postings fetch); identity re-stamp is O(n) over jobs. ✔
-- **No competitor references** — documented purely on the company's public
-  merits. ✔
-
-## User story
-
-> As an **aggregator caller**, I want **\`Site.${d.enumKey}\`** in the source
-> registry, so that a single \`siteType: [Site.${d.enumKey}]\` request returns
-> ${d.displayName}'s live Lever postings, re-stamped with the company identity.
-
-## Functional requirements
-
-| ID | Requirement | Priority |
-|----|-------------|----------|
-| FR-1 | Add \`Site.${d.enumKey} = '${d.slug}'\` to the \`Site\` enum. | must |
-| FR-2 | \`${d.serviceName}\` implements \`IScraper\`, \`@SourcePlugin({ site: Site.${d.enumKey}, name: '${d.displayName}', category: 'company' })\`. | must |
-| FR-3 | Resolve the Lever scraper from \`PluginRegistry\`; delegate \`scrape({ ...input, companySlug: '${d.companySlug}' })\`. | must |
-| FR-4 | Re-stamp each \`JobPostDto\`: \`site = Site.${d.enumKey}\`, \`companyName = '${d.displayName}'\`, \`id\` prefix \`lever-\`→\`${d.slug}-\`. | must |
-| FR-5 | Fail-safe: return an empty \`JobResponseDto\` when Lever is unavailable / unregistered. | must |
-| FR-6 | tsconfig path-alias + jest moduleNameMapper + barrel registration. | must |
-| FR-7 | Mocked unit suite green (DI resolution, enum value, delegation, pass-through, resilience, cap). | must |
-
-## Highlights
-
-${d.highlights.map((h) => `- ${h}`).join('\n')}
-`;
-}
-
-function planMd(d: LeverCompanyDescriptor): string {
-  return `# Plan: ${d.specNo} — Source Company Plugin: ${d.displayName} (Lever company-direct)
-
-| Field | Value |
-| --- | --- |
-| Spec | spec.md |
-| Created | 2026-07-03 |
-| Last updated | 2026-07-03 |
-
-## Approach
-
-Clone the proven registry-delegation pattern via
-\`scripts/scaffold-lever-company-source.ts\`. The service is a thin
-registry-delegating adaptor — no bespoke HTTP or parsing — so it inherits every
-Lever field fix. Registration is applied by the backend-agnostic
-\`scripts/wire-company-source.ts\`.
-
-## Files
-
-| File | Change |
-|------|--------|
-| \`packages/plugins/source-company-${d.slug}/*\` | New package (module, service, index, tests, fixture). |
-| \`packages/models/src/enums/site.enum.ts\` | \`+ ${d.enumKey} = '${d.slug}'\`. |
-| \`packages/plugins/index.ts\` | \`+ import ${d.moduleName}\` + \`ALL_SOURCE_MODULES\` entry. |
-| \`tsconfig.base.json\` | \`+\` path alias. |
-| \`jest.config.js\` | \`+\` moduleNameMapper entry. |
-| \`.specify/specs/${d.specNo}-source-company-${d.slug}/\` | This spec/plan/tasks. |
-
-## Verification
-
-- \`tsc --noEmit\` clean for the new package.
-- Mocked unit suite green (no live network).
-- Optional: live probe against \`https://api.lever.co/v0/postings/${d.companySlug}?mode=json\`.
-`;
-}
-
-function tasksMd(d: LeverCompanyDescriptor): string {
-  return `# Tasks — Spec ${d.specNo}: ${d.displayName} (Lever company-direct)
-
-- [x] T1 — Probe \`${d.companySlug}\` against the public Lever Postings API (≥3 live roles). ✔ (${d.jobCount} roles)
-- [x] T2 — Assemble the descriptor (derive className/moduleName/enumKey from the display name).
-- [x] T3 — Scaffold the \`source-company-${d.slug}\` package (module, service, index, test, fixture).
-- [x] T4 — Wire \`Site.${d.enumKey}\`, barrel import, tsconfig alias, jest mapper.
-- [x] T5 — \`tsc --noEmit\` + mocked unit suite green.
-- [ ] T6 — (Optional) authenticated live verification; flip \`verified\` once confirmed.
-`;
-}
-
 function writeFileSafe(abs: string, content: string): void {
   fs.mkdirSync(path.dirname(abs), { recursive: true });
   fs.writeFileSync(abs, content);
@@ -576,12 +463,7 @@ function writeFileSafe(abs: string, content: string): void {
 
 function scaffoldOne(repoRoot: string, d: LeverCompanyDescriptor): void {
   const pkgDir = path.join(repoRoot, 'packages', 'plugins', `source-company-${d.slug}`);
-  const specDir = path.join(
-    repoRoot,
-    '.specify',
-    'specs',
-    `${d.specNo}-source-company-${d.slug}`,
-  );
+  const specPath = path.join(repoRoot, 'docs', 'specs', `source-company-${d.slug}.md`);
   const files: Array<[string, string]> = [
     [path.join(pkgDir, 'package.json'), packageJson(d)],
     [path.join(pkgDir, 'tsconfig.json'), tsconfigJson()],
@@ -590,10 +472,11 @@ function scaffoldOne(repoRoot: string, d: LeverCompanyDescriptor): void {
     [path.join(pkgDir, 'src', `${d.slug}.service.ts`), serviceFile(d)],
     [path.join(pkgDir, '__tests__', `${d.slug}.service.spec.ts`), testFile(d)],
     [path.join(pkgDir, '__tests__', 'fixtures', `${d.slug}-jobs.json`), buildFixture(d)],
-    [path.join(specDir, 'spec.md'), specMd(d)],
-    [path.join(specDir, 'plan.md'), planMd(d)],
-    [path.join(specDir, 'tasks.md'), tasksMd(d)],
+    [specPath, `# Source company ${d.displayName}\n\n**Status:** ready\n\n## Goal\n\nExpose ${d.displayName} through the source plugin contract.\n\n## Scope\n\n- In: the company source adapter and its mocked regression suite.\n- Out: new API behavior and unrelated sources.\n\n## Design\n\nUse the existing source registry and shared HTTP client or ATS contract.\n\n## Tasks\n\n- [ ] Register the plugin and run its tests.\n\n## Done when\n\n- [ ] Registration, type checks, and mocked source tests pass.\n`],
   ];
+  // Persist the design before emitting implementation files.
+  const specification = files.pop()!;
+  files.unshift(specification);
   for (const [abs, content] of files) writeFileSafe(abs, content);
 }
 

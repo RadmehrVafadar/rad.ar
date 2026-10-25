@@ -18,8 +18,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { MindscopeModule, MindscopeService } from '@ever-jobs/source-ats-mindscope';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { MindscopeModule, MindscopeService } from '@rad-ar/source-ats-mindscope';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Real, public Mindscope candidate portal (tenant code WHITEC04415 on
 // portal2.mindscope.com — confirmed live as a Mindscope V2Portal 2026-06-03).

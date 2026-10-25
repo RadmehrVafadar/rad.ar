@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-humecitycouncil",
+  "name": "@rad-ar/source-company-humecitycouncil",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

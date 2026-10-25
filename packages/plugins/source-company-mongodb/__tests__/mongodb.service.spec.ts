@@ -2,13 +2,13 @@ import 'reflect-metadata';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Test } from '@nestjs/testing';
-import { JobResponseDto, ScraperInputDto, Site } from '@ever-jobs/models';
+import { JobResponseDto, ScraperInputDto, Site } from '@rad-ar/models';
 
 // Mock createHttpClient so the scraper hits a controlled fixture
 // rather than the live Greenhouse public API.
 const mockGet = jest.fn();
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({

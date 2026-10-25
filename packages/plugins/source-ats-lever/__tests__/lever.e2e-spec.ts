@@ -4,13 +4,13 @@
  * Tests both public scraping and authenticated API paths.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const mockGet = jest.fn();
 const mockSetHeaders = jest.fn();
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -20,7 +20,7 @@ jest.mock('@ever-jobs/common', () => {
   };
 });
 
-import { LeverModule, LeverService } from '@ever-jobs/source-ats-lever';
+import { LeverModule, LeverService } from '@rad-ar/source-ats-lever';
 
 describe('LeverService (E2E)', () => {
   let service: LeverService;

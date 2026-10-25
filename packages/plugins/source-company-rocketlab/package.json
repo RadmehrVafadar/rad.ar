@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-rocketlab",
+  "name": "@rad-ar/source-company-rocketlab",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

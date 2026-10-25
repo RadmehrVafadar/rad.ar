@@ -4,8 +4,8 @@
  * Tests ATS scraping (requires companySlug as API key).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ISmartRecruitModule, ISmartRecruitService } from '@ever-jobs/source-ats-ismartrecruit';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ISmartRecruitModule, ISmartRecruitService } from '@rad-ar/source-ats-ismartrecruit';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('ISmartRecruitService (E2E)', () => {
   let service: ISmartRecruitService;

@@ -327,7 +327,7 @@ function runtimeEnvironment(
   configuration: GuiRuntimeConfiguration,
 ): NodeJS.ProcessEnv {
   const operatorUiEnabled =
-    process.env.EVER_JOBS_UI_OPERATOR ?? process.env.VITE_UI_OPERATOR ?? "true";
+    process.env.RADAR_UI_OPERATOR ?? process.env.VITE_UI_OPERATOR ?? "true";
   return {
     ...process.env,
     API_HOST: configuration.apiHost,
@@ -346,12 +346,12 @@ function runtimeEnvironment(
     VITE_PROXY_TARGET:
       process.env.VITE_PROXY_TARGET ??
       `http://${configuration.apiHost}:${configuration.apiPort}`,
-    EVER_JOBS_UI_OPERATOR: operatorUiEnabled,
+    RADAR_UI_OPERATOR: operatorUiEnabled,
     VITE_UI_OPERATOR: operatorUiEnabled,
     NX_DAEMON: process.env.NX_DAEMON ?? "false",
     NX_ISOLATE_PLUGINS: process.env.NX_ISOLATE_PLUGINS ?? "false",
-    EVER_JOBS_LOCAL_ENV_FILE:
-      process.env.EVER_JOBS_LOCAL_ENV_FILE ??
+    RADAR_LOCAL_ENV_FILE:
+      process.env.RADAR_LOCAL_ENV_FILE ??
       resolve(configuration.workspaceRoot, ".env.local"),
   };
 }

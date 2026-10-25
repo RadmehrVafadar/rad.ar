@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-careerjet",
+  "name": "@rad-ar/source-careerjet",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

@@ -12,8 +12,8 @@
  * returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaycorModule, PaycorService } from '@ever-jobs/source-ats-paycor';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { PaycorModule, PaycorService } from '@rad-ar/source-ats-paycor';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Paycor-powered career portal clientId (verified live 2026-06-03).
 const KNOWN_TENANT = '8afc05ca3677c9a501367a8b233e51f1';

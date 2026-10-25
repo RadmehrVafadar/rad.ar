@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-monzo",
+  "name": "@rad-ar/source-company-monzo",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

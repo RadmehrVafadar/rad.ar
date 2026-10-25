@@ -7,7 +7,7 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm --workspace @ever-jobs/web run dev --",
+        "command": "npm --workspace @rad-ar/web run dev --",
         "cwd": "{workspaceRoot}"
       }
     },
@@ -15,7 +15,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/apps/web"],
       "options": {
-        "command": "npm --workspace @ever-jobs/web run build",
+        "command": "npm --workspace @rad-ar/web run build",
         "cwd": "{workspaceRoot}"
       }
     },
@@ -23,14 +23,14 @@
       "executor": "nx:run-commands",
       "dependsOn": ["build"],
       "options": {
-        "command": "npm --workspace @ever-jobs/web run preview --",
+        "command": "npm --workspace @rad-ar/web run preview --",
         "cwd": "{workspaceRoot}"
       }
     },
     "test": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm --workspace @ever-jobs/web run test",
+        "command": "npm --workspace @rad-ar/web run test",
         "cwd": "{workspaceRoot}"
       }
     }

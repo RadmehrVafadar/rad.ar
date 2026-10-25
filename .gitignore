@@ -23,3 +23,7 @@ dist/
 
 # Scratch workspace for scheduled-run discovery/enrichment (never committed)
 tmp/
+
+# Browser validation artifacts
+**/test-results/
+**/playwright-report/

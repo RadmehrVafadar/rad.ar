@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 /**
  * Snagajob (snagajob.com) — hourly and part-time job board.
@@ -15,8 +15,8 @@ import {
   CompensationDto,
   CompensationInterval,
   Site,
-} from '@ever-jobs/models';
-import { createHttpClient, randomSleep, stripHtmlTags } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, randomSleep, stripHtmlTags } from '@rad-ar/common';
 
 const SNAGAJOB_API_URL = 'https://www.snagajob.com/api/search';
 const SNAGAJOB_BASE_URL = 'https://www.snagajob.com';

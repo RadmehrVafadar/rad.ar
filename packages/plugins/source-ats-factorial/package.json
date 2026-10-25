@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-ats-factorial",
+  "name": "@rad-ar/source-ats-factorial",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

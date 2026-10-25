@@ -13,8 +13,8 @@
  * jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { VincereModule, VincereService } from '@ever-jobs/source-ats-vincere';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { VincereModule, VincereService } from '@rad-ar/source-ats-vincere';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('VincereService (E2E)', () => {
   let service: VincereService;

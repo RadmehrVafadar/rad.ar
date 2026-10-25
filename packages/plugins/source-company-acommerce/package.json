@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-acommerce",
+  "name": "@rad-ar/source-company-acommerce",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

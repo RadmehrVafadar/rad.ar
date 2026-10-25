@@ -10,8 +10,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HeyrecruitModule, HeyrecruitService } from '@ever-jobs/source-ats-heyrecruit';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HeyrecruitModule, HeyrecruitService } from '@rad-ar/source-ats-heyrecruit';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Heyrecruit-powered tenant verified live 2026-06-03
 // (Bodensee-Therme Überlingen — bodenseetherme.heyrecruit.de).

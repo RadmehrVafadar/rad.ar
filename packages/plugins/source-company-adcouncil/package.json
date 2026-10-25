@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-adcouncil",
+  "name": "@rad-ar/source-company-adcouncil",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

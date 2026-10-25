@@ -5,8 +5,8 @@
  * Set JOBDATAAPI_API_KEY for higher limits.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobDataApiModule, JobDataApiService } from '@ever-jobs/source-jobdataapi';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobDataApiModule, JobDataApiService } from '@rad-ar/source-jobdataapi';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobDataApiService (E2E)', () => {
   let service: JobDataApiService;

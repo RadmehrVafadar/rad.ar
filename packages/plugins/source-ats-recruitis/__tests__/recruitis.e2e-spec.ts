@@ -11,8 +11,8 @@
  *   - `companySlug: 'recruitisio'` — Recruitis.io s.r.o. career site.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RecruitisModule, RecruitisService } from '@ever-jobs/source-ats-recruitis';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RecruitisModule, RecruitisService } from '@rad-ar/source-ats-recruitis';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('RecruitisService (E2E)', () => {
   let service: RecruitisService;

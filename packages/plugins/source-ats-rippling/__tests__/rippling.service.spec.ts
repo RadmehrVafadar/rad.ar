@@ -6,11 +6,11 @@ import {
   JobType,
   ScraperInputDto,
   Site,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 
 const mockGet = jest.fn();
-jest.mock("@ever-jobs/common", () => {
-  const actual = jest.requireActual("@ever-jobs/common");
+jest.mock("@rad-ar/common", () => {
+  const actual = jest.requireActual("@rad-ar/common");
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -403,8 +403,9 @@ describe("RipplingService pagination", () => {
     expect(result.jobs[0]).not.toHaveProperty("applyUrl");
     expect(result.jobs[1]).toMatchObject({
       employmentType: "Seasonal specialist",
-      location: { city: "Remote - United States" },
+      location: { city: "Remote", country: "United States" },
       isRemote: true,
+      workFromHomeType: "Remote",
     });
     expect(result.jobs[1]).not.toHaveProperty("jobType");
   });

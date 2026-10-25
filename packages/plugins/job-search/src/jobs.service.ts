@@ -1,0 +1,332 @@
+import { IJobSearch, JobSearchDetailedResult as DetailedJobsSearchResult } from '@rad-ar/models';
+import { OnModuleInit, Injectable, Logger, Optional } from "@nestjs/common";
+import {
+  Site,
+  ScraperInputDto,
+  JobPostDto,
+  JobResponseDto,
+  IScraper,
+  Country,
+  SalarySource,
+  CompensationDto,
+  ERR_SOURCE_CIRCUIT_OPEN,
+} from "@rad-ar/models";
+import { extractSalary, convertToAnnual } from "@rad-ar/common";
+import { ConfigService } from "@nestjs/config";
+import { PluginRegistry, CircuitBreakerInterceptor } from "@rad-ar/plugin";
+import { MetricsService } from "@rad-ar/common/runtime/metrics/metrics.service";
+
+export type { JobSearchDetailedResult as DetailedJobsSearchResult } from '@rad-ar/models';
+
+/**
+ * Central orchestration service for job searching.
+ *
+ * All individual scraper injections have been replaced by a single
+ * PluginRegistry injection. The registry is automatically populated
+ * at bootstrap by PluginDiscoveryService scanning for @SourcePlugin()
+ * decorated services.
+ */
+@Injectable()
+export class JobsService implements OnModuleInit, IJobSearch {
+  private readonly logger = new Logger(JobsService.name);
+
+  constructor(
+    private readonly registry: PluginRegistry,
+    private readonly configService: ConfigService,
+    private readonly metrics: MetricsService,
+    /**
+     * Spec 005 / T04 — when {@link CircuitBreakerModule} is imported by
+     * {@link JobsModule} this is bound and every per-site `scrape()` call
+     * is wrapped in {@link CircuitBreakerInterceptor.wrap}. When the
+     * interceptor is *not* bound the service degrades to the prior
+     * behaviour (raw `scraper.scrape()` call, no breaker enforcement) so
+     * test bootstraps that don't import the breaker module keep working.
+     */
+    @Optional() private readonly circuitBreaker?: CircuitBreakerInterceptor,
+  ) {}
+
+  onModuleInit() {
+    this.metrics.setTotalSources(this.registry.size);
+    this.logger.log(
+      `JobsService initialized with ${this.registry.size} source plugins`,
+    );
+
+    // Log all registered sources for debugging
+    const sources = this.registry.listSources();
+    for (const source of sources) {
+      this.logger.debug(
+        `  → ${source.site}: ${source.name} (${source.category})`,
+      );
+    }
+  }
+
+  /**
+   * Orchestrates concurrent searching across selected sites.
+   * Runs all selected source modules in parallel via Promise.allSettled.
+   *
+   * Routing rules (when no explicit siteType is provided):
+   * - If `companySlug` provided → only ATS scrapers run (they need a slug)
+   * - Otherwise → search + company scrapers run (ATS scrapers skipped)
+   *
+   * When `siteType` is explicitly provided, the filter is always respected
+   * regardless of `companySlug`.
+   */
+  async searchJobs(input: ScraperInputDto): Promise<JobPostDto[]> {
+    return (await this.searchJobsDetailed(input)).jobs;
+  }
+
+  /**
+   * The watcher needs per-source outcomes so one broken integration can be
+   * recorded without turning an otherwise useful run into an opaque success.
+   * Existing callers keep using searchJobs(), which returns the same job array.
+   */
+  async searchJobsDetailed(
+    input: ScraperInputDto,
+  ): Promise<DetailedJobsSearchResult> {
+    const explicitSites = input.siteType;
+    const atsSites = new Set<Site>(this.registry.listAtsSites());
+    let sites: Site[];
+
+    if (explicitSites?.length) {
+      // Explicit site selection — respect exactly what was requested
+      sites = explicitSites;
+    } else if (input.companySlug) {
+      // companySlug provided but no explicit sites → ATS scrapers only
+      sites = [...atsSites];
+    } else {
+      // Default: search + company scrapers (skip ATS — they need a slug)
+      sites = this.registry
+        .listSiteKeys()
+        .filter((s: Site) => !atsSites.has(s));
+    }
+
+    const selectedScrapers: { site: Site; scraper: IScraper }[] = [];
+
+    for (const site of sites) {
+      const scraper = this.registry.getScraper(site);
+      if (scraper) {
+        selectedScrapers.push({ site, scraper });
+      } else {
+        this.logger.warn(`Unknown site: ${site}`);
+      }
+    }
+
+    if (selectedScrapers.length === 0) {
+      this.logger.warn("No valid scrapers selected");
+      return {
+        jobs: [],
+        sourcesRequested: sites.map(String),
+        sourcesSucceeded: [],
+        sourcesFailed: sites.map((site) => ({
+          source: String(site),
+          error: "Unknown or unavailable source",
+        })),
+        durationsMs: {},
+      };
+    }
+
+    this.logger.log(
+      `Running ${selectedScrapers.length} scrapers concurrently: ${selectedScrapers.map((s) => s.site).join(", ")}`,
+    );
+
+    // Run all scrapers concurrently using Promise.allSettled
+    const results = await Promise.allSettled(
+      selectedScrapers.map(async ({ site, scraper }) => {
+        const sourceStartedAt = Date.now();
+        // Resolve retry policy for this source
+        const globalRetry = this.configService.get("retry");
+        const perSourceRetry = globalRetry.perSource?.[site] || {};
+
+        const scraperInput = new ScraperInputDto({
+          ...input,
+          retries:
+            input.retries ??
+            perSourceRetry.retries ??
+            globalRetry.defaultRetries,
+          retryDelay:
+            input.retryDelay ??
+            perSourceRetry.delayMs ??
+            globalRetry.defaultDelayMs,
+          retryBackoff:
+            input.retryBackoff ??
+            perSourceRetry.backoff ??
+            globalRetry.defaultBackoff,
+          retryMaxDelay:
+            input.retryMaxDelay ?? perSourceRetry.maxDelayMs ?? 30000,
+        });
+
+        this.logger.log(
+          `Starting search for ${site} (retries=${scraperInput.retries}, backoff=${scraperInput.retryBackoff})`,
+        );
+        const scraperStop = this.metrics.scraperDuration.startTimer({ site });
+        try {
+          // Spec 005 / T04 — wrap the per-source dispatch in the circuit
+          // breaker when bound. The interceptor short-circuits with
+          // `ERR_SOURCE_CIRCUIT_OPEN` once the breaker has tripped, which
+          // we surface as a `circuit_open` metric status (not `error`) so
+          // operators can distinguish "source down" from "we stopped
+          // calling source" on the dashboard.
+          const response = this.circuitBreaker
+            ? await this.circuitBreaker.wrap(site, () =>
+                scraper.scrape(scraperInput),
+              )
+            : await scraper.scrape(scraperInput);
+          scraperStop();
+          this.metrics.scraperRequestsTotal.inc({ site, status: "success" });
+          // Tag each job with the site it came from
+          for (const job of response.jobs) {
+            job.site = site;
+          }
+          this.logger.log(`${site}: found ${response.jobs.length} jobs`);
+          return { response, durationMs: Date.now() - sourceStartedAt };
+        } catch (err: any) {
+          scraperStop();
+          const isCircuitOpen = err?.code === ERR_SOURCE_CIRCUIT_OPEN;
+          this.metrics.scraperRequestsTotal.inc({
+            site,
+            status: isCircuitOpen ? "circuit_open" : "error",
+          });
+          if (isCircuitOpen) {
+            // Breaker short-circuits are an *expected* fan-out outcome
+            // for a degraded source — log at warn, not error, and keep
+            // the message terse so logs stay readable.
+            this.logger.warn(`${site}: skipped (circuit open)`);
+          } else {
+            this.logger.error(`${site} search failed: ${err.message}`);
+          }
+          const failure = err instanceof Error ? err : new Error(String(err));
+          Object.assign(failure, {
+            source: String(site),
+            sourceDurationMs: Date.now() - sourceStartedAt,
+          });
+          throw failure;
+        }
+      }),
+    );
+
+    // Aggregate results from fulfilled searches
+    const allJobs: JobPostDto[] = [];
+    const sourcesSucceeded: string[] = [];
+    const sourcesFailed: Array<{ source: string; error: string }> = [];
+    const durationsMs: Record<string, number> = {};
+    for (let index = 0; index < results.length; index++) {
+      const result = results[index];
+      const source = String(selectedScrapers[index].site);
+      if (result.status === "fulfilled") {
+        allJobs.push(...result.value.response.jobs);
+        sourcesSucceeded.push(source);
+        durationsMs[source] = result.value.durationMs;
+      } else {
+        const reason = result.reason as Error & { sourceDurationMs?: number };
+        sourcesFailed.push({
+          source,
+          error: reason?.message ?? "Source execution failed",
+        });
+        if (reason?.sourceDurationMs !== undefined) {
+          durationsMs[source] = reason.sourceDurationMs;
+        }
+      }
+    }
+
+    // Post-processing: salary enrichment (mirrors Python __init__.py logic)
+    for (const job of allJobs) {
+      this.postProcessSalary(job, input);
+    }
+
+    // Sort by site name then by date (most recent first)
+    allJobs.sort((a, b) => {
+      const siteCompare = (a.site ?? "").localeCompare(b.site ?? "");
+      if (siteCompare !== 0) return siteCompare;
+
+      const dateA = a.datePosted
+        ? new Date(a.datePosted as string).getTime()
+        : 0;
+      const dateB = b.datePosted
+        ? new Date(b.datePosted as string).getTime()
+        : 0;
+      return dateB - dateA;
+    });
+
+    this.logger.log(`Total aggregated jobs: ${allJobs.length}`);
+    return {
+      jobs: allJobs,
+      sourcesRequested: selectedScrapers.map(({ site }) => String(site)),
+      sourcesSucceeded,
+      sourcesFailed,
+      durationsMs,
+    };
+  }
+
+  /**
+   * Post-processes a single job's salary data.
+   * If the scraper provided direct compensation, optionally convert to annual.
+   * If no compensation was returned and the country is USA, try to parse salary from the description.
+   * This mirrors the orchestrator logic for salary post-processing.
+   */
+  private postProcessSalary(job: JobPostDto, input: ScraperInputDto): void {
+    const enforceAnnual = input.enforceAnnualSalary ?? false;
+    const country = input.country ?? Country.USA;
+
+    if (job.compensation) {
+      // Direct compensation from scraper
+      job.salarySource = SalarySource.DIRECT_DATA;
+
+      if (
+        enforceAnnual &&
+        job.compensation.interval &&
+        job.compensation.interval !== "yearly" &&
+        job.compensation.minAmount != null &&
+        job.compensation.maxAmount != null
+      ) {
+        const data = {
+          interval: job.compensation.interval,
+          minAmount: job.compensation.minAmount,
+          maxAmount: job.compensation.maxAmount,
+        };
+        convertToAnnual(data);
+        job.compensation.interval = data.interval as any;
+        job.compensation.minAmount = data.minAmount;
+        job.compensation.maxAmount = data.maxAmount;
+      }
+    } else if (country === Country.USA && job.description) {
+      // Fallback: extract salary from description text (USA only)
+      const extracted = extractSalary(job.description, {
+        enforceAnnualSalary: enforceAnnual,
+      });
+      if (extracted.minAmount != null) {
+        job.salarySource = SalarySource.DESCRIPTION;
+        job.compensation = new CompensationDto({
+          interval: extracted.interval as any,
+          minAmount: extracted.minAmount,
+          maxAmount: extracted.maxAmount,
+          currency: extracted.currency ?? "USD",
+        });
+      }
+    }
+
+    // Clear salary source if no salary data
+    if (!job.compensation?.minAmount) {
+      job.salarySource = undefined;
+    }
+  }
+
+  /**
+   * Dynamically register a new scraper (used by community plugins)
+   */
+  registerScraper(site: string, scraper: IScraper) {
+    this.registry.registerExternal(site, scraper);
+    this.metrics.setTotalSources(this.registry.size);
+  }
+
+  /**
+   * List all currently registered source keys
+   */
+  listRegisteredSources(): string[] {
+    return this.registry.listSiteKeys();
+  }
+
+  /** Source planning metadata exposed through the watcher bridge. */
+  listSourceMetadata() {
+    return this.registry.listSources();
+  }
+}

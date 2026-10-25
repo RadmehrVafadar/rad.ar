@@ -6,7 +6,7 @@ import {
   IStoreMetadata,
   Site,
   STORE_PLUGIN_METADATA_KEY,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { runStoreConformance } from '../../../plugin/src/store/__tests__/conformance';
 import {
   InMemoryJobStore,

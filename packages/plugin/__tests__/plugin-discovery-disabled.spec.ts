@@ -5,13 +5,13 @@ import {
   IScraper,
   ScraperInputDto,
   JobResponseDto,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 import {
   DISABLED_SOURCES_ENV_VAR,
   PluginModule,
   PluginRegistry,
   SourcePlugin,
-} from "@ever-jobs/plugin";
+} from "@rad-ar/plugin";
 
 @SourcePlugin({
   site: Site.LINKEDIN,
@@ -86,7 +86,7 @@ async function bootstrapWithEnv(
   }
 }
 
-describe("PluginDiscoveryService — EVER_JOBS_DISABLED_SOURCES", () => {
+describe("PluginDiscoveryService — RADAR_DISABLED_SOURCES", () => {
   it("registers all plugins when env var is unset", async () => {
     const registry = await bootstrapWithEnv(undefined);
     expect(registry.has(Site.LINKEDIN)).toBe(true);

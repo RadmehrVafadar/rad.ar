@@ -17,8 +17,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {
   DigitalRecruitersModule,
   DigitalRecruitersService,
-} from '@ever-jobs/source-ats-digitalrecruiters';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+} from '@rad-ar/source-ats-digitalrecruiters';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DigitalRecruitersService (E2E)', () => {
   let service: DigitalRecruitersService;

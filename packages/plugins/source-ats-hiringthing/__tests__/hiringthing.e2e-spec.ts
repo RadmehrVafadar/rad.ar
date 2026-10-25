@@ -5,8 +5,8 @@
  * To run these tests, set HIRINGTHING_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HiringThingModule, HiringThingService } from '@ever-jobs/source-ats-hiringthing';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HiringThingModule, HiringThingService } from '@rad-ar/source-ats-hiringthing';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 const describeIfKey = process.env.HIRINGTHING_API_KEY ? describe : describe.skip;
 

@@ -13,8 +13,8 @@
  * actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SolidesModule, SolidesService } from '@ever-jobs/source-ats-solides';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SolidesModule, SolidesService } from '@rad-ar/source-ats-solides';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sólides-powered career site (Sólides Tecnologia — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'solides';

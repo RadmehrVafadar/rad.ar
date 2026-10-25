@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-aclu",
+  "name": "@rad-ar/source-company-aclu",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

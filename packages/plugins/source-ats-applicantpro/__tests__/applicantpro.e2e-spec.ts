@@ -10,8 +10,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApplicantProModule, ApplicantProService } from '@ever-jobs/source-ats-applicantpro';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ApplicantProModule, ApplicantProService } from '@rad-ar/source-ats-applicantpro';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public ApplicantPro-powered job board (City of Pharr, TX).
 const KNOWN_TENANT = 'pharrtx';

@@ -4,8 +4,8 @@
  * Requires AUTHENTICJOBS_API_KEY to be set in the environment.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthenticJobsModule, AuthenticJobsService } from '@ever-jobs/source-authenticjobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { AuthenticJobsModule, AuthenticJobsService } from '@rad-ar/source-authenticjobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('AuthenticJobsService (E2E)', () => {
   let service: AuthenticJobsService;

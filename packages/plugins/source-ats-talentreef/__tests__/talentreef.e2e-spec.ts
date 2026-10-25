@@ -12,8 +12,8 @@
  * only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TalentReefModule, TalentReefService } from '@ever-jobs/source-ats-talentreef';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TalentReefModule, TalentReefService } from '@rad-ar/source-ats-talentreef';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public TalentReef-powered career-search slug (Rooms To Go).
 const KNOWN_TENANT = 'rtg';

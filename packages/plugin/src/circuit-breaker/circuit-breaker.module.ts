@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CIRCUIT_BREAKER_TOKEN } from '@ever-jobs/models';
+import { CIRCUIT_BREAKER_TOKEN } from '@rad-ar/models';
 import { CircuitBreakerService } from './circuit-breaker.service';
 import { CircuitBreakerInterceptor } from './circuit-breaker.interceptor';
 

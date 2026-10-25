@@ -4,8 +4,8 @@
  * Tests ATS scraping (requires companySlug as API key).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CrelateModule, CrelateService } from '@ever-jobs/source-ats-crelate';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CrelateModule, CrelateService } from '@rad-ar/source-ats-crelate';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('CrelateService (E2E)', () => {
   let service: CrelateService;

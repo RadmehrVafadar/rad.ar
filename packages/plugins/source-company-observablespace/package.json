@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-observablespace",
+  "name": "@rad-ar/source-company-observablespace",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

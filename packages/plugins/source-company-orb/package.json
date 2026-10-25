@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-orb",
+  "name": "@rad-ar/source-company-orb",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

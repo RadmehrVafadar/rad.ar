@@ -1,27 +1,16 @@
 import { Inject } from "@nestjs/common";
 import { Command, CommandRunner, Option } from "nest-commander";
 import * as fs from "fs";
-import {
-  buildCompanyCoverageReport,
-  defaultInternshipWatch,
-  DiscordNotificationProvider,
-  JobWatch,
-  WATCH_REPOSITORY,
-  WatchExecutionService,
-  WatchMatchStatus,
-  WatchPresetApplyResult,
-  WatchPresetService,
-  WatchRepository,
-  WatchValidationService,
-  validateWatchTargetKeys,
-} from "@ever-jobs/watcher";
+import { buildCompanyCoverageReport, defaultInternshipWatch, WatchExecutionService, WatchPresetApplyResult, WatchPresetService, WatchValidationService, validateWatchTargetKeys } from '@rad-ar/watch-engine';
+import { DiscordNotificationProvider } from '@rad-ar/notification-discord';
+import { JobWatch, WATCH_REPOSITORY, WatchMatchStatus, WatchRepository } from '@rad-ar/models';
 import {
   createDiscordTestMessage,
   publicNotificationDelivery,
   publicObservedJob,
   publicWatch,
-} from "../../../api/src/watches/watch-management.helpers";
-import { collectWatchMetrics } from "../../../api/src/watches/watch-metrics";
+} from "@rad-ar/watch-engine/management/watch-management.helpers";
+import { collectWatchMetrics } from '@rad-ar/watch-engine/management/watch-metrics';
 
 interface WatchOptions {
   config?: string;

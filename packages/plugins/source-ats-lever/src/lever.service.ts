@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -11,7 +11,7 @@ import {
   CompensationInterval,
   Site,
   getCompensationInterval,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
@@ -20,7 +20,7 @@ import {
   regionNameFromCode,
   randomSleep,
   resolveCompensation,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { LEVER_API_URL, LEVER_HEADERS, LEVER_DELAY_MS } from './lever.constants';
 import { LeverJob } from './lever.types';
 
@@ -67,7 +67,7 @@ export class LeverService implements IScraper {
     const url = `${LEVER_API_URL}/${encodeURIComponent(companySlug)}?mode=json`;
 
     try {
-      this.logger.log(`Fetching Lever jobs for company: ${companySlug}`);
+      this.logger.log(`Fetching Lrad.ar for company: ${companySlug}`);
       const response = await client.get(url);
       const jobs: LeverJob[] = response.data ?? [];
 
@@ -125,7 +125,7 @@ export class LeverService implements IScraper {
     const url = `${LEVER_API_URL}/${encodeURIComponent(companySlug)}?mode=json`;
 
     this.logger.log(
-      `Fetching Lever jobs via authenticated API for company: ${companySlug}`,
+      `Fetching Lrad.ar via authenticated API for company: ${companySlug}`,
     );
     const response = await client.get(url);
     const jobs: LeverJob[] = response.data ?? [];

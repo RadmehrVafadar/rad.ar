@@ -9,8 +9,8 @@
  * `https://www.careers-page.com/{slug}/`).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ManatalModule, ManatalService } from '@ever-jobs/source-ats-manatal';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { ManatalModule, ManatalService } from '@rad-ar/source-ats-manatal';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Real slug: Castelion Corporation (130+ live openings as of capture).
 const CASTELION_SLUG = 'castelion-corporation';

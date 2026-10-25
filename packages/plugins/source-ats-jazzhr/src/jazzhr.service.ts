@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 // WIP: This source may need selector updates after live testing.
 // JazzHR career pages use different themes so selectors may vary per company.
@@ -12,12 +12,12 @@ import {
   LocationDto,
   DescriptionFormat,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   extractEmails,
   htmlToPlainText,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { JAZZHR_HEADERS } from './jazzhr.constants';
 
 @SourcePlugin({

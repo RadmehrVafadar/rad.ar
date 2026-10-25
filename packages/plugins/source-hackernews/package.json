@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-hackernews",
+  "name": "@rad-ar/source-hackernews",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

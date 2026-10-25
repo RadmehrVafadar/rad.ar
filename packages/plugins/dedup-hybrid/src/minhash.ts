@@ -78,7 +78,7 @@ function makeCoeffs(size: number, seed: number): { a: Uint32Array; b: Uint32Arra
  * Returns the normalised tokens (empty array if the text is blank).
  *
  * We re-tokenise inside MinHash rather than reusing
- * `@ever-jobs/common/normalize` because those helpers are tuned for short
+ * `@rad-ar/common/normalize` because those helpers are tuned for short
  * structured fields (title/company) and aggressively strip suffixes; for
  * long-form text we just want a generic word splitter.
  */

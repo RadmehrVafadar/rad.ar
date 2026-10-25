@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-keepersecurity",
+  "name": "@rad-ar/source-company-keepersecurity",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

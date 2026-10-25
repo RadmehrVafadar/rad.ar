@@ -23,15 +23,11 @@ import {
   INotificationSecretStore,
   NOTIFICATION_SECRET_STORE,
   NotificationSecretStatus,
-} from "@ever-jobs/plugin";
-import {
-  DiscordNotificationProvider,
-  JobWatch,
-  WATCH_REPOSITORY,
-  WatchRepository,
-} from "@ever-jobs/watcher";
+} from "@rad-ar/plugin";
+import { DiscordNotificationProvider } from '@rad-ar/notification-discord';
+import { JobWatch, WATCH_REPOSITORY, WatchRepository } from '@rad-ar/models';
 import { AdminAuth } from "../auth/admin-auth.decorator";
-import { createDiscordTestMessage } from "../watches/watch-management.helpers";
+import { createDiscordTestMessage } from "@rad-ar/watch-engine/management/watch-management.helpers";
 import {
   SetDiscordDestinationDto,
   TestDiscordDestinationDto,

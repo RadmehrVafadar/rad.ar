@@ -11,8 +11,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { TribepadModule, TribepadService } from '@ever-jobs/source-ats-tribepad';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { TribepadModule, TribepadService } from '@rad-ar/source-ats-tribepad';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('TribepadService (E2E)', () => {
   let service: TribepadService;

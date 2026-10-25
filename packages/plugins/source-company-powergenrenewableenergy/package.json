@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-powergenrenewableenergy",
+  "name": "@rad-ar/source-company-powergenrenewableenergy",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

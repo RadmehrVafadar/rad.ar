@@ -1,6 +1,6 @@
 # Shopify careers source
 
-`@ever-jobs/source-company-shopify` is the direct Shopify internship source.
+`@rad-ar/source-company-shopify` is the direct Shopify internship source.
 It uses only public pages on `https://www.shopify.com`:
 
 - the server-rendered `/careers` cards for public job/JID identity, title,

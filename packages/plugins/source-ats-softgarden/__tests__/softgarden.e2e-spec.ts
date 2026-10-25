@@ -13,8 +13,8 @@
  *     e-recruiting GmbH's own career page (Germany).
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SoftgardenModule, SoftgardenService } from '@ever-jobs/source-ats-softgarden';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SoftgardenModule, SoftgardenService } from '@rad-ar/source-ats-softgarden';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('SoftgardenService (E2E)', () => {
   let service: SoftgardenService;

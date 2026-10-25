@@ -13,8 +13,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { HirehiveModule, HirehiveService } from '@ever-jobs/source-ats-hirehive';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { HirehiveModule, HirehiveService } from '@rad-ar/source-ats-hirehive';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Hirehive-powered career site (HireHive's own board — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'hirehive';

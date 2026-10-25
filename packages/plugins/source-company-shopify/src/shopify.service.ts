@@ -6,13 +6,13 @@ import {
   JobResponseDto,
   ScraperInputDto,
   Site,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 import {
   createHttpClient,
   htmlToPlainText,
   parseLocationList,
-} from "@ever-jobs/common";
-import { SourcePlugin } from "@ever-jobs/plugin";
+} from "@rad-ar/common";
+import { SourcePlugin } from "@rad-ar/plugin";
 
 import {
   ShopifySourceError,

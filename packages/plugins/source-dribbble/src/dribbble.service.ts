@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 /**
  * Dribbble Jobs — design-focused job board.
@@ -17,8 +17,8 @@ import {
   CompensationDto,
   CompensationInterval,
   Site,
-} from '@ever-jobs/models';
-import { createHttpClient, stripHtmlTags, extractSalary } from '@ever-jobs/common';
+} from '@rad-ar/models';
+import { createHttpClient, stripHtmlTags, extractSalary } from '@rad-ar/common';
 
 const DRIBBBLE_BASE_URL = 'https://dribbble.com';
 const DRIBBBLE_JOBS_URL = 'https://dribbble.com/jobs';

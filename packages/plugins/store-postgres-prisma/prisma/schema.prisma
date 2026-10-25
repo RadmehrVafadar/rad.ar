@@ -1,4 +1,4 @@
-// Prisma schema for `@ever-jobs/store-postgres-prisma` (Spec 004 — Phase 4).
+// Prisma schema for `@rad-ar/store-postgres-prisma` (Spec 004 — Phase 4).
 //
 // This is the SCHEMA-OF-RECORD for the Postgres backend. It mirrors the
 // Drizzle SQLite schema (`packages/plugins/store-sqlite-drizzle/drizzle/schema.ts`)

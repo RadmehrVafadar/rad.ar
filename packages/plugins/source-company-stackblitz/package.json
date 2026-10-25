@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-stackblitz",
+  "name": "@rad-ar/source-company-stackblitz",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,13 +1,13 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 
-jest.mock("@ever-jobs/common", () => {
-  const actual = jest.requireActual("@ever-jobs/common");
+jest.mock("@rad-ar/common", () => {
+  const actual = jest.requireActual("@rad-ar/common");
   return { ...actual, createHttpClient: jest.fn() };
 });
 
-import { createHttpClient } from "@ever-jobs/common";
-import { ScraperInputDto, Site } from "@ever-jobs/models";
+import { createHttpClient } from "@rad-ar/common";
+import { ScraperInputDto, Site } from "@rad-ar/models";
 import { MicrosoftService } from "../src/microsoft.service";
 
 const payload = JSON.parse(

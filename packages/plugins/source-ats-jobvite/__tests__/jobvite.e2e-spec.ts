@@ -5,8 +5,8 @@
  * To run authenticated tests, set JOBVITE_API_KEY and JOBVITE_API_SECRET env vars.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobviteModule, JobviteService } from '@ever-jobs/source-ats-jobvite';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobviteModule, JobviteService } from '@rad-ar/source-ats-jobvite';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobviteService (E2E)', () => {
   let service: JobviteService;

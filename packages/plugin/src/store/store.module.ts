@@ -10,7 +10,7 @@ import {
   JOB_STORE_TOKEN,
   STORE_PLUGIN_METADATA_KEY,
   isHealthSnapshotStore,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import { StoreRegistry } from './store-registry.service';
 
 /**
@@ -97,13 +97,13 @@ export class StoreModuleConfigurationError extends Error {
 /**
  * Bootstrap-time error code: a class passed in `backends` is missing
  * `@StorePlugin()` metadata. Operator-facing — exported from
- * `@ever-jobs/plugin` so log alerts can grep it literally.
+ * `@rad-ar/plugin` so log alerts can grep it literally.
  */
 export const ERR_STORE_BACKEND_NOT_DECORATED = 'ERR_STORE_BACKEND_NOT_DECORATED';
 
 /**
  * Bootstrap-time error code: `forActive('')` was called (empty / blank
- * id). Catches a common operator typo where `EVER_JOBS_STORE` is set
+ * id). Catches a common operator typo where `RADAR_STORE` is set
  * but empty.
  */
 export const ERR_STORE_ACTIVE_ID_REQUIRED = 'ERR_STORE_ACTIVE_ID_REQUIRED';
@@ -148,7 +148,7 @@ export const ERR_STORE_ACTIVE_ID_REQUIRED = 'ERR_STORE_ACTIVE_ID_REQUIRED';
  * ```typescript
  * @Module({
  *   imports: [
- *     StoreModule.forActive(process.env.EVER_JOBS_STORE ?? 'memory', {
+ *     StoreModule.forActive(process.env.RADAR_STORE ?? 'memory', {
  *       backends: [InMemoryJobStore, PostgresJobStore],
  *     }),
  *   ],
@@ -173,7 +173,7 @@ export class StoreModule {
     if (typeof storeId !== 'string' || storeId.trim().length === 0) {
       throw new StoreModuleConfigurationError(
         `StoreModule.forActive() requires a non-empty storeId (got ${JSON.stringify(storeId)}). ` +
-          `Set EVER_JOBS_STORE to one of: [${(options.backends ?? [])
+          `Set RADAR_STORE to one of: [${(options.backends ?? [])
             .map((b) => readStoreId(b))
             .filter((id): id is string => typeof id === 'string')
             .join(', ')}]`,
@@ -319,7 +319,7 @@ export class StoreModule {
 /**
  * Resolve the `id` advertised by a backend class via `@StorePlugin()`.
  * Returns `undefined` when the class is not decorated. Used in error
- * messages so operators see "Set EVER_JOBS_STORE to one of: [...]"
+ * messages so operators see "Set RADAR_STORE to one of: [...]"
  * with the backend ids actually configured.
  */
 function readStoreId(cls: Type<IJobStore>): string | undefined {

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-tenableinc",
+  "name": "@rad-ar/source-company-tenableinc",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

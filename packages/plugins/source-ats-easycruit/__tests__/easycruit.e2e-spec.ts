@@ -10,8 +10,8 @@
  * shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EasyCruitModule, EasyCruitService } from '@ever-jobs/source-ats-easycruit';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { EasyCruitModule, EasyCruitService } from '@rad-ar/source-ats-easycruit';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public EasyCruit-powered careers sub-domain (Esvagt A/S).
 const KNOWN_TENANT = 'esvagt';

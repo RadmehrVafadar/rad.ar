@@ -1,4 +1,4 @@
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 import { MergeCategory } from './types';
 
 /**

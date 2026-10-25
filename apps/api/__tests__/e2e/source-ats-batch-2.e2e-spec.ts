@@ -3,13 +3,13 @@
  *
  * Hits the real HTTP surface (`POST /api/jobs/search`) of a fully
  * bootstrapped `AppModule`, with the only external dependency —
- * `@ever-jobs/common`'s `createHttpClient` — replaced by a fixture
+ * `@rad-ar/common`'s `createHttpClient` — replaced by a fixture
  * router. Verifies that the three new batch-2 plugins
  * (`oracle` / `mercor` / `tesla`) round-trip through the controller +
  * cache + dedup pipeline and return non-empty `JobPostDto[]`.
  *
  * Mirrors `source-ats-batch-1.e2e-spec.ts` (Spec 006 / T10): same
- * `jest.mock('@ever-jobs/common', …)` shape, same `createTestApp()`
+ * `jest.mock('@rad-ar/common', …)` shape, same `createTestApp()`
  * boot, same supertest issuance pattern. Reuses the URL→fixture
  * router introduced by Spec 013 / T11's integration spec — single-
  * sourced fixtures live under each plugin's `__tests__/fixtures/`
@@ -36,7 +36,7 @@
  *      with the same body the unit + integration suites use.
  *   2. **Mock `createHttpClient`, not a sandboxed nock server.** The
  *      unit suites for the three plugins already use
- *      `jest.mock(@ever-jobs/common)`; using it here keeps the
+ *      `jest.mock(@rad-ar/common)`; using it here keeps the
  *      integration shape consistent across unit / integration / E2E
  *      tiers. `nock` would shadow the same code path (axios → undici
  *      stack) at the network layer, which is strictly less precise
@@ -175,8 +175,8 @@ function routePost(_url: string): unknown {
   return null;
 }
 
-jest.mock('@ever-jobs/common', () => {
-  const actual = jest.requireActual('@ever-jobs/common');
+jest.mock('@rad-ar/common', () => {
+  const actual = jest.requireActual('@rad-ar/common');
   return {
     ...actual,
     createHttpClient: jest.fn(() => ({
@@ -192,11 +192,8 @@ jest.mock('@ever-jobs/common', () => {
 });
 
 // ── Bootstrap ─────────────────────────────────────────────────────────
-// eslint-disable-next-line import/first
 import { INestApplication } from '@nestjs/common';
-// eslint-disable-next-line import/first
-import { Site } from '@ever-jobs/models';
-// eslint-disable-next-line import/first
+import { Site } from '@rad-ar/models';
 import { createTestApp } from '../helpers/create-app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

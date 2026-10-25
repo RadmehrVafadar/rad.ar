@@ -36,6 +36,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/watcher/tsconfig.build.json"
       }
+    },
+    "mcp": {
+      "type": "application",
+      "root": "apps/mcp",
+      "entryFile": "index",
+      "sourceRoot": "apps/mcp/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mcp/tsconfig.json"
+      }
     }
   }
 }

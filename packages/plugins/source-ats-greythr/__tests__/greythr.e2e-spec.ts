@@ -13,8 +13,8 @@
  * results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { GreytHrModule, GreytHrService } from '@ever-jobs/source-ats-greythr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { GreytHrModule, GreytHrService } from '@rad-ar/source-ats-greythr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public greytHR-powered careers board (Greytip Software — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'greytip';

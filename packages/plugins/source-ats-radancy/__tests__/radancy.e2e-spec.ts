@@ -15,8 +15,8 @@
  * run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { RadancyModule, RadancyService } from '@ever-jobs/source-ats-radancy';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { RadancyModule, RadancyService } from '@rad-ar/source-ats-radancy';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Radancy-powered career site (Radancy's own board — confirmed live 2026-06-03,
 // org id 47123). Passed as a host so it resolves exactly (not via the bare-label default).

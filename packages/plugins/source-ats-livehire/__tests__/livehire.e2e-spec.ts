@@ -14,8 +14,8 @@
  * assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { LiveHireModule, LiveHireService } from '@ever-jobs/source-ats-livehire';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { LiveHireModule, LiveHireService } from '@rad-ar/source-ats-livehire';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public LiveHire-powered talent community (The Perth Mint — confirmed live 2026-06-03).
 const KNOWN_TENANT = 'perthmint';

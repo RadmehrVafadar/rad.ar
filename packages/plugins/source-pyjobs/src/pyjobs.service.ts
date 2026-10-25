@@ -1,4 +1,4 @@
-﻿import { SourcePlugin } from '@ever-jobs/plugin';
+﻿import { SourcePlugin } from '@rad-ar/plugin';
 
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -9,13 +9,13 @@ import {
   LocationDto,
   DescriptionFormat,
   Site,
-} from '@ever-jobs/models';
+} from '@rad-ar/models';
 import {
   createHttpClient,
   htmlToPlainText,
   markdownConverter,
   extractEmails,
-} from '@ever-jobs/common';
+} from '@rad-ar/common';
 import { PYJOBS_RSS_URL, PYJOBS_DEFAULT_RESULTS, PYJOBS_HEADERS } from './pyjobs.constants';
 import { PyJobsRssItem } from './pyjobs.types';
 

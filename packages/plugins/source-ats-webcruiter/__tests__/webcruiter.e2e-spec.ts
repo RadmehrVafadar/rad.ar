@@ -9,8 +9,8 @@
  * are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WebcruiterModule, WebcruiterService } from '@ever-jobs/source-ats-webcruiter';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { WebcruiterModule, WebcruiterService } from '@rad-ar/source-ats-webcruiter';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public company-lock id for the Norwegian Refugee Council's Webcruiter portal
 // (https://candidate.webcruiter.com/en-gb/home/companyadverts?companyLock=23109900).

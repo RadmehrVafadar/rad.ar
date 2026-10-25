@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-cerebrassystems",
+  "name": "@rad-ar/source-company-cerebrassystems",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

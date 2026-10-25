@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-gridcare",
+  "name": "@rad-ar/source-company-gridcare",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

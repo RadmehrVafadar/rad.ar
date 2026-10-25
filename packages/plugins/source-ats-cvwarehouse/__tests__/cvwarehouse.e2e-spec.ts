@@ -13,8 +13,8 @@
  * results as acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { CvWarehouseModule, CvWarehouseService } from '@ever-jobs/source-ats-cvwarehouse';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { CvWarehouseModule, CvWarehouseService } from '@rad-ar/source-ats-cvwarehouse';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public CVWarehouse-powered board (a live tenant — confirmed live 2026-06-04).
 const KNOWN_TENANT = '0875aa48-21be-43a2-b7cd-1ca7b94b2249';

@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-fetch",
+  "name": "@rad-ar/source-company-fetch",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

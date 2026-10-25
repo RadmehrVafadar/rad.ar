@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-northspyre",
+  "name": "@rad-ar/source-company-northspyre",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2.0",
-  "name": "ever-jobs",
+  "name": "radar",
   "display_name": "rad.ar",
   "description": "Multi-source job search and persistent watcher. Searches job boards, ATS platforms, and company career pages concurrently, returns normalized multi-location job postings, and can monitor target-scoped internship coverage through REST API and CLI.",
   "version": "0.1.0",
@@ -164,9 +164,9 @@
         "tier_1_degraded_at": 3
       },
       "metrics": {
-        "company_coverage": "ever_jobs_watcher_company_coverage{watch_id,status}",
+        "company_coverage": "radar_watcher_company_coverage{watch_id,status}",
         "company_coverage_status_labels": ["configured", "active", "disabled", "uncovered", "initialized", "degraded"],
-        "source_total": "ever_jobs_sources_total is initialized from the discovered plugin-registry count"
+        "source_total": "radar_sources_total is initialized from the discovered plugin-registry count"
       },
       "validation_evidence": {
         "deterministic_suites_pre_phase_13": 6,

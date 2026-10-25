@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { JobsdbModule, JobsdbService } from '../src';
-import { Site } from '@ever-jobs/models';
+import { Site } from '@rad-ar/models';
 
 describe('JobsdbService (e2e)', () => {
   let service: JobsdbService;

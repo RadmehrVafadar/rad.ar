@@ -13,8 +13,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { SenseModule, SenseService } from '@ever-jobs/source-ats-sense';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { SenseModule, SenseService } from '@rad-ar/source-ats-sense';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Sense-powered career site (Sense's own careers board — confirmed live 2026-06-04).
 const KNOWN_TENANT = 'sensehr';

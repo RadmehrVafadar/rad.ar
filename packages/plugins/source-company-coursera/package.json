@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-coursera",
+  "name": "@rad-ar/source-company-coursera",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

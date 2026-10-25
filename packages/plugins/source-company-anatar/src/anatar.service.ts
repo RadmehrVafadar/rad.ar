@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
 import { Injectable, Logger } from "@nestjs/common";
 import * as cheerio from "cheerio";
-import { SourcePlugin } from "@ever-jobs/plugin";
+import { SourcePlugin } from "@rad-ar/plugin";
 import {
   IScraper,
   JobPostDto,
@@ -10,14 +10,14 @@ import {
   getJobTypeFromString,
   ScraperInputDto,
   Site,
-} from "@ever-jobs/models";
+} from "@rad-ar/models";
 import {
   createHttpClient,
   decodeHtmlEntities,
   extractEmails,
   htmlToPlainText,
   parseLocationText,
-} from "@ever-jobs/common";
+} from "@rad-ar/common";
 import {
   ANATAR_CAREERS_URL,
   ANATAR_DEFAULT_RESULTS,

@@ -8,8 +8,8 @@
  * acceptable; the shape assertions only run when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { JobAdderModule, JobAdderService } from '@ever-jobs/source-ats-jobadder';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { JobAdderModule, JobAdderService } from '@rad-ar/source-ats-jobadder';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('JobAdderService (E2E)', () => {
   let service: JobAdderService;

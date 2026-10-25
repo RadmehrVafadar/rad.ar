@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { MetricsService } from './metrics.service';
+import { MetricsService } from '@rad-ar/common/runtime/metrics/metrics.service';
 
 @Injectable()
 export class MetricsInterceptor implements NestInterceptor {

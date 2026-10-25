@@ -15,8 +15,8 @@
  * when jobs are actually returned.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BizneoModule, BizneoService } from '@ever-jobs/source-ats-bizneo';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BizneoModule, BizneoService } from '@rad-ar/source-ats-bizneo';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 // Public Bizneo-powered Career Site (Groundforce — airport handling, ES; confirmed live 2026-06-03).
 const KNOWN_TENANT = 'groundforce';

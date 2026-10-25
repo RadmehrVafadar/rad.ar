@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DrupalJobsModule, DrupalJobsService } from '@ever-jobs/source-drupaljobs';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { DrupalJobsModule, DrupalJobsService } from '@rad-ar/source-drupaljobs';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('DrupalJobsService (E2E)', () => {
   let service: DrupalJobsService;

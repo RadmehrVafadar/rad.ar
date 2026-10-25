@@ -3,7 +3,7 @@ import {
   parseJobPostingLd,
   jobPostingLdToCompensation,
 } from '../src';
-import { CompensationInterval } from '@ever-jobs/models';
+import { CompensationInterval } from '@rad-ar/models';
 
 /** Wrap an ld+json payload in a script block (optionally several). */
 function page(...payloads: unknown[]): string {

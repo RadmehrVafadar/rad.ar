@@ -1,4 +1,4 @@
-import { JobPostDto, Site } from '@ever-jobs/models';
+import { JobPostDto, Site } from '@rad-ar/models';
 import { MinHasher } from '../src/minhash';
 import { MinHashStrategy, deriveBands } from '../src/strategies/minhash-strategy';
 import { PreparedJob } from '../src/types';

@@ -2,8 +2,8 @@
  * E2E test for the Internshala scraper.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { InternshalaModule, InternshalaService } from '@ever-jobs/source-internshala';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { InternshalaModule, InternshalaService } from '@rad-ar/source-internshala';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('InternshalaService (E2E)', () => {
   let service: InternshalaService;

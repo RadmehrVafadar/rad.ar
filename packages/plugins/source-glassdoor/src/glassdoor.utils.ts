@@ -1,4 +1,4 @@
-import { CompensationDto, CompensationInterval, LocationDto, JobType, getJobTypeFromString } from '@ever-jobs/models';
+import { CompensationDto, CompensationInterval, LocationDto, JobType, getJobTypeFromString } from '@rad-ar/models';
 
 /**
  * Parse compensation from Glassdoor payPeriodAdjustedPay data.

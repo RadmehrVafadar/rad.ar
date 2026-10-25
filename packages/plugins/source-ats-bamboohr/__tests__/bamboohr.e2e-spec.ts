@@ -5,8 +5,8 @@
  * To run authenticated tests, set BAMBOOHR_API_KEY env var.
  */
 import { Test, TestingModule } from '@nestjs/testing';
-import { BambooHRModule, BambooHRService } from '@ever-jobs/source-ats-bamboohr';
-import { ScraperInputDto, Site, DescriptionFormat } from '@ever-jobs/models';
+import { BambooHRModule, BambooHRService } from '@rad-ar/source-ats-bamboohr';
+import { ScraperInputDto, Site, DescriptionFormat } from '@rad-ar/models';
 
 describe('BambooHRService (E2E)', () => {
   let service: BambooHRService;

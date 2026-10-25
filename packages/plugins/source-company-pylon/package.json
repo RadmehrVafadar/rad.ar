@@ -1,5 +1,5 @@
 {
-  "name": "@ever-jobs/source-company-pylon",
+  "name": "@rad-ar/source-company-pylon",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",

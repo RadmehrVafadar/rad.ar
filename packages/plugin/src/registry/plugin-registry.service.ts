@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Site, IScraper } from '@ever-jobs/models';
+import { Site, IScraper } from '@rad-ar/models';
 import { IPluginMetadata } from '../interfaces/plugin-metadata.interface';
 
 /**
