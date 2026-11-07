@@ -60,21 +60,22 @@ import {
   EditableWatch,
   isTargetInitialized,
   validateDraft,
+  withSourceTargets,
 } from "../lib/watch-draft";
 import { JobWatch, WatchApplyResponse, WatchRun } from "../types";
 
 type EditorTab =
   | "profile"
-  | "sources"
+  | "filters"
   | "scoring"
   | "notifications"
   | "activity"
   | "json";
 const TABS: Array<{ value: EditorTab; label: string }> = [
-  { value: "profile", label: "Profile" },
-  { value: "sources", label: "Sources" },
+  { value: "profile", label: "Companies & schedule" },
+  { value: "filters", label: "Filters" },
   { value: "scoring", label: "Scoring" },
-  { value: "notifications", label: "Notifications" },
+  { value: "notifications", label: "Alerts" },
   { value: "activity", label: "Activity" },
   { value: "json", label: "Advanced JSON" },
 ];
@@ -116,6 +117,11 @@ export function WatchEditorPage() {
     queryKey: ["watch-presets"],
     queryFn: ({ signal }) => api.presets.list(signal),
     enabled: hasApiKey,
+  });
+  const defaults = useQuery({
+    queryKey: ["watch-preset-defaults", presets.data?.[0]?.id],
+    queryFn: ({ signal }) => api.presets.defaults(presets.data![0].id, signal),
+    enabled: hasApiKey && Boolean(presets.data?.length),
   });
   const preview = useQuery({
     queryKey: ["preset-preview", selectedPreset, watchId],
@@ -286,31 +292,49 @@ export function WatchEditorPage() {
           </p>
         </div>
         <div className="editor-header__actions">
-          <Button
-            variant="ghost"
-            onClick={() =>
-              downloadJson(`${slug(watch.data.name)}.watch.json`, draft)
-            }
-          >
-            <Download size={16} />
-            Export
-          </Button>
-          <Button
-            variant="secondary"
-            title={
-              watch.data.enabled
-                ? "Pause this watch before applying a preset"
-                : undefined
-            }
-            onClick={() => {
-              setSelectedPreset(presets.data?.[0]?.id ?? "");
-              setPresetOpen(true);
-            }}
-            disabled={!presets.data?.length || watch.data.enabled}
-          >
-            <Sparkles size={16} />
-            Apply preset
-          </Button>
+          <details className="editor-tools">
+            <summary>More options</summary>
+            <div className="editor-tools__menu">
+              <Button
+                variant="ghost"
+                onClick={() =>
+                  downloadJson(`${slug(watch.data.name)}.watch.json`, draft)
+                }
+              >
+                <Download size={16} />
+                Export
+              </Button>
+              <Button
+                variant="secondary"
+                title={
+                  watch.data.enabled
+                    ? "Pause this watch before applying a preset"
+                    : undefined
+                }
+                onClick={() => {
+                  setSelectedPreset(presets.data?.[0]?.id ?? "");
+                  setPresetOpen(true);
+                }}
+                disabled={!presets.data?.length || watch.data.enabled}
+              >
+                <Sparkles size={16} />
+                Apply preset
+              </Button>
+
+              <Button
+                variant="ghost"
+                onClick={() => setSearchParams({ tab: "scoring" })}
+              >
+                Scoring settings
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => setSearchParams({ tab: "json" })}
+              >
+                Import / export JSON
+              </Button>
+            </div>
+          </details>
           <Button
             variant="secondary"
             loading={runtimeAction.isPending || initialize.isPending}
@@ -334,16 +358,21 @@ export function WatchEditorPage() {
                 ? "Initialize targets"
                 : "Start watcher"}
           </Button>
-          <Button
-            onClick={() => setReviewOpen(true)}
-            disabled={!diffs.length || errors.length > 0}
-          >
-            <FileDiff size={16} />
-            Review changes
-            {diffs.length ? (
-              <span className="button-count">{diffs.length}</span>
-            ) : null}
-          </Button>
+          <div className="editor-save-action">
+            <Button
+              onClick={() =>
+                hasBehaviorChanges ? setReviewOpen(true) : apply.mutate()
+              }
+              loading={apply.isPending}
+              disabled={!diffs.length || errors.length > 0}
+            >
+              <FileDiff size={16} />
+              Save changes
+              {diffs.length ? (
+                <span className="button-count">{diffs.length}</span>
+              ) : null}
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -422,7 +451,9 @@ export function WatchEditorPage() {
           onChange={(value) =>
             setSearchParams(value === "profile" ? {} : { tab: value })
           }
-          tabs={TABS}
+          tabs={TABS.filter(
+            ({ value }) => value !== "scoring" && value !== "json",
+          )}
           label="Watch editor sections"
         />
         {diffs.length ? (
@@ -439,23 +470,31 @@ export function WatchEditorPage() {
       </div>
 
       {tab === "profile" ? (
-        <ProfileSection draft={draft} update={update} />
+        <div className="watch-editor-main">
+          <ScheduleSection draft={draft} update={update} />
+          <Panel>
+            <PanelHeader
+              title="Company tiers"
+              description="Set check intervals and move companies between tiers."
+            />
+            <SourceTargetsEditor
+              targets={draft.sourceTargets}
+              defaultTargets={defaults.data?.sourceTargets ?? []}
+              sourceHealth={sourceHealth.data?.sources ?? []}
+              defaultIntervalMinutes={draft.intervalMinutes}
+              defaultCountryCodes={draft.countryCodes}
+              defaultLocations={draft.locations}
+              onChange={(targets) =>
+                setDraft((current) =>
+                  current ? withSourceTargets(current, targets) : current,
+                )
+              }
+            />
+          </Panel>
+        </div>
       ) : null}
-      {tab === "sources" ? (
-        <Panel>
-          <PanelHeader
-            title="Source targets"
-            description="Assign a cadence, priority tier, company board, and search scope to every source."
-          />
-          <SourceTargetsEditor
-            targets={draft.sourceTargets}
-            sourceHealth={sourceHealth.data?.sources ?? []}
-            defaultIntervalMinutes={draft.intervalMinutes}
-            defaultCountryCodes={draft.countryCodes}
-            defaultLocations={draft.locations}
-            onChange={(targets) => update("sourceTargets", targets)}
-          />
-        </Panel>
+      {tab === "filters" ? (
+        <ProfileSection draft={draft} update={update} />
       ) : null}
       {tab === "scoring" ? (
         <ScoringSection draft={draft} update={update} />
@@ -540,72 +579,119 @@ export function WatchEditorPage() {
   );
 }
 
-function ProfileSection({ draft, update }: EditorProps) {
+function ScheduleSection({ draft, update }: EditorProps) {
   return (
-    <div className="editor-section-grid">
-      <Panel>
-        <PanelHeader
-          title="Profile details"
-          description="The identity and default cadence for this watch."
-        />
-        <div className="form-stack">
-          <Field label="Watch name">
+    <Panel>
+      <div className="form-grid form-grid--three watch-schedule">
+        <Field label="Watch name">
+          <input
+            value={draft.name}
+            maxLength={200}
+            onChange={(event) => update("name", event.target.value)}
+          />
+        </Field>
+        <Field
+          label="Default check interval"
+          hint="Tier schedules can override this default."
+        >
+          <div className="input-suffix">
             <input
-              value={draft.name}
-              maxLength={200}
-              onChange={(event) => update("name", event.target.value)}
+              aria-label="Check every"
+              type="number"
+              min={1}
+              max={1440}
+              value={draft.intervalMinutes}
+              onChange={(event) =>
+                update("intervalMinutes", Number(event.target.value))
+              }
             />
-          </Field>
+            <span>min</span>
+          </div>
+        </Field>
+        <Field label="Timezone">
+          <input
+            value={draft.timezone}
+            onChange={(event) => update("timezone", event.target.value)}
+          />
+        </Field>
+      </div>
+      <details className="watch-options">
+        <summary>Advanced schedule & startup</summary>
+        <div className="form-stack">
           <Field label="Description">
             <textarea
-              rows={4}
-              maxLength={2000}
+              rows={2}
               value={draft.description ?? ""}
               onChange={(event) =>
                 update("description", event.target.value || null)
               }
             />
           </Field>
-          <div className="form-grid form-grid--three">
-            <Field label="Default interval">
+          <Field
+            label="Cron schedule"
+            hint="Optional; interval remains the fallback."
+          >
+            <input
+              value={draft.schedule ?? ""}
+              onChange={(event) =>
+                update("schedule", event.target.value || null)
+              }
+            />
+          </Field>
+        </div>
+        <Panel>
+          <PanelHeader
+            title="Initialization safety"
+            description="Control what qualifies as recent when first enabling a source."
+          />
+          <div className="form-stack">
+            <Field label="Initialization mode">
+              <select
+                value={draft.initializationMode}
+                onChange={(event) =>
+                  update(
+                    "initializationMode",
+                    event.target.value as EditableWatch["initializationMode"],
+                  )
+                }
+              >
+                <option value="baseline">
+                  Baseline · never alert on existing jobs
+                </option>
+                <option value="recent-only">
+                  Recent only · alert inside window
+                </option>
+                <option value="notify-all">Notify all · explicit opt-in</option>
+              </select>
+            </Field>
+            <Field label="Recent window">
               <div className="input-suffix">
                 <input
                   type="number"
                   min={1}
-                  max={1440}
-                  value={draft.intervalMinutes}
+                  max={10080}
+                  value={draft.recentWindowMinutes ?? 180}
                   onChange={(event) =>
-                    update("intervalMinutes", Number(event.target.value))
+                    update("recentWindowMinutes", Number(event.target.value))
                   }
                 />
                 <span>min</span>
               </div>
             </Field>
-            <Field
-              label="Cron schedule"
-              hint="Optional; interval remains the fallback."
-            >
-              <input
-                value={draft.schedule ?? ""}
-                placeholder="*/30 * * * *"
-                onChange={(event) =>
-                  update("schedule", event.target.value || null)
-                }
-              />
-            </Field>
-            <Field label="Timezone">
-              <input
-                value={draft.timezone}
-                onChange={(event) => update("timezone", event.target.value)}
-              />
-            </Field>
+            <InlineNotice tone="warning">
+              The GUI always uses a no-notification baseline after changes to
+              sources, filters, scoring, or eligibility.
+            </InlineNotice>
           </div>
-          <InlineNotice tone="info">
-            Pause and resume are explicit actions in the page header, so
-            execution state is never hidden inside an Apply operation.
-          </InlineNotice>
-        </div>
-      </Panel>
+        </Panel>
+      </details>
+    </Panel>
+  );
+}
+
+function ProfileSection({ draft, update }: EditorProps) {
+  return (
+    <div className="editor-section-grid">
       <Panel>
         <PanelHeader
           title="Search intent"
@@ -701,51 +787,6 @@ function ProfileSection({ draft, update }: EditorProps) {
             onChange={(values) => update("allowedEmploymentTypes", values)}
             placeholder="internship"
           />
-        </div>
-      </Panel>
-      <Panel>
-        <PanelHeader
-          title="Initialization safety"
-          description="Control what qualifies as recent when first enabling a source."
-        />
-        <div className="form-stack">
-          <Field label="Initialization mode">
-            <select
-              value={draft.initializationMode}
-              onChange={(event) =>
-                update(
-                  "initializationMode",
-                  event.target.value as EditableWatch["initializationMode"],
-                )
-              }
-            >
-              <option value="baseline">
-                Baseline · never alert on existing jobs
-              </option>
-              <option value="recent-only">
-                Recent only · alert inside window
-              </option>
-              <option value="notify-all">Notify all · explicit opt-in</option>
-            </select>
-          </Field>
-          <Field label="Recent window">
-            <div className="input-suffix">
-              <input
-                type="number"
-                min={1}
-                max={10080}
-                value={draft.recentWindowMinutes ?? 180}
-                onChange={(event) =>
-                  update("recentWindowMinutes", Number(event.target.value))
-                }
-              />
-              <span>min</span>
-            </div>
-          </Field>
-          <InlineNotice tone="warning">
-            The GUI always uses a no-notification baseline after changes to
-            sources, filters, scoring, or eligibility.
-          </InlineNotice>
         </div>
       </Panel>
     </div>

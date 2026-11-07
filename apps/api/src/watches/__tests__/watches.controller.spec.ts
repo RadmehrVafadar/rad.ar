@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { NotFoundException } from "@nestjs/common";
-import { JobWatch, ObservedJob, WatchRepository } from '@rad-ar/models';
-import { WatchValidationService } from '@rad-ar/watch-engine';
+import { JobWatch, ObservedJob, WatchRepository } from "@rad-ar/models";
+import { WatchValidationService } from "@rad-ar/watch-engine";
 import { ADMIN_AUTH_METADATA_KEY } from "../../auth/admin-auth.decorator";
 import {
   NotificationsController,
@@ -13,7 +13,7 @@ describe("watcher management controllers", () => {
   let repository: jest.Mocked<WatchRepository>;
   let execution: { runWatch: jest.Mock };
   let companyCoverage: { build: jest.Mock };
-  let presets: { list: jest.Mock; apply: jest.Mock };
+  let presets: { list: jest.Mock; apply: jest.Mock; get: jest.Mock };
   let watchApply: { apply: jest.Mock };
   let controller: WatchesController;
 
@@ -36,7 +36,7 @@ describe("watcher management controllers", () => {
     } as unknown as jest.Mocked<WatchRepository>;
     execution = { runWatch: jest.fn() };
     companyCoverage = { build: jest.fn() };
-    presets = { list: jest.fn(), apply: jest.fn() };
+    presets = { list: jest.fn(), apply: jest.fn(), get: jest.fn() };
     watchApply = { apply: jest.fn() };
     controller = new WatchesController(
       repository,
@@ -103,6 +103,20 @@ describe("watcher management controllers", () => {
 
     await expect(controller.apply(watch.id, body)).resolves.toBe(response);
     expect(watchApply.apply).toHaveBeenCalledWith(watch.id, body);
+  });
+
+  it("returns template defaults for restoring company tiers", () => {
+    const defaults = {
+      name: "Canadian Tech + Adjacent Internships",
+      sourceTargets: [{ site: "linkedin", tier: 3 }],
+    };
+    presets.get.mockReturnValue({ createWatch: () => defaults });
+    expect(
+      controller.presetDefaults("canadian-tech-adjacent-internships"),
+    ).toEqual(defaults);
+    expect(presets.get).toHaveBeenCalledWith(
+      "canadian-tech-adjacent-internships",
+    );
   });
 
   it("lists, previews, and applies presets through WatchPresetService", async () => {

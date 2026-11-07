@@ -1,8 +1,8 @@
 # Local Watcher Operations Runbook
 
 This runbook takes a clean rad.ar checkout to a continuously running local
-watcher for technology internships and co-ops. It covers both dry-run-first
-Canadian internship presets, per-target baseline, inherited watch cadence,
+watcher for technology internships and co-ops. It covers the retained dry-run-first
+Canadian Tech + Adjacent Internships preset, per-target baseline, inherited watch cadence,
 Toronto/GTA geography, Discord,
 Docker, the Spec 6002 localhost operator GUI, named Discord routing,
 target-health alerts, rollback, and failure recovery.
@@ -55,49 +55,11 @@ shared by every concurrent watch run. The source executor also shares its
 per-source limiters across runs, so increasing watch capacity does not multiply
 traffic to one source.
 
-### Default source readiness
-
-`canadian-tech-internships` carries the intended target inventory, but its preview
-and source-audit record are authoritative for enablement. A plugin being
-registered is not an unattended-readiness claim.
-
-| Target | Tier | Intended path | Shipped preset state and remaining gate |
-| ------ | ---- | ------------- | --------------------------------------- |
-| Google Careers | 1 | Official Careers results/details, Toronto/GTA query scope | **target-enabled inside the disabled/uninitialized watch**; deterministic validation passed and live smoke returned two Canadian roles; baseline and two observation cycles remain |
-| Shopify | 1 | Official server-rendered careers pages | **target-enabled inside the disabled/uninitialized watch**; deterministic validation passed and live board was marker-validated empty; baseline and two observation cycles remain |
-| Wealthsimple | 1 | `ashby:wealthsimple`, branded through the maintained Ashby plugin | **enabled target** inside the disabled preset watch; baseline before resume |
-| Plaid | 1 | `ashby:plaid` through the maintained Ashby plugin | **enabled target** inside the disabled preset watch; baseline before resume |
-| Amazon, Microsoft, Apple, Nvidia, Stripe, OpenAI, Datadog, DoorDash, Coinbase, Figma, Vercel, Meta, Wellfound | 1 | retained direct-company inventory with Toronto/GTA post-filter scope | **enabled by operator request**; baseline each before resume; Microsoft's earlier live smoke timed out |
-| Uber, Notion, Ramp, Netflix, IBM | 1 | complete official boards; Notion/Ramp delegate to registered Ashby by fixed slug | **enabled targets inside the disabled/uninitialized watch**; inherited watch cadence, Toronto/GTA scope, `resultsWanted: 500`, disabled live smoke, baseline, and two observation cycles remain |
-| Canada Job Bank | 2 | Structured Canadian query source | **enabled target** inside the disabled preset watch; 12 of 209 matrix requests per run |
-| Google Jobs | 2 | Toronto/GTA query redundancy | **disabled**; fixtures/failure handling pass, but live smoke returned an enable-JavaScript shell |
-| LinkedIn public guest | 3 | Toronto/GTA newest-first 72-hour query | **target-enabled inside the disabled/uninitialized watch**; listing/detail fixtures and unauthenticated live smoke pass; baseline and operator review remain |
-| RBC, TD, Scotiabank, BMO, CIBC | — | deferred official bank adapters | **uncovered by design for Phase 13** and visible in the coverage report |
-
-The target-enabled set is `google_careers`, `shopify`, `ashby:wealthsimple`,
-`ashby:plaid`, all 13 legacy direct-company targets, `uber`, `notion`, `ramp`,
-`netflix`, `ibm`, `canadajobbank`, and `linkedin`. Target-enabled does not start
-polling or notifications while the watch is paused. Only Google Jobs remains
-target-disabled.
-
-The target-company inventory has one auditable classification per company: 21 names
-have an exact branded company/ATS target and five banks are explicitly deferred.
-Generic LinkedIn, Canada Job Bank, and Google Jobs results are redundancy and do
-not turn an uncovered company into covered status.
-
-Pre-Phase-13 source evidence was six deterministic suites/59 tests; Google Careers
-two live Canadian roles; Shopify valid empty; Wealthsimple 37 live Ashby roles
-with a capped mapped sample; LinkedIn public listing/detail pass; Microsoft
-timeout; and Google Jobs classified blocked by the enable-JavaScript shell.
-
 ### Canadian Tech + Adjacent Internships readiness
 
-`canadian-tech-adjacent-internships` is a separate revision-1 preset. It does
-not upgrade or replace the source-readiness statements above. It adds branded
-official targets for the five banks and 15 consulting, retail, insurance, and
-telecom employer groups. Together with the existing 21 technology companies,
-its coverage inventory is exactly 41 employer groups. Loblaw's main, PC
-Financial, and Shoppers boards are separate target keys but one coverage row.
+`canadian-tech-adjacent-internships` is the retained revision-1 preset.
+Its 41 employer groups have branded first-party targets.
+Loblaw has three boards but one company-coverage row.
 
 Large official ATS boards use `board-search`: the planner rotates at most two
 term-only requests in a ten-minute run, then performs strict GTA filtering on
@@ -136,10 +98,8 @@ advertised 109 jobs and parsed 25 GTA jobs, but none contained Summer 2027
 evidence. Repeat the live gate before baseline because these counts describe
 one date and do not promise that every employer currently has a qualifying job.
 
-The preset has 19 search terms and 11 Toronto/GTA locations, producing 209
-term/location entries for each generic query target. The rotating per-run caps
-are 1, 12, 12, and 8 respectively. Google Careers therefore makes one rotating
-request every 10 minutes.
+The retained template defines its search terms and strict GTA locations at watch level.
+Targets inherit those values unless they explicitly provide their own search scope or request budget.
 
 Every preset target sets `strictLocations: true`. At least one advertised job
 location must match the configured GTA list, and its explicit `CA` country scope
@@ -247,8 +207,8 @@ Seed the default watch:
 npm run db:seed
 ```
 
-On a database with no watches, the seed creates `Canadian Tech Internships`
-from `canadian-tech-internships`. It is globally disabled,
+On a database with no watches, the seed creates `Canadian Tech + Adjacent Internships`
+from `canadian-tech-adjacent-internships`. It is globally disabled,
 uninitialized, has no `nextRunAt`, uses `baseline` initialization, and points its
 Discord channel at the environment reference `default`. If any watch already
 exists, the seed returns the first existing watch without creating, upgrading,
@@ -364,9 +324,6 @@ Preview the versioned preset. This command emits a JSON diff and changes no
 state:
 
 ```bash
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
-
-# Preview the separate expanded preset instead.
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
 ```
 
@@ -375,11 +332,6 @@ materially changed, disabled, or operator-only. Applying requires an explicit
 flag:
 
 ```bash
-npm run cli -- watch preset apply canadian-tech-internships \
-  --watch <watch-id> \
-  --apply
-
-# Or apply the expanded preset to the paused watch.
 npm run cli -- watch preset apply canadian-tech-adjacent-internships \
   --watch <watch-id> \
   --apply
@@ -473,10 +425,6 @@ Matching normalizes case, Unicode, punctuation, and common legal suffixes, then
 requires an exact company name match against `sourceTargets[].companyName`. An enabled matching
 target yields `active`, only disabled matching targets yield `disabled`, and no
 matching branded target yields `uncovered`. Generic job boards do not count.
-Before baselines or runtime failures affect the health counts, the Canadian
-Tech Internships preset should show 21 active companies and the five deferred
-banks as uncovered.
-
 For Canadian Tech + Adjacent Internships, require exactly 41 configured and 41
 active company rows with zero uncovered companies before resume. Also require
 every newly added or materially changed enabled target to be initialized. A
@@ -652,8 +600,8 @@ npm run db:generate
 Run CLI management commands from the host against the same local database:
 
 ```bash
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id> --apply
+npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
+npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id> --apply
 npm run cli -- watch initialize <watch-id> --target <target-key> --json
 # Repeat targeted initialization for the full enabled set for two additional
 # no-notification observation cycles; inspect both before continuing.
@@ -750,7 +698,10 @@ digest band change cannot resend the same episode to the same destination.
 Inspect the canonical key, normalized sorted locations, external employer
 application URL, and `canonicalEpisodeStartedAt`. A URL/date-less fallback
 episode is anchored at first observation and reused for a rolling 14 days; UTC
-calendar boundaries do not split it. Preserve the database when restarting; a
+calendar boundaries do not split it.
+For LinkedIn jobs without a real employer URL, refreshed dates are ignored and identical normalized company/title/location reuse an episode seen within the last 14 days.
+A stable LinkedIn source ID retains its episode, and legacy LinkedIn URL-based observations participate in this lookup.
+Preserve the database when restarting; a
 fresh database has no canonical or delivery history.
 
 ### Initialization reported source failures
@@ -774,10 +725,10 @@ Check scheduler poll freshness, previous run duration, source timeouts/retries, 
 - [ ] The seed printed the newly created or already-existing intended watch.
 - [ ] `/health` reports healthy database and started scheduler.
 - [ ] Discord configuration is reported as present.
-- [ ] `watch preset apply canadian-tech-internships --watch <id>` was reviewed as a dry run before `--apply`.
+- [ ] `watch preset apply canadian-tech-adjacent-internships --watch <id>` was reviewed as a dry run before `--apply`.
 - [ ] The preset was applied only while the watch was paused.
 - [ ] Preview confirms `US`, `United States`, broad Canada, and Waterloo are absent from the applied watch and target scopes.
-- [ ] `watch coverage --id <id>` reports all 26 target companies, with 21 active and RBC, TD, Scotiabank, BMO, and CIBC uncovered before health-state changes.
+- [ ] `watch coverage --id <id>` reports all 41 employer groups with enabled branded coverage before health-state changes.
 - [ ] Every added/materially changed enabled target has its own successful `initializedAt` and baseline sent zero notifications.
 - [ ] Hard-failed targets were repaired and re-baselined or explicitly left disabled.
 - [ ] Every enabled Tier 1 target has fixture-backed Toronto/GTA query/post-filter evidence.
@@ -916,7 +867,7 @@ After a behavior-changing Apply, do not bypass the activation panel:
 3. Inspect baseline target outcomes, normalized jobs, company/application URLs,
    coverage, and any hard failures.
 4. Repair, re-baseline, or disable failed targets.
-5. For the Canadian Tech Internships rollout, retain the two additional no-notification
+5. For the Canadian Tech + Adjacent Internships rollout, retain the two additional no-notification
    observation cycles required earlier in this runbook.
 6. Select Resume explicitly.
 

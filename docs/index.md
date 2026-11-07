@@ -15,6 +15,7 @@
 - [log](log.md)
 - [performance-tuning](performance-tuning.md)
 - [plugin-architecture](plugin-architecture.md)
+- [operator-gui](operator-gui.md)
 - [project-structure](project-structure.md)
 - [questions](questions.md)
 - [mac-mini-production-cheat-sheet](runbooks/mac-mini-production-cheat-sheet.md)

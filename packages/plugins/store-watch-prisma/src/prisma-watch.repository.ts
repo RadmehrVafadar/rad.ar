@@ -8,7 +8,7 @@ import {
   WatchRun as PrismaWatchRun,
 } from "@prisma/client";
 import { createHash } from "crypto";
-import { LocationDto } from "@rad-ar/models";
+import { isLinkedInListingUrl, LocationDto } from "@rad-ar/models";
 import {
   AcquireWatchLeaseInput,
   ClaimNotificationDeliveryInput,
@@ -741,6 +741,46 @@ export class PrismaWatchRepository implements WatchRepository {
       !Number.isFinite(anchor.getTime())
     ) {
       return input;
+    }
+    if (
+      input.source === "linkedin" &&
+      input.normalizedCompany &&
+      input.normalizedTitle &&
+      input.normalizedLocation
+    ) {
+      const candidates = await transaction.observedJob.findMany({
+        where: {
+          source: "linkedin",
+          normalizedCompany: input.normalizedCompany,
+          normalizedTitle: input.normalizedTitle,
+          normalizedLocation: input.normalizedLocation,
+          canonicalEpisodeKey: { not: null },
+          OR: [
+            { fingerprint: input.fingerprint },
+            {
+              lastSeenAt: {
+                gte: new Date(anchor.getTime() - windowMs),
+                lte: anchor,
+              },
+            },
+          ],
+        },
+        orderBy: [{ lastSeenAt: "desc" }, { id: "desc" }],
+      });
+      const eligible = candidates.filter(
+        (job) =>
+          !job.applicationUrl || isLinkedInListingUrl(job.applicationUrl),
+      );
+      const existing =
+        eligible.find((job) => job.fingerprint === input.fingerprint) ??
+        eligible[0];
+      if (existing?.canonicalEpisodeKey)
+        return {
+          ...input,
+          canonicalEpisodeKey: existing.canonicalEpisodeKey,
+          canonicalEpisodeStartedAt:
+            existing.canonicalEpisodeStartedAt ?? existing.firstSeenAt,
+        };
     }
     const recent = await transaction.observedJob.findFirst({
       where: {

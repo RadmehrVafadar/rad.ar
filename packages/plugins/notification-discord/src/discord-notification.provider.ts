@@ -1,5 +1,5 @@
-import { DISCORD_NOTIFICATION_OPTIONS } from '@rad-ar/plugin/feature-tokens';
-export { DISCORD_NOTIFICATION_OPTIONS } from '@rad-ar/plugin/feature-tokens';
+import { DISCORD_NOTIFICATION_OPTIONS } from "@rad-ar/plugin/feature-tokens";
+export { DISCORD_NOTIFICATION_OPTIONS } from "@rad-ar/plugin/feature-tokens";
 import { Inject, Injectable, Optional } from "@nestjs/common";
 import { createHttpClient, HttpClient } from "@rad-ar/common";
 import {
@@ -15,7 +15,6 @@ import {
 
 export const DISCORD_WEBHOOK_ENV_VAR = "DISCORD_WEBHOOK_URL";
 export const DISCORD_DEFAULT_DESTINATION_REF = "default";
-
 
 const DEFAULT_TIMEOUT_MS = 10_000;
 const MAX_CONTENT_LENGTH = 2_000;
@@ -165,13 +164,19 @@ export function buildDiscordWebhookPayload(
   const reasons = uniqueReasons(message).slice(0, 6);
   const reasonDescription =
     reasons.length > 0
-      ? `**Top matches**\n${reasons.map((reason) => `• ${displayValue(reason, "Match", 220)}`).join("\n")}`
-      : "**Top matches**\n• Match met the configured score threshold";
+      ? `**Why it matches**\n${reasons.map((reason) => `• ${displayValue(reason, "Match", 220)}`).join("\n")}`
+      : "Match met the configured score threshold.";
 
   const fields: DiscordEmbedField[] = [
     field("Location", message.job.location, false, "Not provided", 400),
     field("Workplace", message.job.workplaceType, true, "Not provided", 100),
-    field("Employment", message.job.employmentType, true, "Not provided", 100),
+    field(
+      "Employment",
+      employmentLabel(message.job.employmentType),
+      true,
+      "Not provided",
+      100,
+    ),
     field("Source", message.job.source, true, "Unknown", 200),
     field(
       "Published (UTC)",
@@ -198,13 +203,9 @@ export function buildDiscordWebhookPayload(
   if (detailsUrl && detailsUrl !== applicationUrl) {
     fields.push(linkField("Job details", detailsUrl));
   }
-  fields.push(field("Watch", message.watch.name, false, "Unnamed watch", 300));
 
   const embed = {
-    title: truncateDiscordText(
-      `${score}/100 — ${company} — ${title}`,
-      MAX_EMBED_TITLE_LENGTH,
-    ),
+    title: truncateDiscordText(`${company} · ${title}`, MAX_EMBED_TITLE_LENGTH),
     ...(targetUrl ? { url: targetUrl } : {}),
     color: urgency.color,
     description: truncateDiscordText(
@@ -221,7 +222,7 @@ export function buildDiscordWebhookPayload(
   return {
     username: "rad.ar",
     content: truncateDiscordText(
-      `${urgency.icon} **${urgency.label} — ${score}/100 MATCH**`,
+      `${urgency.icon} **${urgency.label} · ${score}/100 match**`,
       MAX_CONTENT_LENGTH,
     ),
     allowed_mentions: { parse: [] },
@@ -379,6 +380,33 @@ function displayValue(
 ): string {
   const escaped = escapeDiscordMarkdown(value);
   return truncateDiscordText(escaped || fallback, maxLength);
+}
+
+function employmentLabel(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const labels: Record<string, string> = {
+    internship: "Internship",
+    fulltime: "Full-time",
+    "full-time": "Full-time",
+    parttime: "Part-time",
+    "part-time": "Part-time",
+    coop: "Co-op",
+    "co-op": "Co-op",
+    temporary: "Temporary",
+    contract: "Contract",
+    volunteer: "Volunteer",
+  };
+  return [
+    ...new Set(
+      value
+        .split(",")
+        .map((part) => {
+          const text = part.trim();
+          return labels[text.toLowerCase()] ?? text;
+        })
+        .filter(Boolean),
+    ),
+  ].join(" · ");
 }
 
 function field(

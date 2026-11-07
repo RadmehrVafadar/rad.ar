@@ -1,5 +1,3 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
 import { BadRequestException, ConflictException } from "@nestjs/common";
 import { Site } from "@rad-ar/models";
 import { JobWatch } from "@rad-ar/models/interfaces/watch.types";
@@ -9,10 +7,8 @@ import {
   CANADIAN_TECH_INTERNSHIP_COMPANIES,
   CANADIAN_TECH_INTERNSHIP_DEFERRED_COMPANIES,
   CANADIAN_TECH_INTERNSHIP_LOCATIONS,
-  canadianTechInternshipsWatch,
-  CANADIAN_TECH_INTERNSHIPS_ID,
-  CANADIAN_TECH_INTERNSHIPS_NAME,
-} from "../services/canadian-tech-internships.preset";
+  canadianTechInternshipDefaults,
+} from "../services/canadian-tech-internship-base";
 import {
   assertCanadianTechAdjacentInternshipCompanyCoverage,
   CANADIAN_TECH_ADJACENT_INTERNSHIP_COMPANIES,
@@ -29,9 +25,9 @@ import {
 } from "../services/watch-preset.service";
 import { WatchValidationService } from "../services/watch-validation.service";
 
-describe("canadian-tech-internships preset", () => {
+describe("shared Canadian technology internship configuration", () => {
   it("defines the disabled, uninitialized and evidence-gated target matrix", () => {
-    const watch = canadianTechInternshipsWatch();
+    const watch = canadianTechInternshipDefaults();
     const targets = watch.sourceTargets ?? [];
     const byKey = new Map(
       targets.map((target) => [watchSourceTargetKey(target), target]),
@@ -39,7 +35,6 @@ describe("canadian-tech-internships preset", () => {
 
     expect(watch).toEqual(
       expect.objectContaining({
-        name: CANADIAN_TECH_INTERNSHIPS_NAME,
         enabled: false,
         intervalMinutes: 10,
         initializationMode: "baseline",
@@ -164,7 +159,7 @@ describe("canadian-tech-internships preset", () => {
   });
 
   it("rejects an inventory entry with neither target nor deferral", () => {
-    const targets = canadianTechInternshipsWatch().sourceTargets ?? [];
+    const targets = canadianTechInternshipDefaults().sourceTargets ?? [];
     const withoutUber = targets.filter(
       (target) => target.companyName !== "Uber",
     );
@@ -186,7 +181,7 @@ describe("canadian-tech-internships preset", () => {
   });
 
   it("uses the same normalized exact-name semantics as coverage reports", () => {
-    const targets = (canadianTechInternshipsWatch().sourceTargets ?? []).map(
+    const targets = (canadianTechInternshipDefaults().sourceTargets ?? []).map(
       (target) =>
         target.companyName === "Google"
           ? { ...target, companyName: "Google, Inc." }
@@ -197,28 +192,14 @@ describe("canadian-tech-internships preset", () => {
       assertCanadianTechInternshipCompanyCoverage(targets),
     ).not.toThrow();
   });
-
-  it("keeps the Canadian Tech Internships JSON example aligned with the factory", () => {
-    const example = JSON.parse(
-      readFileSync(
-        resolve(
-          __dirname,
-          "../../../../../examples/canadian-tech-internships.watch.json",
-        ),
-        "utf8",
-      ),
-    ) as Record<string, unknown>;
-    const parsed = new WatchValidationService().parseCreate(example);
-    const preset = canadianTechInternshipsWatch();
-
-    expect(parsed).toEqual(preset);
-  });
 });
 
 describe("WatchPresetService", () => {
   it("hydrates legacy watches with the engineering-family defaults", async () => {
     const repository = new InMemoryWatchRepository();
-    const watch = await repository.createWatch(canadianTechInternshipsWatch());
+    const watch = await repository.createWatch(
+      canadianTechInternshipDefaults(),
+    );
 
     expect(watch.roleFamilies).toEqual([
       "software-engineering",
@@ -228,15 +209,10 @@ describe("WatchPresetService", () => {
     ]);
   });
 
-  it("lists both Canadian internship presets and rejects the retired ID", () => {
+  it("lists only the retained Canadian internship preset and rejects retired IDs", () => {
     const service = new WatchPresetService(new InMemoryWatchRepository());
 
     expect(service.list()).toEqual([
-      {
-        id: CANADIAN_TECH_INTERNSHIPS_ID,
-        version: 1,
-        name: CANADIAN_TECH_INTERNSHIPS_NAME,
-      },
       {
         id: CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
         version: 1,
@@ -244,6 +220,9 @@ describe("WatchPresetService", () => {
       },
     ]);
     expect(() => service.get("prestige-internships-v2")).toThrow(
+      BadRequestException,
+    );
+    expect(() => service.get("canadian-tech-internships")).toThrow(
       BadRequestException,
     );
   });
@@ -374,7 +353,7 @@ describe("WatchPresetService", () => {
     const repository = new InMemoryWatchRepository();
     const baselineAt = new Date("2026-08-10T12:00:00.000Z");
     const sourceTargets = (
-      canadianTechInternshipsWatch().sourceTargets ?? []
+      canadianTechAdjacentInternshipsWatch().sourceTargets ?? []
     ).map((target) => ({
       ...target,
       searchScope: target.searchScope
@@ -382,7 +361,7 @@ describe("WatchPresetService", () => {
             ...target.searchScope,
             countryCodes: ["CA", "US"],
             locations: [
-              ...CANADIAN_TECH_INTERNSHIP_LOCATIONS,
+              ...CANADIAN_TECH_ADJACENT_INTERNSHIP_LOCATIONS,
               "Waterloo, Ontario",
               "United States",
             ],
@@ -391,7 +370,7 @@ describe("WatchPresetService", () => {
       initializedAt: target.enabled ? baselineAt : target.initializedAt,
     }));
     const watch = await repository.createWatch({
-      ...canadianTechInternshipsWatch(),
+      ...canadianTechAdjacentInternshipsWatch(),
       locations: [
         "Canada",
         "Toronto, Ontario",
@@ -404,7 +383,7 @@ describe("WatchPresetService", () => {
     });
 
     const result = await new WatchPresetService(repository).apply(
-      CANADIAN_TECH_INTERNSHIPS_ID,
+      CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
       watch.id,
       { apply: true },
     );
@@ -415,7 +394,9 @@ describe("WatchPresetService", () => {
       "United States",
     ]);
     expect(result.fields.countryCodesRemoved).toEqual(["US"]);
-    expect(result.watch?.locations).toEqual(CANADIAN_TECH_INTERNSHIP_LOCATIONS);
+    expect(result.watch?.locations).toEqual(
+      CANADIAN_TECH_ADJACENT_INTERNSHIP_LOCATIONS,
+    );
     expect(result.watch?.countryCodes).toEqual(["CA"]);
     expect(result.watch?.excludedTerms).toEqual(
       expect.arrayContaining(["operator exclusion", "United States only"]),
@@ -437,20 +418,25 @@ describe("WatchPresetService", () => {
   it("previews without mutation and requires a paused watch to apply", async () => {
     const repository = new InMemoryWatchRepository();
     const watch = await repository.createWatch({
-      ...canadianTechInternshipsWatch(),
+      ...canadianTechAdjacentInternshipsWatch(),
       enabled: true,
     });
     const update = jest.spyOn(repository, "updateWatch");
     const service = new WatchPresetService(repository);
 
-    const preview = await service.apply(CANADIAN_TECH_INTERNSHIPS_ID, watch.id);
+    const preview = await service.apply(
+      CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
+      watch.id,
+    );
 
     expect(preview).toEqual(
       expect.objectContaining({ dryRun: true, applied: false }),
     );
     expect(update).not.toHaveBeenCalled();
     await expect(
-      service.apply(CANADIAN_TECH_INTERNSHIPS_ID, watch.id, { apply: true }),
+      service.apply(CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID, watch.id, {
+        apply: true,
+      }),
     ).rejects.toBeInstanceOf(ConflictException);
     expect(update).not.toHaveBeenCalled();
   });
@@ -459,14 +445,16 @@ describe("WatchPresetService", () => {
     const repository = new InMemoryWatchRepository();
     const baselineAt = new Date("2026-07-21T12:00:00.000Z");
     const phase13Keys = ["uber", "notion", "ramp", "netflix", "ibm"];
-    const currentTargets = (canadianTechInternshipsWatch().sourceTargets ?? [])
+    const currentTargets = (
+      canadianTechAdjacentInternshipsWatch().sourceTargets ?? []
+    )
       .filter((target) => !phase13Keys.includes(watchSourceTargetKey(target)))
       .map((target) => ({
         ...target,
         initializedAt: target.enabled ? baselineAt : target.initializedAt,
       }));
     const watch = await repository.createWatch({
-      ...canadianTechInternshipsWatch(),
+      ...canadianTechAdjacentInternshipsWatch(),
       initializedAt: baselineAt,
       sourceTargets: currentTargets,
       sources: currentTargets.map((target) => target.site),
@@ -476,9 +464,13 @@ describe("WatchPresetService", () => {
     });
     const service = new WatchPresetService(repository);
 
-    const result = await service.apply(CANADIAN_TECH_INTERNSHIPS_ID, watch.id, {
-      apply: true,
-    });
+    const result = await service.apply(
+      CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
+      watch.id,
+      {
+        apply: true,
+      },
+    );
 
     expect(result.preset.version).toBe(1);
     expect(result.targets.added).toEqual(phase13Keys);
@@ -490,7 +482,7 @@ describe("WatchPresetService", () => {
     const repository = new InMemoryWatchRepository();
     const baselineAt = new Date("2026-07-21T12:00:00.000Z");
     const currentTargets = (
-      canadianTechInternshipsWatch().sourceTargets ?? []
+      canadianTechAdjacentInternshipsWatch().sourceTargets ?? []
     ).map((target) => ({
       ...target,
       ...(watchSourceTargetKey(target) === "uber"
@@ -499,13 +491,13 @@ describe("WatchPresetService", () => {
       initializedAt: target.enabled ? baselineAt : target.initializedAt,
     }));
     const watch = await repository.createWatch({
-      ...canadianTechInternshipsWatch(),
+      ...canadianTechAdjacentInternshipsWatch(),
       initializedAt: baselineAt,
       sourceTargets: currentTargets,
     });
 
     const result = await new WatchPresetService(repository).apply(
-      CANADIAN_TECH_INTERNSHIPS_ID,
+      CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
       watch.id,
       { apply: true },
     );
@@ -524,7 +516,9 @@ describe("WatchPresetService", () => {
   it("preserves operator state and resets only added/materially changed targets", async () => {
     const repository = new InMemoryWatchRepository();
     const baselineAt = new Date("2026-07-18T12:00:00.000Z");
-    const sourceTargets = (canadianTechInternshipsWatch().sourceTargets ?? [])
+    const sourceTargets = (
+      canadianTechAdjacentInternshipsWatch().sourceTargets ?? []
+    )
       .filter((target) => target.site !== Site.CANADAJOBBANK)
       .map((target) => {
         if (!target.enabled) return target;
@@ -545,7 +539,7 @@ describe("WatchPresetService", () => {
       initializedAt: baselineAt,
     });
     const watch = await repository.createWatch({
-      ...canadianTechInternshipsWatch(),
+      ...canadianTechAdjacentInternshipsWatch(),
       name: "My operator-owned watch",
       enabled: false,
       minimumScore: 73,
@@ -561,9 +555,13 @@ describe("WatchPresetService", () => {
     });
     const service = new WatchPresetService(repository);
 
-    const result = await service.apply(CANADIAN_TECH_INTERNSHIPS_ID, watch.id, {
-      apply: true,
-    });
+    const result = await service.apply(
+      CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
+      watch.id,
+      {
+        apply: true,
+      },
+    );
     const updated = await repository.getWatch(watch.id);
 
     expect(result).toEqual(
@@ -616,7 +614,9 @@ describe("WatchPresetService", () => {
 
   it("validates explicit initialization keys before source execution", async () => {
     const repository = new InMemoryWatchRepository();
-    const watch = await repository.createWatch(canadianTechInternshipsWatch());
+    const watch = await repository.createWatch(
+      canadianTechAdjacentInternshipsWatch(),
+    );
 
     expect(validateWatchTargetKeys(watch, undefined)).toEqual([]);
     expect(validateWatchTargetKeys(watch, [])).toEqual([]);

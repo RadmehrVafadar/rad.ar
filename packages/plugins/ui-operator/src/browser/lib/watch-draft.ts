@@ -14,6 +14,102 @@ export type EditableWatch = Omit<
 
 export type CreatableWatch = EditableWatch & Pick<JobWatch, "enabled">;
 
+export function targetCompanyKey(target: WatchSourceTarget): string {
+  return (
+    target.companyName?.trim().toLowerCase() ||
+    `${target.site}:${target.companySlug ?? ""}`
+  );
+}
+
+export function tierInterval(
+  targets: WatchSourceTarget[],
+  tier: number,
+  watchInterval: number,
+): number | undefined {
+  const values = [
+    ...new Set(
+      targets
+        .filter((target) => target.tier === tier)
+        .map((target) => target.intervalMinutes ?? watchInterval),
+    ),
+  ];
+  return values.length === 1 ? values[0] : undefined;
+}
+
+export function moveCompanyToTier(
+  targets: WatchSourceTarget[],
+  key: string,
+  tier: 1 | 2 | 3,
+  watchInterval: number,
+): WatchSourceTarget[] {
+  const interval = tierInterval(targets, tier, watchInterval);
+  return targets.map((target) =>
+    targetCompanyKey(target) === key
+      ? {
+          ...target,
+          tier,
+          ...(interval === undefined ? {} : { intervalMinutes: interval }),
+        }
+      : target,
+  );
+}
+
+/** Keep company filters and legacy source fields aligned with explicit targets. */
+export function withSourceTargets(
+  draft: EditableWatch,
+  targets: WatchSourceTarget[],
+): EditableWatch {
+  const membershipChanged =
+    draft.sourceTargets.length !== targets.length ||
+    targets.some((target, index) => {
+      const previous = draft.sourceTargets[index];
+      return (
+        previous.site !== target.site ||
+        previous.companySlug !== target.companySlug ||
+        previous.companyName !== target.companyName
+      );
+    });
+  if (!membershipChanged)
+    return {
+      ...draft,
+      sourceTargets: targets,
+      sourceTiers: targets.some(
+        (target, index) => target.tier !== draft.sourceTargets[index].tier,
+      )
+        ? Object.fromEntries(
+            targets.map((target) => [target.site, target.tier]),
+          )
+        : draft.sourceTiers,
+    };
+  const previousNames = new Set(
+    draft.sourceTargets
+      .map((target) => target.companyName?.trim().toLowerCase())
+      .filter(Boolean),
+  );
+  const nextNames = targets
+    .map((target) => target.companyName?.trim())
+    .filter((name): name is string => Boolean(name));
+  return {
+    ...draft,
+    sourceTargets: targets,
+    sources: [...new Set(targets.map((target) => target.site))],
+    sourceTiers: Object.fromEntries(
+      targets.map((target) => [target.site, target.tier]),
+    ),
+    companySlugs: targets.flatMap((target) =>
+      target.companySlug ? [`${target.site}:${target.companySlug}`] : [],
+    ),
+    companies: [
+      ...new Set([
+        ...draft.companies.filter(
+          (name) => !previousNames.has(name.trim().toLowerCase()),
+        ),
+        ...nextNames,
+      ]),
+    ],
+  };
+}
+
 const EDITABLE_FIELDS: Array<keyof EditableWatch> = [
   "name",
   "description",
@@ -97,10 +193,27 @@ export function diffWatch(
         path: String(field),
         before,
         after,
-        behaviorChanging: BEHAVIOR_FIELDS.has(String(field)),
+        behaviorChanging:
+          BEHAVIOR_FIELDS.has(String(field)) &&
+          !(
+            field === "sourceTargets" &&
+            stableStringify(original.sourceTargets.map(withoutCadence)) ===
+              stableStringify(draft.sourceTargets.map(withoutCadence))
+          ),
       },
     ];
   });
+}
+
+function withoutCadence(target: WatchSourceTarget): unknown {
+  const {
+    intervalMinutes,
+    initializedAt,
+    lastRunAt,
+    nextRunAt,
+    ...configuration
+  } = target;
+  return configuration;
 }
 
 export function validateDraft(draft: EditableWatch): string[] {

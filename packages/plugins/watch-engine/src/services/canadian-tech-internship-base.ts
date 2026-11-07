@@ -6,10 +6,6 @@ import {
   WatchSourceTarget,
 } from "@rad-ar/models/interfaces/watch.types";
 
-export const CANADIAN_TECH_INTERNSHIPS_ID = "canadian-tech-internships";
-export const CANADIAN_TECH_INTERNSHIPS_VERSION = 1;
-export const CANADIAN_TECH_INTERNSHIPS_NAME = "Canadian Tech Internships";
-
 export interface WatchPresetDefinition {
   id: string;
   version: number;
@@ -361,14 +357,11 @@ export function canadianTechInternshipSourceTargets(): WatchSourceTarget[] {
   return targets;
 }
 
-export function canadianTechInternshipsWatch(): Partial<JobWatch> {
+export function canadianTechInternshipDefaults(): Partial<JobWatch> {
   const targets = canadianTechInternshipSourceTargets();
   assertCanadianTechInternshipCompanyCoverage(targets);
   const sources = [...new Set(targets.map(({ site }) => String(site)))];
   return {
-    name: CANADIAN_TECH_INTERNSHIPS_NAME,
-    description:
-      "Toronto and Greater Toronto Area monitoring for Summer 2027 technology internships and co-ops.",
     enabled: false,
     intervalMinutes: 10,
     timezone: "America/Toronto",
@@ -425,17 +418,3 @@ export function assertCanadianTechInternshipCompanyCoverage(
     );
   }
 }
-
-export const CANADIAN_TECH_INTERNSHIPS_PRESET: WatchPresetDefinition =
-  Object.freeze<WatchPresetDefinition>({
-    id: CANADIAN_TECH_INTERNSHIPS_ID,
-    version: CANADIAN_TECH_INTERNSHIPS_VERSION,
-    name: CANADIAN_TECH_INTERNSHIPS_NAME,
-    description:
-      "Summer 2027 technology internships and co-ops in Toronto and the Greater Toronto Area.",
-    applyPolicy: {
-      locations: "replace",
-      countryCodes: "replace",
-    },
-    createWatch: canadianTechInternshipsWatch,
-  });

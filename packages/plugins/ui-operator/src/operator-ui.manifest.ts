@@ -19,8 +19,6 @@ export const OPERATOR_UI_MANIFEST: UiPluginManifest = Object.freeze({
     { id: "watches", label: "Watches", path: "/watches" },
     { id: "notifications", label: "Notifications", path: "/notifications" },
     { id: "matches", label: "Matches & jobs", path: "/matches" },
-    { id: "search", label: "Search & analyze", path: "/search" },
-    { id: "compare", label: "Compare sources", path: "/compare" },
     { id: "settings", label: "Settings", path: "/settings" },
   ]),
 });

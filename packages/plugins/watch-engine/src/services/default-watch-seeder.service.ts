@@ -6,11 +6,14 @@ import {
   Optional,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { WATCH_REPOSITORY, WatchRepository } from "@rad-ar/models/interfaces/watch.types";
 import {
-  canadianTechInternshipsWatch,
-  CANADIAN_TECH_INTERNSHIPS_NAME,
-} from "./canadian-tech-internships.preset";
+  WATCH_REPOSITORY,
+  WatchRepository,
+} from "@rad-ar/models/interfaces/watch.types";
+import {
+  canadianTechAdjacentInternshipsWatch,
+  CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME,
+} from "./canadian-tech-adjacent-internships.preset";
 
 /**
  * Creates the safe, disabled baseline watch on a fresh deployment.
@@ -36,10 +39,10 @@ export class DefaultWatchSeederService implements OnApplicationBootstrap {
     if ((await this.repository.listWatches()).length > 0) return;
 
     const watch = await this.repository.createWatch(
-      canadianTechInternshipsWatch(),
+      canadianTechAdjacentInternshipsWatch(),
     );
     this.logger.log(
-      `Created disabled ${CANADIAN_TECH_INTERNSHIPS_NAME} watch watchId=${watch.id}; initialize targets then resume it to enable alerts`,
+      `Created disabled ${CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME} watch watchId=${watch.id}; initialize targets then resume it to enable alerts`,
     );
   }
 }

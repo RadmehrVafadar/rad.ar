@@ -1,5 +1,17 @@
 # API Changelog
 
+## [Unreleased] - 2026-11-06
+
+### Changed
+
+- The GUI now uses a company tier board with drag-and-drop, accessible tier menus, shared intervals, and template tier reset.
+- Source interval-only updates preserve baselines; company and tier edits retain review and safe-baseline requirements.
+- Discord alerts show the score once, omit the Watch field, and deduplicate employment labels.
+- LinkedIn reposts reuse recently seen matching episodes despite new listing IDs, URLs, or refreshed dates.
+- Canadian Tech + Adjacent Internships is the only selectable preset and the default for new watches and fresh database seeds.
+- Removed the Canadian Tech Internships preset, its JSON template, and the deprecated prestige exports.
+- Existing saved watches are preserved; removing a template does not delete database records.
+
 ## [Unreleased] — 2026-08-13 — Spec 6005
 
 ### Changed

@@ -7,6 +7,38 @@ import { DailyDigestService } from "../services/daily-digest.service";
 
 describe("watcher primitives", () => {
   const fp = new JobFingerprintService();
+  it("groups LinkedIn reposts independently of listing URLs and refreshed dates", () => {
+    const original = new JobPostDto({
+      site: "linkedin",
+      id: "4481613775",
+      companyName: "IMCO",
+      title: "Intern, Enterprise Transformation and AI Strategy (Summer 2027)",
+      location: { city: "Toronto", state: "ON", country: "CA" } as any,
+      jobUrl: "https://ca.linkedin.com/jobs/view/4481613775",
+      applyUrl: "https://ca.linkedin.com/jobs/view/4481613775",
+      datePosted: "2026-10-22",
+    });
+    const repost = new JobPostDto({
+      ...original,
+      id: "4490000000",
+      applyUrl: "https://www.linkedin.com/jobs/view/4490000000",
+      jobUrl: "https://www.linkedin.com/jobs/view/4490000000",
+      datePosted: "2026-11-02",
+    });
+    expect(fp.fingerprint(original)).not.toBe(fp.fingerprint(repost));
+    expect(fp.canonicalFingerprint(original)).toBe(
+      fp.canonicalFingerprint(repost),
+    );
+    expect(fp.usesObservationEpisodeAnchor(original)).toBe(true);
+    const employer = new JobPostDto({
+      ...original,
+      jobUrlDirect: "https://careers.example/jobs/requisition-1",
+    });
+    expect(fp.usesObservationEpisodeAnchor(employer)).toBe(false);
+    expect(fp.canonicalFingerprint(employer)).not.toBe(
+      fp.canonicalFingerprint(original),
+    );
+  });
   it("canonicalizes tracking URLs and keeps fingerprint stable", () => {
     const a = new JobPostDto({
       site: "greenhouse",
@@ -280,7 +312,7 @@ describe("watcher primitives", () => {
       ]),
     );
   });
-  it("requires a target engineering title even for a Canadian internship", () => {
+  it("requires a configured role family even for a Canadian internship", () => {
     const watch = defaultInternshipWatch() as any;
     const score = new JobScoringService().score(
       new JobPostDto({
@@ -296,7 +328,7 @@ describe("watcher primitives", () => {
       }),
       watch,
     );
-    expect(score.missingRequired).toContain("target role in title");
+    expect(score.missingRequired).toContain("configured role family");
   });
   it("applies per-watch configurable scoring weights", () => {
     const watch = {

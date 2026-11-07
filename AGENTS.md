@@ -56,3 +56,4 @@ docs/archive/         Historical logs and reference material.
 - Before consulting historical records, read [the archive guide](docs/archive/README.md).
 - Before changing deployment identifiers, read [Identifier migration](docs/identifier-migration.md).
 - Before changing workflows or test sharding, read [Continuous integration](docs/continuous-integration.md).
+- Before changing watch editing or alerts, read [Operator GUI](docs/operator-gui.md).

@@ -3,7 +3,6 @@ import {
   ArrowRight,
   CirclePause,
   CirclePlay,
-  Clock3,
   Copy,
   MoreHorizontal,
   Plus,
@@ -47,11 +46,6 @@ export function WatchesPage() {
   const watches = useQuery({
     queryKey: ["watches"],
     queryFn: ({ signal }) => api.watches.list(signal),
-    enabled: hasApiKey,
-  });
-  const presets = useQuery({
-    queryKey: ["watch-presets"],
-    queryFn: ({ signal }) => api.presets.list(signal),
     enabled: hasApiKey,
   });
   const invalidate = () =>
@@ -117,23 +111,25 @@ export function WatchesPage() {
     <div className="page">
       {!hasApiKey ? <MissingKeyBanner /> : null}
       <PageHeader
-        eyebrow="Watcher"
         title="Watches"
-        description="Build, baseline, and schedule persistent job profiles from one place."
+        description="Manage your companies, schedules, and alerts."
         actions={
           <>
             <Button
-              variant="secondary"
+              variant="primary"
               onClick={() => defaultMutation.mutate()}
               loading={defaultMutation.isPending}
               disabled={!hasApiKey}
             >
-              <Sparkles size={16} />
-              Use Canadian Tech Internships preset
-            </Button>
-            <Button onClick={() => setCreateOpen(true)} disabled={!hasApiKey}>
               <Plus size={16} />
               New watch
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setCreateOpen(true)}
+              disabled={!hasApiKey}
+            >
+              Blank watch
             </Button>
           </>
         }
@@ -141,50 +137,10 @@ export function WatchesPage() {
       {feedback ? <InlineNotice tone="success">{feedback}</InlineNotice> : null}
       <ErrorText error={action.error ?? defaultMutation.error} />
 
-      <section className="metric-grid metric-grid--three">
-        <div className="watch-summary">
-          <span>
-            <Radar size={17} />
-          </span>
-          <div>
-            <strong>{watches.data?.length ?? 0}</strong>
-            <small>Total profiles</small>
-          </div>
-        </div>
-        <div className="watch-summary">
-          <span>
-            <CirclePlay size={17} />
-          </span>
-          <div>
-            <strong>
-              {watches.data?.filter((watch) => watch.enabled).length ?? 0}
-            </strong>
-            <small>Actively scheduled</small>
-          </div>
-        </div>
-        <div className="watch-summary">
-          <span>
-            <Clock3 size={17} />
-          </span>
-          <div>
-            <strong>
-              {watches.data?.filter((watch) =>
-                watch.sourceTargets.some(
-                  (target) =>
-                    target.enabled &&
-                    !isTargetInitialized(target, watch.initializedAt),
-                ),
-              ).length ?? 0}
-            </strong>
-            <small>Need baseline</small>
-          </div>
-        </div>
-      </section>
-
       <Panel>
         <PanelHeader
-          title="Configured watches"
-          description="Start watcher resumes a persisted profile; it does not spawn another process."
+          title="Your watches"
+          description="Open a watch to update its companies and schedule."
           action={
             <div className="segmented" aria-label="Filter watches">
               {(["all", "active", "paused"] as const).map((value) => (
@@ -217,7 +173,7 @@ export function WatchesPage() {
             }
             description={
               filter === "all"
-                ? "Start with a blank profile or use the safe default preset."
+                ? "Create a watch from the Canadian Tech + Adjacent Internships template."
                 : "Change the filter or update a watch state."
             }
             action={
@@ -287,6 +243,12 @@ export function WatchesPage() {
                     </Badge>
                   </div>
                   <div className="watch-row__actions">
+                    <Link
+                      className="button button--secondary button--small"
+                      to={`/watches/${watch.id}`}
+                    >
+                      Edit watch
+                    </Link>
                     {!watch.enabled && needsBaseline ? (
                       <Link
                         className="button button--secondary button--small"
@@ -317,7 +279,7 @@ export function WatchesPage() {
                         ) : (
                           <CirclePlay size={15} />
                         )}
-                        {watch.enabled ? "Pause" : "Start watcher"}
+                        {watch.enabled ? "Pause" : "Resume"}
                       </Button>
                     )}
                     <div className="menu">
@@ -386,32 +348,6 @@ export function WatchesPage() {
           </div>
         )}
       </Panel>
-
-      {presets.data?.length ? (
-        <Panel>
-          <PanelHeader
-            title="Available presets"
-            description="Versioned starting points maintained by rad.ar."
-          />
-          <div className="preset-grid">
-            {presets.data.map((preset) => (
-              <article key={preset.id}>
-                <span>
-                  <Sparkles size={17} />
-                </span>
-                <div>
-                  <h3>{preset.name}</h3>
-                  <p>
-                    {preset.description ||
-                      "A versioned rad.ar watch configuration."}
-                  </p>
-                  <small>Version {preset.version}</small>
-                </div>
-              </article>
-            ))}
-          </div>
-        </Panel>
-      ) : null}
 
       <CreateWatchModal
         open={createOpen}

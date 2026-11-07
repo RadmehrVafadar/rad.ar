@@ -1,6 +1,6 @@
 import "dotenv/config";
 import {
-  prestigeInternshipsV2Watch,
+  defaultInternshipWatch,
   PrismaWatchRepository,
   WatcherPrismaService,
 } from "@rad-ar/watcher";
@@ -17,8 +17,7 @@ async function seed(): Promise<void> {
     // Seeding is fresh-install-only. A repeated deploy must never duplicate or
     // overwrite legacy/custom watches, cadence, thresholds, or baseline state.
     const watch =
-      watches[0] ??
-      (await repository.createWatch(prestigeInternshipsV2Watch()));
+      watches[0] ?? (await repository.createWatch(defaultInternshipWatch()));
 
     process.stdout.write(
       JSON.stringify(

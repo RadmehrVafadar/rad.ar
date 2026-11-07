@@ -80,18 +80,10 @@ export function OverviewPage() {
     <div className="page page--overview">
       {!hasApiKey ? <MissingKeyBanner /> : null}
       <PageHeader
-        eyebrow="Local operator console"
-        title="Your job signal, at a glance"
-        description="Keep every watch, source, and delivery path in view without reaching for the command line."
+        title="Overview"
+        description="Your watches, recent matches, and alerts."
         actions={
           <>
-            <Link
-              className="button button--secondary button--medium"
-              to="/search"
-            >
-              <Search size={16} />
-              Run a search
-            </Link>
             <Link
               className="button button--primary button--medium"
               to="/watches"

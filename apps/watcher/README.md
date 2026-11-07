@@ -6,29 +6,15 @@ matches, and notification deliveries in PostgreSQL. It invokes source plugins
 directly and sends durable notifications only after database persistence
 succeeds.
 
-The `canadian-tech-internships` preset (revision 1) targets Summer 2027
-technology internships and co-op roles in Toronto and the Greater Toronto Area.
-Every source tier uses `CA` and the same GTA location list. Its first activation
-is deliberately safe: a new seeded watch is
-globally disabled/uninitialized and every target baseline is unset. Target-level
-enabled flags describe validated inventory only; they cannot poll or notify
-while the watch is paused.
+The sole selectable preset is `canadian-tech-adjacent-internships` revision 1, displayed as **Canadian Tech + Adjacent Internships**.
+It targets Summer 2027 technology and technology-adjacent internships and co-ops in the Greater Toronto Area across nine role families and 41 employer groups.
+New default watches use this preset, start disabled and uninitialized, and require a reviewed baseline before resuming.
+Existing watch configuration, cadence, thresholds, and initialization are preserved across restarts and repeated seeds.
+The older Canadian Tech Internships and prestige presets and the older JSON template have been removed.
+Shared technology-company source definitions remain implementation details of the retained preset.
 
-The retained inventory classifies every target company explicitly: 21 have at least one
-first-class company/ATS target, while RBC, TD, Scotiabank, BMO, and CIBC remain
-visible as deferred, uncovered companies. Generic LinkedIn, Canada Job Bank, and
-Google Jobs targets provide redundancy but never count as company coverage.
-
-Spec 6004 adds a separate disabled preset,
-`canadian-tech-adjacent-internships` (revision 1). It keeps the original preset
-unchanged while requiring branded first-party coverage for 41 employer groups:
-the existing 21 technology companies plus 20 banks, consulting firms, Canadian
-retail/consumer brands, insurers, and telecoms. It enables nine role families:
-software engineering, data/AI, cybersecurity, cloud/platform/infrastructure,
-QA/automation, technical product, UX/product design, systems/business analysis,
-and technology risk/IT audit.
-
-For copy-and-paste operating procedures, use the [local runbook](../../docs/runbooks/watcher-local.md). For the supported Google Cloud shape and its constraints, use the [Google Cloud runbook](../../docs/runbooks/watcher-google-cloud.md).
+For operating procedures, see the [local runbook](../../docs/runbooks/watcher-local.md).
+For the Google Cloud deployment shape, see the [Google Cloud runbook](../../docs/runbooks/watcher-google-cloud.md).
 
 ## Runtime architecture
 
@@ -108,16 +94,9 @@ must remain paused:
 
 ```bash
 npm run cli -- watch list --json
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id> --apply
-npm run cli -- watch coverage --id <watch-id> --json
-```
-
-To use the separate expanded preset, substitute these dry-run/apply commands:
-
-```bash
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id> --apply
+npm run cli -- watch coverage --id <watch-id> --json
 ```
 
 The apply result identifies added and materially changed targets. Baseline only
@@ -209,9 +188,7 @@ Plugin metadata declares whether a source is a complete `board` or a search
 `query`; Google Careers and Microsoft declare their actual behavior explicitly.
 Query targets build the complete configured Summer 2027 term × location matrix and process a
 rotating slice capped by `maxRequestsPerRun`, so a permanently fixed first
-country/location cannot starve the remaining matrix. The preset has 19 terms
-and 11 Toronto/GTA locations, producing 209 matrix entries for each query
-target. Their request caps are 1, 12, 12, and 8 per run respectively. Google Careers therefore makes only one
+country/location cannot starve the remaining matrix. The retained preset supplies its own search terms and GTA locations; each query target applies its configured request budget. Google Careers therefore makes only one
 rotating search per inherited watch interval.
 
 ## Default source readiness
@@ -227,17 +204,14 @@ it unattended:
 | Plaid | 1 | Generic Ashby target `ashby:plaid` | **Enabled target** inside the disabled preset watch; baseline before resuming. |
 | Amazon, Microsoft, Apple, Nvidia, Stripe, OpenAI, Datadog, DoorDash, Coinbase, Figma, Vercel, Meta, Wellfound | 1 | Retained direct-company inventory with Toronto/GTA post-filter scope | **Enabled by operator request.** Baseline every target before resuming; Microsoft's earlier live smoke timed out. |
 | Uber, Notion, Ramp, Netflix, IBM | 1 | Complete official company boards; Notion/Ramp delegate to registered Ashby by fixed slug | **Enabled targets inside the disabled/uninitialized watch.** Each is Toronto/GTA-scoped at 10 minutes with `resultsWanted: 500`; disabled live smoke, targeted baseline, and two observation cycles remain operator gates. |
-| Canada Job Bank | 2 | Structured Canadian query source | **Enabled target** inside the disabled preset watch; 12 of 209 matrix requests every 30 minutes. |
+| Canada Job Bank | 2 | Structured Canadian query source | **Enabled target** inside the disabled preset watch; Inherits the watch schedule and geography, with a per-source request budget. |
 | Google Jobs | 2 | Toronto/GTA query source with employer application URL extraction | **Disabled.** Fixture/failure gates pass, but the live smoke returned an enable-JavaScript shell; require a successful smoke and baseline. |
 | LinkedIn public guest | 3 | Toronto/GTA newest-first 72-hour public search | **Target-enabled inside the disabled/uninitialized watch.** Listing/detail fixtures and unauthenticated live smoke pass; baseline and operator review remain required. |
-| RBC, TD, Scotiabank, BMO, CIBC | — | Deferred official bank adapters | **Uncovered by design in this phase.** They remain in the configured company inventory and appear as `uncovered` in coverage reports. |
+| RBC, TD, Scotiabank, BMO, CIBC | 1 | Branded official ATS targets | Enabled inside the disabled/uninitialized retained preset; baseline before resuming. |
 
-The target-enabled set is `google_careers`, `shopify`, `ashby:wealthsimple`,
-`ashby:plaid`, all 13 legacy direct-company targets listed above,
-`uber`, `notion`, `ramp`, `netflix`, `ibm`, `canadajobbank`, and `linkedin`.
-Only Google Jobs remains target-disabled. The inventory invariant requires every
-target company to have an exact branded target or an explicit deferral; adding an
-unclassified name fails validation.
+The retained preset includes enabled branded coverage for all 41 configured employer groups.
+Google Jobs remains disabled; review per-target readiness before resuming a new watch.
+Shared technology-company defaults are extended with the retained preset's bank, consulting, retail, insurance, and telecom targets.
 
 The preset preview is the authoritative report of which targets are enabled in
 the installed revision. Do not change a gate to enabled merely because the
@@ -265,8 +239,7 @@ Coverage uses normalized exact matching between `watch.companies[]` and
 active; a company with only disabled branded targets is disabled; a company
 with no branded target is uncovered. Generic discovery boards do not satisfy
 first-class company coverage even when their query or score allowlist names the
-company. For the Canadian Tech Internships preset, the expected summary is 21 active and five
-uncovered before considering initialization and runtime degradation.
+company.
 
 For Canadian Tech + Adjacent Internships, require exactly 41 configured and 41
 active companies, zero uncovered companies, and successful initialization for
@@ -344,13 +317,17 @@ idempotency key uses watch + canonical episode + channel and destination. It
 deliberately excludes notification type, so a standard/urgent/digest band change
 cannot resend. The same posting found on a company board, Google Jobs, and
 LinkedIn is delivered once while every source observation remains queryable.
-An already-sent episode never reopens. A stable source ID reposted after the
-14-day fallback window receives a new episode-scoped observation and may create
-one new delivery; a UTC boundary alone cannot do so.
+An already-sent episode never reopens.
+LinkedIn listing URLs and refreshed publication dates do not create new identities when no real employer URL is available.
+Matching normalized company/title/location reuse a LinkedIn episode seen within 14 days, including legacy URL-based observations; known source IDs retain their episode.
+Other URL/date-less sources retain the original 14-day first-observation window.
+Distinct employer requisition URLs remain distinct.
 
 If the URL is exposed, delete or rotate the Discord webhook immediately and update the environment. Never put the URL in the example watch configuration or a database field.
 
 Telegram is not an enabled delivery path in this release. A generic webhook provider exists, but Discord is the documented and tested path for this deployment.
+
+The [operator GUI guide](../../docs/operator-gui.md) covers the tier board, shared intervals, atomic saves, and compact Discord alerts.
 
 ## Main configuration
 
@@ -399,8 +376,8 @@ npm run cli -- watch metrics <watch-id> --json
 npm run cli -- watch coverage --id <watch-id> --json
 npm run cli -- watch deliveries <watch-id> --json
 npm run cli -- watch initialize <watch-id> --target <target-key> --json
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id> --apply
+npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
+npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id> --apply
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id> --apply
 ```
@@ -423,8 +400,8 @@ inspection, and a no-notification baseline of every reported target:
 
 ```bash
 node dist/apps/cli/main.js watch pause <watch-id> --json
-node dist/apps/cli/main.js watch preset apply canadian-tech-internships --watch <watch-id>
-node dist/apps/cli/main.js watch preset apply canadian-tech-internships --watch <watch-id> --apply
+node dist/apps/cli/main.js watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
+node dist/apps/cli/main.js watch preset apply canadian-tech-adjacent-internships --watch <watch-id> --apply
 node dist/apps/cli/main.js watch coverage --id <watch-id> --json
 node dist/apps/cli/main.js watch initialize <watch-id> --json
 ```
@@ -433,15 +410,8 @@ Inspect every target result. Retry failures or disable a failing target before
 running `watch resume`; do not treat a partial baseline as complete. A fresh
 watch must baseline every enabled target reported by its preset diff.
 
-The current example is
-[Canadian Tech Internships](../../examples/canadian-tech-internships.watch.json).
-Its top-level interval, country codes, and locations are inherited by source
-targets unless a target explicitly supplies the corresponding property. Partial
-`searchScope` objects are supported, so target-only terms or request budgets do
-not duplicate geography. A compacted copy of the 47-target expanded preset is
-[Canadian Tech + Adjacent Internships](../../examples/canadian-tech-adjacent-internships.watch.json).
-The older Canada/USA and broad-Canada example paths remain only as deprecated
-compatibility artifacts.
+The retained saved configuration is [Canadian Tech + Adjacent Internships](../../examples/canadian-tech-adjacent-internships.watch.json).
+Watch-level interval and geography are inherited unless a target explicitly overrides them.
 
 The authenticated API supplies the equivalent watch CRUD, initialization, run, pause/resume, run history, match, metric, company-coverage, observed-job, and notification-delivery endpoints. Company coverage is available at `GET /api/watches/:id/coverage`. Run the API separately with `npm run start:dev`; it is not required when managing a local worker exclusively through the CLI.
 

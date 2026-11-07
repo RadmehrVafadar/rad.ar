@@ -1,7 +1,7 @@
 import { ConflictException } from "@nestjs/common";
 import { Site } from "@rad-ar/models";
-import { JobWatch, WatchRepository } from '@rad-ar/models';
-import { WatchValidationService } from '@rad-ar/watch-engine';
+import { JobWatch, WatchRepository } from "@rad-ar/models";
+import { WatchValidationService } from "@rad-ar/watch-engine";
 import { WatchApplyService } from "../watch-apply.service";
 
 describe("WatchApplyService", () => {
@@ -58,6 +58,50 @@ describe("WatchApplyService", () => {
       "metadata",
       "routing",
     ]);
+  });
+
+  it("updates source cadence without discarding baseline state or pausing the watch", async () => {
+    const current = watchFixture({ enabled: true });
+    const lastRunAt = new Date("2026-08-04T12:00:00Z");
+    current.sourceTargets[0].lastRunAt = lastRunAt;
+    repository.getWatch.mockResolvedValue(current);
+    repository.updateWatchIfCurrent.mockImplementation(
+      async (_id, _version, patch) => ({ ...current, ...patch }),
+    );
+    const target = current.sourceTargets[0];
+    const result = await service.apply(current.id, {
+      expectedUpdatedAt: current.updatedAt.toISOString(),
+      patch: {
+        sourceTargets: [
+          {
+            site: target.site,
+            companySlug: target.companySlug,
+            tier: target.tier,
+            enabled: true,
+            intervalMinutes: 60,
+          },
+        ],
+      },
+    });
+    expect(result.behaviorChanged).toBe(false);
+    expect(result.paused).toBe(false);
+    expect(result.resumeRequired).toBe(false);
+    expect(result.targetKeysRequiringInitialization).toEqual([]);
+    expect(repository.updateWatchIfCurrent).toHaveBeenCalledWith(
+      current.id,
+      current.updatedAt,
+      expect.objectContaining({
+        nextRunAt: null,
+        sourceTargets: [
+          expect.objectContaining({
+            initializedAt: target.initializedAt,
+            lastRunAt,
+            nextRunAt: new Date("2026-08-04T13:00:00Z"),
+            intervalMinutes: 60,
+          }),
+        ],
+      }),
+    );
   });
 
   it("atomically pauses behavior changes and invalidates enabled targets", async () => {
