@@ -13,6 +13,7 @@ npm run gui
 ```
 
 The launcher applies migrations, generates Prisma when necessary, builds the API, watcher, and web GUI, and starts the stack.
+The launcher resolves Nx through its published package executable for builds and web preview rather than a version-specific internal file path.
 Open `http://localhost:3000` and keep the terminal running.
 Keep the separate watcher LaunchAgent unloaded while the GUI stack is running.
 

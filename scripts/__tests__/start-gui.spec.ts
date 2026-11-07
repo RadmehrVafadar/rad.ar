@@ -131,3 +131,15 @@ describe("start-gui launcher", () => {
     }
   });
 });
+
+it("launches the installed Nx CLI for GUI development and production preview", () => {
+  const { execFileSync } = require("node:child_process");
+  for (const mode of ["development", "production"] as const) {
+    const command = serviceCommands(createRuntimeConfiguration(mode, {}))[2];
+    expect(
+      execFileSync(command.command, [command.args[0], "--version"], {
+        encoding: "utf8",
+      }),
+    ).toContain("Nx Version");
+  }
+});
