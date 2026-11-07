@@ -6,13 +6,13 @@ import {
   WatchSourceTarget,
 } from "@rad-ar/models/interfaces/watch.types";
 import {
-  canadianTechInternshipsWatch,
+  canadianTechInternshipDefaults,
   canadianTechInternshipSourceTargets,
   CANADIAN_TECH_INTERNSHIP_COMPANIES,
   CANADIAN_TECH_INTERNSHIP_DEFERRED_COMPANIES,
   createCanadianInternshipSourceTarget,
   WatchPresetDefinition,
-} from "./canadian-tech-internships.preset";
+} from "./canadian-tech-internship-base";
 
 export const CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID =
   "canadian-tech-adjacent-internships";
@@ -329,7 +329,7 @@ export function assertCanadianTechAdjacentInternshipCompanyCoverage(
 }
 
 export function canadianTechAdjacentInternshipsWatch(): Partial<JobWatch> {
-  const base = canadianTechInternshipsWatch();
+  const base = canadianTechInternshipDefaults();
   const targets = canadianTechAdjacentInternshipSourceTargets();
   assertCanadianTechAdjacentInternshipCompanyCoverage(targets);
   return {

@@ -10,8 +10,6 @@ describe("OperatorUiPlugin", () => {
       "watches",
       "notifications",
       "matches",
-      "search",
-      "compare",
       "settings",
     ]);
   });

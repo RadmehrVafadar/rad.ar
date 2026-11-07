@@ -19,9 +19,24 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@nestjs/swagger";
-import { CompanyCoverageReport, CompanyCoverageService, defaultInternshipWatch, RunWatchOptions, WatchExecutionService, WatchPresetApplyResult, WatchPresetService, WatchValidationService, validateWatchTargetKeys } from '@rad-ar/watch-engine';
-import { DiscordNotificationProvider } from '@rad-ar/notification-discord';
-import { JobWatch, Page, WATCH_REPOSITORY, WatchRepository } from '@rad-ar/models';
+import {
+  CompanyCoverageReport,
+  CompanyCoverageService,
+  defaultInternshipWatch,
+  RunWatchOptions,
+  WatchExecutionService,
+  WatchPresetApplyResult,
+  WatchPresetService,
+  WatchValidationService,
+  validateWatchTargetKeys,
+} from "@rad-ar/watch-engine";
+import { DiscordNotificationProvider } from "@rad-ar/notification-discord";
+import {
+  JobWatch,
+  Page,
+  WATCH_REPOSITORY,
+  WatchRepository,
+} from "@rad-ar/models";
 import { AdminAuth } from "../auth/admin-auth.decorator";
 import {
   CompanyCoverageReportDto,
@@ -36,7 +51,10 @@ import {
   WatchMatchQueryDto,
   WatchRunQueryDto,
 } from "@rad-ar/models/dtos/watch.dto";
-import { WatchApplyResult, WatchApplyService } from "@rad-ar/watch-engine/management/watch-apply.service";
+import {
+  WatchApplyResult,
+  WatchApplyService,
+} from "@rad-ar/watch-engine/management/watch-apply.service";
 import {
   createDiscordTestMessage,
   publicNotificationDelivery,
@@ -47,7 +65,7 @@ import {
   toWatchMatchQuery,
   toWatchRunQuery,
 } from "@rad-ar/watch-engine/management/watch-management.helpers";
-import { collectWatchMetrics } from '@rad-ar/watch-engine/management/watch-metrics';
+import { collectWatchMetrics } from "@rad-ar/watch-engine/management/watch-metrics";
 
 type PublicWatchPresetApplyResult = Omit<WatchPresetApplyResult, "watch"> & {
   watch?: Record<string, unknown>;
@@ -79,7 +97,7 @@ export class WatchesController {
 
   @Post("default")
   @ApiOperation({
-    summary: "Create the safe Canadian Tech Internships watch",
+    summary: "Create the safe Canadian Tech + Adjacent Internships watch",
     description:
       "Creates the repository default disabled and in baseline mode. Initialize it before resuming.",
   })
@@ -98,6 +116,14 @@ export class WatchesController {
   @ApiOperation({ summary: "List available watch presets" })
   listPresets(): Array<{ id: string; version: number; name: string }> {
     return this.presets.list();
+  }
+
+  @Get("presets/:presetId/defaults")
+  @ApiOperation({
+    summary: "Get a watch template's default company tiers and schedule",
+  })
+  presetDefaults(@Param("presetId") presetId: string): Partial<JobWatch> {
+    return this.presets.get(presetId).createWatch();
   }
 
   @Get(":id")

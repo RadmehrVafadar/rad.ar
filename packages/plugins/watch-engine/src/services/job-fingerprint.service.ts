@@ -1,10 +1,12 @@
 import { createHash } from "crypto";
 import { Injectable } from "@nestjs/common";
+import { normalizeLocationIdentity, parseLocationText } from "@rad-ar/common";
 import {
-  normalizeLocationIdentity,
-  parseLocationText,
-} from "@rad-ar/common";
-import { JobPostDto, LocationDto, Site } from "@rad-ar/models";
+  isLinkedInListingUrl,
+  JobPostDto,
+  LocationDto,
+  Site,
+} from "@rad-ar/models";
 
 export const CANONICAL_EPISODE_WINDOW_MS = 14 * 24 * 60 * 60 * 1_000;
 
@@ -136,7 +138,10 @@ export class JobFingerprintService {
     options: CanonicalFingerprintOptions = {},
   ): string {
     const employerUrl = this.canonicalEmployerUrl(job, options);
-    const publicationDate = this.normalizedPublicationDate(job.datePosted);
+    const publicationDate =
+      this.normalizeText(job.site) === Site.LINKEDIN
+        ? ""
+        : this.normalizedPublicationDate(job.datePosted);
     const observationAnchor = Number.isFinite(observedAt.getTime())
       ? observedAt.toISOString()
       : new Date(0).toISOString();
@@ -160,7 +165,8 @@ export class JobFingerprintService {
   ): boolean {
     return (
       !this.canonicalEmployerUrl(job, options) &&
-      !this.normalizedPublicationDate(job.datePosted)
+      (this.normalizeText(job.site) === Site.LINKEDIN ||
+        !this.normalizedPublicationDate(job.datePosted))
     );
   }
 
@@ -208,9 +214,13 @@ export class JobFingerprintService {
     if (job.site === Site.GOOGLE_CAREERS && job.jobUrl) {
       return this.canonicalizeUrl(job.jobUrl);
     }
-    const externalEmployerUrl = firstNonEmpty(job.applyUrl, job.jobUrlDirect);
+    const externalEmployerUrl = firstNonEmpty(
+      ...[job.applyUrl, job.jobUrlDirect].filter(
+        (url) => !isLinkedInListingUrl(url),
+      ),
+    );
     if (externalEmployerUrl) return this.canonicalizeUrl(externalEmployerUrl);
-    if (options.employerOwnedListing) {
+    if (options.employerOwnedListing && !isLinkedInListingUrl(job.jobUrl)) {
       return this.canonicalizeUrl(job.jobUrl);
     }
     return "";

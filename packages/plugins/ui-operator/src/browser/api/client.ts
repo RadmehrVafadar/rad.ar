@@ -1,16 +1,12 @@
 import {
   ApiHealth,
-  CompareResponse,
   CoverageReport,
   DestinationSummary,
-  JobAnalysis,
   JobWatch,
   NotificationDelivery,
   ObservedJob,
   OperatorOverview,
   Page,
-  SearchInput,
-  SearchResponse,
   SourceHealth,
   WatchApplyResponse,
   WatchMatch,
@@ -222,6 +218,11 @@ export const api = {
       request<CoverageReport>(`/watches/${id}/coverage`, { signal }),
   },
   presets: {
+    defaults: (presetId: string, signal?: AbortSignal) =>
+      request<Pick<JobWatch, "sourceTargets" | "intervalMinutes">>(
+        `/watches/presets/${encodeURIComponent(presetId)}/defaults`,
+        { signal },
+      ),
     list: (signal?: AbortSignal) =>
       request<WatchPresetSummary[]>("/watches/presets", { signal }),
     preview: (presetId: string, watchId: string, signal?: AbortSignal) =>
@@ -278,36 +279,6 @@ export const api = {
       }),
     get: (id: string, signal?: AbortSignal) =>
       request<ObservedJob>(`/observed-jobs/${id}`, { signal }),
-  },
-  jobs: {
-    search: (
-      body: SearchInput,
-      options: {
-        dedup?: boolean;
-        liveness?: boolean;
-        legitimacy?: boolean;
-      } = {},
-    ) =>
-      request<SearchResponse>(
-        `/jobs/search${queryString({
-          dedup: options.dedup ?? true,
-          liveness: options.liveness,
-          legitimacy: options.legitimacy,
-        })}`,
-        { method: "POST", body, authenticated: false },
-      ),
-    analyze: (body: SearchInput) =>
-      request<JobAnalysis>("/jobs/analyze", {
-        method: "POST",
-        body,
-        authenticated: false,
-      }),
-    compare: (body: SearchInput & { concurrency?: number }) =>
-      request<CompareResponse>("/jobs/compare", {
-        method: "POST",
-        body,
-        authenticated: false,
-      }),
   },
 };
 

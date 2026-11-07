@@ -2,13 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Bell,
   Binoculars,
-  ChartNoAxesCombined,
-  GitCompareArrows,
   KeyRound,
   LayoutDashboard,
   Menu,
   Radar,
-  Search,
   Settings,
   X,
 } from "lucide-react";
@@ -24,8 +21,6 @@ const NAV_ICONS: Record<string, ReactNode> = {
   watches: <Radar size={18} />,
   notifications: <Bell size={18} />,
   matches: <Binoculars size={18} />,
-  search: <Search size={18} />,
-  compare: <GitCompareArrows size={18} />,
   settings: <Settings size={18} />,
 };
 
@@ -41,6 +36,22 @@ const TITLES = Object.fromEntries(
 
 export function AppShell() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobile, setMobile] = useState(
+    () => window.matchMedia("(max-width: 900px)").matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 900px)");
+    const update = () => setMobile(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, []);
   const location = useLocation();
   const { hasApiKey } = useAuth();
   const health = useQuery({
@@ -62,10 +73,19 @@ export function AppShell() {
         Skip to content
       </a>
       <aside
+        id="primary-navigation"
+        inert={mobile && !menuOpen}
         className={`sidebar ${menuOpen ? "sidebar--open" : ""}`}
         aria-label="Primary"
       >
         <div className="brand">
+          <button
+            className="sidebar-close icon-button"
+            aria-label="Close navigation"
+            onClick={() => setMenuOpen(false)}
+          >
+            <X size={20} />
+          </button>
           <span className="brand__mark" aria-hidden="true">
             <span />
           </span>
@@ -78,12 +98,6 @@ export function AppShell() {
           <p className="sidebar__label">Workspace</p>
           {NAVIGATION.filter(({ id }) =>
             ["overview", "watches", "notifications", "matches"].includes(id),
-          ).map((item) => (
-            <NavigationLink key={item.to} {...item} />
-          ))}
-          <p className="sidebar__label sidebar__label--spaced">Explore</p>
-          {NAVIGATION.filter(({ id }) =>
-            ["search", "compare"].includes(id),
           ).map((item) => (
             <NavigationLink key={item.to} {...item} />
           ))}
@@ -117,10 +131,12 @@ export function AppShell() {
           onClick={() => setMenuOpen(false)}
         />
       ) : null}
-      <div className="workspace">
+      <div className="workspace" inert={mobile && menuOpen}>
         <header className="topbar">
           <button
             className="mobile-menu"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
             onClick={() => setMenuOpen((value) => !value)}
           >

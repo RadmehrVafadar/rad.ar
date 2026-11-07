@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { createHash, randomUUID } from "crypto";
+import { isLinkedInListingUrl } from "@rad-ar/models";
 import {
   AcquireWatchLeaseInput,
   ClaimNotificationDeliveryInput,
@@ -492,6 +493,40 @@ export class InMemoryWatchRepository implements WatchRepository {
       return input;
     }
     const minimumAnchor = anchor.getTime() - windowMs;
+    if (
+      input.source === "linkedin" &&
+      input.normalizedCompany &&
+      input.normalizedTitle &&
+      input.normalizedLocation
+    ) {
+      const candidates = [...this.jobs.values()]
+        .filter(
+          (job) =>
+            job.source === "linkedin" &&
+            job.normalizedCompany === input.normalizedCompany &&
+            job.normalizedTitle === input.normalizedTitle &&
+            job.normalizedLocation === input.normalizedLocation &&
+            job.canonicalEpisodeKey &&
+            (!job.applicationUrl || isLinkedInListingUrl(job.applicationUrl)) &&
+            (job.fingerprint === input.fingerprint ||
+              (job.lastSeenAt.getTime() >= minimumAnchor &&
+                job.lastSeenAt.getTime() <= anchor.getTime())),
+        )
+        .sort(
+          (left, right) =>
+            right.lastSeenAt.getTime() - left.lastSeenAt.getTime(),
+        );
+      const existing =
+        candidates.find((job) => job.fingerprint === input.fingerprint) ??
+        candidates[0];
+      if (existing?.canonicalEpisodeKey)
+        return {
+          ...input,
+          canonicalEpisodeKey: existing.canonicalEpisodeKey,
+          canonicalEpisodeStartedAt:
+            existing.canonicalEpisodeStartedAt ?? existing.firstSeenAt,
+        };
+    }
     const recent = [...this.jobs.values()]
       .filter(
         (job) =>

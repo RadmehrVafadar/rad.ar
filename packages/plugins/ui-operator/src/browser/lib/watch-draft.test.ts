@@ -7,9 +7,71 @@ import {
   isTargetInitialized,
   parseImportedWatchDraft,
   validateDraft,
+  withSourceTargets,
+  moveCompanyToTier,
 } from "./watch-draft";
 
 describe("watch draft helpers", () => {
+  it("treats tier frequency updates as schedule changes and preserves unrelated filters", () => {
+    const original = editableWatch(makeWatch());
+    const changed = withSourceTargets(
+      original,
+      original.sourceTargets.map((target) => ({
+        ...target,
+        intervalMinutes: 60,
+      })),
+    );
+    expect(changed.companySlugs).toEqual(original.companySlugs);
+    expect(changed.companies).toEqual(original.companies);
+    expect(diffWatch(original, changed)).toEqual([
+      expect.objectContaining({
+        path: "sourceTargets",
+        behaviorChanging: false,
+      }),
+    ]);
+  });
+  it("moves every board for a company and uses the destination tier schedule", () => {
+    const targets = [
+      {
+        site: "workday",
+        companyName: "Loblaw",
+        companySlug: "main",
+        tier: 1 as const,
+        intervalMinutes: 10,
+        enabled: true,
+      },
+      {
+        site: "workday",
+        companyName: "Loblaw",
+        companySlug: "pc",
+        tier: 1 as const,
+        intervalMinutes: 10,
+        enabled: true,
+      },
+      {
+        site: "linkedin",
+        tier: 3 as const,
+        intervalMinutes: 60,
+        enabled: true,
+      },
+    ];
+    const moved = moveCompanyToTier(targets, "loblaw", 3, 20);
+    expect(moved.slice(0, 2)).toEqual(
+      targets
+        .slice(0, 2)
+        .map((target) => ({ ...target, tier: 3, intervalMinutes: 60 })),
+    );
+    expect(targets[0].tier).toBe(1);
+    const draft = {
+      ...editableWatch(makeWatch()),
+      sourceTargets: targets,
+      companies: ["Loblaw", "Custom ranking company"],
+    };
+    const removed = withSourceTargets(draft, [targets[2]]);
+    expect(removed.companies).toEqual(["Custom ranking company"]);
+    expect(removed.sources).toEqual(["linkedin"]);
+    expect(removed.companySlugs).toEqual([]);
+  });
   it("classifies metadata, schedule, and routing changes as live updates", () => {
     const original = editableWatch(makeWatch());
     const draft = structuredClone(original);

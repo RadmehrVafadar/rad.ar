@@ -218,9 +218,7 @@ non-empty timestamps, consecutive hard failures, and degradation state.
 
 Coverage is a normalized exact company-name match against
 `sourceTargets[].companyName`. Generic discovery boards do not count. The
-original Canadian Tech Internships preset reports 21 first-class covered
-companies and leaves RBC, TD, Scotiabank, BMO, and CIBC visibly uncovered. The
-separate Canadian Tech + Adjacent Internships preset requires first-class
+retained Canadian Tech + Adjacent Internships preset requires first-class
 coverage for all 41 configured employer groups, including the Big Five banks
 and 15 additional consulting, retail, insurance, and telecom employers.
 
@@ -236,7 +234,6 @@ preset.
 Preset application is a dry run by default:
 
 ```bash
-npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
 npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
 ```
 
@@ -246,11 +243,6 @@ watch, and mutate only with the explicit flag:
 
 ```bash
 npm run cli -- watch pause <watch-id> --json
-npm run cli -- watch preset apply canadian-tech-internships \
-  --watch <watch-id> \
-  --apply
-
-# Or apply the separate 41-employer, nine-role-family preset.
 npm run cli -- watch preset apply canadian-tech-adjacent-internships \
   --watch <watch-id> \
   --apply
@@ -268,8 +260,8 @@ URLs and health, then repeat targeted initialization for two additional
 no-notification observation cycles before resume.
 
 The preset uses `CA` for every tier and limits its location matrix to Toronto,
-the GTA, Mississauga, Brampton, Vaughan, Richmond Hill, Markham, Oakville,
-Burlington, Pickering, and Ajax. Its 19 search terms form 209-entry matrices.
+the GTA and the retained template's surrounding municipalities.
+Its search matrix derives from the watch's configured terms and locations.
 Every target uses `strictLocations: true`, so postings outside that municipality
 list are ineligible even when they are elsewhere in Canada. Per-run request
 budgets remain 1, 12, 12, and 8 respectively, and LinkedIn uses

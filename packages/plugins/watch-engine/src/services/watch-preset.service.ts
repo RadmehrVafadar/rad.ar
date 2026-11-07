@@ -13,14 +13,12 @@ import {
   WatchSourceTarget,
 } from "@rad-ar/models/interfaces/watch.types";
 import {
-  CANADIAN_TECH_INTERNSHIPS_PRESET,
   WatchPresetApplyPolicy,
   WatchPresetDefinition,
-} from "./canadian-tech-internships.preset";
+} from "./canadian-tech-internship-base";
 import { CANADIAN_TECH_ADJACENT_INTERNSHIPS_PRESET } from "./canadian-tech-adjacent-internships.preset";
 
 const PRESETS = new Map<string, WatchPresetDefinition>([
-  [CANADIAN_TECH_INTERNSHIPS_PRESET.id, CANADIAN_TECH_INTERNSHIPS_PRESET],
   [
     CANADIAN_TECH_ADJACENT_INTERNSHIPS_PRESET.id,
     CANADIAN_TECH_ADJACENT_INTERNSHIPS_PRESET,
@@ -76,8 +74,8 @@ export interface ApplyWatchPresetOptions {
   apply?: boolean;
 }
 
-import { watchSourceTargetKey } from '@rad-ar/models';
-export { watchSourceTargetKey } from '@rad-ar/models';
+import { watchSourceTargetKey } from "@rad-ar/models";
+export { watchSourceTargetKey } from "@rad-ar/models";
 
 /**
  * Validate explicit initialization targets before executing external sources.

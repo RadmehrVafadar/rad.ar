@@ -18,7 +18,7 @@ Existing watches are not modified during application startup. To migrate one:
 
    ```bash
    npm run cli -- watch pause <watch-id> --json
-   npm run cli -- watch preset apply canadian-tech-internships --watch <watch-id>
+   npm run cli -- watch preset apply canadian-tech-adjacent-internships --watch <watch-id>
    ```
 
 2. Confirm the preview removes `US`, `United States`, broad `Canada`, and
@@ -26,7 +26,7 @@ Existing watches are not modified during application startup. To migrate one:
 3. Apply explicitly:
 
    ```bash
-   npm run cli -- watch preset apply canadian-tech-internships \
+   npm run cli -- watch preset apply canadian-tech-adjacent-internships \
      --watch <watch-id> \
      --apply
    ```
@@ -36,10 +36,10 @@ Existing watches are not modified during application startup. To migrate one:
    failures and baseline results, and explicitly resume only when complete.
 
 Fresh databases seed the new watch disabled and uninitialized. No schema
-migration is required. Deprecated TypeScript names remain compilation aliases,
-but the old string ID is no longer a selectable template. The canonical import
+migration is required. Retired prestige TypeScript exports have been removed.
+Canadian Tech + Adjacent Internships is now the only selectable template. The canonical import
 example is
-[`examples/canadian-tech-internships.watch.json`](../examples/canadian-tech-internships.watch.json).
+[`examples/canadian-tech-adjacent-internships.watch.json`](../examples/canadian-tech-adjacent-internships.watch.json).
 
 ## Spec 6000 — Prestige Internship Coverage Expansion (2026-07-19)
 

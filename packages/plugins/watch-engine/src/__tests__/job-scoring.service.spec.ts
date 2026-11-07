@@ -5,8 +5,8 @@ import { defaultInternshipWatch } from "../services/default-watch";
 import { JobScoringService } from "../services/job-scoring.service";
 import {
   CANADIAN_TECH_INTERNSHIP_LOCATIONS,
-  canadianTechInternshipsWatch,
-} from "../services/canadian-tech-internships.preset";
+  canadianTechInternshipDefaults,
+} from "../services/canadian-tech-internship-base";
 import {
   CANADIAN_TECH_ADJACENT_INTERNSHIP_LOCATIONS,
   canadianTechAdjacentInternshipsWatch,
@@ -107,7 +107,7 @@ describe("JobScoringService internship eligibility", () => {
   });
 
   it("suppresses an unexpected US result from the CA-only Canadian template", () => {
-    const canadianWatch = canadianTechInternshipsWatch() as JobWatch;
+    const canadianWatch = canadianTechInternshipDefaults() as JobWatch;
     const score = scorer.score(
       sourceJob(
         new JobPostDto({
@@ -130,7 +130,7 @@ describe("JobScoringService internship eligibility", () => {
   });
 
   it("suppresses a Canadian result outside the template's strict GTA locations", () => {
-    const canadianWatch = canadianTechInternshipsWatch() as JobWatch;
+    const canadianWatch = canadianTechInternshipDefaults() as JobWatch;
     const score = scorer.score(
       sourceJob(
         new JobPostDto({
@@ -333,6 +333,12 @@ describe("JobScoringService internship eligibility", () => {
   });
 
   it("caps a prestige-listed but non-Tier-1 LinkedIn company below urgent", () => {
+    const withoutRbcTarget = {
+      ...watch,
+      sourceTargets: watch.sourceTargets.filter(
+        (target) => target.companyName !== "RBC",
+      ),
+    };
     const score = scorer.score(
       sourceJob(
         new JobPostDto({
@@ -347,7 +353,7 @@ describe("JobScoringService internship eligibility", () => {
         3,
         "linkedin",
       ),
-      watch,
+      withoutRbcTarget,
     );
 
     expect(score.total).toBe(watch.urgentScore - 1);
@@ -386,7 +392,7 @@ describe("JobScoringService internship eligibility", () => {
   it.each(["Uber", "Notion", "Ramp", "Netflix", "IBM"])(
     "derives LinkedIn urgent eligibility for the new Tier 1 target %s",
     (companyName) => {
-      const canadianWatch = canadianTechInternshipsWatch() as JobWatch;
+      const canadianWatch = canadianTechInternshipDefaults() as JobWatch;
       const score = scorer.score(
         sourceJob(
           new JobPostDto({

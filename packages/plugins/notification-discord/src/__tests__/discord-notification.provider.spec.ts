@@ -20,6 +20,32 @@ type DiscordDestination = NotificationDestination & {
 };
 
 describe("DiscordNotificationProvider", () => {
+  it("shows the score once and retains job details without the Watch field", () => {
+    const message = notificationMessage();
+    message.job.employmentType = "internship,internship,fulltime";
+    const payload = buildDiscordWebhookPayload(message);
+    expect(payload.embeds[0].title).not.toContain("/100");
+    expect(payload.content).toContain("94/100");
+    expect(
+      payload.embeds[0].fields?.some((field) => field.name === "Watch"),
+    ).toBe(false);
+    expect(payload.embeds[0].fields).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "Employment",
+          value: "Internship · Full-time",
+        }),
+        expect.objectContaining({ name: "Location" }),
+        expect.objectContaining({ name: "Workplace" }),
+        expect.objectContaining({ name: "Published (UTC)" }),
+        expect.objectContaining({ name: "Detected (UTC)" }),
+        expect.objectContaining({ name: "Source" }),
+        expect.objectContaining({ name: "Detection delay" }),
+        expect.objectContaining({ name: "Apply" }),
+        expect.objectContaining({ name: "Job details" }),
+      ]),
+    );
+  });
   it("resolves only the referenced environment webhook and sends a Discord embed", async () => {
     const fetchMock = jest.fn<
       ReturnType<DiscordFetch>,

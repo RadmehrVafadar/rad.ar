@@ -1,21 +1,11 @@
 import { JobWatch } from "@rad-ar/models/interfaces/watch.types";
 import {
-  canadianTechInternshipsWatch,
-  CANADIAN_TECH_INTERNSHIPS_NAME,
-} from "./canadian-tech-internships.preset";
+  canadianTechAdjacentInternshipsWatch,
+  CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME,
+} from "./canadian-tech-adjacent-internships.preset";
 
-/** @deprecated Use `canadianTechInternshipsWatch` and the versioned preset ID. */
 export function defaultInternshipWatch(): Partial<JobWatch> {
-  return canadianTechInternshipsWatch();
+  return canadianTechAdjacentInternshipsWatch();
 }
 
-/** @deprecated Use `CANADIAN_TECH_INTERNSHIPS_NAME`. */
-export const DEFAULT_WATCH_NAME = CANADIAN_TECH_INTERNSHIPS_NAME;
-
-export {
-  canadianTechInternshipsWatch,
-  CANADIAN_TECH_INTERNSHIPS_ID,
-  CANADIAN_TECH_INTERNSHIPS_NAME,
-  CANADIAN_TECH_INTERNSHIPS_PRESET,
-  CANADIAN_TECH_INTERNSHIPS_VERSION,
-} from "./canadian-tech-internships.preset";
+export const DEFAULT_WATCH_NAME = CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME;

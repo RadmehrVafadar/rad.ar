@@ -5,8 +5,8 @@ import {
 } from "../services/company-coverage.service";
 import {
   CANADIAN_TECH_INTERNSHIP_DEFERRED_COMPANIES,
-  canadianTechInternshipsWatch,
-} from "../services/canadian-tech-internships.preset";
+  canadianTechInternshipDefaults,
+} from "../services/canadian-tech-internship-base";
 import { canadianTechAdjacentInternshipsWatch } from "../services/canadian-tech-adjacent-internships.preset";
 
 describe("buildCompanyCoverageReport", () => {
@@ -190,7 +190,7 @@ describe("buildCompanyCoverageReport", () => {
 
   it("keeps all five deferred banks visibly uncovered", () => {
     const report = buildCompanyCoverageReport(
-      watchFixture(canadianTechInternshipsWatch()),
+      watchFixture(canadianTechInternshipDefaults()),
     );
 
     expect(report.summary).toEqual({

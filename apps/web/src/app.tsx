@@ -5,11 +5,9 @@ import {
   OPERATOR_UI_MANIFEST,
 } from "@rad-ar/ui-operator/manifest";
 import { AppShell } from "./components/app-shell";
-import { ComparePage } from "@rad-ar/ui-operator/browser/pages/compare-page";
 import { MatchesPage } from "@rad-ar/ui-operator/browser/pages/matches-page";
 import { NotificationsPage } from "@rad-ar/ui-operator/browser/pages/notifications-page";
 import { OverviewPage } from "@rad-ar/ui-operator/browser/pages/overview-page";
-import { SearchPage } from "@rad-ar/ui-operator/browser/pages/search-page";
 import { SettingsPage } from "@rad-ar/ui-operator/browser/pages/settings-page";
 import { WatchEditorPage } from "@rad-ar/ui-operator/browser/pages/watch-editor-page";
 import { WatchesPage } from "@rad-ar/ui-operator/browser/pages/watches-page";
@@ -24,8 +22,6 @@ export function App() {
     watches: <WatchesPage />,
     notifications: <NotificationsPage />,
     matches: <MatchesPage />,
-    search: <SearchPage />,
-    compare: <ComparePage />,
     settings: <SettingsPage />,
   };
   return (

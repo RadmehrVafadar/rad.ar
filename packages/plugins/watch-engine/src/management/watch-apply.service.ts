@@ -12,6 +12,7 @@ import {
   WATCH_REPOSITORY,
   WatchRepository,
   watchSourceTargetKey,
+  WatchSourceTarget,
 } from "@rad-ar/models";
 import { ApplyWatchDto } from "@rad-ar/models/dtos/watch.dto";
 import { publicWatch } from "./watch-management.helpers";
@@ -88,7 +89,7 @@ export class WatchApplyService {
     );
     const update = behaviorChanged
       ? safeBehaviorUpdate(current, requestedPatch)
-      : requestedPatch;
+      : scheduleUpdate(current, requestedPatch);
     const systemChanges = behaviorChanged
       ? fieldChanges({ ...current, ...requestedPatch }, update)
       : [];
@@ -190,12 +191,66 @@ function fieldChanges(
     if (isDeepStrictEqual(before, after)) continue;
     changes.push({
       field: String(field),
-      classification: CHANGE_CLASSIFICATION[field] ?? "behavior",
+      classification:
+        field === "sourceTargets" &&
+        sameTargetConfiguration(current.sourceTargets, patch.sourceTargets)
+          ? "schedule"
+          : (CHANGE_CLASSIFICATION[field] ?? "behavior"),
       before,
       after,
     });
   }
   return changes;
+}
+
+function sameTargetConfiguration(
+  before: WatchSourceTarget[] | undefined,
+  after: WatchSourceTarget[] | undefined,
+): boolean {
+  const configuration = (target: WatchSourceTarget) => {
+    const { intervalMinutes, initializedAt, lastRunAt, nextRunAt, ...rest } =
+      target;
+    return Object.fromEntries(
+      Object.entries(rest).filter(([, value]) => value !== undefined),
+    );
+  };
+  return Boolean(
+    before &&
+    after &&
+    isDeepStrictEqual(before.map(configuration), after.map(configuration)),
+  );
+}
+
+function scheduleUpdate(
+  current: JobWatch,
+  requested: Partial<JobWatch>,
+): Partial<JobWatch> {
+  if (!requested.sourceTargets && requested.intervalMinutes === undefined)
+    return requested;
+  const targets = requested.sourceTargets ?? current.sourceTargets;
+  return {
+    ...requested,
+    nextRunAt: null,
+    sourceTargets: targets.map((target, index) => {
+      const previous = current.sourceTargets[index];
+      const oldInterval = previous.intervalMinutes ?? current.intervalMinutes;
+      const newInterval =
+        target.intervalMinutes ??
+        requested.intervalMinutes ??
+        current.intervalMinutes;
+      return {
+        ...previous,
+        intervalMinutes: target.intervalMinutes,
+        ...(oldInterval === newInterval
+          ? {}
+          : {
+              nextRunAt: previous.lastRunAt
+                ? new Date(previous.lastRunAt.getTime() + newInterval * 60000)
+                : null,
+            }),
+      };
+    }),
+  };
 }
 
 function safeBehaviorUpdate(

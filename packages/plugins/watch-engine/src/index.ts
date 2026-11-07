@@ -7,9 +7,8 @@ export * from "./services/watch-execution.service";
 export * from "./services/daily-digest.service";
 export * from "./services/default-watch";
 export * from "./services/default-watch-seeder.service";
-export * from "./services/canadian-tech-internships.preset";
+export * from "./services/canadian-tech-internship-base";
 export * from "./services/canadian-tech-adjacent-internships.preset";
-export * from "./services/prestige-internships-v2.preset";
 export * from "./services/watch-preset.service";
 export * from "./services/company-coverage.service";
 export * from "./services/notification-dispatcher.service";
@@ -36,4 +35,4 @@ export * from "./services/watcher-scheduler.service";
 export * from "./management/watch-apply.service";
 export * from "./management/watch-management.helpers";
 
-export * from './management/watch-metrics';
+export * from "./management/watch-metrics";

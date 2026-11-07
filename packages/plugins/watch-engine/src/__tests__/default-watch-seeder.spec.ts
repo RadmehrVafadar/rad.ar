@@ -1,7 +1,10 @@
 import { ConfigService } from "@nestjs/config";
 import { InMemoryWatchRepository } from "@rad-ar/store-watch-memory/in-memory-watch.repository";
 import { DefaultWatchSeederService } from "../services/default-watch-seeder.service";
-import { CANADIAN_TECH_INTERNSHIPS_NAME } from "../services/canadian-tech-internships.preset";
+import {
+  CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME,
+  canadianTechAdjacentInternshipsWatch,
+} from "../services/canadian-tech-adjacent-internships.preset";
 import { watchSourceTargetKey } from "../services/watch-preset.service";
 
 describe("DefaultWatchSeederService", () => {
@@ -16,7 +19,7 @@ describe("DefaultWatchSeederService", () => {
     const [created] = await repository.listWatches();
     expect(created).toEqual(
       expect.objectContaining({
-        name: CANADIAN_TECH_INTERNSHIPS_NAME,
+        name: CANADIAN_TECH_ADJACENT_INTERNSHIPS_NAME,
         countryCodes: ["CA"],
         enabled: false,
         initializationMode: "baseline",
@@ -27,32 +30,11 @@ describe("DefaultWatchSeederService", () => {
       created.sourceTargets
         .filter((target) => target.enabled)
         .map(watchSourceTargetKey),
-    ).toEqual([
-      "google_careers",
-      "shopify",
-      "ashby:wealthsimple",
-      "ashby:plaid",
-      "amazon",
-      "microsoft",
-      "apple",
-      "nvidia",
-      "stripe",
-      "openai",
-      "datadog",
-      "doordash",
-      "coinbase",
-      "figma",
-      "vercel",
-      "meta",
-      "wellfound",
-      "uber",
-      "notion",
-      "ramp",
-      "netflix",
-      "ibm",
-      "canadajobbank",
-      "linkedin",
-    ]);
+    ).toEqual(
+      (canadianTechAdjacentInternshipsWatch().sourceTargets ?? [])
+        .filter((target) => target.enabled)
+        .map(watchSourceTargetKey),
+    );
     expect(
       created.sourceTargets.every((target) => target.initializedAt === null),
     ).toBe(true);

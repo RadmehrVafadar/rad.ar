@@ -1,7 +1,13 @@
 import { ChevronDown, Plus, Search, Trash2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SourceHealth, WatchSourceTarget } from "../types";
-import { blankTarget, inheritWatchDefaults } from "../lib/watch-draft";
+import {
+  blankTarget,
+  inheritWatchDefaults,
+  moveCompanyToTier,
+  targetCompanyKey,
+  tierInterval,
+} from "../lib/watch-draft";
 import { Badge, Button, Field, StatusBadge, TagInput, Toggle } from "./ui";
 
 const FALLBACK_SOURCES = [
@@ -21,6 +27,7 @@ const FALLBACK_SOURCES = [
 
 export function SourceTargetsEditor({
   targets,
+  defaultTargets = [],
   sourceHealth,
   defaultIntervalMinutes,
   defaultCountryCodes,
@@ -28,6 +35,7 @@ export function SourceTargetsEditor({
   onChange,
 }: {
   targets: WatchSourceTarget[];
+  defaultTargets?: WatchSourceTarget[];
   sourceHealth: SourceHealth[];
   defaultIntervalMinutes: number;
   defaultCountryCodes: string[];
@@ -36,6 +44,8 @@ export function SourceTargetsEditor({
 }) {
   const [search, setSearch] = useState("");
   const [newSite, setNewSite] = useState("");
+  const [newCompany, setNewCompany] = useState("");
+  const [newSlug, setNewSlug] = useState("");
   const suggestions = useMemo(
     () =>
       [
@@ -54,6 +64,49 @@ export function SourceTargetsEditor({
       ),
     );
 
+  const groups = new Map<
+    string,
+    {
+      name: string;
+      tier: 1 | 2 | 3;
+      rows: Array<{ target: WatchSourceTarget; index: number }>;
+    }
+  >();
+  for (const row of visible) {
+    const key = targetCompanyKey(row.target);
+    const group = groups.get(key) ?? {
+      name: row.target.companyName || row.target.site,
+      tier: row.target.tier,
+      rows: [],
+    };
+    group.rows.push(row);
+    groups.set(key, group);
+  }
+  const recipes = defaultTargets.filter(
+    (target) => targetCompanyKey(target) === newCompany.trim().toLowerCase(),
+  );
+  const restoreDefaultTiers = () =>
+    onChange(
+      targets.map((target) => {
+        const original = defaultTargets.find(
+          (item) =>
+            item.site === target.site &&
+            item.companySlug === target.companySlug &&
+            targetCompanyKey(item) === targetCompanyKey(target),
+        );
+        if (!original) return target;
+        const interval = tierInterval(
+          targets,
+          original.tier,
+          defaultIntervalMinutes,
+        );
+        return {
+          ...target,
+          tier: original.tier,
+          ...(interval === undefined ? {} : { intervalMinutes: interval }),
+        };
+      }),
+    );
   const update = (index: number, patch: Partial<WatchSourceTarget>) => {
     onChange(
       targets.map((target, targetIndex) =>
@@ -77,61 +130,415 @@ export function SourceTargetsEditor({
   };
   const add = () => {
     const site = newSite.trim();
-    if (!site) return;
-    onChange([...targets, blankTarget(site)]);
+    if (!site && !recipes.length) return;
+    const additions = recipes.length
+      ? recipes
+      : [
+          {
+            ...blankTarget(site),
+            companyName: newCompany.trim() || undefined,
+            companySlug: newSlug.trim() || undefined,
+          },
+        ];
+    const newTargets = additions
+      .filter(
+        (addition) =>
+          !targets.some(
+            (target) =>
+              target.site === addition.site &&
+              target.companySlug === addition.companySlug,
+          ),
+      )
+      .map((target) => ({
+        ...target,
+        intervalMinutes:
+          tierInterval(targets, target.tier, defaultIntervalMinutes) ??
+          target.intervalMinutes,
+        initializedAt: null,
+        lastRunAt: null,
+        nextRunAt: null,
+      }));
+    onChange([...targets, ...newTargets]);
+    setNewCompany("");
+    setNewSlug("");
     setNewSite("");
   };
 
+  const renderTarget = ({
+    target,
+    index,
+  }: {
+    target: WatchSourceTarget;
+    index: number;
+  }) => {
+    const health = sourceHealth.find(({ site }) => site === target.site);
+    const targetKey = target.companySlug
+      ? `${target.site}:${target.companySlug}`
+      : target.site;
+    return (
+      <details open className="target-card" key={`${target.site}-${index}`}>
+        <summary>
+          <span
+            className={`target-card__tier target-card__tier--${target.tier}`}
+          >
+            T{target.tier}
+          </span>
+          <span className="target-card__identity">
+            <strong>{target.site}</strong>
+            <small>{targetKey}</small>
+          </span>
+          <StatusBadge
+            status={!target.enabled ? "disabled" : (health?.state ?? "unknown")}
+            label={
+              !target.enabled
+                ? "Disabled"
+                : health
+                  ? health.state
+                  : "No runtime data"
+            }
+          />
+          <span className="target-card__interval">
+            Every {target.intervalMinutes ?? defaultIntervalMinutes} min
+            {target.intervalMinutes === undefined ? " (default)" : ""}
+          </span>
+          <ChevronDown className="target-card__chevron" size={17} />
+        </summary>
+        <div className="target-card__body">
+          <div className="form-grid form-grid--four">
+            <Field label="Source ID">
+              <input
+                value={target.site}
+                list="source-suggestions"
+                onChange={(event) =>
+                  update(index, { site: event.target.value })
+                }
+              />
+            </Field>
+            <Field
+              label="Run interval"
+              hint={
+                target.intervalMinutes === undefined
+                  ? `Using watch default: ${defaultIntervalMinutes} minutes`
+                  : "Custom for this source"
+              }
+            >
+              <div className="input-suffix">
+                <input
+                  type="number"
+                  min={1}
+                  max={1440}
+                  value={target.intervalMinutes ?? ""}
+                  placeholder={String(defaultIntervalMinutes)}
+                  onChange={(event) =>
+                    update(index, {
+                      intervalMinutes: event.target.value
+                        ? Number(event.target.value)
+                        : undefined,
+                    })
+                  }
+                />
+                <span>min</span>
+              </div>
+              {target.intervalMinutes !== undefined ? (
+                <Button
+                  variant="ghost"
+                  size="small"
+                  onClick={() => update(index, { intervalMinutes: undefined })}
+                >
+                  Use watch default
+                </Button>
+              ) : null}
+            </Field>
+            <Field label="Result limit">
+              <input
+                type="number"
+                min={1}
+                max={1000}
+                value={target.resultsWanted ?? ""}
+                placeholder="Source default"
+                onChange={(event) =>
+                  update(index, {
+                    resultsWanted: event.target.value
+                      ? Number(event.target.value)
+                      : undefined,
+                  })
+                }
+              />
+            </Field>
+          </div>
+          <div className="form-grid form-grid--two">
+            <Field label="Company name">
+              <input
+                value={target.companyName ?? ""}
+                onChange={(event) =>
+                  update(index, {
+                    companyName: event.target.value || undefined,
+                  })
+                }
+                placeholder="Human-readable company"
+              />
+            </Field>
+            <Field label="Company slug">
+              <input
+                value={target.companySlug ?? ""}
+                onChange={(event) =>
+                  update(index, {
+                    companySlug: event.target.value || undefined,
+                  })
+                }
+                placeholder="ATS tenant or board slug"
+              />
+            </Field>
+          </div>
+          <div className="target-scope">
+            <div className="target-scope__header">
+              <div>
+                <strong>Target search scope</strong>
+                <small>
+                  Override the watch-wide geography and terms for this source.
+                </small>
+              </div>
+              <Badge tone={target.searchScope ? "info" : "neutral"}>
+                {target.searchScope
+                  ? "Has source overrides"
+                  : "Uses watch defaults"}
+              </Badge>
+            </div>
+            <div className="form-grid form-grid--two">
+              <div>
+                <TagInput
+                  label={`Country codes — ${
+                    target.searchScope?.countryCodes
+                      ? "custom"
+                      : "watch default"
+                  }`}
+                  values={
+                    target.searchScope?.countryCodes ?? defaultCountryCodes
+                  }
+                  onChange={(countryCodes) =>
+                    updateScope(index, {
+                      countryCodes: countryCodes.length
+                        ? countryCodes.map((code) => code.toUpperCase())
+                        : undefined,
+                    })
+                  }
+                  placeholder="CA"
+                />
+                {target.searchScope?.countryCodes ? (
+                  <Button
+                    variant="ghost"
+                    size="small"
+                    onClick={() =>
+                      updateScope(index, { countryCodes: undefined })
+                    }
+                  >
+                    Use watch country codes
+                  </Button>
+                ) : null}
+              </div>
+              <div>
+                <TagInput
+                  label={`Locations — ${
+                    target.searchScope?.locations ? "custom" : "watch default"
+                  }`}
+                  values={target.searchScope?.locations ?? defaultLocations}
+                  onChange={(locations) =>
+                    updateScope(index, {
+                      locations: locations.length ? locations : undefined,
+                    })
+                  }
+                  placeholder="Toronto, Ontario"
+                />
+                {target.searchScope?.locations ? (
+                  <Button
+                    variant="ghost"
+                    size="small"
+                    onClick={() => updateScope(index, { locations: undefined })}
+                  >
+                    Use watch locations
+                  </Button>
+                ) : null}
+              </div>
+            </div>
+            <TagInput
+              label="Search terms — source override"
+              values={target.searchScope?.searchTerms ?? []}
+              onChange={(searchTerms) =>
+                updateScope(index, {
+                  searchTerms: searchTerms.length ? searchTerms : undefined,
+                })
+              }
+              placeholder="Leave empty to use watch search terms"
+            />
+            <Toggle
+              checked={target.searchScope?.strictLocations ?? false}
+              onChange={(strictLocations) =>
+                updateScope(index, {
+                  strictLocations: strictLocations || undefined,
+                })
+              }
+              label="Require listed locations"
+              description="Reject returned jobs that do not advertise at least one configured location."
+            />
+            <div className="inline-actions">
+              <Field label="Request budget">
+                <input
+                  type="number"
+                  min={1}
+                  max={1000}
+                  value={target.searchScope?.maxRequestsPerRun ?? ""}
+                  placeholder="No override"
+                  onChange={(event) =>
+                    updateScope(index, {
+                      maxRequestsPerRun: event.target.value
+                        ? Number(event.target.value)
+                        : undefined,
+                    })
+                  }
+                />
+              </Field>
+              {target.searchScope ? (
+                <Button
+                  variant="ghost"
+                  size="small"
+                  onClick={() => update(index, { searchScope: undefined })}
+                >
+                  Clear source search overrides
+                </Button>
+              ) : null}
+            </div>
+          </div>
+          <div className="target-card__footer">
+            <Toggle
+              checked={target.enabled}
+              onChange={(enabled) => update(index, { enabled })}
+              label="Source enabled"
+              description={
+                target.initializedAt
+                  ? `Baselined ${new Date(target.initializedAt).toLocaleDateString()}`
+                  : "A baseline is required before notifications."
+              }
+            />
+            <Button
+              variant="danger"
+              size="small"
+              onClick={() =>
+                onChange(
+                  targets.filter((_, targetIndex) => targetIndex !== index),
+                )
+              }
+            >
+              <Trash2 size={15} />
+              Remove
+            </Button>
+          </div>
+        </div>
+      </details>
+    );
+  };
   return (
     <div className="targets-editor">
       <div className="targets-toolbar">
         <label className="search-input">
           <Search size={16} />
-          <span className="sr-only">Filter configured sources</span>
+          <span className="sr-only">Find a company or source</span>
           <input
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Filter configured sources"
+            placeholder="Find a company or source"
           />
         </label>
-        <div className="add-target">
-          <input
-            list="source-suggestions"
-            value={newSite}
-            onChange={(event) => setNewSite(event.target.value)}
-            placeholder="Choose or type a source"
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                add();
+        <details className="add-company">
+          <summary>
+            <Plus size={15} /> Add company or source
+          </summary>
+          <div className="add-target">
+            <Field label="Company to add">
+              <input
+                list="company-suggestions"
+                value={newCompany}
+                onChange={(event) => setNewCompany(event.target.value)}
+                placeholder="Optional for job boards"
+              />
+            </Field>
+            <datalist id="company-suggestions">
+              {[
+                ...new Set(
+                  defaultTargets
+                    .map((target) => target.companyName)
+                    .filter(Boolean),
+                ),
+              ].map((name) => (
+                <option key={name} value={name} />
+              ))}
+            </datalist>
+            {!recipes.length ? (
+              <Field label="Source">
+                <input
+                  list="source-suggestions"
+                  value={newSite}
+                  onChange={(event) => setNewSite(event.target.value)}
+                  aria-label="Source"
+                  placeholder="Choose a supported source"
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      add();
+                    }
+                  }}
+                />
+                <datalist id="source-suggestions">
+                  {suggestions.map((site) => (
+                    <option value={site} key={site} />
+                  ))}
+                </datalist>
+              </Field>
+            ) : null}
+            {!recipes.length ? (
+              <Field
+                label="Board slug"
+                hint="For an ATS source, use its company board slug."
+              >
+                <input
+                  value={newSlug}
+                  onChange={(event) => setNewSlug(event.target.value)}
+                  placeholder="Optional"
+                />
+              </Field>
+            ) : null}
+            <Button
+              size="small"
+              onClick={add}
+              disabled={!newSite.trim() && !recipes.length}
+            >
+              <Plus size={15} />
+              Add to watch
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              onClick={() => onChange(targets.map(inheritWatchDefaults))}
+              disabled={
+                !targets.some(
+                  (target) =>
+                    target.intervalMinutes !== undefined ||
+                    target.searchScope?.countryCodes !== undefined ||
+                    target.searchScope?.locations !== undefined,
+                )
               }
-            }}
-          />
-          <datalist id="source-suggestions">
-            {suggestions.map((site) => (
-              <option value={site} key={site} />
-            ))}
-          </datalist>
-          <Button size="small" onClick={add} disabled={!newSite.trim()}>
-            <Plus size={15} />
-            Add source
-          </Button>
-          <Button
-            variant="secondary"
-            size="small"
-            onClick={() => onChange(targets.map(inheritWatchDefaults))}
-            disabled={
-              !targets.some(
-                (target) =>
-                  target.intervalMinutes !== undefined ||
-                  target.searchScope?.countryCodes !== undefined ||
-                  target.searchScope?.locations !== undefined,
-              )
-            }
-          >
-            Use defaults for all
-          </Button>
-        </div>
+            >
+              Use watch schedule and geography for all
+            </Button>
+          </div>
+        </details>
+        <Button
+          variant="ghost"
+          size="small"
+          onClick={restoreDefaultTiers}
+          disabled={!defaultTargets.length}
+        >
+          Default tiers
+        </Button>
       </div>
       {!targets.length ? (
         <div className="routes-empty">
@@ -144,307 +551,195 @@ export function SourceTargetsEditor({
           </div>
         </div>
       ) : null}
+      <p className="tier-board-hint">
+        Drag a company or choose its tier. Set minutes between checks for each
+        tier.
+      </p>
       <div className="target-list">
-        {visible.map(({ target, index }) => {
-          const health = sourceHealth.find(({ site }) => site === target.site);
-          const targetKey = target.companySlug
-            ? `${target.site}:${target.companySlug}`
-            : target.site;
-          return (
-            <details className="target-card" key={`${target.site}-${index}`}>
-              <summary>
-                <span
-                  className={`target-card__tier target-card__tier--${target.tier}`}
-                >
-                  T{target.tier}
-                </span>
-                <span className="target-card__identity">
-                  <strong>{target.companyName || target.site}</strong>
-                  <small>{targetKey}</small>
-                </span>
-                <StatusBadge
-                  status={
-                    !target.enabled ? "disabled" : (health?.state ?? "unknown")
+        <div className="tier-board">
+          {([1, 2, 3] as const).map((tier) => (
+            <section
+              className={`tier-column tier-column--${tier}`}
+              key={tier}
+              aria-label={`Tier ${tier}`}
+              onDragOver={(event) => {
+                event.preventDefault();
+                event.dataTransfer.dropEffect = "move";
+              }}
+              onDrop={(event) => {
+                event.preventDefault();
+                const key = event.dataTransfer.getData(
+                  "application/x-radar-company",
+                );
+                if (groups.has(key))
+                  onChange(
+                    moveCompanyToTier(
+                      targets,
+                      key,
+                      tier,
+                      defaultIntervalMinutes,
+                    ),
+                  );
+              }}
+            >
+              <header className="tier-column__header">
+                <div>
+                  <h3>Tier {tier}</h3>
+                  <span>
+                    {tier === 1
+                      ? "Priority companies"
+                      : tier === 2
+                        ? "Standard sources"
+                        : "Discovery sources"}
+                  </span>
+                </div>
+                <Badge>
+                  {
+                    [...groups.values()].filter((group) => group.tier === tier)
+                      .length
                   }
-                  label={
-                    !target.enabled
-                      ? "Disabled"
-                      : health
-                        ? health.state
-                        : "No runtime data"
-                  }
-                />
-                <span className="target-card__interval">
-                  Every {target.intervalMinutes ?? defaultIntervalMinutes} min
-                  {target.intervalMinutes === undefined ? " (default)" : ""}
-                </span>
-                <ChevronDown className="target-card__chevron" size={17} />
-              </summary>
-              <div className="target-card__body">
-                <div className="form-grid form-grid--four">
-                  <Field label="Source ID">
-                    <input
-                      value={target.site}
-                      list="source-suggestions"
-                      onChange={(event) =>
-                        update(index, { site: event.target.value })
-                      }
-                    />
-                  </Field>
-                  <Field label="Priority tier">
-                    <select
-                      value={target.tier}
-                      onChange={(event) =>
-                        update(index, {
-                          tier: Number(event.target.value) as 1 | 2 | 3,
-                        })
-                      }
+                </Badge>
+              </header>
+              <TierSchedule
+                tier={tier}
+                value={tierInterval(targets, tier, defaultIntervalMinutes)}
+                disabled={!targets.some((target) => target.tier === tier)}
+                onChange={(intervalMinutes) =>
+                  onChange(
+                    targets.map((target) =>
+                      target.tier === tier
+                        ? { ...target, intervalMinutes }
+                        : target,
+                    ),
+                  )
+                }
+              />
+              <div className="tier-column__companies">
+                {[...groups.entries()]
+                  .filter(([, group]) => group.tier === tier)
+                  .map(([key, group]) => (
+                    <details
+                      className="company-card"
+                      draggable
+                      key={key}
+                      onDragStart={(event) => {
+                        event.dataTransfer.setData(
+                          "application/x-radar-company",
+                          key,
+                        );
+                        event.dataTransfer.effectAllowed = "move";
+                      }}
                     >
-                      <option value={1}>Tier 1 · priority</option>
-                      <option value={2}>Tier 2 · standard</option>
-                      <option value={3}>Tier 3 · discovery</option>
-                    </select>
-                  </Field>
-                  <Field
-                    label="Run interval"
-                    hint={
-                      target.intervalMinutes === undefined
-                        ? `Using watch default: ${defaultIntervalMinutes} minutes`
-                        : "Custom for this source"
-                    }
-                  >
-                    <div className="input-suffix">
-                      <input
-                        type="number"
-                        min={1}
-                        max={1440}
-                        value={target.intervalMinutes ?? ""}
-                        placeholder={String(defaultIntervalMinutes)}
-                        onChange={(event) =>
-                          update(index, {
-                            intervalMinutes: event.target.value
-                              ? Number(event.target.value)
-                              : undefined,
-                          })
-                        }
-                      />
-                      <span>min</span>
-                    </div>
-                    {target.intervalMinutes !== undefined ? (
-                      <Button
-                        variant="ghost"
-                        size="small"
-                        onClick={() =>
-                          update(index, { intervalMinutes: undefined })
-                        }
-                      >
-                        Use watch default
-                      </Button>
-                    ) : null}
-                  </Field>
-                  <Field label="Result limit">
-                    <input
-                      type="number"
-                      min={1}
-                      max={1000}
-                      value={target.resultsWanted ?? ""}
-                      placeholder="Source default"
-                      onChange={(event) =>
-                        update(index, {
-                          resultsWanted: event.target.value
-                            ? Number(event.target.value)
-                            : undefined,
-                        })
-                      }
-                    />
-                  </Field>
-                </div>
-                <div className="form-grid form-grid--two">
-                  <Field label="Company name">
-                    <input
-                      value={target.companyName ?? ""}
-                      onChange={(event) =>
-                        update(index, {
-                          companyName: event.target.value || undefined,
-                        })
-                      }
-                      placeholder="Human-readable company"
-                    />
-                  </Field>
-                  <Field label="Company slug">
-                    <input
-                      value={target.companySlug ?? ""}
-                      onChange={(event) =>
-                        update(index, {
-                          companySlug: event.target.value || undefined,
-                        })
-                      }
-                      placeholder="ATS tenant or board slug"
-                    />
-                  </Field>
-                </div>
-                <div className="target-scope">
-                  <div className="target-scope__header">
-                    <div>
-                      <strong>Target search scope</strong>
-                      <small>
-                        Override the watch-wide geography and terms for this
-                        source.
-                      </small>
-                    </div>
-                    <Badge tone={target.searchScope ? "info" : "neutral"}>
-                      {target.searchScope
-                        ? "Has source overrides"
-                        : "Uses watch defaults"}
-                    </Badge>
-                  </div>
-                  <div className="form-grid form-grid--two">
-                    <div>
-                      <TagInput
-                        label={`Country codes — ${
-                          target.searchScope?.countryCodes
-                            ? "custom"
-                            : "watch default"
-                        }`}
-                        values={
-                          target.searchScope?.countryCodes ??
-                          defaultCountryCodes
-                        }
-                        onChange={(countryCodes) =>
-                          updateScope(index, {
-                            countryCodes: countryCodes.length
-                              ? countryCodes.map((code) => code.toUpperCase())
-                              : undefined,
-                          })
-                        }
-                        placeholder="CA"
-                      />
-                      {target.searchScope?.countryCodes ? (
-                        <Button
-                          variant="ghost"
-                          size="small"
-                          onClick={() =>
-                            updateScope(index, { countryCodes: undefined })
+                      <summary>
+                        <span className="company-card__name">
+                          <strong>{group.name}</strong>
+                          <small>
+                            {group.rows.length}{" "}
+                            {group.rows.length === 1 ? "source" : "sources"} ·{" "}
+                            {group.rows.every(({ target }) => target.enabled)
+                              ? "Enabled"
+                              : "Includes disabled sources"}
+                          </small>
+                        </span>
+                        <select
+                          aria-label={`Tier for ${group.name}`}
+                          value={group.tier}
+                          onClick={(event) => event.stopPropagation()}
+                          onChange={(event) =>
+                            onChange(
+                              moveCompanyToTier(
+                                targets,
+                                key,
+                                Number(event.target.value) as 1 | 2 | 3,
+                                defaultIntervalMinutes,
+                              ),
+                            )
                           }
                         >
-                          Use watch country codes
-                        </Button>
-                      ) : null}
-                    </div>
-                    <div>
-                      <TagInput
-                        label={`Locations — ${
-                          target.searchScope?.locations
-                            ? "custom"
-                            : "watch default"
-                        }`}
-                        values={
-                          target.searchScope?.locations ?? defaultLocations
-                        }
-                        onChange={(locations) =>
-                          updateScope(index, {
-                            locations: locations.length ? locations : undefined,
-                          })
-                        }
-                        placeholder="Toronto, Ontario"
-                      />
-                      {target.searchScope?.locations ? (
-                        <Button
-                          variant="ghost"
-                          size="small"
-                          onClick={() =>
-                            updateScope(index, { locations: undefined })
-                          }
+                          <option value={1}>Tier 1</option>
+                          <option value={2}>Tier 2</option>
+                          <option value={3}>Tier 3</option>
+                        </select>
+                        <button
+                          type="button"
+                          className="icon-button target-remove"
+                          aria-label={`Remove ${group.name}`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            onChange(
+                              targets.filter(
+                                (target) => targetCompanyKey(target) !== key,
+                              ),
+                            );
+                          }}
                         >
-                          Use watch locations
-                        </Button>
-                      ) : null}
-                    </div>
-                  </div>
-                  <TagInput
-                    label="Search terms — source override"
-                    values={target.searchScope?.searchTerms ?? []}
-                    onChange={(searchTerms) =>
-                      updateScope(index, {
-                        searchTerms: searchTerms.length
-                          ? searchTerms
-                          : undefined,
-                      })
-                    }
-                    placeholder="Leave empty to use watch search terms"
-                  />
-                  <Toggle
-                    checked={target.searchScope?.strictLocations ?? false}
-                    onChange={(strictLocations) =>
-                      updateScope(index, {
-                        strictLocations: strictLocations || undefined,
-                      })
-                    }
-                    label="Require listed locations"
-                    description="Reject returned jobs that do not advertise at least one configured location."
-                  />
-                  <div className="inline-actions">
-                    <Field label="Request budget">
-                      <input
-                        type="number"
-                        min={1}
-                        max={1000}
-                        value={target.searchScope?.maxRequestsPerRun ?? ""}
-                        placeholder="No override"
-                        onChange={(event) =>
-                          updateScope(index, {
-                            maxRequestsPerRun: event.target.value
-                              ? Number(event.target.value)
-                              : undefined,
-                          })
-                        }
-                      />
-                    </Field>
-                    {target.searchScope ? (
-                      <Button
-                        variant="ghost"
-                        size="small"
-                        onClick={() =>
-                          update(index, { searchScope: undefined })
-                        }
-                      >
-                        Clear all source overrides
-                      </Button>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="target-card__footer">
-                  <Toggle
-                    checked={target.enabled}
-                    onChange={(enabled) => update(index, { enabled })}
-                    label="Source enabled"
-                    description={
-                      target.initializedAt
-                        ? `Baselined ${new Date(target.initializedAt).toLocaleDateString()}`
-                        : "A baseline is required before notifications."
-                    }
-                  />
-                  <Button
-                    variant="danger"
-                    size="small"
-                    onClick={() =>
-                      window.confirm(`Remove ${targetKey} from this draft?`) &&
-                      onChange(
-                        targets.filter(
-                          (_, targetIndex) => targetIndex !== index,
-                        ),
-                      )
-                    }
-                  >
-                    <Trash2 size={15} />
-                    Remove
-                  </Button>
-                </div>
+                          <Trash2 size={16} />
+                        </button>
+                      </summary>
+                      <div className="company-card__settings">
+                        {group.rows.map(renderTarget)}
+                      </div>
+                    </details>
+                  ))}
+                {![...groups.values()].some((group) => group.tier === tier) ? (
+                  <p className="tier-empty">
+                    Drop a company here or choose this tier from its menu.
+                  </p>
+                ) : null}
               </div>
-            </details>
-          );
-        })}
+            </section>
+          ))}
+        </div>
       </div>
+    </div>
+  );
+}
+
+function TierSchedule({
+  tier,
+  value,
+  disabled,
+  onChange,
+}: {
+  tier: number;
+  value: number | undefined;
+  disabled: boolean;
+  onChange(value: number | undefined): void;
+}) {
+  const [text, setText] = useState(value === undefined ? "" : String(value));
+  useEffect(() => setText(value === undefined ? "" : String(value)), [value]);
+  if (disabled)
+    return (
+      <p className="tier-schedule-empty">Uses the first company's schedule.</p>
+    );
+  return (
+    <div className="tier-schedule">
+      <Field
+        label={`Tier ${tier} interval`}
+        hint={
+          disabled
+            ? "Add a company to set its schedule."
+            : value === undefined
+              ? "Mixed schedules. Enter minutes to use one schedule."
+              : "Minutes between checks"
+        }
+      >
+        <input
+          aria-label={`Tier ${tier} interval`}
+          type="number"
+          min={1}
+          max={1440}
+          value={text}
+          disabled={disabled}
+          placeholder="Mixed"
+          onChange={(event) => {
+            setText(event.target.value);
+            const n = Number(event.target.value);
+            if (Number.isInteger(n) && n >= 1 && n <= 1440) onChange(n);
+          }}
+          onBlur={() => setText(value === undefined ? "" : String(value))}
+        />
+      </Field>
     </div>
   );
 }

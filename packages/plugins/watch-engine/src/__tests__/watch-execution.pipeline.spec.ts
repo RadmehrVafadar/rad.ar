@@ -12,9 +12,78 @@ import {
   WatchExecutionOptions,
   WatchExecutionService,
 } from "../services/watch-execution.service";
-import { JobWatch, NotificationProvider } from "@rad-ar/models/interfaces/watch.types";
+import {
+  JobWatch,
+  NotificationProvider,
+} from "@rad-ar/models/interfaces/watch.types";
 
 describe("WatchExecutionService durable pipeline", () => {
+  it("sends one alert for a LinkedIn repost with a new ID, URL, and publication date", async () => {
+    let now = new Date("2026-10-23T12:00:00Z");
+    const target = plannedTarget(
+      Site.LINKEDIN,
+      3,
+      new Date("2026-10-01T00:00:00Z"),
+    );
+    let job = new JobPostDto({
+      ...internship("4481613775", "Summer 2027"),
+      site: Site.LINKEDIN,
+      title: "Software Engineering Intern (Summer 2027)",
+      jobUrl: "https://ca.linkedin.com/jobs/view/4481613775",
+      applyUrl: "https://ca.linkedin.com/jobs/view/4481613775",
+      datePosted: "2026-10-22",
+    });
+    const executor = fakeExecutor(() => oneTargetResult(job, target));
+    const provider = successfulProvider();
+    const repository = new InMemoryWatchRepository();
+    const watch = await repository.createWatch(
+      pipelineWatch({
+        sources: [Site.LINKEDIN],
+        sourceTargets: [sourceTarget(Site.LINKEDIN, 3, now)],
+        notificationChannels: [{ type: "discord", destinationRef: "default" }],
+        initializedAt: now,
+      }),
+    );
+    const execution = executionService(
+      repository,
+      executor,
+      provider,
+      () => now,
+      "linkedin-reposts",
+    );
+    expect((await execution.runWatch(watch.id)).notificationsSent).toBe(1);
+    now = new Date("2026-11-02T12:00:00Z");
+    job = new JobPostDto({
+      ...job,
+      id: "4490000000",
+      datePosted: "2026-11-02",
+      jobUrl: "https://www.linkedin.com/jobs/view/4490000000",
+      applyUrl: "https://www.linkedin.com/jobs/view/4490000000",
+    });
+    const repost = await execution.runWatch(watch.id);
+    expect(repost.matchesCreated).toBe(0);
+    expect(repost.notificationsSent).toBe(0);
+    expect(provider.send).toHaveBeenCalledTimes(1);
+    expect((await repository.listObservedJobs({})).total).toBe(2);
+    expect((await repository.listMatches({ watchId: watch.id })).total).toBe(1);
+    // Continued sightings extend the repost window beyond the original episode start.
+    now = new Date("2026-11-12T12:00:00Z");
+    job = new JobPostDto({
+      ...job,
+      id: "4491000000",
+      datePosted: "2026-11-12",
+      jobUrl: "https://www.linkedin.com/jobs/view/4491000000",
+      applyUrl: "https://www.linkedin.com/jobs/view/4491000000",
+    });
+    expect((await execution.runWatch(watch.id)).notificationsSent).toBe(0);
+    // Two actual employer requisitions remain separate even with identical role/location.
+    job = new JobPostDto({
+      ...job,
+      id: "4492000000",
+      applyUrl: "https://careers.google.com/requisition-2",
+    });
+    expect((await execution.runWatch(watch.id)).matchesCreated).toBe(1);
+  });
   it("baselines existing jobs, sends one new-job notification, and ignores an edit", async () => {
     let now = new Date("2026-07-14T12:00:00.000Z");
     let jobs = [

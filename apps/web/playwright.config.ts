@@ -5,6 +5,17 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
+  projects: [
+    { name: "desktop", use: { viewport: { width: 1280, height: 900 } } },
+    {
+      name: "mobile",
+      use: {
+        viewport: { width: 390, height: 844 },
+        isMobile: true,
+        hasTouch: true,
+      },
+    },
+  ],
   use: {
     baseURL: "http://127.0.0.1:3000",
     channel: process.env.PLAYWRIGHT_CHANNEL,
