@@ -1,7 +1,7 @@
 import { ChildProcess, spawn } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { createConnection, createServer } from "node:net";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { config as loadDotEnv } from "dotenv";
 
 export type GuiMode = "development" | "production";
@@ -74,16 +74,23 @@ export function createRuntimeConfiguration(
   };
 }
 
+function nxCommandPath(workspaceRoot: string): string {
+  const manifestPath = resolve(
+    workspaceRoot,
+    "node_modules",
+    "nx",
+    "package.json",
+  );
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+    bin: { nx: string };
+  };
+  return resolve(dirname(manifestPath), manifest.bin.nx);
+}
+
 export function serviceCommands(
   configuration: GuiRuntimeConfiguration,
 ): readonly CommandSpec[] {
-  const nx = resolve(
-    configuration.workspaceRoot,
-    "node_modules",
-    "nx",
-    "bin",
-    "nx.js",
-  );
+  const nx = nxCommandPath(configuration.workspaceRoot);
   if (configuration.mode === "development") {
     return [
       {
@@ -209,13 +216,7 @@ async function run(): Promise<void> {
     "build",
     "index.js",
   );
-  const nx = resolve(
-    configuration.workspaceRoot,
-    "node_modules",
-    "nx",
-    "bin",
-    "nx.js",
-  );
+  const nx = nxCommandPath(configuration.workspaceRoot);
 
   await assertServicePortsAvailable(configuration);
 
