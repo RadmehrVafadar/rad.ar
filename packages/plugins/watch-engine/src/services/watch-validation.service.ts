@@ -181,7 +181,7 @@ const watchObjectSchema = z
     timezone: z.string().trim().min(1).max(100).optional(),
     sourceTargets: z.array(watchSourceTargetSchema).min(1).max(250).optional(),
     sources: z.array(z.string().trim().min(1)).max(250).optional(),
-    sourceTiers: z.record(z.number().int().min(1).max(3)).optional(),
+    sourceTiers: z.record(z.string(), z.number().int().min(1).max(3)).optional(),
     companySlugs: z.array(z.string().trim().min(1)).max(250).optional(),
     companies: z.array(z.string().trim().min(1)).max(500).optional(),
     searchTerms: z.array(z.string().trim().min(1)).min(1).max(100).optional(),
@@ -227,7 +227,7 @@ const watchObjectSchema = z
       .min(1)
       .max(7 * 24 * 60)
       .optional(),
-    weights: z.record(z.number().min(0).max(100)).optional(),
+    weights: z.record(z.string(), z.number().min(0).max(100)).optional(),
   })
   .strict();
 

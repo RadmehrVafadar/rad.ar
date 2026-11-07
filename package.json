@@ -77,24 +77,25 @@
     "socks-proxy-agent": "^8.0.0",
     "turndown": "^7.2.0",
     "uuid": "^13.0.0",
-    "zod": "^3.23.0"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.23",
+    "@nestjs/cli": "^12.0.12",
     "@nestjs/schematics": "^11.1.0",
     "@nestjs/testing": "^11.1.27",
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20.14.0",
+    "@types/node": "^22.0.0",
     "@types/supertest": "^6.0.3",
     "@types/turndown": "^5.0.5",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.57.0",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
     "jest": "^30.2.0",
-    "nx": "^19.0.0",
+    "nx": "^24.0.5",
     "prisma": "^6.5.0",
     "supertest": "^7.2.2",
     "testcontainers": "^10.13.0",
@@ -102,17 +103,17 @@
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.0",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.5.0"
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "typescript": "^5.5.0",
+    "webpack": "^5.112.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "overrides": {
-    "undici": "7.29.0",
+    "undici": "^7.30.1",
     "lodash": "4.18.1",
-    "multer": "2.2.0",
-    "qs": "6.15.2",
-    "webpack": "5.106.2",
-    "request": {
-      "form-data": "2.5.6"
-    },
+    "multer": "^2.5.0",
+    "qs": "^6.17.1",
+    "webpack": "^5.112.2",
     "external-editor": {
       "tmp": "0.2.7"
     },
@@ -122,26 +123,11 @@
     "@nestjs/graphql": {
       "ws": "8.21.0"
     },
-    "@nestjs/cli": {
-      "glob": "10.5.0"
-    },
-    "archiver-utils": {
-      "glob": "10.5.0"
-    },
-    "nx": {
-      "minimatch": "9.0.7"
-    },
     "@angular-devkit/core": {
       "picomatch": "4.0.4"
     },
     "testcontainers": {
-      "undici": "6.27.0"
-    },
-    "express": {
-      "body-parser": "1.20.5"
-    },
-    "@nestjs/platform-express": {
-      "body-parser": "1.20.5"
+      "undici": "^6.29.1"
     },
     "dockerode": {
       "uuid": "11.1.1"
@@ -150,16 +136,51 @@
       "uuid": "11.1.1"
     },
     "@eslint/eslintrc": {
-      "js-yaml": "4.2.0"
+      "js-yaml": "^4.3.2"
     },
     "@nestjs/swagger": {
-      "js-yaml": "4.2.0"
+      "js-yaml": "^4.3.2"
     },
     "cosmiconfig": {
-      "js-yaml": "4.2.0"
+      "js-yaml": "^4.3.2"
     },
     "eslint": {
-      "js-yaml": "4.2.0"
+      "js-yaml": "^4.3.2"
+    },
+    "@upwork/node-upwork-oauth2": {
+      "request": "npm:@cypress/request@^4.0.1"
+    },
+    "@graphql-tools/utils": "^12.1.0",
+    "deepmerge-ts": "^8.0.0",
+    "axios": "$axios",
+    "follow-redirects": "^1.16.2",
+    "@jest/reporters": {
+      "glob": "^14.0.4"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.5"
+    },
+    "archiver-utils": {
+      "glob": "^14.0.4"
+    },
+    "jest-config": {
+      "glob": "^14.0.4"
+    },
+    "glob": {
+      "minimatch": "^11.0.5"
+    },
+    "jest-runtime": {
+      "glob": "^14.0.4"
+    },
+    "nx": {
+      "minimatch": "^11.0.5"
+    },
+    "test-exclude": {
+      "glob": "^14.0.4",
+      "minimatch": "^11.0.5"
     }
+  },
+  "engines": {
+    "node": "^22.23.1 || >=24.0.0"
   }
 }

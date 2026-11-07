@@ -2,7 +2,7 @@ import {
   buildCompanyCoverageReport,
   JobWatch,
   LEGACY_INTERNSHIP_ROLE_FAMILIES,
-  PRESTIGE_INTERNSHIPS_V2_ID,
+  CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID,
   WatchPresetService,
   WatchRepository,
 } from "@rad-ar/watcher";
@@ -117,7 +117,7 @@ describe("WatchCommand", () => {
   it("previews preset application without updating the watch", async () => {
     repository.getWatch.mockResolvedValue(watchFixture());
 
-    await command.run(["preset", "apply", PRESTIGE_INTERNSHIPS_V2_ID], {
+    await command.run(["preset", "apply", CANADIAN_TECH_ADJACENT_INTERNSHIPS_ID], {
       watch: "watch-1",
       json: true,
     });

@@ -4,6 +4,9 @@ Pull requests to prod run bounded validation jobs, with source fixtures separate
 
 ## How it works
 
+Node-based validation uses Node 22.23.1 to match the Mac Mini runtime.
+The lint job also runs `npm audit --audit-level=moderate` against all workspace dependencies, including development tools.
+
 Every workflow job has a timeout of at most 15 minutes.
 New pushes cancel superseded runs on the same branch.
 Source fixture tests run across 12 Jest shards, each with a 10-minute test-step limit and 15-second individual test limit.
