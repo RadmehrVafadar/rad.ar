@@ -290,6 +290,19 @@ export function SourceTargetsEditor({
               />
             </Field>
           </div>
+          <Field
+            label="Board URL"
+            hint="Official employer board address, required by sources such as Yello."
+          >
+            <input
+              type="url"
+              value={target.companyUrl ?? ""}
+              placeholder="https://employer.example/careers"
+              onChange={(event) =>
+                update(index, { companyUrl: event.target.value || undefined })
+              }
+            />
+          </Field>
           <div className="target-scope">
             <div className="target-scope__header">
               <div>

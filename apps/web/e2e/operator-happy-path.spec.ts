@@ -278,3 +278,108 @@ function makeWatch() {
     updatedAt: UPDATED_AT,
   };
 }
+
+test("partial baselines show and retry only the remaining targets", async ({
+  page,
+}) => {
+  let watch = makeWatch();
+  watch.sourceTargets.push({
+    ...watch.sourceTargets[0],
+    site: "shopify",
+    companyName: "Shopify",
+  });
+  const attempts: string[][] = [];
+  await page.addInitScript(() =>
+    sessionStorage.setItem("radar.operator.api-key", "e2e-admin-key"),
+  );
+  await page.route("**/health", (route) =>
+    route.fulfill({ json: { status: "healthy" } }),
+  );
+  await page.route(
+    (url) => url.pathname.startsWith("/api/"),
+    async (route) => {
+      const path = new URL(route.request().url()).pathname;
+      if (path.endsWith("/apply")) {
+        watch = {
+          ...watch,
+          ...route.request().postDataJSON().patch,
+          enabled: false,
+          updatedAt: "2026-08-04T13:00:00Z",
+          sourceTargets: watch.sourceTargets.map((t) => ({
+            ...t,
+            initializedAt: null,
+          })),
+        };
+        await route.fulfill({
+          json: {
+            watch,
+            diff: [],
+            systemChanges: [],
+            changed: true,
+            behaviorChanged: true,
+            paused: true,
+            pausedByApply: true,
+            resumeRequired: true,
+            targetKeysRequiringInitialization: ["greenhouse", "shopify"],
+          },
+        });
+      } else if (path.endsWith("/initialize")) {
+        attempts.push(route.request().postDataJSON().targetKeys);
+        watch = {
+          ...watch,
+          updatedAt: `2026-08-04T13:0${attempts.length}:00Z`,
+          sourceTargets: watch.sourceTargets.map((t) => ({
+            ...t,
+            initializedAt:
+              attempts.length > 1 || t.site === "greenhouse"
+                ? "2026-08-04T13:00:00Z"
+                : null,
+          })),
+        };
+        await route.fulfill({
+          json: {
+            status: attempts.length === 1 ? "partial" : "completed",
+            notificationsSent: 0,
+          },
+        });
+      } else if (path === "/api/watches/watch-1")
+        await route.fulfill({ json: watch });
+      else if (path === "/api/watches/presets")
+        await route.fulfill({ json: [] });
+      else if (path === "/api/sources/health")
+        await route.fulfill({ json: { count: 0, sources: [] } });
+      else if (path === "/api/notification-destinations")
+        await route.fulfill({ json: [] });
+      else await route.fulfill({ status: 404, json: {} });
+    },
+  );
+  await page.goto("/watches/watch-1");
+  await page.getByLabel("Tier for Acme").selectOption("3");
+  await page.getByRole("button", { name: /Save changes/ }).click();
+  await page
+    .getByRole("dialog", { name: "Review changes" })
+    .getByRole("button", { name: /Apply .* changes/ })
+    .click();
+  await expect(page.locator(".activation-banner")).toContainText(
+    "2 enabled targets",
+  );
+  await page
+    .getByRole("button", { name: "Run safe baseline", exact: true })
+    .click();
+  await expect(page.locator(".activation-banner")).toContainText(
+    "1 enabled targets",
+  );
+  await expect(page.locator(".activation-banner .target-key-list")).toHaveText(
+    "shopify",
+  );
+  await expect(
+    page.getByRole("button", { name: "Resume watch", exact: true }),
+  ).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Run safe baseline", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Resume watch", exact: true }),
+  ).toBeVisible();
+  expect(attempts).toEqual([["greenhouse", "shopify"], ["shopify"]]);
+});

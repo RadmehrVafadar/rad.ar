@@ -42,6 +42,9 @@ Edits remain in the draft until Save changes is selected.
 Names and schedule-only changes save directly without pausing or discarding baselines.
 An interval change preserves source runtime state and recalculates its next due time from its last run.
 Company, tier, filter, and scoring changes show a review, pause the watch, and require a safe baseline before explicit resume.
+After a partial baseline, the banner and retry use the saved initialization state and include only remaining enabled targets.
+A completed subset does not enable resume while other targets still need initialization.
+Company source settings include a Board URL field for adapters such as Yello that require an explicit employer origin.
 Stale drafts are rejected using the saved watch's version rather than overwriting newer edits.
 
 Filters, alert routing, and activity have their own tabs.

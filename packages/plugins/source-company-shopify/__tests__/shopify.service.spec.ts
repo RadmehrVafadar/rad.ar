@@ -3,10 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { Test } from "@nestjs/testing";
 import { ScraperInputDto, Site } from "@rad-ar/models";
-import {
-  SOURCE_PLUGIN_METADATA,
-  type IPluginMetadata,
-} from "@rad-ar/plugin";
+import { SOURCE_PLUGIN_METADATA, type IPluginMetadata } from "@rad-ar/plugin";
 
 const mockGet = jest.fn();
 jest.mock("@rad-ar/common", () => {
@@ -234,4 +231,92 @@ describe("ShopifyService — Spec 6000 / T19", () => {
     ).rejects.toMatchObject({ code: "SCHEMA_INVALID" });
     expect(({} as { polluted?: string }).polluted).toBeUndefined();
   });
+});
+
+it("reads every redesigned Shopify role from the public route payload, including roles beyond the rendered page", async () => {
+  const flattened: unknown[] = [];
+  const encode = (value: any): number => {
+    const index = flattened.length;
+    flattened.push(null);
+    flattened[index] = Array.isArray(value)
+      ? value.map(encode)
+      : value !== null && typeof value === "object"
+        ? Object.fromEntries(
+            Object.entries(value).map(([key, item]) => [
+              `_${encode(key)}`,
+              encode(item),
+            ]),
+          )
+        : value;
+    return index;
+  };
+  encode({
+    loaderData: {
+      "($locale)/careers": {
+        canonicalUrl: "https://www.shopify.com/careers",
+        roles: [
+          {
+            id: DETAILS[0].jid,
+            title: DETAILS[0].title,
+            location: DETAILS[0].location,
+            discipline: "Engineering & Data",
+            href: `/careers/software-engineering-intern_${DETAILS[0].jid}`,
+          },
+          {
+            id: DETAILS[1].jid,
+            title: DETAILS[1].title,
+            location: DETAILS[1].location,
+            discipline: "Engineering & Data",
+            href: `/careers/ml-intern_${DETAILS[1].jid}`,
+          },
+        ],
+      },
+    },
+  });
+  const html = `<html><body><h1>We make commerce better for everyone.</h1><h2>Wanna build?</h2><a data-component-name="job-row"><h3>${DETAILS[0].title}</h3></a><script>window.__reactRouterContext.streamController.enqueue(${JSON.stringify(JSON.stringify(flattened))})</script></body></html>`;
+  mockOfficialPages();
+  const original = mockGet.getMockImplementation()!;
+  mockGet.mockImplementation((url: string) =>
+    url === "https://www.shopify.com/careers"
+      ? Promise.resolve({ data: html })
+      : original(url),
+  );
+  const result = await new ShopifyService().scrape({
+    resultsWanted: 100,
+  } as ScraperInputDto);
+  expect(result.jobs.map((job) => job.title)).toEqual([
+    DETAILS[0].title,
+    DETAILS[1].title,
+  ]);
+});
+
+it("rejects a redesigned board shell without a public roles payload instead of marking an empty baseline successful", async () => {
+  mockGet.mockReset();
+  mockGet.mockResolvedValue({
+    data: "<html><body><h2>Wanna build?</h2></body></html>",
+  });
+  await expect(
+    new ShopifyService().scrape({ resultsWanted: 100 } as ScraperInputDto),
+  ).rejects.toMatchObject({ code: "MARKUP_CHANGED" });
+});
+
+it("accepts a genuinely empty redesigned public roles payload", async () => {
+  mockGet.mockReset();
+  const payload = [
+    { _1: 2 },
+    "loaderData",
+    { _3: 4 },
+    "careers",
+    { _5: 6, _7: 8 },
+    "canonicalUrl",
+    "https://www.shopify.com/careers",
+    "roles",
+    [],
+  ];
+  const html = `<html><body><h2>Wanna build?</h2><script>streamController.enqueue(${JSON.stringify(JSON.stringify(payload))})</script></body></html>`;
+  mockGet.mockResolvedValue({ data: html });
+  await expect(
+    new ShopifyService().scrape({ resultsWanted: 100 } as ScraperInputDto),
+  ).resolves.toMatchObject({ jobs: [] });
+  expect(mockGet).toHaveBeenCalledTimes(1);
 });

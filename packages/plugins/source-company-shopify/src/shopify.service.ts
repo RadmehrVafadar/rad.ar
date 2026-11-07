@@ -115,6 +115,12 @@ export class ShopifyService implements IScraper {
     this.assertNotBlocked(html, SHOPIFY_CAREERS_URL);
     const $ = cheerio.load(html);
     const pageText = normalizeWhitespace($("body").text());
+    if (
+      $('a[data-component-name="job-row"]').length ||
+      /wanna build/i.test(pageText)
+    ) {
+      return this.parseRedesignedBoard(html);
+    }
     if (!/find your quest/i.test(pageText) || !/job postings/i.test(pageText)) {
       throw new ShopifySourceError(
         "MARKUP_CHANGED",
@@ -163,6 +169,69 @@ export class ShopifyService implements IScraper {
     });
 
     return listings;
+  }
+
+  private parseRedesignedBoard(html: string): ShopifyListingReference[] {
+    const streams = /streamController\.enqueue\(("(?:\\.|[^"\\])*")\)/g;
+    for (const match of html.matchAll(streams)) {
+      try {
+        const flattened: unknown = JSON.parse(JSON.parse(match[1]));
+        if (!Array.isArray(flattened)) continue;
+        const loaders = findNestedRecord(
+          decodeFlattenedPayload(flattened),
+          "loaderData",
+        );
+        for (const value of Object.values(loaders ?? {})) {
+          const route = asRecord(value);
+          if (
+            route?.canonicalUrl !== SHOPIFY_CAREERS_URL ||
+            !Array.isArray(route.roles)
+          )
+            continue;
+          // The HTML renders only the first page; the public route contains all roles.
+          return route.roles.map((value) => {
+            const role = asRecord(value);
+            const href = firstString(role?.href);
+            const publicJid = href
+              ? PUBLIC_JID_PATTERN.exec(href)?.[1]?.toLowerCase()
+              : undefined;
+            const title = firstString(role?.title);
+            const locationLabel = firstString(role?.location);
+            if (
+              !publicJid ||
+              publicJid !== firstString(role?.id)?.toLowerCase() ||
+              !title ||
+              !locationLabel
+            ) {
+              throw new ShopifySourceError(
+                "SCHEMA_INVALID",
+                "A Shopify public role is missing its identity, title, or location.",
+              );
+            }
+            const detailUrl = new URL(href!, SHOPIFY_CAREERS_URL).toString();
+            this.assertOfficialShopifyUrl(detailUrl, "detail");
+            return {
+              publicJid,
+              title,
+              locationLabel,
+              detailUrl,
+              department: firstString(role?.discipline),
+            };
+          });
+        }
+      } catch (error) {
+        if (error instanceof ShopifySourceError) throw error;
+        throw new ShopifySourceError(
+          "SCHEMA_INVALID",
+          "Shopify public roles could not be decoded.",
+          error,
+        );
+      }
+    }
+    throw new ShopifySourceError(
+      "MARKUP_CHANGED",
+      "Shopify public roles payload is missing.",
+    );
   }
 
   private async fetchQualifyingDetails(

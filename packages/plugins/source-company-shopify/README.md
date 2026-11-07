@@ -3,7 +3,7 @@
 `@rad-ar/source-company-shopify` is the direct Shopify internship source.
 It uses only public pages on `https://www.shopify.com`:
 
-- the server-rendered `/careers` cards for public job/JID identity, title,
+- the public `/careers` route payload for the redesigned board, including roles beyond the first rendered page, or legacy server-rendered cards for public job/JID identity, title,
   discipline, location label, and canonical detail URL;
 - each relevant public `/careers/<slug>_<jid>` route for its embedded public
   job record, genuine publication date, description, employment type, and
@@ -27,13 +27,9 @@ records throw typed `HTTP`, `BLOCKED`, `MARKUP_CHANGED`, or `SCHEMA_INVALID`
 failures. A board is a successful empty run only when the official careers
 markers remain present and no job cards exist.
 
-This source is included in the final six-suite/57-test deterministic pass; tests
-use sanitized local HTML and flattened public-route fixtures, and CI never
-contacts Shopify. The disabled official-board smoke retained Shopify's expected
-markers and returned zero qualifying internships, so it was classified as a
-valid empty run rather than a failure.
+Deterministic tests cover legacy cards, the redesigned public roles payload, typed failures, and unsafe payload rejection.
+The parser validates the official careers canonical URL and role identity before treating a redesigned board as successful.
+Malformed or missing payloads remain failures rather than successful empty baselines.
 
-The v2 preset target-enables `shopify` only inside the globally disabled,
-uninitialized watch. That state cannot poll or notify while paused. Complete the
-target baseline and two additional no-notification observation cycles before
-resuming.
+The Canadian Tech + Adjacent Internships preset includes Shopify as an enabled target inside a globally disabled, uninitialized watch.
+Complete a no-notification baseline before explicitly resuming the watch.

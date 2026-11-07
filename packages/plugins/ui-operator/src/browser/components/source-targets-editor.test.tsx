@@ -170,3 +170,28 @@ describe("SourceTargetsEditor watch defaults", () => {
     expect(state).toHaveTextContent('"maxRequestsPerRun":2');
   });
 });
+
+it("allows configuring the employer board URL for sources such as Yello", async () => {
+  const user = userEvent.setup();
+  render(
+    <Editor
+      initial={[
+        {
+          site: "yello",
+          companyName: "EY Canada",
+          companySlug: "test-board",
+          tier: 1,
+          enabled: true,
+        },
+      ]}
+    />,
+  );
+  await user.click(screen.getByText("EY Canada", { exact: true }));
+  await user.type(
+    screen.getByLabelText(/^Board URL/),
+    "https://eyglobal.yello.co",
+  );
+  expect(
+    JSON.parse(screen.getByTestId("targets-state").textContent!)[0].companyUrl,
+  ).toBe("https://eyglobal.yello.co");
+});

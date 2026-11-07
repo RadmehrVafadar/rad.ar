@@ -65,12 +65,7 @@ import {
 import { JobWatch, WatchApplyResponse, WatchRun } from "../types";
 
 type EditorTab =
-  | "profile"
-  | "filters"
-  | "scoring"
-  | "notifications"
-  | "activity"
-  | "json";
+  "profile" | "filters" | "scoring" | "notifications" | "activity" | "json";
 const TABS: Array<{ value: EditorTab; label: string }> = [
   { value: "profile", label: "Companies & schedule" },
   { value: "filters", label: "Filters" },
@@ -91,7 +86,6 @@ export function WatchEditorPage() {
   const [presetOpen, setPresetOpen] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState("");
   const [applyResult, setApplyResult] = useState<WatchApplyResponse>();
-  const [baselineComplete, setBaselineComplete] = useState(false);
   const [baselineIssue, setBaselineIssue] = useState<string>();
   const requestedTab = searchParams.get("tab") as EditorTab | null;
   const tab = TABS.some(({ value }) => value === requestedTab)
@@ -161,6 +155,7 @@ export function WatchEditorPage() {
     [watch.data],
   );
   const needsBaseline = uninitializedTargetKeys.length > 0;
+  const baselineComplete = !needsBaseline;
   const update = <K extends keyof EditableWatch>(
     field: K,
     value: EditableWatch[K],
@@ -179,7 +174,6 @@ export function WatchEditorPage() {
     onSuccess: async (result) => {
       setReviewOpen(false);
       setApplyResult(result);
-      setBaselineComplete(false);
       const next = editableWatch(normalizeWatch(result.watch));
       setOriginal(next);
       setDraft(next);
@@ -207,7 +201,6 @@ export function WatchEditorPage() {
       api.watches.initialize(watchId, targetKeys),
     onSuccess: async (run) => {
       const completed = run.status === "completed";
-      setBaselineComplete(completed);
       setBaselineIssue(
         completed
           ? undefined
@@ -390,17 +383,12 @@ export function WatchEditorPage() {
             <p>
               {baselineComplete
                 ? "Review the latest baseline run, then explicitly resume when you’re ready for notifications."
-                : `${(applyResult?.targetKeysRequiringInitialization ?? uninitializedTargetKeys).length} enabled targets need a no-notification baseline before this profile can resume.`}
+                : `${uninitializedTargetKeys.length} enabled targets need a no-notification baseline before this profile can resume.`}
             </p>
             <div className="target-key-list">
-              {(
-                applyResult?.targetKeysRequiringInitialization ??
-                uninitializedTargetKeys
-              )
-                .slice(0, 8)
-                .map((key) => (
-                  <code key={key}>{key}</code>
-                ))}
+              {uninitializedTargetKeys.slice(0, 8).map((key) => (
+                <code key={key}>{key}</code>
+              ))}
             </div>
           </div>
           {baselineComplete ? (
@@ -413,12 +401,7 @@ export function WatchEditorPage() {
             </Button>
           ) : (
             <Button
-              onClick={() =>
-                initialize.mutate(
-                  applyResult?.targetKeysRequiringInitialization ??
-                    uninitializedTargetKeys,
-                )
-              }
+              onClick={() => initialize.mutate(uninitializedTargetKeys)}
               loading={initialize.isPending}
             >
               <Sparkles size={16} />
@@ -431,7 +414,7 @@ export function WatchEditorPage() {
           Changes are live. This update did not require a new baseline.
         </InlineNotice>
       ) : null}
-      {baselineIssue ? (
+      {baselineIssue && needsBaseline ? (
         <InlineNotice tone="danger" title="Baseline not complete">
           {baselineIssue}
         </InlineNotice>
